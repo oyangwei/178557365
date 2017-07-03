@@ -934,7 +934,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = YEZ42AE4QP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/公司项目/Teleconmobile/Teleconmobile/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = $SRCROOT/Teleconmobile/PrefixHeader.pch;
 				INFOPLIST_FILE = Teleconmobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TM.Teleconmobile;
@@ -948,7 +948,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = YEZ42AE4QP;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/公司项目/Teleconmobile/Teleconmobile/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = $SRCROOT/Teleconmobile/PrefixHeader.pch;
 				INFOPLIST_FILE = Teleconmobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TM.Teleconmobile;
@@ -1025,6 +1025,7 @@
 				557D2FE31F00A4A5003820E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		557D2FE41F00A4A5003820E9 /* Build configuration list for PBXNativeTarget "TeleconmobileTests" */ = {
 			isa = XCConfigurationList;
@@ -1033,6 +1034,7 @@
 				557D2FE61F00A4A5003820E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		557D2FE71F00A4A5003820E9 /* Build configuration list for PBXNativeTarget "TeleconmobileUITests" */ = {
 			isa = XCConfigurationList;
@@ -1041,6 +1043,7 @@
 				557D2FE91F00A4A5003820E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
