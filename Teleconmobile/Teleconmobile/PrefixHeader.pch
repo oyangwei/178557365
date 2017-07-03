@@ -1,0 +1,24 @@
+//
+//  PrefixHeader.pch
+//  Teleconmobile
+//
+//  Created by YangWei on 17/6/26.
+//  Copyright © 2017年 TeleconMobile. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "YWSystemDefine.h"
+#import "Masonry.h"      //约束头文件
+#import "UIColor+Hex.h"  //颜色RGB
+#import "UIButton+YWUIButton.h" //UIButton类别
+#import "UIViewController+YWUIViewController.h"  //UIViewController类别
+#import "YWNetworkingMamager.h"  //网络请求封装
+#import "YWHttpURLDefine.h"   //网络请求地址
+#import "YWCommonMethod.h"   //公用方法类
+
+#endif /* PrefixHeader_pch */
