@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "YWRootHomeViewController.h"
 #import "YWNavigationViewController.h"
+#import "SPKitExample.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+   
+    [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     YWRootHomeViewController *loginVC = [[YWRootHomeViewController alloc] init];

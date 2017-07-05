@@ -34,15 +34,15 @@
     self.areaLabel.textAlignment = NSTextAlignmentLeft;
     
     [self.codeLable makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.leading).offset(10);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
+        make.leading.equalTo(self.mas_leading).offset(10);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
     }];
     
     [self.areaLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.trailing).offset(-10);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
+        make.trailing.equalTo(self.mas_trailing).offset(-10);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
     }];
 }
 

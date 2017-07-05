@@ -8,12 +8,14 @@
 
 #import "YWLoginViewController.h"
 #import "YWHomeTabBarViewController.h"
+#import "SPUtil.h"
+#import "SPKitExample.h"
 
 #define TextFieldWidth ScreenWitdh * 3 / 4
 #define TextFieldHeight 50
 #define TextFieldCornerRadius 5
 
-@interface YWLoginViewController ()
+@interface YWLoginViewController ()<UIActionSheetDelegate>
 
 @property(strong, nonatomic) UITextField *phoneTextField;
 @property(strong, nonatomic) UITextField *passwordTextField;
@@ -51,7 +53,7 @@
     phoneTextField.leftView.userInteractionEnabled = NO;
     phoneTextField.leftViewMode = UITextFieldViewModeAlways;
     phoneTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
+//    phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
     
     UILabel *phoneLabel = [[UILabel alloc] init];
     phoneLabel.text = @"Mobile";
@@ -93,47 +95,79 @@
     [self.view addSubview:self.loginBtn];
     
     [phoneTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(50);
-        make.top.equalTo(self.view.top).offset(120);
+        make.top.equalTo(self.view.mas_top).offset(120);
     }];
     
     [phoneLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(phoneTextField.leading).offset(10);
-        make.top.equalTo(phoneTextField.top).offset(10);
-        make.bottom.equalTo(phoneTextField.bottom).offset(-10);
+        make.leading.equalTo(phoneTextField.mas_leading).offset(10);
+        make.top.equalTo(phoneTextField.mas_top).offset(10);
+        make.bottom.equalTo(phoneTextField.mas_bottom).offset(-10);
         make.width.equalTo(70);
     }];
     
     [passwordTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
-        make.top.equalTo(phoneTextField.bottom).offset(10);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(phoneTextField.mas_bottom).offset(10);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [pwLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(passwordTextField.leading).offset(10);
-        make.top.equalTo(passwordTextField.top).offset(10);
-        make.bottom.equalTo(passwordTextField.bottom).offset(-10);
+        make.leading.equalTo(passwordTextField.mas_leading).offset(10);
+        make.top.equalTo(passwordTextField.mas_top).offset(10);
+        make.bottom.equalTo(passwordTextField.mas_bottom).offset(-10);
         make.width.equalTo(70);
     }];
     
     [loginBtn makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
-        make.centerX.equalTo(self.view.centerX);
-        make.top.equalTo(passwordTextField.bottom).offset(80);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(passwordTextField.mas_bottom).offset(80);
     }];
     
 }
 
 -(void)login:(id)sender
 {
+    __weak typeof(self) weakSelf = self;
+    
+    [[SPUtil sharedInstance] setWaitingIndicatorShown:YES withKey:self.description];
+    
+    NSLog(@"%@ %@", self.phoneTextField.text, self.passwordTextField.text);
+    
+    [[SPKitExample sharedInstance] callThisAfterISVAccountLoginSuccessWithYWLoginId:self.phoneTextField.text passWord:self.passwordTextField.text preloginedBlock:^{
+        [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
+        [weakSelf _pushMainControllerAnimated:YES];
+    } successBlock:^{
+        [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
+        [weakSelf _pushMainControllerAnimated:YES];
+    } failedBlock:^(NSError *aError) {
+        NSLog(@"aError : %@", aError);
+        if (aError.code == YWLoginErrorCodePasswordError || aError.code == YWLoginErrorCodePasswordInvalid || aError.code == YWLoginErrorCodeUserNotExsit) {
+            [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
+            
+            NSLog(@"%@", aError);
+        }
+    }];
+    
+}
+
+-(void)_pushMainControllerAnimated:(BOOL)aAnimated
+{
+    if ([self.view.window.rootViewController isKindOfClass:[YWHomeTabBarViewController class]]){
+        //已经进入主界面
+        return;
+    }
+    
     YWHomeTabBarViewController *homeTBVC = [[YWHomeTabBarViewController alloc] init];
-    [homeTBVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self.navigationController presentViewController:homeTBVC animated:YES completion:nil];
+    homeTBVC.view.frame = self.view.window.bounds;
+    [UIView transitionWithView:self.view.window duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.view.window.rootViewController = homeTBVC;
+    } completion:nil];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

@@ -54,24 +54,24 @@
     [self.questionBtn setImage:[UIImage imageNamed:@"more_unfold"] forState:UIControlStateNormal];
     
     [self.questionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.leading);
-        make.trailing.equalTo(self.trailing).offset(-50);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
+        make.leading.equalTo(self.mas_leading);
+        make.trailing.equalTo(self.mas_trailing).offset(-50);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
     }];
     
     [self.splitLine makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.questionLabel.trailing);
-        make.height.equalTo(self.height);
-        make.top.equalTo(self.top);
+        make.leading.equalTo(self.questionLabel.mas_trailing);
+        make.height.equalTo(self.mas_height);
+        make.top.equalTo(self.mas_top);
         make.width.equalTo(1.0);
     }];
     
     [self.questionBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.splitLine.leading);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
-        make.trailing.equalTo(self.trailing);
+        make.leading.equalTo(self.splitLine.mas_leading);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
+        make.trailing.equalTo(self.mas_trailing);
     }];
 }
 

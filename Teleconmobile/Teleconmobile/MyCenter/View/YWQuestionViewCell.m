@@ -28,9 +28,9 @@
     self.questionLable.textAlignment = NSTextAlignmentLeft;
     
     [self.questionLable makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.trailing).offset(-10);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
+        make.trailing.equalTo(self.mas_trailing).offset(-10);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
     }];
 }
 

@@ -92,15 +92,15 @@
     [self.view addSubview:self.promptLabel];
     
     [userNameTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(ScreenWitdh * 3 / 4);
         make.height.equalTo(50);
-        make.top.equalTo(self.view.top).offset(120);
+        make.top.equalTo(self.view.mas_top).offset(120);
     }];
     
     [passwordTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
-        make.top.equalTo(userNameTextField.bottom).offset(10);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(userNameTextField.mas_bottom).offset(10);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
     }];
@@ -108,13 +108,13 @@
     [nextBtn makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
-        make.centerX.equalTo(self.view.centerX);
-        make.top.equalTo(passwordTextField.bottom).offset(80);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(passwordTextField.mas_bottom).offset(80);
     }];
     
     [promptLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(nextBtn.leading);
-        make.top.equalTo(nextBtn.bottom).offset(5);
+        make.leading.equalTo(nextBtn.mas_leading);
+        make.top.equalTo(nextBtn.mas_bottom).offset(5);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight - 20);
     }];

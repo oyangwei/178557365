@@ -158,10 +158,10 @@
     [self.view addSubview:self.areaCodePickerView];
     
     [areaCodeTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
-        make.top.equalTo(self.view.top).offset(120);
+        make.top.equalTo(self.view.mas_top).offset(120);
     }];
     
     [areaCodeView makeConstraints:^(MASConstraintMaker *make) {
@@ -172,44 +172,44 @@
     }];
     
     [phoneTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(areaCodeTextField.leading);
-        make.top.equalTo(areaCodeTextField.bottom).offset(10);
+        make.leading.equalTo(areaCodeTextField.mas_leading);
+        make.top.equalTo(areaCodeTextField.mas_bottom).offset(10);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [codeTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(areaCodeTextField.leading);
-        make.top.equalTo(phoneTextField.bottom).offset(10);
+        make.leading.equalTo(areaCodeTextField.mas_leading);
+        make.top.equalTo(phoneTextField.mas_bottom).offset(10);
         make.width.equalTo(TextFieldWidth * 1 / 2);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [getCodeBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(areaCodeTextField.trailing);
-        make.leading.equalTo(codeTextField.trailing).offset(10);
-        make.top.equalTo(codeTextField.top);
+        make.trailing.equalTo(areaCodeTextField.mas_trailing);
+        make.leading.equalTo(codeTextField.mas_trailing).offset(10);
+        make.top.equalTo(codeTextField.mas_top);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [nextBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(areaCodeTextField.leading);
-        make.top.equalTo(codeTextField.bottom).offset(20);
+        make.leading.equalTo(areaCodeTextField.mas_leading);
+        make.top.equalTo(codeTextField.mas_bottom).offset(20);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [promptLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(areaCodeTextField.leading);
-        make.top.equalTo(nextBtn.bottom).offset(5);
+        make.leading.equalTo(areaCodeTextField.mas_leading);
+        make.top.equalTo(nextBtn.mas_bottom).offset(5);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight - 20);
     }];
     
     [areaCodePickerView makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.areaCodeTextField.leading);
-        make.trailing.equalTo(self.areaCodeTextField.trailing).offset(-50);
-        make.top.equalTo(self.areaCodeTextField.bottom);
+        make.leading.equalTo(self.areaCodeTextField.mas_leading);
+        make.trailing.equalTo(self.areaCodeTextField.mas_trailing).offset(-50);
+        make.top.equalTo(self.areaCodeTextField.mas_bottom);
         make.height.equalTo(180);
     }];
 }

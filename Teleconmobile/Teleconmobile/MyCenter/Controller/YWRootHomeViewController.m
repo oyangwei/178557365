@@ -35,7 +35,7 @@
 -(void)setupViewController
 {
     [self setUIViewBackgroud:self.view name:@"login_bg"];
-    
+
     CGRect loginBtnRect = CGRectMake(ScreenWitdh/2 - 50, ScreenHeight/2 - 60, 100, 50);
     UIButton *loginBtn = [UIButton createButtonWithFrame:loginBtnRect Title:@"Log In\n登陆" Target:self Selector:@selector(login:)];
     loginBtn.tintColor = [UIColor whiteColor];
@@ -49,25 +49,26 @@
     [signBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [signBtn setUIButtonBorderColor:[UIColor whiteColor].CGColor borderWidth:1.0 borderRadius:5.0];
     signBtn.titleLabel.numberOfLines = 0;
-    
+
     self.loginBtn = loginBtn;
     self.signBtn = signBtn;
     [self.view addSubview:self.loginBtn];
     [self.view addSubview:self.signBtn];
-    
+
     [signBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(100);
         make.height.equalTo(50);
-        make.bottom.equalTo(self.view.centerY).offset(-20);
+        make.bottom.equalTo(self.view.mas_centerY).offset(-20);
     }];
     
     [loginBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
-        make.width.equalTo(signBtn.width);
-        make.height.equalTo(signBtn.height);
-        make.bottom.equalTo(signBtn.top).equalTo(-20);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.equalTo(signBtn.mas_width);
+        make.height.equalTo(signBtn.mas_height);
+        make.bottom.equalTo(signBtn.mas_top).equalTo(-20);
     }];
+    
 }
 
 -(void)login:(id)sender

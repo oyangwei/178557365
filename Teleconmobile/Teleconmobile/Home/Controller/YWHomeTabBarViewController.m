@@ -8,12 +8,13 @@
 
 #import "YWHomeTabBarViewController.h"
 #import "YWNavigationViewController.h"
-#import "YWIMViewController.h"
 #import "YWContactsViewController.h"
 #import "YWContigViewController.h"
 #import "YWThingsViewController.h"
 #import "YWMeViewController.h"
 #import "UIImage+YWUIImage.h"
+#import "YWConversationListViewController+UIViewControllerPreviewing.h"
+#import "SPKitExample.h"
 
 @interface YWHomeTabBarViewController ()
 
@@ -36,7 +37,19 @@
     [tabBar setTitleTextAttributes:attrs forState:UIControlStateNormal];
     [tabBar setTitleTextAttributes:selectedAttrs forState:UIControlStateSelected];
 
-    [self setupChildVC:[[YWIMViewController alloc] init] title:@"Message" image:@"message_1" selectImage:@"message_2"];
+    YWConversationListViewController *conversationListController = [[SPKitExample sharedInstance].ywIMKit makeConversationListViewController];
+    
+    [[SPKitExample sharedInstance] exampleCustomizeConversationCellWithConversationListController:conversationListController];
+    
+    __weak __typeof(conversationListController) weakConversationListController = conversationListController;
+    conversationListController.didSelectItemBlock = ^(YWConversation *aConversation)
+    {
+        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation fromNavigationController:weakConversationListController.navigationController];
+    };
+    
+    
+    
+    [self setupChildVC:conversationListController title:@"Message" image:@"message_1" selectImage:@"message_2"];
     [self setupChildVC:[[YWContactsViewController alloc] init] title:@"Contact" image:@"contact_1" selectImage:@"contact_2"];
     [self setupChildVC:[[YWContigViewController alloc] init] title:@"Contig" image:@"wifi_1" selectImage:@"wifi_2"];
     [self setupChildVC:[[YWThingsViewController alloc] init] title:@"Things" image:@"programme_2" selectImage:@"programme_2"];

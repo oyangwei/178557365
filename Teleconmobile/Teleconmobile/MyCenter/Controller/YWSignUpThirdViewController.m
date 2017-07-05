@@ -246,90 +246,90 @@
 
     
     [firstQuestionTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(50);
-        make.top.equalTo(self.view.top).offset(100);
+        make.top.equalTo(self.view.mas_top).offset(100);
     }];
     
     [firstAnswerTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(firstQuestionTextField.leading);
-        make.top.equalTo(firstQuestionTextField.bottom).offset(10);
+        make.leading.equalTo(firstQuestionTextField.mas_leading);
+        make.top.equalTo(firstQuestionTextField.mas_bottom).offset(10);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [firstAnswerLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(firstAnswerTextField.leading).offset(10);
-        make.top.equalTo(firstAnswerTextField.top);
-        make.height.equalTo(firstAnswerTextField.height);
+        make.leading.equalTo(firstAnswerTextField.mas_leading).offset(10);
+        make.top.equalTo(firstAnswerTextField.mas_top);
+        make.height.equalTo(firstAnswerTextField.mas_height);
     }];
     
     [secondQuestionTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(50);
-        make.top.equalTo(firstAnswerTextField.bottom).offset(10);
+        make.top.equalTo(firstAnswerTextField.mas_bottom).offset(10);
     }];
     
     [secondAnswerTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(secondQuestionTextField.leading);
-        make.top.equalTo(secondQuestionTextField.bottom).offset(10);
+        make.leading.equalTo(secondQuestionTextField.mas_leading);
+        make.top.equalTo(secondQuestionTextField.mas_bottom).offset(10);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [secondAnswerLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(secondAnswerTextField.leading).offset(10);
-        make.top.equalTo(secondAnswerTextField.top);
-        make.height.equalTo(secondAnswerTextField.height);
+        make.leading.equalTo(secondAnswerTextField.mas_leading).offset(10);
+        make.top.equalTo(secondAnswerTextField.mas_top);
+        make.height.equalTo(secondAnswerTextField.mas_height);
     }];
     
     [thirdQuestionTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view.centerX);
+        make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(50);
-        make.top.equalTo(secondAnswerTextField.bottom).offset(10);
+        make.top.equalTo(secondAnswerTextField.mas_bottom).offset(10);
     }];
     
     [thirdAnswerTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(thirdQuestionTextField.leading);
-        make.top.equalTo(thirdQuestionTextField.bottom).offset(10);
+        make.leading.equalTo(thirdQuestionTextField.mas_leading);
+        make.top.equalTo(thirdQuestionTextField.mas_bottom).offset(10);
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
     }];
     
     [thirdAnswerLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(thirdAnswerTextField.leading).offset(10);
-        make.top.equalTo(thirdAnswerTextField.top);
-        make.height.equalTo(thirdAnswerTextField.height);
+        make.leading.equalTo(thirdAnswerTextField.mas_leading).offset(10);
+        make.top.equalTo(thirdAnswerTextField.mas_top);
+        make.height.equalTo(thirdAnswerTextField.mas_height);
     }];
     
     [finishedBtn makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(TextFieldWidth);
         make.height.equalTo(TextFieldHeight);
-        make.centerX.equalTo(self.view.centerX);
-        make.top.equalTo(thirdAnswerTextField.bottom).offset(20);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.top.equalTo(thirdAnswerTextField.mas_bottom).offset(20);
     }];
     
     [firstQuestionTableView makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.firstQuestionTextField.leading);
-        make.trailing.equalTo(self.firstQuestionTextField.trailing).offset(-TextFieldHeight + 1);
-        make.top.equalTo(self.firstQuestionTextField.bottom);
+        make.leading.equalTo(self.firstQuestionTextField.mas_leading);
+        make.trailing.equalTo(self.firstQuestionTextField.mas_trailing).offset(-TextFieldHeight + 1);
+        make.top.equalTo(self.firstQuestionTextField.mas_bottom);
         make.height.equalTo(0);
     }];
     
     [secondQuestionTableView makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.secondQuestionTextField.leading);
-        make.trailing.equalTo(self.secondQuestionTextField.trailing).offset(-TextFieldHeight + 1);
-        make.top.equalTo(self.secondQuestionTextField.bottom);
+        make.leading.equalTo(self.secondQuestionTextField.mas_leading);
+        make.trailing.equalTo(self.secondQuestionTextField.mas_trailing).offset(-TextFieldHeight + 1);
+        make.top.equalTo(self.secondQuestionTextField.mas_bottom);
         make.height.equalTo(0);
     }];
     
     [thirdQuestionTableView makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.thirdQuestionTextField.leading);
-        make.trailing.equalTo(self.thirdQuestionTextField.trailing).offset(-TextFieldHeight + 1);
-        make.top.equalTo(self.thirdQuestionTextField.bottom);
+        make.leading.equalTo(self.thirdQuestionTextField.mas_leading);
+        make.trailing.equalTo(self.thirdQuestionTextField.mas_trailing).offset(-TextFieldHeight + 1);
+        make.top.equalTo(self.thirdQuestionTextField.mas_bottom);
         make.height.equalTo(0);
     }];
 }

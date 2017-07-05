@@ -47,29 +47,29 @@
     [self.selectBtn setImage:[UIImage imageNamed:@"more_unfold"] forState:UIControlStateNormal];
     
     [self.codeLable makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.leading).offset(10);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
+        make.leading.equalTo(self.mas_leading).offset(10);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
     }];
     
     [self.selectBtn makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.trailing);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
-        make.width.equalTo(self.height).offset(-1);
+        make.trailing.equalTo(self.mas_trailing);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
+        make.width.equalTo(self.mas_height).offset(-1);
     }];
     
     [self.splitLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.selectBtn.leading);
-        make.top.equalTo(self.top);
+        make.trailing.equalTo(self.selectBtn.mas_leading);
+        make.top.equalTo(self.mas_top);
         make.width.equalTo(1.0);
-        make.height.equalTo(self.height);
+        make.height.equalTo(self.mas_height);
     }];
     
     [self.areaLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.splitLabel.leading).offset(-10);
-        make.top.equalTo(self.top);
-        make.height.equalTo(self.height);
+        make.trailing.equalTo(self.splitLabel.mas_leading).offset(-10);
+        make.top.equalTo(self.mas_top);
+        make.height.equalTo(self.mas_height);
     }];
 }
 
