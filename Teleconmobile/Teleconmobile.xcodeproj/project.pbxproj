@@ -14,17 +14,6 @@
 		557D2FDD1F00A4A5003820E9 /* TeleconmobileUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D2FDC1F00A4A5003820E9 /* TeleconmobileUITests.m */; };
 		557D2FFF1F00AF6A003820E9 /* UIViewController+YWUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D2FFE1F00AF6A003820E9 /* UIViewController+YWUIViewController.m */; };
 		557D30021F00BC7C003820E9 /* UIButton+YWUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D30011F00BC7C003820E9 /* UIButton+YWUIButton.m */; };
-		557D301F1F00E69B003820E9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 557D30051F00E69B003820E9 /* Info.plist */; };
-		557D30201F00E69B003820E9 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D30071F00E69B003820E9 /* MASCompositeConstraint.m */; };
-		557D30211F00E69B003820E9 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D300A1F00E69B003820E9 /* MASConstraint.m */; };
-		557D30221F00E69B003820E9 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D300C1F00E69B003820E9 /* MASConstraintMaker.m */; };
-		557D30231F00E69B003820E9 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D300E1F00E69B003820E9 /* MASLayoutConstraint.m */; };
-		557D30241F00E69B003820E9 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D30121F00E69B003820E9 /* MASViewAttribute.m */; };
-		557D30251F00E69B003820E9 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D30141F00E69B003820E9 /* MASViewConstraint.m */; };
-		557D30261F00E69B003820E9 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D30161F00E69B003820E9 /* NSArray+MASAdditions.m */; };
-		557D30271F00E69B003820E9 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D30191F00E69B003820E9 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		557D30281F00E69B003820E9 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D301B1F00E69B003820E9 /* View+MASAdditions.m */; };
-		557D30291F00E69B003820E9 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D301E1F00E69B003820E9 /* ViewController+MASAdditions.m */; };
 		557D302C1F00E768003820E9 /* YWNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D302B1F00E768003820E9 /* YWNavigationViewController.m */; };
 		557D302F1F00F6E9003820E9 /* YWLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D302E1F00F6E9003820E9 /* YWLoginViewController.m */; };
 		557D30321F00F723003820E9 /* YWSignUpFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D30311F00F723003820E9 /* YWSignUpFirstViewController.m */; };
@@ -76,6 +65,7 @@
 		557D31311F04F30F003820E9 /* wifi_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 557D31271F04F30F003820E9 /* wifi_1.png */; };
 		557D31321F04F30F003820E9 /* wifi_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 557D31281F04F30F003820E9 /* wifi_2.png */; };
 		557D31351F05DCBF003820E9 /* UIImage+YWUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D31341F05DCBF003820E9 /* UIImage+YWUIImage.m */; };
+		5DC103B34B4168272DCCAE8B /* libPods-Teleconmobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B8FF9B430C2E6502A73FA4 /* libPods-Teleconmobile.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +82,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 557D2FB31F00A4A5003820E9;
 			remoteInfo = Teleconmobile;
+		};
+		55A946031F0CBA20007B15FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A945FE1F0CBA20007B15FE /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 78002DFC64BD9F415E3B46E788CB20C6;
+			remoteInfo = Masonry;
+		};
+		55A946051F0CBA20007B15FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55A945FE1F0CBA20007B15FE /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E0B3777C8C104F36C53EC45826BBAAB3;
+			remoteInfo = "Pods-Teleconmobile";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -112,32 +116,6 @@
 		557D2FFE1F00AF6A003820E9 /* UIViewController+YWUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YWUIViewController.m"; sourceTree = "<group>"; };
 		557D30001F00BC7C003820E9 /* UIButton+YWUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+YWUIButton.h"; sourceTree = "<group>"; };
 		557D30011F00BC7C003820E9 /* UIButton+YWUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YWUIButton.m"; sourceTree = "<group>"; };
-		557D30051F00E69B003820E9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		557D30061F00E69B003820E9 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
-		557D30071F00E69B003820E9 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
-		557D30081F00E69B003820E9 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
-		557D30091F00E69B003820E9 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
-		557D300A1F00E69B003820E9 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
-		557D300B1F00E69B003820E9 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
-		557D300C1F00E69B003820E9 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
-		557D300D1F00E69B003820E9 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
-		557D300E1F00E69B003820E9 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
-		557D300F1F00E69B003820E9 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
-		557D30101F00E69B003820E9 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
-		557D30111F00E69B003820E9 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
-		557D30121F00E69B003820E9 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
-		557D30131F00E69B003820E9 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
-		557D30141F00E69B003820E9 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
-		557D30151F00E69B003820E9 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		557D30161F00E69B003820E9 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		557D30171F00E69B003820E9 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		557D30181F00E69B003820E9 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		557D30191F00E69B003820E9 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		557D301A1F00E69B003820E9 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
-		557D301B1F00E69B003820E9 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
-		557D301C1F00E69B003820E9 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		557D301D1F00E69B003820E9 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
-		557D301E1F00E69B003820E9 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		557D302A1F00E768003820E9 /* YWNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YWNavigationViewController.h; path = ../YWNavigationViewController.h; sourceTree = "<group>"; };
 		557D302B1F00E768003820E9 /* YWNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YWNavigationViewController.m; path = ../YWNavigationViewController.m; sourceTree = "<group>"; };
 		557D302D1F00F6E9003820E9 /* YWLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWLoginViewController.h; sourceTree = "<group>"; };
@@ -233,6 +211,10 @@
 		557D31281F04F30F003820E9 /* wifi_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi_2.png; sourceTree = "<group>"; };
 		557D31331F05DCBF003820E9 /* UIImage+YWUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YWUIImage.h"; sourceTree = "<group>"; };
 		557D31341F05DCBF003820E9 /* UIImage+YWUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YWUIImage.m"; sourceTree = "<group>"; };
+		55A945FE1F0CBA20007B15FE /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		A0A785CBC9B91284EA76F630 /* Pods-Teleconmobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teleconmobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Teleconmobile/Pods-Teleconmobile.debug.xcconfig"; sourceTree = "<group>"; };
+		B53B93B5ED8A5067BA90FD64 /* Pods-Teleconmobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Teleconmobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-Teleconmobile/Pods-Teleconmobile.release.xcconfig"; sourceTree = "<group>"; };
+		F0B8FF9B430C2E6502A73FA4 /* libPods-Teleconmobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Teleconmobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC103B34B4168272DCCAE8B /* libPods-Teleconmobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,13 +243,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3525778885955848EC3E034C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A0A785CBC9B91284EA76F630 /* Pods-Teleconmobile.debug.xcconfig */,
+				B53B93B5ED8A5067BA90FD64 /* Pods-Teleconmobile.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		557D2FAB1F00A4A5003820E9 = {
 			isa = PBXGroup;
 			children = (
+				55A945FE1F0CBA20007B15FE /* Pods.xcodeproj */,
 				557D2FB61F00A4A5003820E9 /* Teleconmobile */,
 				557D2FD01F00A4A5003820E9 /* TeleconmobileTests */,
 				557D2FDB1F00A4A5003820E9 /* TeleconmobileUITests */,
 				557D2FB51F00A4A5003820E9 /* Products */,
+				3525778885955848EC3E034C /* Pods */,
+				C46B4BCF909BE4BE8776953E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -429,42 +424,8 @@
 				557D30921F03397A003820E9 /* YWNetworking */,
 				557D304F1F0251C1003820E9 /* AFNetworking */,
 				557D305D1F0251C1003820E9 /* UIKit+AFNetworking */,
-				557D30041F00E69B003820E9 /* Masonry */,
 			);
 			path = Framework;
-			sourceTree = "<group>";
-		};
-		557D30041F00E69B003820E9 /* Masonry */ = {
-			isa = PBXGroup;
-			children = (
-				557D30051F00E69B003820E9 /* Info.plist */,
-				557D30061F00E69B003820E9 /* MASCompositeConstraint.h */,
-				557D30071F00E69B003820E9 /* MASCompositeConstraint.m */,
-				557D30081F00E69B003820E9 /* MASConstraint+Private.h */,
-				557D30091F00E69B003820E9 /* MASConstraint.h */,
-				557D300A1F00E69B003820E9 /* MASConstraint.m */,
-				557D300B1F00E69B003820E9 /* MASConstraintMaker.h */,
-				557D300C1F00E69B003820E9 /* MASConstraintMaker.m */,
-				557D300D1F00E69B003820E9 /* MASLayoutConstraint.h */,
-				557D300E1F00E69B003820E9 /* MASLayoutConstraint.m */,
-				557D300F1F00E69B003820E9 /* Masonry.h */,
-				557D30101F00E69B003820E9 /* MASUtilities.h */,
-				557D30111F00E69B003820E9 /* MASViewAttribute.h */,
-				557D30121F00E69B003820E9 /* MASViewAttribute.m */,
-				557D30131F00E69B003820E9 /* MASViewConstraint.h */,
-				557D30141F00E69B003820E9 /* MASViewConstraint.m */,
-				557D30151F00E69B003820E9 /* NSArray+MASAdditions.h */,
-				557D30161F00E69B003820E9 /* NSArray+MASAdditions.m */,
-				557D30171F00E69B003820E9 /* NSArray+MASShorthandAdditions.h */,
-				557D30181F00E69B003820E9 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				557D30191F00E69B003820E9 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				557D301A1F00E69B003820E9 /* View+MASAdditions.h */,
-				557D301B1F00E69B003820E9 /* View+MASAdditions.m */,
-				557D301C1F00E69B003820E9 /* View+MASShorthandAdditions.h */,
-				557D301D1F00E69B003820E9 /* ViewController+MASAdditions.h */,
-				557D301E1F00E69B003820E9 /* ViewController+MASAdditions.m */,
-			);
-			path = Masonry;
 			sourceTree = "<group>";
 		};
 		557D30401F010093003820E9 /* YWDefine */ = {
@@ -604,6 +565,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		55A945FF1F0CBA20007B15FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55A946041F0CBA20007B15FE /* libMasonry.a */,
+				55A946061F0CBA20007B15FE /* libPods-Teleconmobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C46B4BCF909BE4BE8776953E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0B8FF9B430C2E6502A73FA4 /* libPods-Teleconmobile.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -611,9 +589,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 557D2FE11F00A4A5003820E9 /* Build configuration list for PBXNativeTarget "Teleconmobile" */;
 			buildPhases = (
+				AE7BF3FB9D7856B341FA6DC1 /* [CP] Check Pods Manifest.lock */,
 				557D2FB01F00A4A5003820E9 /* Sources */,
 				557D2FB11F00A4A5003820E9 /* Frameworks */,
 				557D2FB21F00A4A5003820E9 /* Resources */,
+				ABF18FDC36F79F1474B2E166 /* [CP] Embed Pods Frameworks */,
+				E124A80DAE80CFF7FC3F411E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -700,6 +681,12 @@
 			mainGroup = 557D2FAB1F00A4A5003820E9;
 			productRefGroup = 557D2FB51F00A4A5003820E9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 55A945FF1F0CBA20007B15FE /* Products */;
+					ProjectRef = 55A945FE1F0CBA20007B15FE /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				557D2FB31F00A4A5003820E9 /* Teleconmobile */,
@@ -708,6 +695,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		55A946041F0CBA20007B15FE /* libMasonry.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMasonry.a;
+			remoteRef = 55A946031F0CBA20007B15FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		55A946061F0CBA20007B15FE /* libPods-Teleconmobile.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libPods-Teleconmobile.a";
+			remoteRef = 55A946051F0CBA20007B15FE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		557D2FB21F00A4A5003820E9 /* Resources */ = {
@@ -729,7 +733,6 @@
 				557D31311F04F30F003820E9 /* wifi_1.png in Resources */,
 				557D31321F04F30F003820E9 /* wifi_2.png in Resources */,
 				557D30E11F039A74003820E9 /* securityQuestion.plist in Resources */,
-				557D301F1F00E69B003820E9 /* Info.plist in Resources */,
 				557D312C1F04F30F003820E9 /* me_2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +753,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		ABF18FDC36F79F1474B2E166 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Teleconmobile/Pods-Teleconmobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE7BF3FB9D7856B341FA6DC1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E124A80DAE80CFF7FC3F411E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Teleconmobile/Pods-Teleconmobile-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		557D2FB01F00A4A5003820E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -759,14 +810,12 @@
 				557D30E71F03B073003820E9 /* YWQuestionViewCell.m in Sources */,
 				557D30821F0251C1003820E9 /* UIButton+AFNetworking.m in Sources */,
 				557D307B1F0251C1003820E9 /* AFURLRequestSerialization.m in Sources */,
-				557D30271F00E69B003820E9 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				557D2FBC1F00A4A5003820E9 /* AppDelegate.m in Sources */,
 				557D311C1F04E18B003820E9 /* YWIMViewController.m in Sources */,
 				557D311E1F04E18B003820E9 /* YWThingsViewController.m in Sources */,
 				557D30841F0251C1003820E9 /* UIProgressView+AFNetworking.m in Sources */,
 				557D30E41F03A7E9003820E9 /* YWAreaCodeViewCell.m in Sources */,
 				557D30811F0251C1003820E9 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				557D30251F00E69B003820E9 /* MASViewConstraint.m in Sources */,
 				557D30851F0251C1003820E9 /* UIRefreshControl+AFNetworking.m in Sources */,
 				557D2FFF1F00AF6A003820E9 /* UIViewController+YWUIViewController.m in Sources */,
 				557D307D1F0251C1003820E9 /* AFURLSessionManager.m in Sources */,
@@ -774,29 +823,21 @@
 				557D303F1F00FC9C003820E9 /* UIColor+Hex.m in Sources */,
 				557D30021F00BC7C003820E9 /* UIButton+YWUIButton.m in Sources */,
 				557D2FB91F00A4A5003820E9 /* main.m in Sources */,
-				557D30281F00E69B003820E9 /* View+MASAdditions.m in Sources */,
 				557D31081F04E16E003820E9 /* YWNetworkingMamager.m in Sources */,
-				557D30201F00E69B003820E9 /* MASCompositeConstraint.m in Sources */,
 				557D302F1F00F6E9003820E9 /* YWLoginViewController.m in Sources */,
 				557D311A1F04E18B003820E9 /* YWContigViewController.m in Sources */,
 				557D30451F020FB9003820E9 /* YWQuestionView.m in Sources */,
 				557D31051F04E137003820E9 /* YWRootHomeViewController.m in Sources */,
-				557D30241F00E69B003820E9 /* MASViewAttribute.m in Sources */,
 				557D30791F0251C1003820E9 /* AFNetworkReachabilityManager.m in Sources */,
 				557D311B1F04E18B003820E9 /* YWHomeTabBarViewController.m in Sources */,
 				557D307E1F0251C1003820E9 /* AFAutoPurgingImageCache.m in Sources */,
-				557D30221F00E69B003820E9 /* MASConstraintMaker.m in Sources */,
-				557D30261F00E69B003820E9 /* NSArray+MASAdditions.m in Sources */,
 				557D307F1F0251C1003820E9 /* AFImageDownloader.m in Sources */,
 				557D30381F00F738003820E9 /* YWSignUpThirdViewController.m in Sources */,
 				557D30801F0251C1003820E9 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				557D30781F0251C1003820E9 /* AFHTTPSessionManager.m in Sources */,
-				557D30291F00E69B003820E9 /* ViewController+MASAdditions.m in Sources */,
 				557D31351F05DCBF003820E9 /* UIImage+YWUIImage.m in Sources */,
 				557D302C1F00E768003820E9 /* YWNavigationViewController.m in Sources */,
 				557D30831F0251C1003820E9 /* UIImageView+AFNetworking.m in Sources */,
-				557D30211F00E69B003820E9 /* MASConstraint.m in Sources */,
-				557D30231F00E69B003820E9 /* MASLayoutConstraint.m in Sources */,
 				557D309A1F033F69003820E9 /* YWCommonMethod.m in Sources */,
 				557D30351F00F72D003820E9 /* YWSignUpSecondViewController.m in Sources */,
 				557D307A1F0251C1003820E9 /* AFSecurityPolicy.m in Sources */,
@@ -930,6 +971,7 @@
 		};
 		557D2FE21F00A4A5003820E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0A785CBC9B91284EA76F630 /* Pods-Teleconmobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = YEZ42AE4QP;
@@ -944,6 +986,7 @@
 		};
 		557D2FE31F00A4A5003820E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B53B93B5ED8A5067BA90FD64 /* Pods-Teleconmobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = YEZ42AE4QP;
