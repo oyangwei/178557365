@@ -47,8 +47,6 @@
         [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation fromNavigationController:weakConversationListController.navigationController];
     };
     
-    
-    
     [self setupChildVC:conversationListController title:@"Message" image:@"message_1" selectImage:@"message_2"];
     [self setupChildVC:[[YWContactsViewController alloc] init] title:@"Contact" image:@"contact_1" selectImage:@"contact_2"];
     [self setupChildVC:[[YWContigViewController alloc] init] title:@"Contig" image:@"wifi_1" selectImage:@"wifi_2"];

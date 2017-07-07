@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55212C5C1F0F4F7300A31676 /* SPContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55212C5A1F0F4F7300A31676 /* SPContactCell.m */; };
+		55212C5D1F0F4F7300A31676 /* SPContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55212C5B1F0F4F7300A31676 /* SPContactCell.xib */; };
 		557D2FB91F00A4A5003820E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D2FB81F00A4A5003820E9 /* main.m */; };
 		557D2FBC1F00A4A5003820E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 557D2FBB1F00A4A5003820E9 /* AppDelegate.m */; };
 		557D2FC41F00A4A5003820E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 557D2FC31F00A4A5003820E9 /* Assets.xcassets */; };
@@ -150,6 +152,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55212C591F0F4F7300A31676 /* SPContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPContactCell.h; sourceTree = "<group>"; };
+		55212C5A1F0F4F7300A31676 /* SPContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPContactCell.m; sourceTree = "<group>"; };
+		55212C5B1F0F4F7300A31676 /* SPContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPContactCell.xib; sourceTree = "<group>"; };
 		557D2FB41F00A4A5003820E9 /* Teleconmobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teleconmobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557D2FB81F00A4A5003820E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		557D2FBA1F00A4A5003820E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -383,6 +388,23 @@
 				B53B93B5ED8A5067BA90FD64 /* Pods-Teleconmobile.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		55212C571F0F4F4700A31676 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		55212C581F0F4F4700A31676 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55212C591F0F4F7300A31676 /* SPContactCell.h */,
+				55212C5A1F0F4F7300A31676 /* SPContactCell.m */,
+				55212C5B1F0F4F7300A31676 /* SPContactCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		557D2FAB1F00A4A5003820E9 = {
@@ -661,8 +683,8 @@
 			isa = PBXGroup;
 			children = (
 				557D310A1F04E18B003820E9 /* Controller */,
-				557D31171F04E18B003820E9 /* Mode */,
-				557D31181F04E18B003820E9 /* View */,
+				55212C571F0F4F4700A31676 /* Model */,
+				55212C581F0F4F4700A31676 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -682,20 +704,6 @@
 				557D31161F04E18B003820E9 /* YWThingsViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		557D31171F04E18B003820E9 /* Mode */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mode;
-			sourceTree = "<group>";
-		};
-		557D31181F04E18B003820E9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		55A945FF1F0CBA20007B15FE /* Products */ = {
@@ -1056,6 +1064,7 @@
 				55A946641F0CBF4E007B15FE /* demo_discussion@2x.png in Resources */,
 				557D30E11F039A74003820E9 /* securityQuestion.plist in Resources */,
 				55A946141F0CBEF9007B15FE /* WXOpenIMSDKResource.bundle in Resources */,
+				55212C5D1F0F4F7300A31676 /* SPContactCell.xib in Resources */,
 				557D312C1F04F30F003820E9 /* me_2.png in Resources */,
 				55A946551F0CBF29007B15FE /* input_plug_ico_card_nor@2x.png in Resources */,
 			);
@@ -1176,6 +1185,7 @@
 				557D30351F00F72D003820E9 /* YWSignUpSecondViewController.m in Sources */,
 				557D307A1F0251C1003820E9 /* AFSecurityPolicy.m in Sources */,
 				557D31191F04E18B003820E9 /* YWContactsViewController.m in Sources */,
+				55212C5C1F0F4F7300A31676 /* SPContactCell.m in Sources */,
 				557D30861F0251C1003820E9 /* UIWebView+AFNetworking.m in Sources */,
 				557D30321F00F723003820E9 /* YWSignUpFirstViewController.m in Sources */,
 				557D307C1F0251C1003820E9 /* AFURLResponseSerialization.m in Sources */,

@@ -327,10 +327,10 @@ UIAlertViewDelegate>
 //#warning TODO: CHANGE TO YOUR AppKey
         /// 线上环境，更换成你自己的AppKey
         [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23015524" getError:&error]; //官方
-//        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23015524" getError:&error];  //公司
+//        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"24528176" getError:&error];  //公司
     } else {
         // OpenIM内网环境，暂时不向开发者开放，需要测试环境的，自行申请另一个Appkey作为测试环境
-//        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23015524" getError:&error];
+//        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"24528176" getError:&error];
         [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"60028148" getError:&error];
     }
 
