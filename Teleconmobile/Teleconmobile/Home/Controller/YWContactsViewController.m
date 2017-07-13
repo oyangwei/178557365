@@ -28,6 +28,12 @@
     [super viewDidLoad];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.separatorColor =[UIColor colorWithWhite:1.f*0xdf/0xff alpha:1.f];
+    if ([self.tableView respondsToSelector:@selector(setSectionIndexBackgroundColor:)]) {
+        self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+    }
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"SPContactCell" bundle:nil]
          forCellReuseIdentifier:@"ContactCell"];
     self.tableView.delegate = self;
@@ -87,6 +93,32 @@
     [cell configureWithAvatar:avatar title:displayName subtitle:nil];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 64.0f;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+        UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+        [header.textLabel setTextColor:[UIColor lightGrayColor]];
+    }
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section >= [[self.fetchedResultsController sectionIndexTitles] count]) {
+        return nil;
+    }
+    return  [self.fetchedResultsController sectionIndexTitles][(NSInteger)section];
+}
+
+-(NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return [self.fetchedResultsController sectionIndexTitles];
 }
 
 -(YWFetchedResultsController *)fetchedResultsController

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="171" id="KGk-i7-Jjw" customClass="AdvertiseTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="171"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="436" height="170"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcast Packet :" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfP-ug-K7h">
+                        <rect key="frame" x="18" y="8" width="143" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAQ-KJ-SMB">
+                        <rect key="frame" x="18" y="34" width="54.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toC-vr-A9Y">
+                        <rect key="frame" x="18" y="60" width="400" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KAQ-KJ-SMB" firstAttribute="top" secondItem="pfP-ug-K7h" secondAttribute="bottom" constant="5" id="8h8-VF-seT"/>
+                    <constraint firstItem="KAQ-KJ-SMB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="C4Q-JH-Y9Z"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="pfP-ug-K7h" secondAttribute="trailing" constant="10" id="DkI-K6-Iyu"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="KAQ-KJ-SMB" secondAttribute="trailing" constant="10" id="HSk-7c-Jat"/>
+                    <constraint firstItem="pfP-ug-K7h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Uvl-V0-UAq"/>
+                    <constraint firstItem="toC-vr-A9Y" firstAttribute="top" secondItem="KAQ-KJ-SMB" secondAttribute="bottom" constant="5" id="cAI-tY-Ux4"/>
+                    <constraint firstItem="toC-vr-A9Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="deF-ak-xst"/>
+                    <constraint firstItem="pfP-ug-K7h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="ev3-VE-aDI"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="toC-vr-A9Y" secondAttribute="trailing" constant="10" id="lko-QF-ac4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="RSSI" destination="toC-vr-A9Y" id="4Dd-6h-1eN"/>
+                <outlet property="name" destination="KAQ-KJ-SMB" id="xfl-4l-s9G"/>
+                <outlet property="packet" destination="pfP-ug-K7h" id="9J0-F3-Ht9"/>
+            </connections>
+            <point key="canvasLocation" x="-1190" y="-34"/>
+        </tableViewCell>
+    </objects>
+</document>
