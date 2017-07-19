@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "55A26F0C1F1621A3006F9A5C"
-               BuildableName = "BLE.app"
-               BlueprintName = "BLE"
-               ReferencedContainer = "container:BLE.xcodeproj">
+               BuildableName = "dm_ios_ble_advscan_1v0.app"
+               BlueprintName = "dm_ios_ble_advscan_1v0"
+               ReferencedContainer = "container:dm_ios_ble_advscan_1v0.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "55A26F251F1621A3006F9A5C"
-               BuildableName = "BLETests.xctest"
-               BlueprintName = "BLETests"
-               ReferencedContainer = "container:BLE.xcodeproj">
+               BuildableName = "dm_ios_ble_advscan_1v0Tests.xctest"
+               BlueprintName = "dm_ios_ble_advscan_1v0Tests"
+               ReferencedContainer = "container:dm_ios_ble_advscan_1v0.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "55A26F301F1621A4006F9A5C"
-               BuildableName = "BLEUITests.xctest"
-               BlueprintName = "BLEUITests"
-               ReferencedContainer = "container:BLE.xcodeproj">
+               BuildableName = "dm_ios_ble_advscan_1v0UITests.xctest"
+               BlueprintName = "dm_ios_ble_advscan_1v0UITests"
+               ReferencedContainer = "container:dm_ios_ble_advscan_1v0.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "55A26F0C1F1621A3006F9A5C"
-            BuildableName = "BLE.app"
-            BlueprintName = "BLE"
-            ReferencedContainer = "container:BLE.xcodeproj">
+            BuildableName = "dm_ios_ble_advscan_1v0.app"
+            BlueprintName = "dm_ios_ble_advscan_1v0"
+            ReferencedContainer = "container:dm_ios_ble_advscan_1v0.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "55A26F0C1F1621A3006F9A5C"
-            BuildableName = "BLE.app"
-            BlueprintName = "BLE"
-            ReferencedContainer = "container:BLE.xcodeproj">
+            BuildableName = "dm_ios_ble_advscan_1v0.app"
+            BlueprintName = "dm_ios_ble_advscan_1v0"
+            ReferencedContainer = "container:dm_ios_ble_advscan_1v0.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "55A26F0C1F1621A3006F9A5C"
-            BuildableName = "BLE.app"
-            BlueprintName = "BLE"
-            ReferencedContainer = "container:BLE.xcodeproj">
+            BuildableName = "dm_ios_ble_advscan_1v0.app"
+            BlueprintName = "dm_ios_ble_advscan_1v0"
+            ReferencedContainer = "container:dm_ios_ble_advscan_1v0.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

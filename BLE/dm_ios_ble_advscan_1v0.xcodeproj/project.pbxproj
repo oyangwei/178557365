@@ -57,17 +57,17 @@
 
 /* Begin PBXFileReference section */
 		1C40DDBD08E32510730193F5 /* libPods-BLE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BLE.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55A26F0D1F1621A3006F9A5C /* BLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A26F0D1F1621A3006F9A5C /* dm_ios_ble_advscan_1v0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dm_ios_ble_advscan_1v0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A26F111F1621A3006F9A5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55A26F131F1621A3006F9A5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		55A26F141F1621A3006F9A5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		55A26F1C1F1621A3006F9A5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55A26F1F1F1621A3006F9A5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55A26F211F1621A3006F9A5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55A26F261F1621A3006F9A5C /* BLETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A26F261F1621A3006F9A5C /* dm_ios_ble_advscan_1v0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dm_ios_ble_advscan_1v0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A26F2A1F1621A4006F9A5C /* BLETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLETests.m; sourceTree = "<group>"; };
 		55A26F2C1F1621A4006F9A5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55A26F311F1621A4006F9A5C /* BLEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A26F311F1621A4006F9A5C /* dm_ios_ble_advscan_1v0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dm_ios_ble_advscan_1v0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A26F351F1621A4006F9A5C /* BLEUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLEUITests.m; sourceTree = "<group>"; };
 		55A26F371F1621A4006F9A5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55A26F461F1622BB006F9A5C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -140,9 +140,9 @@
 		55A26F0E1F1621A3006F9A5C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55A26F0D1F1621A3006F9A5C /* BLE.app */,
-				55A26F261F1621A3006F9A5C /* BLETests.xctest */,
-				55A26F311F1621A4006F9A5C /* BLEUITests.xctest */,
+				55A26F0D1F1621A3006F9A5C /* dm_ios_ble_advscan_1v0.app */,
+				55A26F261F1621A3006F9A5C /* dm_ios_ble_advscan_1v0Tests.xctest */,
+				55A26F311F1621A4006F9A5C /* dm_ios_ble_advscan_1v0UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,9 +220,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		55A26F0C1F1621A3006F9A5C /* BLE */ = {
+		55A26F0C1F1621A3006F9A5C /* dm_ios_ble_advscan_1v0 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55A26F3A1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "BLE" */;
+			buildConfigurationList = 55A26F3A1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "dm_ios_ble_advscan_1v0" */;
 			buildPhases = (
 				1DEB9EC9D806BEBDF80CF71F /* [CP] Check Pods Manifest.lock */,
 				55A26F091F1621A3006F9A5C /* Sources */,
@@ -235,14 +235,14 @@
 			);
 			dependencies = (
 			);
-			name = BLE;
+			name = dm_ios_ble_advscan_1v0;
 			productName = BLE;
-			productReference = 55A26F0D1F1621A3006F9A5C /* BLE.app */;
+			productReference = 55A26F0D1F1621A3006F9A5C /* dm_ios_ble_advscan_1v0.app */;
 			productType = "com.apple.product-type.application";
 		};
-		55A26F251F1621A3006F9A5C /* BLETests */ = {
+		55A26F251F1621A3006F9A5C /* dm_ios_ble_advscan_1v0Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55A26F3D1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "BLETests" */;
+			buildConfigurationList = 55A26F3D1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "dm_ios_ble_advscan_1v0Tests" */;
 			buildPhases = (
 				55A26F221F1621A3006F9A5C /* Sources */,
 				55A26F231F1621A3006F9A5C /* Frameworks */,
@@ -253,14 +253,14 @@
 			dependencies = (
 				55A26F281F1621A3006F9A5C /* PBXTargetDependency */,
 			);
-			name = BLETests;
+			name = dm_ios_ble_advscan_1v0Tests;
 			productName = BLETests;
-			productReference = 55A26F261F1621A3006F9A5C /* BLETests.xctest */;
+			productReference = 55A26F261F1621A3006F9A5C /* dm_ios_ble_advscan_1v0Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		55A26F301F1621A4006F9A5C /* BLEUITests */ = {
+		55A26F301F1621A4006F9A5C /* dm_ios_ble_advscan_1v0UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55A26F401F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "BLEUITests" */;
+			buildConfigurationList = 55A26F401F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "dm_ios_ble_advscan_1v0UITests" */;
 			buildPhases = (
 				55A26F2D1F1621A4006F9A5C /* Sources */,
 				55A26F2E1F1621A4006F9A5C /* Frameworks */,
@@ -271,9 +271,9 @@
 			dependencies = (
 				55A26F331F1621A4006F9A5C /* PBXTargetDependency */,
 			);
-			name = BLEUITests;
+			name = dm_ios_ble_advscan_1v0UITests;
 			productName = BLEUITests;
-			productReference = 55A26F311F1621A4006F9A5C /* BLEUITests.xctest */;
+			productReference = 55A26F311F1621A4006F9A5C /* dm_ios_ble_advscan_1v0UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -304,7 +304,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55A26F081F1621A3006F9A5C /* Build configuration list for PBXProject "BLE" */;
+			buildConfigurationList = 55A26F081F1621A3006F9A5C /* Build configuration list for PBXProject "dm_ios_ble_advscan_1v0" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -323,9 +323,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				55A26F0C1F1621A3006F9A5C /* BLE */,
-				55A26F251F1621A3006F9A5C /* BLETests */,
-				55A26F301F1621A4006F9A5C /* BLEUITests */,
+				55A26F0C1F1621A3006F9A5C /* dm_ios_ble_advscan_1v0 */,
+				55A26F251F1621A3006F9A5C /* dm_ios_ble_advscan_1v0Tests */,
+				55A26F301F1621A4006F9A5C /* dm_ios_ble_advscan_1v0UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -460,12 +460,12 @@
 /* Begin PBXTargetDependency section */
 		55A26F281F1621A3006F9A5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55A26F0C1F1621A3006F9A5C /* BLE */;
+			target = 55A26F0C1F1621A3006F9A5C /* dm_ios_ble_advscan_1v0 */;
 			targetProxy = 55A26F271F1621A3006F9A5C /* PBXContainerItemProxy */;
 		};
 		55A26F331F1621A4006F9A5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55A26F0C1F1621A3006F9A5C /* BLE */;
+			target = 55A26F0C1F1621A3006F9A5C /* dm_ios_ble_advscan_1v0 */;
 			targetProxy = 55A26F321F1621A4006F9A5C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -605,7 +605,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TM.BLETests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BLE.app/BLE";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dm_ios_ble_advscan_1v0.app/dm_ios_ble_advscan_1v0";
 			};
 			name = Debug;
 		};
@@ -618,7 +618,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TM.BLETests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BLE.app/BLE";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dm_ios_ble_advscan_1v0.app/dm_ios_ble_advscan_1v0";
 			};
 			name = Release;
 		};
@@ -649,7 +649,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55A26F081F1621A3006F9A5C /* Build configuration list for PBXProject "BLE" */ = {
+		55A26F081F1621A3006F9A5C /* Build configuration list for PBXProject "dm_ios_ble_advscan_1v0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55A26F381F1621A4006F9A5C /* Debug */,
@@ -658,7 +658,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55A26F3A1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "BLE" */ = {
+		55A26F3A1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "dm_ios_ble_advscan_1v0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55A26F3B1F1621A4006F9A5C /* Debug */,
@@ -667,7 +667,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55A26F3D1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "BLETests" */ = {
+		55A26F3D1F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "dm_ios_ble_advscan_1v0Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55A26F3E1F1621A4006F9A5C /* Debug */,
@@ -676,7 +676,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55A26F401F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "BLEUITests" */ = {
+		55A26F401F1621A4006F9A5C /* Build configuration list for PBXNativeTarget "dm_ios_ble_advscan_1v0UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55A26F411F1621A4006F9A5C /* Debug */,

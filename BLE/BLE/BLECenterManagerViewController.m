@@ -19,6 +19,11 @@
 #define TabBarHeight [[UITabBarController alloc] init].tabBar.frame.size.height
 
 @interface BLECenterManagerViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+{
+    NSMutableArray *peripherals;
+    int times;
+}
+
 
 @property(strong, nonatomic) CBCentralManager *cMgr;
 @property(strong, nonatomic) CBPeripheral *peripheral;
@@ -32,12 +37,14 @@
 @property(assign, nonatomic) BOOL isScan;
 @property(assign, nonatomic) BOOL isScrolling;
 
+
 @end
 
 @implementation BLECenterManagerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    times = 0;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -81,7 +88,7 @@
 {
     if (!_cMgr) {
         _cMgr = [[CBCentralManager alloc] initWithDelegate:self
-                                                     queue:dispatch_get_main_queue()
+                                                     queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
                                                    options:nil];
     }
     return _cMgr;
@@ -105,7 +112,7 @@
         [self.cMgr scanForPeripheralsWithServices:nil   //通过某些服务器筛选外设
                                           options:nil];
         
-        self.leftSeconds = 10;
+        self.leftSeconds = 100;
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeDown) userInfo:nil repeats:YES];
     }
     else
@@ -173,7 +180,7 @@
             
             //搜索外设
             [self.cMgr scanForPeripheralsWithServices:nil   //通过某些服务器筛选外设
-                                              options:nil];  //dict,条件
+                                              options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBCentralManagerScanOptionAllowDuplicatesKey]];  //dict,条件
             break;
             
         default:
@@ -189,15 +196,29 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral   //外设
 {
     NSLog(@"central = %@, peripheral = %@, advertisementData = %@, RSSI = %@", central, peripheral, advertisementData, RSSI);
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys: advertisementData, @"packet", peripheral.name, @"name", RSSI, @"RSSI", nil];
-        Advertise *ad = [Advertise instanceWithDictionary:dict];
-        [self.dataArray addObject:ad];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height) animated:YES];
-        });
-    });
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys: advertisementData, @"packet", peripheral.name, @"name", RSSI, @"RSSI", times, @"times", nil];
+    
+    
+    
+    if ([peripheral.name isEqualToString:@"Oyw01"]) {
+//        [self.dataArray indexOfObject:dict];
+//        
+//        self.dataArray replaceObjectAtIndex:(NSUInteger) withObject:(nonnull id)
+        NSLog(@"times:%d", ++times);
+    }
+    
+//    [peripherals addObject:peripheral];
+//    
+//    Advertise *ad = [Advertise instanceWithDictionary:dict];
+//    [self.dataArray addObject:ad];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.tableView reloadData];
+//        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height) animated:YES];
+//    });
+    
+    
+//    [central connectPeripheral:peripheral options:nil];
 }
 
 -(void)centralManager:(CBCentralManager *)central  //中心管理者

@@ -203,6 +203,9 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         NSDictionary *advertDict = @{CBAdvertisementDataServiceUUIDsKey : [self.services valueForKey:@"UUID" ],
                                      CBAdvertisementDataLocalNameKey:self.localNameKey};
         NSLog(@"%s, line = %d, %@", __func__, __LINE__, advertDict);
+        
+        
+        
         [peripheral startAdvertising:advertDict];
     }
 }
@@ -263,6 +266,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 
 - (void)touchEnd:(id)sender
 {
+    [self.pMgr stopAdvertising];
     if ([self.timer isValid]) {
         [self.timer invalidate];
         self.timer = nil;
@@ -272,8 +276,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     [UIView animateWithDuration:0.5 animations:^{
         btn.alpha = 1.0;
     }];
-    [self.pMgr stopAdvertising];
-    NSLog(@"%s, line = %d", __func__, __LINE__);
 }
 
 - (void)sendMsg
@@ -319,7 +321,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         {
             if ([[self.userDefault valueForKey:@"UUID02"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID02"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
-                return;
+                break;
             }
             
             // 通常UUID都是由硬件工程师定义的
@@ -334,7 +336,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         {
             if ([[self.userDefault valueForKey:@"UUID03"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID03"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
-                return;
+                break;
             }
             
             // 通常UUID都是由硬件工程师定义的
@@ -349,7 +351,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         {
             if ([[self.userDefault valueForKey:@"UUID04"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID04"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
-                return;
+                break;
             }
             
             // 通常UUID都是由硬件工程师定义的
@@ -380,9 +382,12 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 }
 
 -(void)alertMsg:(NSString *)msg{
+    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Warning" message:msg preferredStyle:UIAlertControllerStyleAlert];
 
-    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self touchEnd:nil];
+    }];
     [alertVC addAction:confirm];
     
     [self presentViewController:alertVC animated:YES completion:nil];
