@@ -202,11 +202,14 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         //广播内容
         NSDictionary *advertDict = @{CBAdvertisementDataServiceUUIDsKey : [self.services valueForKey:@"UUID" ],
                                      CBAdvertisementDataLocalNameKey:self.localNameKey};
-        NSLog(@"%s, line = %d, %@", __func__, __LINE__, advertDict);
         
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.02 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            NSLog(@"%s, line = %d, %@", __func__, __LINE__, advertDict);
+            [peripheral startAdvertising:advertDict];
+        }];
         
-        
-        [peripheral startAdvertising:advertDict];
+        NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+        [runloop addTimer:self.timer forMode:NSDefaultRunLoopMode];
     }
 }
 
@@ -255,39 +258,14 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 
 - (void)touchStart:(id)sender
 {
-    NSLog(@"%s, line = %d", __func__, __LINE__);
-    UIButton *btn = (UIButton *)sender;
-    NSDictionary *dic = @{@"tag":[NSString stringWithFormat:@"%ld", (long)btn.tag]};
-    self.timer = [NSTimer timerWithTimeInterval:0.02 target:self selector:@selector(sendMsg) userInfo:dic repeats:YES];
-    
-    NSRunLoop *runloop = [NSRunLoop currentRunLoop];
-    [runloop addTimer:self.timer forMode:NSDefaultRunLoopMode];
-}
-
-- (void)touchEnd:(id)sender
-{
-    [self.pMgr stopAdvertising];
-    if ([self.timer isValid]) {
-        [self.timer invalidate];
-        self.timer = nil;
-    }
-    
-    UIButton *btn = (UIButton *)sender;
-    [UIView animateWithDuration:0.5 animations:^{
-        btn.alpha = 1.0;
-    }];
-}
-
-- (void)sendMsg
-{
     self.numOfServices = 0;
     [self.services removeAllObjects];
-    int tag = [self.timer.userInfo[@"tag"] intValue];
-    NSLog(@"%s, line = %d, tag = %d", __func__, __LINE__, tag);
-    UIButton *btn = [self.view viewWithTag:tag];
+    
+    UIButton *btn = (UIButton *)sender;
     [UIView animateWithDuration:0.5 animations:^{
         btn.alpha = 0.5;
     }];
+    int tag= (int)btn.tag;
     // 创建特征的描述
     CBMutableDescriptor *descriptor = [[CBMutableDescriptor alloc] initWithType:[CBUUID UUIDWithString:CBUUIDCharacteristicUserDescriptionString] value:@"TeleconMobile01"];
     
@@ -302,8 +280,12 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         {
             if ([[self.userDefault valueForKey:@"UUID01"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID01"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
+                [UIView animateWithDuration:0.5 animations:^{
+                    btn.alpha = 1.0;
+                }];
                 break;
             }
+            
             
             // 通常UUID都是由硬件工程师定义的
             CBUUID *serviceUUID = [CBUUID UUIDWithString:[self.userDefault valueForKey:@"UUID01"]];
@@ -321,6 +303,9 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         {
             if ([[self.userDefault valueForKey:@"UUID02"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID02"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
+                [UIView animateWithDuration:0.5 animations:^{
+                    btn.alpha = 1.0;
+                }];
                 break;
             }
             
@@ -336,6 +321,9 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         {
             if ([[self.userDefault valueForKey:@"UUID03"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID03"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
+                [UIView animateWithDuration:0.5 animations:^{
+                    btn.alpha = 1.0;
+                }];
                 break;
             }
             
@@ -351,11 +339,15 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         {
             if ([[self.userDefault valueForKey:@"UUID04"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID04"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
+                [UIView animateWithDuration:0.5 animations:^{
+                    btn.alpha = 1.0;
+                }];
                 break;
             }
             
             // 通常UUID都是由硬件工程师定义的
-            CBUUID *serviceUUID = [CBUUID UUIDWithString:[self.userDefault valueForKey:@"UUID04"]];            CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
+            CBUUID *serviceUUID = [CBUUID UUIDWithString:[self.userDefault valueForKey:@"UUID04"]];
+            CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
             service.characteristics = @[cha];
             [self.services addObject:service];
             self.localNameKey = LocalNameKey4;
@@ -370,6 +362,21 @@ static NSString *const LocalNameKey4 = @"Oyw04";
             [self.pMgr addService:service];
         }
     }
+    
+}
+
+- (void)touchEnd:(id)sender
+{
+    [self.pMgr stopAdvertising];
+    if ([self.timer isValid]) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    
+    UIButton *btn = (UIButton *)sender;
+    [UIView animateWithDuration:0.5 animations:^{
+        btn.alpha = 1.0;
+    }];
 }
 
 #pragma mark - 进入设置界面
@@ -385,9 +392,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Warning" message:msg preferredStyle:UIAlertControllerStyleAlert];
 
-    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self touchEnd:nil];
-    }];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
     [alertVC addAction:confirm];
     
     [self presentViewController:alertVC animated:YES completion:nil];
