@@ -17,10 +17,10 @@
 #define buttonWidth 130
 #define TabBarHeight [[UITabBarController alloc] init].tabBar.frame.size.height
 
-static NSString *const Service1StrUUID = @"66554433-2211-2211-2211-221144332211";
-static NSString *const Service2StrUUID = @"67554433-2211-2211-2211-221144332211";
-static NSString *const Service3StrUUID = @"68554433-2211-2211-2211-221144332211";
-static NSString *const Service4StrUUID = @"69554433-2211-2211-2211-221144332211";
+static NSString *const Service1StrUUID = @"856f5555-8064-43e9-8b7e-d04c5a9d6a9a";
+static NSString *const Service2StrUUID = @"856f5555-8064-43e9-8b7e-d04c5a9d6b9b";
+static NSString *const Service3StrUUID = @"856f5555-8064-43e9-8b7e-d04c5a9d6c9c";
+static NSString *const Service4StrUUID = @"856f5555-8064-43e9-8b7e-d04c5a9d6d9d";
 
 static NSString *const notifyCharacticStrUUID = @"FFF1";
 static NSString *const readWriteCharacticStrUUID = @"FFF2";
@@ -54,7 +54,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.userDefault = [NSUserDefaults standardUserDefaults];
+    [self initUserDefault];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -151,7 +151,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -159,6 +158,45 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     self.navigationController.navigationBar.hidden = YES;
 }
 
+#pragma mark - 初始化userDefault某些key值
+-(void)initUserDefault
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    if (![userDefault objectForKey:@"UUID01"]) {
+        [userDefault setValue:@"" forKey:@"UUID01"];
+    }
+    
+    if (![userDefault objectForKey:@"LocalName01"]) {
+        [userDefault setValue:@"" forKey:@"LocalName01"];
+    }
+    
+    if (![userDefault objectForKey:@"UUID02"]) {
+        [userDefault setValue:@"" forKey:@"UUID02"];
+    }
+    
+    if (![userDefault objectForKey:@"LocalName02"]) {
+        [userDefault setValue:@"" forKey:@"LocalName02"];
+    }
+    
+    if (![userDefault objectForKey:@"UUID03"]) {
+        [userDefault setValue:@"" forKey:@"UUID03"];
+    }
+    
+    if (![userDefault objectForKey:@"LocalName03"]) {
+        [userDefault setValue:@"" forKey:@"LocalName03"];
+    }
+    
+    if (![userDefault objectForKey:@"UUID04"]) {
+        [userDefault setValue:@"" forKey:@"UUID04"];
+    }
+    
+    if (![userDefault objectForKey:@"LocalName04"]) {
+        [userDefault setValue:@"" forKey:@"LocalName04"];
+    }
+    
+    self.userDefault = userDefault;
+}
 
 -(CBPeripheralManager *)pMgr
 {
@@ -205,6 +243,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         NSDictionary *advertDict = @{CBAdvertisementDataServiceUUIDsKey : [self.services valueForKey:@"UUID" ],
                                      CBAdvertisementDataLocalNameKey:self.localNameKey};
         
+        
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.02 repeats:YES block:^(NSTimer * _Nonnull timer) {
             NSLog(@"%s, line = %d, %@", __func__, __LINE__, advertDict);
             [peripheral startAdvertising:advertDict];
@@ -212,13 +251,15 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         
         NSRunLoop *runloop = [NSRunLoop currentRunLoop];
         [runloop addTimer:self.timer forMode:NSDefaultRunLoopMode];
+        
     }
 }
 
-#pragma mark - 开始广播出发的代理
+#pragma mark - 开始广播触发的代理
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(nullable NSError *)error
 {
     NSLog(@"%s, line = %d", __func__, __LINE__);
+    
 }
 
 #pragma mark - 外设收到读的请求后，然后根据读特征的值赋值给request
@@ -228,6 +269,8 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     if (request.characteristic.properties & CBCharacteristicPropertyRead) {
         NSData *data = request.characteristic.value;
         request.value = data;
+        
+        NSLog(@"%s, line = %d", __func__, __LINE__);
         
         //对请求成功做出响应
         [self.pMgr respondToRequest:request withResult:CBATTErrorSuccess];
@@ -258,7 +301,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     }
 }
 
-#pragma mark - 按下按钮
 - (void)touchStart:(id)sender
 {
     self.numOfServices = 0;
@@ -270,6 +312,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         btn.alpha = 0.5;
     }];
     int tag= (int)btn.tag;
+    
     // 创建特征的描述
     CBMutableDescriptor *descriptor = [[CBMutableDescriptor alloc] initWithType:[CBUUID UUIDWithString:CBUUIDCharacteristicUserDescriptionString] value:@"TeleconMobile01"];
     
@@ -282,37 +325,37 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     switch (tag) {
         case 101:
         {
-            if ([[self.userDefault valueForKey:@"UUID01"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID01"] == nil) {
+            if ([[self.userDefault valueForKey:@"UUID01"] isEqualToString:@""]) {
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
-                    btn.alpha = 1.0;
                     btn.selected = NO;
+                    btn.alpha = 1.0;
                 }];
                 break;
             }
-            
             
             // 通常UUID都是由硬件工程师定义的
             CBUUID *serviceUUID = [CBUUID UUIDWithString:[self.userDefault valueForKey:@"UUID01"]];
             
             // 设置添加到外设中的服务
             CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
+            
             service.characteristics = @[cha];
             
             // 添加服务到外设管理者中
             [self.services addObject:service];
-            self.localNameKey = LocalNameKey1;
+            self.localNameKey = [self.userDefault valueForKey:@"LocalName01"];
             break;
         }
         case 102:
         {
-            if ([[self.userDefault valueForKey:@"UUID02"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID02"] == nil) {
+            if ([[self.userDefault valueForKey:@"UUID02"] isEqualToString:@""]) {
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
-                    btn.alpha = 1.0;
                     btn.selected = NO;
+                    btn.alpha = 1.0;
                 }];
-                break;
+                return;
             }
             
             // 通常UUID都是由硬件工程师定义的
@@ -320,18 +363,18 @@ static NSString *const LocalNameKey4 = @"Oyw04";
             CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
             service.characteristics = @[cha];
             [self.services addObject:service];
-            self.localNameKey = LocalNameKey2;
+            self.localNameKey = [self.userDefault valueForKey:@"LocalName02"];
             break;
         }
         case 103:
         {
-            if ([[self.userDefault valueForKey:@"UUID03"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID03"] == nil) {
+            if ([[self.userDefault valueForKey:@"UUID03"] isEqualToString:@""]) {
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
-                    btn.alpha = 1.0;
                     btn.selected = NO;
+                    btn.alpha = 1.0;
                 }];
-                break;
+                return;
             }
             
             // 通常UUID都是由硬件工程师定义的
@@ -339,26 +382,25 @@ static NSString *const LocalNameKey4 = @"Oyw04";
             CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
             service.characteristics = @[cha];
             [self.services addObject:service];
-            self.localNameKey = LocalNameKey3;
+            self.localNameKey = [self.userDefault valueForKey:@"LocalName03"];
             break;
         }
         case 104:
         {
-            if ([[self.userDefault valueForKey:@"UUID04"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID04"] == nil) {
+            if ([[self.userDefault valueForKey:@"UUID04"] isEqualToString:@""]) {
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
-                    btn.alpha = 1.0;
                     btn.selected = NO;
+                    btn.alpha = 1.0;
                 }];
-                break;
+                return;
             }
             
             // 通常UUID都是由硬件工程师定义的
-            CBUUID *serviceUUID = [CBUUID UUIDWithString:[self.userDefault valueForKey:@"UUID04"]];
-            CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
+            CBUUID *serviceUUID = [CBUUID UUIDWithString:[self.userDefault valueForKey:@"UUID04"]];            CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
             service.characteristics = @[cha];
             [self.services addObject:service];
-            self.localNameKey = LocalNameKey4;
+            self.localNameKey = [self.userDefault valueForKey:@"LocalName04"];
             break;
         }
         default:
@@ -370,7 +412,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
             [self.pMgr addService:service];
         }
     }
-    
 }
 
 #pragma mark - 释放按钮
@@ -413,6 +454,10 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     }
 }
 
+- (void)sendMsg
+{
+    }
+
 #pragma mark - 进入设置界面
 -(void)settingBtnClick
 {
@@ -423,24 +468,12 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 }
 
 -(void)alertMsg:(NSString *)msg{
-    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Warning" message:msg preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
     [alertVC addAction:confirm];
     
     [self presentViewController:alertVC animated:YES completion:nil];
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-     NSLog(@"%s, line = %d", __func__, __LINE__);
-    return [self preferredInterfaceOrientationForPresentation];
-}
-
--(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-     NSLog(@"%s, line = %d", __func__, __LINE__);
 }
 
 @end
