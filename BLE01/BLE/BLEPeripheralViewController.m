@@ -150,7 +150,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         make.height.mas_equalTo(buttonWidth);
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -306,6 +305,9 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     self.numOfServices = 0;
     [self.services removeAllObjects];
     
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"isCanOrientarion" object:@"Periheral" userInfo:@{@"isTouched":@YES}];
+    
     UIButton *btn = (UIButton *)sender;
     btn.selected = YES;
     [UIView animateWithDuration:0.5 animations:^{
@@ -417,6 +419,8 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 #pragma mark - 释放按钮
 - (void)touchEnd:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"isCanOrientarion" object:@"Periheral" userInfo:@{@"isTouched":@NO}];
+    
     [self stopAdvertising];
     
     UIButton *btn = (UIButton *)sender;
@@ -435,28 +439,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         self.timer = nil;
     }
 }
-
-#pragma mark - 屏幕旋转
--(void)_orientationDidChange:(NSNotification *)nf
-{
-    [self stopAdvertising];
-    
-    for (id obj in self.view.subviews) {
-        if ([obj isKindOfClass:[UIButton class]]) {
-            UIButton *btn = (UIButton *)obj;
-            if (btn.selected) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    btn.alpha = 1.0;
-                    btn.selected = NO;
-                }];
-            }
-        }
-    }
-}
-
-- (void)sendMsg
-{
-    }
 
 #pragma mark - 进入设置界面
 -(void)settingBtnClick

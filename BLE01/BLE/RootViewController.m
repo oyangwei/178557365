@@ -13,6 +13,7 @@
 @interface RootViewController ()
 
 @property(strong, nonatomic) UINavigationController *nVC;
+@property(assign, nonatomic) BOOL isTouched;
 
 @end
 
@@ -44,6 +45,33 @@
     
     [self addChildViewController:nVC];
     [self addChildViewController:centerVC];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_orientationDidChange:) name:@"isCanOrientarion" object:@"Periheral"];
 }
+
+-(void)_orientationDidChange:(NSNotification *)ns
+{
+    self.isTouched = [ns.userInfo[@"isTouched"] boolValue];
+    [self shouldAutorotate];
+}
+
+-(BOOL)shouldAutorotate
+{
+    return !self.isTouched;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.isTouched = YES;
+    [self shouldAutorotate];
+}
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.isTouched = NO;
+    [self shouldAutorotate];
+}
+
 
 @end

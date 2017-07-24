@@ -33,6 +33,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 
 @interface BLEPeripheralViewController ()<CBPeripheralManagerDelegate>
 
+
 @property(strong, nonatomic) NSUserDefaults *userDefault;
 
 @property(strong, nonatomic) CBPeripheralManager *pMgr;
@@ -150,8 +151,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
         make.height.mas_equalTo(buttonWidth);
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -264,9 +263,10 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     self.numOfServices = 0;
     [self.services removeAllObjects];
     
-    UIButton *btn = (UIButton *)sender;
-    btn.selected = YES;
-    [UIView animateWithDuration:0.5 animations:^{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"isCanOrientarion" object:@"Periheral" userInfo:@{@"isTouched":@YES}];
+    
+    UIButton *btn = (UIButton *)sender;    [UIView animateWithDuration:0.5 animations:^{
         btn.alpha = 0.5;
     }];
     int tag= (int)btn.tag;
@@ -286,7 +286,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
                     btn.alpha = 1.0;
-                    btn.selected = NO;
                 }];
                 break;
             }
@@ -310,7 +309,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
                     btn.alpha = 1.0;
-                    btn.selected = NO;
                 }];
                 break;
             }
@@ -328,9 +326,7 @@ static NSString *const LocalNameKey4 = @"Oyw04";
             if ([[self.userDefault valueForKey:@"UUID03"] isEqualToString:@""] || [self.userDefault objectForKey:@"UUID03"] == nil) {
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
-                    btn.alpha = 1.0;
-                    btn.selected = NO;
-                }];
+                    btn.alpha = 1.0;                }];
                 break;
             }
             
@@ -348,7 +344,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
                 [self alertMsg:@"UUID can't be null !"];
                 [UIView animateWithDuration:0.5 animations:^{
                     btn.alpha = 1.0;
-                    btn.selected = NO;
                 }];
                 break;
             }
@@ -376,12 +371,13 @@ static NSString *const LocalNameKey4 = @"Oyw04";
 #pragma mark - 释放按钮
 - (void)touchEnd:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"isCanOrientarion" object:@"Periheral" userInfo:@{@"isTouched":@NO}];
+    
     [self stopAdvertising];
     
     UIButton *btn = (UIButton *)sender;
     [UIView animateWithDuration:0.5 animations:^{
         btn.alpha = 1.0;
-        btn.selected = NO;
     }];
 }
 
@@ -392,24 +388,6 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     if ([self.timer isValid]) {
         [self.timer invalidate];
         self.timer = nil;
-    }
-}
-
-#pragma mark - 屏幕旋转
--(void)_orientationDidChange:(NSNotification *)nf
-{
-    [self stopAdvertising];
-    
-    for (id obj in self.view.subviews) {
-        if ([obj isKindOfClass:[UIButton class]]) {
-            UIButton *btn = (UIButton *)obj;
-            if (btn.selected) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    btn.alpha = 1.0;
-                    btn.selected = NO;
-                }];
-            }
-        }
     }
 }
 
@@ -432,15 +410,5 @@ static NSString *const LocalNameKey4 = @"Oyw04";
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-     NSLog(@"%s, line = %d", __func__, __LINE__);
-    return [self preferredInterfaceOrientationForPresentation];
-}
-
--(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-     NSLog(@"%s, line = %d", __func__, __LINE__);
-}
 
 @end
