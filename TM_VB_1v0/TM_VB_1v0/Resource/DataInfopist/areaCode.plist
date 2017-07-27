@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>code</key>
+		<string>+86</string>
+		<key>area</key>
+		<string>中国</string>
+	</dict>
+	<dict>
+		<key>code</key>
+		<string>+90</string>
+		<key>area</key>
+		<string>Turkey</string>
+	</dict>
+	<dict>
+		<key>code</key>
+		<string>+1</string>
+		<key>area</key>
+		<string>USA or Canada</string>
+	</dict>
+	<dict>
+		<key>code</key>
+		<string>+81</string>
+		<key>area</key>
+		<string>Japan</string>
+	</dict>
+	<dict>
+		<key>code</key>
+		<string>+49</string>
+		<key>area</key>
+		<string>Germany</string>
+	</dict>
+	<dict>
+		<key>code</key>
+		<string>+44</string>
+		<key>area</key>
+		<string>United Kingdom</string>
+	</dict>
+</array>
+</plist>
