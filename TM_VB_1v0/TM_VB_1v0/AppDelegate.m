@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "YW_RootTabBarController.h"
+#import "SPKitExample.h"
 
 @interface AppDelegate ()
 
@@ -15,13 +16,15 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
     
     YW_RootTabBarController *rootTbVC = [[YW_RootTabBarController alloc] init];
     self.window.rootViewController = rootTbVC;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

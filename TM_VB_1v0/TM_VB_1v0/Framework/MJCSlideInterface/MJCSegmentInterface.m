@@ -21,8 +21,8 @@ static CGFloat const defaultShowCountItem = 4;
 static CGFloat const defaultItemFontSize = 14;
 @interface MJCSegmentInterface ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
 
-@property (nonatomic,weak) MJCTitlesView *titlesViews;
 @property (nonatomic,weak) MJCChildsView *childScrollView;
+@property (nonatomic,weak) MJCTitlesView *titlesViews;
 @property (nonatomic,weak) MJCIndicator *indicator;
 @property (nonatomic,strong) NSArray *titlesItemArr;
 @property (nonatomic,weak) UIViewController *mainViewController;
@@ -218,6 +218,12 @@ static CGFloat const defaultItemFontSize = 14;
             [self setupGramientWithValueTag:value leftItem:leftItem rightItem:rightItem scaleRight:scaleRight];
         }
     }
+    else
+    {
+        if ([self.delegate respondsToSelector:@selector(title_scrollView:)]) {
+            [self.delegate title_scrollView:scrollView];
+        }
+    }
 }
 
 -(void)setupGramientWithValueTag:(NSInteger)value leftItem:(MJCTabItem*)leftItem rightItem:(MJCTabItem*)rightItem scaleRight:(CGFloat)scaleRight
@@ -306,8 +312,9 @@ static CGFloat const defaultItemFontSize = 14;
         }
     }
 }
-- (void)selectedTitleCenter:(MJCTabItem *)cell titlesScrollView:(UICollectionView *)collectionViews
+- (void)selectedTitleCenter:(MJCTabItem *)cell titlesScrollView:(UICollectionView *)collectionViews withIndexPath:(NSIndexPath *)indexPath
 {
+    
     CGFloat offsetX = cell.center.x - collectionViews.jc_width * 0.7;
     if (offsetX < 0) {
         offsetX = 0;
@@ -316,7 +323,12 @@ static CGFloat const defaultItemFontSize = 14;
     if (offsetX > maxOffsetX) {
         offsetX = maxOffsetX;
     }
-    [collectionViews setContentOffset: CGPointMake(offsetX,0) animated:YES];   
+    
+    if (indexPath.row == 1) {
+        offsetX += cell.width;
+    }
+    
+    [collectionViews setContentOffset:CGPointMake(offsetX,0) animated:YES];
 }
 - (void)addChildVcView
 {
@@ -354,7 +366,7 @@ static CGFloat const defaultItemFontSize = 14;
 - (void)collectV:(UICollectionView *)collectV cellForItemAtIndexPath:(NSIndexPath *)indexPath itemBtn:(MJCTabItem *)itemBtn
 {
     [self setupTiTlesViewDefaultItem:indexPath];
-    [self selectedTitleCenter:itemBtn titlesScrollView:collectV];
+    [self selectedTitleCenter:itemBtn titlesScrollView:collectV withIndexPath:indexPath];
     [self setupChildViewScollAnimal:indexPath.row];
     [self addChildVcView];
 }
@@ -442,7 +454,7 @@ static CGFloat const defaultItemFontSize = 14;
     _mainViewController = hostController;
     _childScrollView.contentSize = CGSizeMake(titlesArray.count * self.frame.size.width,0);
     if (titlesArray.count <=defaultShowCountItem && !_defaultShowItemCount) {
-        self .defaultShowItemCount = titlesArray.count;
+        self.defaultShowItemCount = titlesArray.count;
     }
     [self layoutIfNeeded];
     [self setNeedsLayout];
@@ -453,6 +465,16 @@ static CGFloat const defaultItemFontSize = 14;
         [self collectionView:_titlesViews didSelectItemAtIndexPath:[NSIndexPath indexPathForItem:_defaultItemNumber inSection:0]];
     });
 }
+
+-(void)setCurrentSelectedItem:(NSInteger)currentItemNum{
+    NSLog(@"%s, line = %d", __func__, __LINE__);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _isLoadDefaultChildVC = YES;
+        [_titlesViews selectItemAtIndexPath:[NSIndexPath indexPathForItem:currentItemNum inSection:0] animated:YES scrollPosition:(UICollectionViewScrollPositionNone)];
+        [self collectionView:_titlesViews didSelectItemAtIndexPath:[NSIndexPath indexPathForItem:currentItemNum inSection:0]];
+    });
+}
+
 -(void)intoChildControllerArray:(NSArray *)childControllerArray
 {
     _childControllerArray = childControllerArray;

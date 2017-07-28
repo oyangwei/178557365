@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MJCTabItem.h"
 #import "MJCCommonTools.h"
+#import "MJCTitlesView.h"
 
 //标题样式
 typedef enum {
@@ -36,6 +37,8 @@ typedef NS_OPTIONS(NSUInteger,MJCImageEffectStyles) {
 
 /** 点击标题栏按钮的点击事件 */
 - (void)mjc_ClickEvent:(MJCTabItem *)tabItem childViewController:(UIViewController *)childViewController segmentInterface:(MJCSegmentInterface *)segmentInterface;
+
+- (void)title_scrollView:(UIScrollView *)scrollView;
 
 @end
 
@@ -129,7 +132,7 @@ typedef NS_OPTIONS(NSUInteger,MJCImageEffectStyles) {
 /** 添加标题栏的方法 */
 -(void)intoTitlesArray:(NSArray *)titlesArray hostController:(UIViewController *)hostController;
 
-
-
+/** 设置当前被选中的标题 */
+-(void)setCurrentSelectedItem:(NSInteger)currentItemNum;
 
 @end

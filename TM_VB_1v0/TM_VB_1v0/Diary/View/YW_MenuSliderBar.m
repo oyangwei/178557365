@@ -43,19 +43,22 @@
         
         [self addSubview:label];
     }
+    
     self.contentSize = CGSizeMake(titleArr.count * labelW, 0);
 }
 
 -(void)tapMenuItem:(UITapGestureRecognizer *)tapGestureRecognizer
 {
     YW_MenuBarLabel *label = (YW_MenuBarLabel *)tapGestureRecognizer.view;
-    label.backgroundColor = [UIColor purpleColor];
+    label.backgroundColor = [UIColor colorWithHexString:@"#FF0000"];
+    label.alpha = 0.5;
     label.textColor = [UIColor whiteColor];
     
     for (YW_MenuBarLabel *otherLabel in self.subviews) {
         if (otherLabel != label) {
             otherLabel.backgroundColor = [UIColor clearColor];
             otherLabel.textColor = [UIColor blackColor];
+            otherLabel.alpha = 1.0;
         }
     }
     CGPoint titleOffset = self.contentOffset;
