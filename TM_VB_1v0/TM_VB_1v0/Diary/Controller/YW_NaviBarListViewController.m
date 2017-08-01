@@ -55,6 +55,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.listItemBlock) {
+        self.listItemBlock(indexPath.row);
+        
+    }
     NSLog(@"%zd",indexPath.row);
 }
 
@@ -76,5 +81,10 @@
     }
 }
 
+-(void)updateItems:(NSArray *)titles
+{
+    self.titles = titles;
+    [self.tableView reloadData];
+}
 
 @end

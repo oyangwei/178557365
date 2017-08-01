@@ -272,7 +272,11 @@ static CGFloat const defaultItemFontSize = 14;
         }
         _selectedItem = cell;
         [self collectV:_titlesViews cellForItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0] itemBtn:_selectedItem];
-    }    
+        if ([self.delegate respondsToSelector:@selector(childVC_scrollView:)]) {
+            [self.delegate childVC_scrollView:scrollView];
+        }
+    }
+    
 }
 -(void)setupTiTlesViewDefaultItem:(NSIndexPath *)indexPath
 {

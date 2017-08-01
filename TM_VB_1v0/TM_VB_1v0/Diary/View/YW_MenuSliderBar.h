@@ -13,6 +13,7 @@
 /** 屏幕可显示的最大数量 */
 @property(assign, nonatomic) int maxShowNum;
 
--(void)setUpMenuWithTitleArr:(NSMutableArray *)titleArr;
+-(void)setUpMenuWithTitleArr:(NSArray *)titleArr;
 
+- (void)updateMenuWithTitleArr:(NSMutableArray *)titleArr;
 @end

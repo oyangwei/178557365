@@ -10,6 +10,11 @@
 #import "YW_MenuBarLabel.h"
 #import "UIView+YW_ScreenFrame.h"
 
+
+@interface YW_MenuSliderBar ()
+
+@end
+
 @implementation YW_MenuSliderBar
 
 -(instancetype)initWithFrame:(CGRect)frame
@@ -24,7 +29,7 @@
     return self;
 }
 
--(void)setUpMenuWithTitleArr:(NSMutableArray *)titleArr
+-(void)setUpMenuWithTitleArr:(NSArray *)titleArr
 {
     CGFloat labelW = (self.width) / self.maxShowNum;
     CGFloat labelH = self.height;
@@ -45,6 +50,15 @@
     }
     
     self.contentSize = CGSizeMake(titleArr.count * labelW, 0);
+}
+
+- (void)updateMenuWithTitleArr:(NSMutableArray *)titleArr
+{
+    for (id subviews in self.subviews) {
+        [subviews removeFromSuperview];
+    }
+    
+    [self setUpMenuWithTitleArr:titleArr];
 }
 
 -(void)tapMenuItem:(UITapGestureRecognizer *)tapGestureRecognizer

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5532EA401F3051930014C297 /* YW_HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA3F1F3051930014C297 /* YW_HistoryTableView.m */; };
+		5532EA451F3058F00014C297 /* YW_HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */; };
+		5532EA471F3064C40014C297 /* historyRecord.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5532EA461F3064C40014C297 /* historyRecord.plist */; };
 		5575C8AC1F283A63003F12B8 /* YW_MenuBarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */; };
 		5575C8B41F288A1F003F12B8 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B31F288A1F003F12B8 /* UIColor+Hex.m */; };
 		5575C8B71F288A2B003F12B8 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B61F288A2B003F12B8 /* NSString+Ext.m */; };
@@ -63,6 +66,7 @@
 		5575C9371F29B480003F12B8 /* SPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C91E1F29B480003F12B8 /* SPUtil.m */; };
 		5575C93A1F29CB49003F12B8 /* left_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 5575C9381F29CB49003F12B8 /* left_more.png */; };
 		5575C93B1F29CB49003F12B8 /* right_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 5575C9391F29CB49003F12B8 /* right_more.png */; };
+		559654591F2F118B00C7F073 /* MenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 559654581F2F118B00C7F073 /* MenuTab.plist */; };
 		55C501F01F26E6F40062DBE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501EF1F26E6F40062DBE0 /* main.m */; };
 		55C501F31F26E6F40062DBE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501F21F26E6F40062DBE0 /* AppDelegate.m */; };
 		55C501FB1F26E6F40062DBE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C501FA1F26E6F40062DBE0 /* Assets.xcassets */; };
@@ -141,6 +145,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5532EA3E1F3051930014C297 /* YW_HistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_HistoryTableView.h; sourceTree = "<group>"; };
+		5532EA3F1F3051930014C297 /* YW_HistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_HistoryTableView.m; sourceTree = "<group>"; };
+		5532EA431F3058F00014C297 /* YW_HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_HistoryTableViewCell.h; sourceTree = "<group>"; };
+		5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_HistoryTableViewCell.m; sourceTree = "<group>"; };
+		5532EA461F3064C40014C297 /* historyRecord.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = historyRecord.plist; sourceTree = "<group>"; };
 		5575C8AA1F283A63003F12B8 /* YW_MenuBarLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MenuBarLabel.h; sourceTree = "<group>"; };
 		5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuBarLabel.m; sourceTree = "<group>"; };
 		5575C8B21F288A1F003F12B8 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -212,6 +221,7 @@
 		5575C91E1F29B480003F12B8 /* SPUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtil.m; sourceTree = "<group>"; };
 		5575C9381F29CB49003F12B8 /* left_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_more.png; sourceTree = "<group>"; };
 		5575C9391F29CB49003F12B8 /* right_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_more.png; sourceTree = "<group>"; };
+		559654581F2F118B00C7F073 /* MenuTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTab.plist; sourceTree = "<group>"; };
 		55C501EB1F26E6F40062DBE0 /* TM_VB_1v0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TM_VB_1v0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C501EF1F26E6F40062DBE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55C501F11F26E6F40062DBE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -507,6 +517,8 @@
 				55C501FA1F26E6F40062DBE0 /* Assets.xcassets */,
 				55C501FC1F26E6F40062DBE0 /* LaunchScreen.storyboard */,
 				55C501FF1F26E6F40062DBE0 /* Info.plist */,
+				559654581F2F118B00C7F073 /* MenuTab.plist */,
+				5532EA461F3064C40014C297 /* historyRecord.plist */,
 				55C501EE1F26E6F40062DBE0 /* Supporting Files */,
 			);
 			path = TM_VB_1v0;
@@ -595,6 +607,10 @@
 				55C502BD1F2738E20062DBE0 /* YW_MenuSliderBar.m */,
 				5575C8AA1F283A63003F12B8 /* YW_MenuBarLabel.h */,
 				5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */,
+				5532EA3E1F3051930014C297 /* YW_HistoryTableView.h */,
+				5532EA3F1F3051930014C297 /* YW_HistoryTableView.m */,
+				5532EA431F3058F00014C297 /* YW_HistoryTableViewCell.h */,
+				5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1068,6 +1084,7 @@
 				5575C93A1F29CB49003F12B8 /* left_more.png in Resources */,
 				55C5028A1F2716AC0062DBE0 /* message_2.png in Resources */,
 				5575C8D01F29B27D003F12B8 /* yw_1222.jpg in Resources */,
+				5532EA471F3064C40014C297 /* historyRecord.plist in Resources */,
 				55C502921F2718DA0062DBE0 /* leftList.png in Resources */,
 				5575C92D1F29B480003F12B8 /* icon_add@2x.png in Resources */,
 				55C5028D1F2716AC0062DBE0 /* programme_2.png in Resources */,
@@ -1084,6 +1101,7 @@
 				55C501FE1F26E6F40062DBE0 /* LaunchScreen.storyboard in Resources */,
 				55C502811F2716AC0062DBE0 /* areaCode.plist in Resources */,
 				55C502881F2716AC0062DBE0 /* me_2.png in Resources */,
+				559654591F2F118B00C7F073 /* MenuTab.plist in Resources */,
 				55C5028E1F2716AC0062DBE0 /* wifi_1.png in Resources */,
 				55C5028F1F2716AC0062DBE0 /* wifi_2.png in Resources */,
 				55C502841F2716AC0062DBE0 /* contact_1.png in Resources */,
@@ -1180,6 +1198,7 @@
 				55C502B81F2729560062DBE0 /* UIView+MJCClassExtension.m in Sources */,
 				5575C8BF1F2988D4003F12B8 /* YW_NaviBarListViewController.m in Sources */,
 				5575C9201F29B480003F12B8 /* SPCallingCardBubbleChatView.m in Sources */,
+				5532EA401F3051930014C297 /* YW_HistoryTableView.m in Sources */,
 				5575C9251F29B480003F12B8 /* SPInputViewPluginGreeting.m in Sources */,
 				55C502AF1F2729560062DBE0 /* MJCChildsView.m in Sources */,
 				5575C9371F29B480003F12B8 /* SPUtil.m in Sources */,
@@ -1187,6 +1206,7 @@
 				55C502391F26F56D0062DBE0 /* YW_RootTabBarController.m in Sources */,
 				5575C9221F29B480003F12B8 /* SPInputViewPluginCallingCard.m in Sources */,
 				55C5024C1F26F9060062DBE0 /* YW_DiaryViewController.m in Sources */,
+				5532EA451F3058F00014C297 /* YW_HistoryTableViewCell.m in Sources */,
 				55C502B31F2729560062DBE0 /* MJCCommonTools.m in Sources */,
 				5575C8AC1F283A63003F12B8 /* YW_MenuBarLabel.m in Sources */,
 				55C502BE1F2738E20062DBE0 /* YW_MenuSliderBar.m in Sources */,

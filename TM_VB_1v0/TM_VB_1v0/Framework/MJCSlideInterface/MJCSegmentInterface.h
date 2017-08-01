@@ -39,6 +39,7 @@ typedef NS_OPTIONS(NSUInteger,MJCImageEffectStyles) {
 - (void)mjc_ClickEvent:(MJCTabItem *)tabItem childViewController:(UIViewController *)childViewController segmentInterface:(MJCSegmentInterface *)segmentInterface;
 
 - (void)title_scrollView:(UIScrollView *)scrollView;
+- (void)childVC_scrollView:(UIScrollView *)scrollView;
 
 @end
 

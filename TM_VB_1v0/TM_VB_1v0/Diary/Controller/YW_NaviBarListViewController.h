@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^ListItemBlock)(NSInteger index);
+
 @interface YW_NaviBarListViewController : UIViewController
 
 /** 分割线高度 */
@@ -16,5 +18,9 @@
 /** Items */
 @property(strong, nonatomic) NSArray *titles;
 
+/** ListItemBlock */
+@property(copy, nonatomic) ListItemBlock listItemBlock;
+
+-(void)updateItems:(NSArray *)titles;
 
 @end
