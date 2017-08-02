@@ -92,7 +92,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - 初始化 NavigationBar
@@ -156,7 +156,10 @@
 {
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake( MaskWidth, 64 + MenuBarHeight + BarSpace, self.view.width - 2 * MaskWidth, SearchBarHeight)];
     self.searchBar.delegate = self;
-    self.searchBar.barTintColor = [UIColor whiteColor];
+    self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    self.searchBar.searchTextPositionAdjustment = UIOffsetMake(10, 0);
+    self.searchBar.barTintColor = [UIColor clearColor];
     self.searchBar.layer.borderWidth = 1.0;
     self.searchBar.layer.borderColor = [UIColor grayColor].CGColor;
     self.searchBar.layer.cornerRadius = 10;
@@ -465,6 +468,16 @@
     coverView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5];
     [coverView addTarget:self action:@selector(removeCoverView) forControlEvents:UIControlEventTouchUpInside];
     
+    historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( MaskWidth + 30, 64 + MenuBarHeight + SearchBarHeight + BarSpace, self.view.width - MaskWidth * 2 - 30, (self.historyRecord.count + 1) * 30)];
+            __weak typeof(self) weakSelf = self;
+            historyTableView.historyRecord = self.historyRecord;
+            historyTableView.clearBlock = ^(){
+                [weakSelf ClearPlistFile];
+            };
+    historyTableView.cellBlock = ^(NSString *text){
+                weakSelf.searchBar.text = text;
+            };
+    
     NSArray *windowArray = [[UIApplication sharedApplication] windows];
     for(UIWindow *subWindow in windowArray)
     {
@@ -472,6 +485,7 @@
         if(subWindow != [[UIApplication sharedApplication] keyWindow])
         {
             [subWindow addSubview:coverView];
+            [subWindow addSubview:historyTableView];
         }
     }
     
@@ -483,17 +497,9 @@
         coverViewFrame.origin.y = 64 + MenuBarHeight + SearchBarHeight + BarSpace;
         coverView.frame = coverViewFrame;
         
-        historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( MaskWidth + 30, 0, self.view.width - MaskWidth * 2 - 30, (self.historyRecord.count + 1) * 30)];
-        __weak typeof(self) weakSelf = self;
-        historyTableView.historyRecord = self.historyRecord;
-        historyTableView.clearBlock = ^(){
-            [weakSelf ClearPlistFile];
-        };
-        
-        historyTableView.cellBlock = ^(NSString *text){
-            weakSelf.searchBar.text = text;
-        };
-        [coverView addSubview:historyTableView];
+        CGRect historyTableViewFrame = historyTableView.frame;
+        historyTableViewFrame.size.height = (self.historyRecord.count + 1) * 30;
+        historyTableView.frame = historyTableViewFrame;
     }];
 
 }
@@ -516,6 +522,11 @@
     
 }
 
+-(void)keyBoardWillHide:(NSNotification *)notification
+{
+    [self removeCoverView];
+}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
@@ -528,7 +539,9 @@
     if(nil != coverView.superview)
     {
         [coverView removeFromSuperview];
+        [historyTableView removeFromSuperview];
         coverView = nil;
+        historyTableView = nil;
         [self.searchBar resignFirstResponder];
     }
 }
@@ -578,7 +591,7 @@
         [historyTableView removeFromSuperview];
     }
     
-    historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( MaskWidth + 30, 0, self.view.width - MaskWidth * 2 - 30, (self.historyRecord.count + 1) * 30)];
+    historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( MaskWidth + 30, 64 + MenuBarHeight + SearchBarHeight + BarSpace, self.view.width - MaskWidth * 2 - 30, (self.historyRecord.count + 1) * 30)];
     __weak typeof(self) weakSelf = self;
     historyTableView.historyRecord = self.historyRecord;
     historyTableView.clearBlock = ^(){
@@ -588,7 +601,16 @@
     historyTableView.cellBlock = ^(NSString *text){
         weakSelf.searchBar.text = text;
     };
-    [coverView addSubview:historyTableView];
+    
+    NSArray *windowArray = [[UIApplication sharedApplication] windows];
+    for(UIWindow *subWindow in windowArray)
+    {
+        // 键盘实际上是除了keyWindow之外的第二个window
+        if(subWindow != [[UIApplication sharedApplication] keyWindow])
+        {
+            [subWindow addSubview:historyTableView];
+        }
+    }
     
 }
 

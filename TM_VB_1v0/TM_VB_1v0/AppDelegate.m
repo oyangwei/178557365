@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "YW_RootTabBarController.h"
+#import "YW_NavigationController.h"
+#import "YW_RootViewController.h"
 #import "SPKitExample.h"
 
 @interface AppDelegate ()
@@ -21,8 +22,11 @@
     
     [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
     
-    YW_RootTabBarController *rootTbVC = [[YW_RootTabBarController alloc] init];
-    self.window.rootViewController = rootTbVC;
+    YW_RootViewController *rootVC = [[YW_RootViewController alloc] init];
+    
+    YW_NavigationController *navigationVC = [[YW_NavigationController alloc] initWithRootViewController:rootVC];
+    [navigationVC setupNavigationBar];
+    self.window.rootViewController = navigationVC;
     [self.window makeKeyAndVisible];
     
     return YES;

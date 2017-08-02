@@ -50,7 +50,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         }
-        cell.textLabel.text = self.historyRecord[indexPath.row];
+        cell.textLabel.text = self.historyRecord[self.historyRecord.count - indexPath.row - 1];
         return cell;
     }
     else
