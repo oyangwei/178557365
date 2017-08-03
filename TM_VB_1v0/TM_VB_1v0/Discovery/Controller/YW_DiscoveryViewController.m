@@ -40,8 +40,6 @@
 
 /** 弹出菜单栏 */
 @property(strong, nonatomic) YW_NaviBarListViewController *listViewPopVC;
-/** 是否隐藏菜单栏 */
-@property(assign, nonatomic) BOOL isHideAll;
 
 /** MenuBar */
 @property(strong, nonatomic) YW_MenuSliderBar *menuBar;
@@ -76,6 +74,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = CurrentTitle;
     
     self.automaticallyAdjustsScrollViewInsets = false;
@@ -99,12 +98,12 @@
 #pragma mark - 初始化 NavigationBar
 - (void)setupNavigationBar
 {
-    self.isHideAll = YES;
-    
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 22)];
+    [leftBtn setSelected:NO];
     [leftBtn setImage:[UIImage imageNamed:@"leftList"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"rightList"] forState:UIControlStateSelected];
     [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 0)];
-    [leftBtn addTarget:self action:@selector(showLeftList) forControlEvents:UIControlEventTouchUpInside];
+    [leftBtn addTarget:self action:@selector(showLeftList:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     [rightBtn setImage:[UIImage imageNamed:@"rightList"] forState:UIControlStateNormal];
@@ -296,110 +295,83 @@
 }
 
 #pragma mark - NavigationBar 左右按钮事件
-- (void)showLeftList
+- (void)showLeftList:(UIButton *)btn
 {
     [self removeCoverView];
     
-    NSArray *leftItems = [NSArray arrayWithObject:self.isHideAll?@"Hide All":@"Show All"];
-    
-    CGFloat itemLineH = 1.5;
-    
-    self.listViewPopVC = [[YW_NaviBarListViewController alloc] init];
-    self.listViewPopVC.titles = leftItems;
-    self.listViewPopVC.labelLineH = itemLineH;
-    
-    //设置 VC 弹出方式
-    self.listViewPopVC.modalPresentationStyle = UIModalPresentationPopover;
-    //设置依附的按钮
-    self.listViewPopVC.popoverPresentationController.barButtonItem = self.navigationItem.leftBarButtonItem;
-    //可以指示小箭头颜色
-    self.listViewPopVC.popoverPresentationController.backgroundColor = [UIColor whiteColor];
-    
-    //代理
-    self.listViewPopVC.popoverPresentationController.delegate = self;
-    [self presentViewController:self.listViewPopVC animated:YES completion:nil];
-    
-    self.listViewPopVC.titles = leftItems;
-    
-    __weak typeof(self) weakSelf = self;
-    
-    self.listViewPopVC.listItemBlock = ^(NSInteger index){
-        [weakSelf.listViewPopVC dismissViewControllerAnimated:YES completion:^{
-            if (weakSelf.isHideAll) {
-                [UIView animateWithDuration:0.5 animations:^{
-                    CGRect menuBarRect = weakSelf.menuBar.frame;
-                    menuBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-                    weakSelf.menuBar.frame = menuBarRect;
-                    
-                    CGRect menuLeftMaskRect = weakSelf.menuLeftMask.frame;
-                    menuLeftMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-                    weakSelf.menuLeftMask.frame = menuLeftMaskRect;
-                    
-                    CGRect menuRightMaskRect = weakSelf.menuRightMask.frame;
-                    menuRightMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-                    weakSelf.menuRightMask.frame = menuRightMaskRect;
-                    
-                    CGRect searchBarRect = weakSelf.searchBar.frame;
-                    searchBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace;
-                    weakSelf.searchBar.frame = searchBarRect;
-                    
-                    CGRect tabBarRect = weakSelf.tabBar.frame;
-                    tabBarRect.origin.y = 64;
-                    tabBarRect.size.height = weakSelf.view.height - 64 - 49;
-                    weakSelf.tabBar.frame = tabBarRect;
-                    
-                    CGRect tabLeftMaskRect = weakSelf.tabLeftMask.frame;
-                    tabLeftMaskRect.origin.y = 64;
-                    weakSelf.tabLeftMask.frame = tabLeftMaskRect;
-                    
-                    CGRect tabRightMaskRect = weakSelf.tabRightMask.frame;
-                    tabRightMaskRect.origin.y = 64;
-                    weakSelf.tabRightMask.frame = tabRightMaskRect;
-                    
-                    weakSelf.isHideAll = NO;
-                }];
-            }
-            else
-            {
-                [UIView animateWithDuration:0.5 animations:^{
-                    
-                    CGRect menuBarRect = weakSelf.menuBar.frame;
-                    menuBarRect.origin.y = 64;
-                    weakSelf.menuBar.frame = menuBarRect;
-                    
-                    CGRect menuLeftMaskRect = weakSelf.menuLeftMask.frame;
-                    menuLeftMaskRect.origin.y = 64;
-                    weakSelf.menuLeftMask.frame = menuLeftMaskRect;
-                    
-                    CGRect menuRightMaskRect = weakSelf.menuRightMask.frame;
-                    menuRightMaskRect.origin.y = 64;
-                    weakSelf.menuRightMask.frame = menuRightMaskRect;
-                    
-                    CGRect searchBarRect = weakSelf.searchBar.frame;
-                    searchBarRect.origin.y = 64 + MenuBarHeight + BarSpace;
-                    weakSelf.searchBar.frame = searchBarRect;
-                    
-                    CGRect tabBarRect = weakSelf.tabBar.frame;
-                    tabBarRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-                    weakSelf.tabBar.frame = tabBarRect;
-                    
-                    CGRect tabLeftMaskRect = weakSelf.tabLeftMask.frame;
-                    tabLeftMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-                    weakSelf.tabLeftMask.frame = tabLeftMaskRect;
-                    
-                    CGRect tabRightMaskRect = weakSelf.tabRightMask.frame;
-                    tabRightMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-                    weakSelf.tabRightMask.frame = tabRightMaskRect;
-                    
-                    weakSelf.isHideAll = YES;
-                } completion:^(BOOL finished) {
-                    CGRect tabBarRect = weakSelf.tabBar.frame;
-                    tabBarRect.size.height = weakSelf.view.height - 64 - 49 - MenuBarHeight - SearchBarHeight - 2 * BarSpace;
-                    weakSelf.tabBar.frame = tabBarRect;
-                }];
-            }
+    if (!btn.isSelected) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect menuBarRect = self.menuBar.frame;
+            menuBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
+            self.menuBar.frame = menuBarRect;
+            
+            CGRect menuLeftMaskRect = self.menuLeftMask.frame;
+            menuLeftMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
+            self.menuLeftMask.frame = menuLeftMaskRect;
+            
+            CGRect menuRightMaskRect = self.menuRightMask.frame;
+            menuRightMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
+            self.menuRightMask.frame = menuRightMaskRect;
+            
+            CGRect searchBarRect = self.searchBar.frame;
+            searchBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace;
+            self.searchBar.frame = searchBarRect;
+            
+            CGRect tabBarRect = self.tabBar.frame;
+            tabBarRect.origin.y = 64;
+            tabBarRect.size.height = self.view.height - 64 - 49;
+            self.tabBar.frame = tabBarRect;
+            
+            CGRect tabLeftMaskRect = self.tabLeftMask.frame;
+            tabLeftMaskRect.origin.y = 64;
+            self.tabLeftMask.frame = tabLeftMaskRect;
+            
+            CGRect tabRightMaskRect = self.tabRightMask.frame;
+            tabRightMaskRect.origin.y = 64;
+            self.tabRightMask.frame = tabRightMaskRect;
+            
+            [btn setSelected:YES];
         }];
-    };
+    }
+    else
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            CGRect menuBarRect = self.menuBar.frame;
+            menuBarRect.origin.y = 64;
+            self.menuBar.frame = menuBarRect;
+            
+            CGRect menuLeftMaskRect = self.menuLeftMask.frame;
+            menuLeftMaskRect.origin.y = 64;
+            self.menuLeftMask.frame = menuLeftMaskRect;
+            
+            CGRect menuRightMaskRect = self.menuRightMask.frame;
+            menuRightMaskRect.origin.y = 64;
+            self.menuRightMask.frame = menuRightMaskRect;
+            
+            CGRect searchBarRect = self.searchBar.frame;
+            searchBarRect.origin.y = 64 + MenuBarHeight + BarSpace;
+            self.searchBar.frame = searchBarRect;
+            
+            CGRect tabBarRect = self.tabBar.frame;
+            tabBarRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
+            self.tabBar.frame = tabBarRect;
+            
+            CGRect tabLeftMaskRect = self.tabLeftMask.frame;
+            tabLeftMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
+            self.tabLeftMask.frame = tabLeftMaskRect;
+            
+            CGRect tabRightMaskRect = self.tabRightMask.frame;
+            tabRightMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
+            self.tabRightMask.frame = tabRightMaskRect;
+            
+            [btn setSelected:NO];
+        } completion:^(BOOL finished) {
+            CGRect tabBarRect = self.tabBar.frame;
+            tabBarRect.size.height = self.view.height - 64 - 49 - MenuBarHeight - SearchBarHeight - 2 * BarSpace;
+            self.tabBar.frame = tabBarRect;
+        }];
+    }
 }
 
 - (void)showRightList
@@ -532,6 +504,13 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     
+}
+
+#pragma mark - 移除监听事件
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 // 移除遮罩层

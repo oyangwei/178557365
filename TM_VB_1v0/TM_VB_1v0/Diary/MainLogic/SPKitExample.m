@@ -303,7 +303,6 @@ UIAlertViewDelegate>
         /// 默认的情况下，我们都设置为生产证书
         [[[YWAPI sharedInstance] getGlobalPushService] setXPushCertName:@"production"];
     }
-    
 }
 
 /**
@@ -1022,7 +1021,7 @@ const CGFloat kSPCustomConversationCellContentMargin =10;
     [aConversationListController setHeightForRowBlock:^CGFloat(UITableView *aTableView, NSIndexPath *aIndexPath, YWConversation *aConversation) {
         if ([aConversation.conversationId isEqualToString:kSPCustomConversationIdForFAQ]) {
             /// TODO: 如果希望自定义Cell高度，在此返回你希望的高度
-            return kSPCustomConversationCellHeight;
+            return 0;
         } else {
             return YWConversationListCellDefaultHeight;
         }

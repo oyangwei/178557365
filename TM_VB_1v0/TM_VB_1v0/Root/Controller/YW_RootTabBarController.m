@@ -36,8 +36,6 @@
     vc.tabBarItem.image = [UIImage imageNamed:image];
     vc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImage];
     
-    vc.view.backgroundColor = [UIColor whiteColor];
-    
     YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:vc];
     [nVC setupNavigationBar];
     [self addChildViewController:nVC];

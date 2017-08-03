@@ -123,6 +123,18 @@
 		55EC6DDE1F31B55300F5C7B2 /* YWQuestionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DDA1F31B55300F5C7B2 /* YWQuestionViewCell.m */; };
 		55EC6DE11F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DE01F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m */; };
 		55EC6DE61F31BB9C00F5C7B2 /* YWNetworkingMamager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DE51F31BB9C00F5C7B2 /* YWNetworkingMamager.m */; };
+		55EC6DFC1F32FF7400F5C7B2 /* SPContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DF11F32FF7400F5C7B2 /* SPContactCell.m */; };
+		55EC6DFD1F32FF7400F5C7B2 /* SPContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6DF21F32FF7400F5C7B2 /* SPContactCell.xib */; };
+		55EC6DFE1F32FF7400F5C7B2 /* SPContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DF41F32FF7400F5C7B2 /* SPContactListController.m */; };
+		55EC6DFF1F32FF7400F5C7B2 /* SPContactListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6DF51F32FF7400F5C7B2 /* SPContactListController.xib */; };
+		55EC6E001F32FF7400F5C7B2 /* SPContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DF71F32FF7400F5C7B2 /* SPContactManager.m */; };
+		55EC6E011F32FF7400F5C7B2 /* SPContactProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DF91F32FF7400F5C7B2 /* SPContactProfileController.m */; };
+		55EC6E021F32FF7400F5C7B2 /* SPContactRequestListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DFB1F32FF7400F5C7B2 /* SPContactRequestListController.m */; };
+		55EC6E081F33028900F5C7B2 /* UIBarButtonItem+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6E051F33028900F5C7B2 /* UIBarButtonItem+BlockSupport.m */; };
+		55EC6E091F33028900F5C7B2 /* UIControl+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6E071F33028900F5C7B2 /* UIControl+BlockSupport.m */; };
+		55EC6E0D1F33030A00F5C7B2 /* SPSearchContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6E0B1F33030A00F5C7B2 /* SPSearchContactViewController.m */; };
+		55EC6E0E1F33030A00F5C7B2 /* SPSearchContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6E0C1F33030A00F5C7B2 /* SPSearchContactViewController.xib */; };
+		55EC6E101F330D2F00F5C7B2 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6E0F1F330D2F00F5C7B2 /* share.png */; };
 		FC9E0AFFE644B15418D0A238 /* libPods-TM_VB_1v0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C47E0A9C8CCB52739566F688 /* libPods-TM_VB_1v0.a */; };
 /* End PBXBuildFile section */
 
@@ -343,6 +355,26 @@
 		55EC6DE41F31BB9C00F5C7B2 /* YWNetworkingMamager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWNetworkingMamager.h; sourceTree = "<group>"; };
 		55EC6DE51F31BB9C00F5C7B2 /* YWNetworkingMamager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWNetworkingMamager.m; sourceTree = "<group>"; };
 		55EC6DEC1F31BBF600F5C7B2 /* YWHttpURLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YWHttpURLDefine.h; sourceTree = "<group>"; };
+		55EC6DF01F32FF7400F5C7B2 /* SPContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPContactCell.h; sourceTree = "<group>"; };
+		55EC6DF11F32FF7400F5C7B2 /* SPContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPContactCell.m; sourceTree = "<group>"; };
+		55EC6DF21F32FF7400F5C7B2 /* SPContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPContactCell.xib; sourceTree = "<group>"; };
+		55EC6DF31F32FF7400F5C7B2 /* SPContactListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPContactListController.h; sourceTree = "<group>"; };
+		55EC6DF41F32FF7400F5C7B2 /* SPContactListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPContactListController.m; sourceTree = "<group>"; };
+		55EC6DF51F32FF7400F5C7B2 /* SPContactListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPContactListController.xib; sourceTree = "<group>"; };
+		55EC6DF61F32FF7400F5C7B2 /* SPContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPContactManager.h; sourceTree = "<group>"; };
+		55EC6DF71F32FF7400F5C7B2 /* SPContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPContactManager.m; sourceTree = "<group>"; };
+		55EC6DF81F32FF7400F5C7B2 /* SPContactProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPContactProfileController.h; sourceTree = "<group>"; };
+		55EC6DF91F32FF7400F5C7B2 /* SPContactProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPContactProfileController.m; sourceTree = "<group>"; };
+		55EC6DFA1F32FF7400F5C7B2 /* SPContactRequestListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPContactRequestListController.h; sourceTree = "<group>"; };
+		55EC6DFB1F32FF7400F5C7B2 /* SPContactRequestListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPContactRequestListController.m; sourceTree = "<group>"; };
+		55EC6E041F33028900F5C7B2 /* UIBarButtonItem+BlockSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+BlockSupport.h"; sourceTree = "<group>"; };
+		55EC6E051F33028900F5C7B2 /* UIBarButtonItem+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+BlockSupport.m"; sourceTree = "<group>"; };
+		55EC6E061F33028900F5C7B2 /* UIControl+BlockSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+BlockSupport.h"; sourceTree = "<group>"; };
+		55EC6E071F33028900F5C7B2 /* UIControl+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+BlockSupport.m"; sourceTree = "<group>"; };
+		55EC6E0A1F33030A00F5C7B2 /* SPSearchContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSearchContactViewController.h; sourceTree = "<group>"; };
+		55EC6E0B1F33030A00F5C7B2 /* SPSearchContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSearchContactViewController.m; sourceTree = "<group>"; };
+		55EC6E0C1F33030A00F5C7B2 /* SPSearchContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPSearchContactViewController.xib; sourceTree = "<group>"; };
+		55EC6E0F1F330D2F00F5C7B2 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		B7908F8A70D76B5615F7CAA6 /* Pods-TM_VB_1v0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TM_VB_1v0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TM_VB_1v0/Pods-TM_VB_1v0.debug.xcconfig"; sourceTree = "<group>"; };
 		C47E0A9C8CCB52739566F688 /* libPods-TM_VB_1v0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TM_VB_1v0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C60A9345F83567DAED320 /* Pods-TM_VB_1v0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TM_VB_1v0.release.xcconfig"; path = "Pods/Target Support Files/Pods-TM_VB_1v0/Pods-TM_VB_1v0.release.xcconfig"; sourceTree = "<group>"; };
@@ -623,6 +655,8 @@
 		55C5022C1F26F0310062DBE0 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				55EC6E031F33028900F5C7B2 /* Utils */,
+				55EC6DEF1F32FF7400F5C7B2 /* Contact */,
 				5575C8F11F29B480003F12B8 /* Customize */,
 				5575C9151F29B480003F12B8 /* MainLogic */,
 				55C5022D1F26F0310062DBE0 /* Controller */,
@@ -653,6 +687,9 @@
 		55C5022F1F26F0310062DBE0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55EC6E0A1F33030A00F5C7B2 /* SPSearchContactViewController.h */,
+				55EC6E0B1F33030A00F5C7B2 /* SPSearchContactViewController.m */,
+				55EC6E0C1F33030A00F5C7B2 /* SPSearchContactViewController.xib */,
 				55C502BC1F2738E20062DBE0 /* YW_MenuSliderBar.h */,
 				55C502BD1F2738E20062DBE0 /* YW_MenuSliderBar.m */,
 				5575C8AA1F283A63003F12B8 /* YW_MenuBarLabel.h */,
@@ -894,6 +931,7 @@
 		55C502721F2716AC0062DBE0 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				55EC6E0F1F330D2F00F5C7B2 /* share.png */,
 				5575C9381F29CB49003F12B8 /* left_more.png */,
 				5575C9391F29CB49003F12B8 /* right_more.png */,
 				55C502901F2718DA0062DBE0 /* leftList.png */,
@@ -1006,6 +1044,36 @@
 				55EC6DE51F31BB9C00F5C7B2 /* YWNetworkingMamager.m */,
 			);
 			path = YWNetworking;
+			sourceTree = "<group>";
+		};
+		55EC6DEF1F32FF7400F5C7B2 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				55EC6DF01F32FF7400F5C7B2 /* SPContactCell.h */,
+				55EC6DF11F32FF7400F5C7B2 /* SPContactCell.m */,
+				55EC6DF21F32FF7400F5C7B2 /* SPContactCell.xib */,
+				55EC6DF31F32FF7400F5C7B2 /* SPContactListController.h */,
+				55EC6DF41F32FF7400F5C7B2 /* SPContactListController.m */,
+				55EC6DF51F32FF7400F5C7B2 /* SPContactListController.xib */,
+				55EC6DF61F32FF7400F5C7B2 /* SPContactManager.h */,
+				55EC6DF71F32FF7400F5C7B2 /* SPContactManager.m */,
+				55EC6DF81F32FF7400F5C7B2 /* SPContactProfileController.h */,
+				55EC6DF91F32FF7400F5C7B2 /* SPContactProfileController.m */,
+				55EC6DFA1F32FF7400F5C7B2 /* SPContactRequestListController.h */,
+				55EC6DFB1F32FF7400F5C7B2 /* SPContactRequestListController.m */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		55EC6E031F33028900F5C7B2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				55EC6E041F33028900F5C7B2 /* UIBarButtonItem+BlockSupport.h */,
+				55EC6E051F33028900F5C7B2 /* UIBarButtonItem+BlockSupport.m */,
+				55EC6E061F33028900F5C7B2 /* UIControl+BlockSupport.h */,
+				55EC6E071F33028900F5C7B2 /* UIControl+BlockSupport.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		EF8D6E0C39A177E0DC374675 /* Frameworks */ = {
@@ -1185,10 +1253,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5575C9341F29B480003F12B8 /* demo_discussion@2x.png in Resources */,
+				55EC6DFF1F32FF7400F5C7B2 /* SPContactListController.xib in Resources */,
 				55C502931F2718DA0062DBE0 /* rightList.png in Resources */,
 				55C5028C1F2716AC0062DBE0 /* programme_1.png in Resources */,
 				5575C9311F29B480003F12B8 /* input_plug_ico_transparent_nor@2x.png in Resources */,
 				5575C8CF1F29B27D003F12B8 /* WXOUIModuleResources.bundle in Resources */,
+				55EC6E0E1F33030A00F5C7B2 /* SPSearchContactViewController.xib in Resources */,
 				5575C93B1F29CB49003F12B8 /* right_more.png in Resources */,
 				5575C92B1F29B480003F12B8 /* face_e@2x.png in Resources */,
 				5575C9351F29B480003F12B8 /* pub_title_ico_back_white@2x.png in Resources */,
@@ -1197,6 +1267,7 @@
 				55C502861F2716AC0062DBE0 /* login_bg.png in Resources */,
 				5575C93A1F29CB49003F12B8 /* left_more.png in Resources */,
 				55C5028A1F2716AC0062DBE0 /* message_2.png in Resources */,
+				55EC6E101F330D2F00F5C7B2 /* share.png in Resources */,
 				5575C8D01F29B27D003F12B8 /* yw_1222.jpg in Resources */,
 				5532EA471F3064C40014C297 /* historyRecord.plist in Resources */,
 				55C502921F2718DA0062DBE0 /* leftList.png in Resources */,
@@ -1208,6 +1279,7 @@
 				5575C91F1F29B480003F12B8 /* SPCallingCardBubbleChatContentView.xib in Resources */,
 				5575C92E1F29B480003F12B8 /* icon_delete@2x.png in Resources */,
 				55C502871F2716AC0062DBE0 /* me_1.png in Resources */,
+				55EC6DFD1F32FF7400F5C7B2 /* SPContactCell.xib in Resources */,
 				55C502831F2716AC0062DBE0 /* back.png in Resources */,
 				5575C9291F29B480003F12B8 /* calling_card_bg@2x.png in Resources */,
 				5575C9321F29B480003F12B8 /* YW_TGZ_Emoitons.emo in Resources */,
@@ -1307,8 +1379,10 @@
 				55C502581F26F96C0062DBE0 /* YW_ShopViewController.m in Sources */,
 				5575C9271F29B480003F12B8 /* SPBubbleViewModelCustomize.m in Sources */,
 				55EC6DDB1F31B55300F5C7B2 /* YWAreaCodeView.m in Sources */,
+				55EC6DFC1F32FF7400F5C7B2 /* SPContactCell.m in Sources */,
 				5575C9281F29B480003F12B8 /* SPInputViewPluginTransparent.m in Sources */,
 				55EC6DDD1F31B55300F5C7B2 /* YWQuestionView.m in Sources */,
+				55EC6E011F32FF7400F5C7B2 /* SPContactProfileController.m in Sources */,
 				5575C9241F29B480003F12B8 /* SPGreetingBubbleViewModel.m in Sources */,
 				55EC6DDC1F31B55300F5C7B2 /* YWAreaCodeViewCell.m in Sources */,
 				55C502801F2716AC0062DBE0 /* YWCommonMethod.m in Sources */,
@@ -1320,6 +1394,8 @@
 				55EC6DC61F31ACA300F5C7B2 /* UIButton+YWUIButton.m in Sources */,
 				5532EA401F3051930014C297 /* YW_HistoryTableView.m in Sources */,
 				5575C9251F29B480003F12B8 /* SPInputViewPluginGreeting.m in Sources */,
+				55EC6E081F33028900F5C7B2 /* UIBarButtonItem+BlockSupport.m in Sources */,
+				55EC6E021F32FF7400F5C7B2 /* SPContactRequestListController.m in Sources */,
 				55C502AF1F2729560062DBE0 /* MJCChildsView.m in Sources */,
 				5575C9371F29B480003F12B8 /* SPUtil.m in Sources */,
 				55EC6DCF1F31B3AD00F5C7B2 /* YW_LoginViewController.m in Sources */,
@@ -1332,6 +1408,8 @@
 				5575C8AC1F283A63003F12B8 /* YW_MenuBarLabel.m in Sources */,
 				55C502BE1F2738E20062DBE0 /* YW_MenuSliderBar.m in Sources */,
 				5575C8B71F288A2B003F12B8 /* NSString+Ext.m in Sources */,
+				55EC6DFE1F32FF7400F5C7B2 /* SPContactListController.m in Sources */,
+				55EC6E091F33028900F5C7B2 /* UIControl+BlockSupport.m in Sources */,
 				55C502681F27142D0062DBE0 /* YW_NavigationController.m in Sources */,
 				55EC6DCC1F31AD3C00F5C7B2 /* YW_RootViewController.m in Sources */,
 				5575C9231F29B480003F12B8 /* SPGreetingBubbleChatView.m in Sources */,
@@ -1349,6 +1427,8 @@
 				55EC6DDE1F31B55300F5C7B2 /* YWQuestionViewCell.m in Sources */,
 				55C502B11F2729560062DBE0 /* MJCTabItem.m in Sources */,
 				5575C8B41F288A1F003F12B8 /* UIColor+Hex.m in Sources */,
+				55EC6E001F32FF7400F5C7B2 /* SPContactManager.m in Sources */,
+				55EC6E0D1F33030A00F5C7B2 /* SPSearchContactViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

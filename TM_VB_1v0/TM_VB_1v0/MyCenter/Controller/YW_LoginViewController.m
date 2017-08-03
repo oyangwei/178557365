@@ -139,7 +139,7 @@
     
     NSLog(@"%@ %@", self.phoneTextField.text, self.passwordTextField.text);
     
-    [[SPKitExample sharedInstance] callThisAfterISVAccountLoginSuccessWithYWLoginId:@"visitor1" passWord:@"taobao1234" preloginedBlock:^{
+    [[SPKitExample sharedInstance] callThisAfterISVAccountLoginSuccessWithYWLoginId:self.phoneTextField.text passWord:self.passwordTextField.text preloginedBlock:^{
         [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
         [weakSelf _pushMainControllerAnimated:YES];
     } successBlock:^{
