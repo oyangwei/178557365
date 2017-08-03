@@ -110,6 +110,19 @@
 		55C502B81F2729560062DBE0 /* UIView+MJCClassExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502AC1F2729560062DBE0 /* UIView+MJCClassExtension.m */; };
 		55C502BE1F2738E20062DBE0 /* YW_MenuSliderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502BD1F2738E20062DBE0 /* YW_MenuSliderBar.m */; };
 		55C502C11F273B100062DBE0 /* UIView+YW_ScreenFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502C01F273B100062DBE0 /* UIView+YW_ScreenFrame.m */; };
+		55EC6DC61F31ACA300F5C7B2 /* UIButton+YWUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DBF1F31ACA300F5C7B2 /* UIButton+YWUIButton.m */; };
+		55EC6DC71F31ACA300F5C7B2 /* UIImage+YWUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DC11F31ACA300F5C7B2 /* UIImage+YWUIImage.m */; };
+		55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DC31F31ACA300F5C7B2 /* UILabel+YWUILabel.m */; };
+		55EC6DC91F31ACA300F5C7B2 /* UIViewController+YWUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DC51F31ACA300F5C7B2 /* UIViewController+YWUIViewController.m */; };
+		55EC6DCC1F31AD3C00F5C7B2 /* YW_RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DCB1F31AD3C00F5C7B2 /* YW_RootViewController.m */; };
+		55EC6DCF1F31B3AD00F5C7B2 /* YW_LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DCE1F31B3AD00F5C7B2 /* YW_LoginViewController.m */; };
+		55EC6DD21F31B52800F5C7B2 /* YW_SignUpSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DD11F31B52800F5C7B2 /* YW_SignUpSecondViewController.m */; };
+		55EC6DDB1F31B55300F5C7B2 /* YWAreaCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DD41F31B55300F5C7B2 /* YWAreaCodeView.m */; };
+		55EC6DDC1F31B55300F5C7B2 /* YWAreaCodeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DD61F31B55300F5C7B2 /* YWAreaCodeViewCell.m */; };
+		55EC6DDD1F31B55300F5C7B2 /* YWQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DD81F31B55300F5C7B2 /* YWQuestionView.m */; };
+		55EC6DDE1F31B55300F5C7B2 /* YWQuestionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DDA1F31B55300F5C7B2 /* YWQuestionViewCell.m */; };
+		55EC6DE11F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DE01F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m */; };
+		55EC6DE61F31BB9C00F5C7B2 /* YWNetworkingMamager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DE51F31BB9C00F5C7B2 /* YWNetworkingMamager.m */; };
 		FC9E0AFFE644B15418D0A238 /* libPods-TM_VB_1v0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C47E0A9C8CCB52739566F688 /* libPods-TM_VB_1v0.a */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +154,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = CF813695AA7A4FEA9321E1FCA7AB7D5F;
 			remoteInfo = "Pods-TM_VB_1v0";
+		};
+		55EC6DEA1F31BB9C00F5C7B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55C502211F26EE8D0062DBE0 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 062E8C379154C574B96A1D3D62479239;
+			remoteInfo = AFNetworking;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -296,6 +316,33 @@
 		55C502BD1F2738E20062DBE0 /* YW_MenuSliderBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuSliderBar.m; sourceTree = "<group>"; };
 		55C502BF1F273B100062DBE0 /* UIView+YW_ScreenFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YW_ScreenFrame.h"; sourceTree = "<group>"; };
 		55C502C01F273B100062DBE0 /* UIView+YW_ScreenFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YW_ScreenFrame.m"; sourceTree = "<group>"; };
+		55EC6DBE1F31ACA300F5C7B2 /* UIButton+YWUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+YWUIButton.h"; sourceTree = "<group>"; };
+		55EC6DBF1F31ACA300F5C7B2 /* UIButton+YWUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YWUIButton.m"; sourceTree = "<group>"; };
+		55EC6DC01F31ACA300F5C7B2 /* UIImage+YWUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YWUIImage.h"; sourceTree = "<group>"; };
+		55EC6DC11F31ACA300F5C7B2 /* UIImage+YWUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YWUIImage.m"; sourceTree = "<group>"; };
+		55EC6DC21F31ACA300F5C7B2 /* UILabel+YWUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+YWUILabel.h"; sourceTree = "<group>"; };
+		55EC6DC31F31ACA300F5C7B2 /* UILabel+YWUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+YWUILabel.m"; sourceTree = "<group>"; };
+		55EC6DC41F31ACA300F5C7B2 /* UIViewController+YWUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YWUIViewController.h"; sourceTree = "<group>"; };
+		55EC6DC51F31ACA300F5C7B2 /* UIViewController+YWUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YWUIViewController.m"; sourceTree = "<group>"; };
+		55EC6DCA1F31AD3C00F5C7B2 /* YW_RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_RootViewController.h; sourceTree = "<group>"; };
+		55EC6DCB1F31AD3C00F5C7B2 /* YW_RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_RootViewController.m; sourceTree = "<group>"; };
+		55EC6DCD1F31B3AD00F5C7B2 /* YW_LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_LoginViewController.h; sourceTree = "<group>"; };
+		55EC6DCE1F31B3AD00F5C7B2 /* YW_LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_LoginViewController.m; sourceTree = "<group>"; };
+		55EC6DD01F31B52800F5C7B2 /* YW_SignUpSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_SignUpSecondViewController.h; sourceTree = "<group>"; };
+		55EC6DD11F31B52800F5C7B2 /* YW_SignUpSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_SignUpSecondViewController.m; sourceTree = "<group>"; };
+		55EC6DD31F31B55300F5C7B2 /* YWAreaCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWAreaCodeView.h; sourceTree = "<group>"; };
+		55EC6DD41F31B55300F5C7B2 /* YWAreaCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWAreaCodeView.m; sourceTree = "<group>"; };
+		55EC6DD51F31B55300F5C7B2 /* YWAreaCodeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWAreaCodeViewCell.h; sourceTree = "<group>"; };
+		55EC6DD61F31B55300F5C7B2 /* YWAreaCodeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWAreaCodeViewCell.m; sourceTree = "<group>"; };
+		55EC6DD71F31B55300F5C7B2 /* YWQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWQuestionView.h; sourceTree = "<group>"; };
+		55EC6DD81F31B55300F5C7B2 /* YWQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWQuestionView.m; sourceTree = "<group>"; };
+		55EC6DD91F31B55300F5C7B2 /* YWQuestionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWQuestionViewCell.h; sourceTree = "<group>"; };
+		55EC6DDA1F31B55300F5C7B2 /* YWQuestionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWQuestionViewCell.m; sourceTree = "<group>"; };
+		55EC6DDF1F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_SignUpFirstViewController.h; sourceTree = "<group>"; };
+		55EC6DE01F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_SignUpFirstViewController.m; sourceTree = "<group>"; };
+		55EC6DE41F31BB9C00F5C7B2 /* YWNetworkingMamager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWNetworkingMamager.h; sourceTree = "<group>"; };
+		55EC6DE51F31BB9C00F5C7B2 /* YWNetworkingMamager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWNetworkingMamager.m; sourceTree = "<group>"; };
+		55EC6DEC1F31BBF600F5C7B2 /* YWHttpURLDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YWHttpURLDefine.h; sourceTree = "<group>"; };
 		B7908F8A70D76B5615F7CAA6 /* Pods-TM_VB_1v0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TM_VB_1v0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TM_VB_1v0/Pods-TM_VB_1v0.debug.xcconfig"; sourceTree = "<group>"; };
 		C47E0A9C8CCB52739566F688 /* libPods-TM_VB_1v0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TM_VB_1v0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C60A9345F83567DAED320 /* Pods-TM_VB_1v0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TM_VB_1v0.release.xcconfig"; path = "Pods/Target Support Files/Pods-TM_VB_1v0/Pods-TM_VB_1v0.release.xcconfig"; sourceTree = "<group>"; };
@@ -510,6 +557,7 @@
 				55C5023E1F26F8E10062DBE0 /* Discovery */,
 				55C502461F26F8E10062DBE0 /* Shop */,
 				55C502421F26F8E10062DBE0 /* Me */,
+				55EC6D9E1F31AC6500F5C7B2 /* MyCenter */,
 				55C502691F2716AC0062DBE0 /* Resource */,
 				55C502591F26FBE00062DBE0 /* Category */,
 				55C501F11F26E6F40062DBE0 /* AppDelegate.h */,
@@ -554,6 +602,7 @@
 		55C502221F26EE8D0062DBE0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				55EC6DEB1F31BB9C00F5C7B2 /* libAFNetworking.a */,
 				55C502271F26EE8D0062DBE0 /* libMasonry.a */,
 				55C502291F26EE8D0062DBE0 /* libPods-TM_VB_1v0.a */,
 			);
@@ -565,6 +614,7 @@
 			children = (
 				5575C8C01F29B27D003F12B8 /* WXFrameworks */,
 				55C502961F2729560062DBE0 /* MJCSlideInterface */,
+				55EC6DE31F31BB9C00F5C7B2 /* YWNetworking */,
 			);
 			name = Framework;
 			path = TM_VB_1v0/Framework;
@@ -791,6 +841,14 @@
 				5575C8B31F288A1F003F12B8 /* UIColor+Hex.m */,
 				5575C8B51F288A2B003F12B8 /* NSString+Ext.h */,
 				5575C8B61F288A2B003F12B8 /* NSString+Ext.m */,
+				55EC6DBE1F31ACA300F5C7B2 /* UIButton+YWUIButton.h */,
+				55EC6DBF1F31ACA300F5C7B2 /* UIButton+YWUIButton.m */,
+				55EC6DC01F31ACA300F5C7B2 /* UIImage+YWUIImage.h */,
+				55EC6DC11F31ACA300F5C7B2 /* UIImage+YWUIImage.m */,
+				55EC6DC21F31ACA300F5C7B2 /* UILabel+YWUILabel.h */,
+				55EC6DC31F31ACA300F5C7B2 /* UILabel+YWUILabel.m */,
+				55EC6DC41F31ACA300F5C7B2 /* UIViewController+YWUIViewController.h */,
+				55EC6DC51F31ACA300F5C7B2 /* UIViewController+YWUIViewController.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -828,6 +886,7 @@
 			isa = PBXGroup;
 			children = (
 				55C502711F2716AC0062DBE0 /* CustomDefine.h */,
+				55EC6DEC1F31BBF600F5C7B2 /* YWHttpURLDefine.h */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -899,6 +958,54 @@
 				55C502AC1F2729560062DBE0 /* UIView+MJCClassExtension.m */,
 			);
 			path = common;
+			sourceTree = "<group>";
+		};
+		55EC6D9E1F31AC6500F5C7B2 /* MyCenter */ = {
+			isa = PBXGroup;
+			children = (
+				55EC6D9F1F31AC6500F5C7B2 /* Controller */,
+				55EC6DAA1F31AC6500F5C7B2 /* View */,
+			);
+			path = MyCenter;
+			sourceTree = "<group>";
+		};
+		55EC6D9F1F31AC6500F5C7B2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				55EC6DCA1F31AD3C00F5C7B2 /* YW_RootViewController.h */,
+				55EC6DCB1F31AD3C00F5C7B2 /* YW_RootViewController.m */,
+				55EC6DCD1F31B3AD00F5C7B2 /* YW_LoginViewController.h */,
+				55EC6DCE1F31B3AD00F5C7B2 /* YW_LoginViewController.m */,
+				55EC6DDF1F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.h */,
+				55EC6DE01F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m */,
+				55EC6DD01F31B52800F5C7B2 /* YW_SignUpSecondViewController.h */,
+				55EC6DD11F31B52800F5C7B2 /* YW_SignUpSecondViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		55EC6DAA1F31AC6500F5C7B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55EC6DD31F31B55300F5C7B2 /* YWAreaCodeView.h */,
+				55EC6DD41F31B55300F5C7B2 /* YWAreaCodeView.m */,
+				55EC6DD51F31B55300F5C7B2 /* YWAreaCodeViewCell.h */,
+				55EC6DD61F31B55300F5C7B2 /* YWAreaCodeViewCell.m */,
+				55EC6DD71F31B55300F5C7B2 /* YWQuestionView.h */,
+				55EC6DD81F31B55300F5C7B2 /* YWQuestionView.m */,
+				55EC6DD91F31B55300F5C7B2 /* YWQuestionViewCell.h */,
+				55EC6DDA1F31B55300F5C7B2 /* YWQuestionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55EC6DE31F31BB9C00F5C7B2 /* YWNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				55EC6DE41F31BB9C00F5C7B2 /* YWNetworkingMamager.h */,
+				55EC6DE51F31BB9C00F5C7B2 /* YWNetworkingMamager.m */,
+			);
+			path = YWNetworking;
 			sourceTree = "<group>";
 		};
 		EF8D6E0C39A177E0DC374675 /* Frameworks */ = {
@@ -1063,6 +1170,13 @@
 			remoteRef = 55C502281F26EE8D0062DBE0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		55EC6DEB1F31BB9C00F5C7B2 /* libAFNetworking.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAFNetworking.a;
+			remoteRef = 55EC6DEA1F31BB9C00F5C7B2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1187,21 +1301,28 @@
 				55C502C11F273B100062DBE0 /* UIView+YW_ScreenFrame.m in Sources */,
 				5575C9361F29B480003F12B8 /* SPKitExample.m in Sources */,
 				55C502B71F2729560062DBE0 /* UILabel+MJCClassExtension.m in Sources */,
+				55EC6DC91F31ACA300F5C7B2 /* UIViewController+YWUIViewController.m in Sources */,
 				55C502551F26F9600062DBE0 /* YW_MeViewController.m in Sources */,
 				5575C8BC1F297A70003F12B8 /* MJCSegmentInterface.m in Sources */,
 				55C502581F26F96C0062DBE0 /* YW_ShopViewController.m in Sources */,
 				5575C9271F29B480003F12B8 /* SPBubbleViewModelCustomize.m in Sources */,
+				55EC6DDB1F31B55300F5C7B2 /* YWAreaCodeView.m in Sources */,
 				5575C9281F29B480003F12B8 /* SPInputViewPluginTransparent.m in Sources */,
+				55EC6DDD1F31B55300F5C7B2 /* YWQuestionView.m in Sources */,
 				5575C9241F29B480003F12B8 /* SPGreetingBubbleViewModel.m in Sources */,
+				55EC6DDC1F31B55300F5C7B2 /* YWAreaCodeViewCell.m in Sources */,
 				55C502801F2716AC0062DBE0 /* YWCommonMethod.m in Sources */,
 				55C502B21F2729560062DBE0 /* MJCTitlesView.m in Sources */,
 				55C502B81F2729560062DBE0 /* UIView+MJCClassExtension.m in Sources */,
 				5575C8BF1F2988D4003F12B8 /* YW_NaviBarListViewController.m in Sources */,
+				55EC6DE61F31BB9C00F5C7B2 /* YWNetworkingMamager.m in Sources */,
 				5575C9201F29B480003F12B8 /* SPCallingCardBubbleChatView.m in Sources */,
+				55EC6DC61F31ACA300F5C7B2 /* UIButton+YWUIButton.m in Sources */,
 				5532EA401F3051930014C297 /* YW_HistoryTableView.m in Sources */,
 				5575C9251F29B480003F12B8 /* SPInputViewPluginGreeting.m in Sources */,
 				55C502AF1F2729560062DBE0 /* MJCChildsView.m in Sources */,
 				5575C9371F29B480003F12B8 /* SPUtil.m in Sources */,
+				55EC6DCF1F31B3AD00F5C7B2 /* YW_LoginViewController.m in Sources */,
 				55C502B51F2729560062DBE0 /* UIButton+MJCClassExtension.m in Sources */,
 				55C502391F26F56D0062DBE0 /* YW_RootTabBarController.m in Sources */,
 				5575C9221F29B480003F12B8 /* SPInputViewPluginCallingCard.m in Sources */,
@@ -1212,14 +1333,20 @@
 				55C502BE1F2738E20062DBE0 /* YW_MenuSliderBar.m in Sources */,
 				5575C8B71F288A2B003F12B8 /* NSString+Ext.m in Sources */,
 				55C502681F27142D0062DBE0 /* YW_NavigationController.m in Sources */,
+				55EC6DCC1F31AD3C00F5C7B2 /* YW_RootViewController.m in Sources */,
 				5575C9231F29B480003F12B8 /* SPGreetingBubbleChatView.m in Sources */,
 				55C502B01F2729560062DBE0 /* MJCIndicator.m in Sources */,
 				55C501F01F26E6F40062DBE0 /* main.m in Sources */,
 				55C502B61F2729560062DBE0 /* UIColor+MJCClassExtension.m in Sources */,
+				55EC6DE11F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m in Sources */,
+				55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */,
 				55C5024F1F26F93C0062DBE0 /* YW_ActivityViewController.m in Sources */,
+				55EC6DC71F31ACA300F5C7B2 /* UIImage+YWUIImage.m in Sources */,
 				5575C9211F29B480003F12B8 /* SPCallingCardBubbleViewModel.m in Sources */,
 				55C502521F26F9540062DBE0 /* YW_DiscoveryViewController.m in Sources */,
+				55EC6DD21F31B52800F5C7B2 /* YW_SignUpSecondViewController.m in Sources */,
 				55C502B41F2729560062DBE0 /* MJCOrdinaryLayout.m in Sources */,
+				55EC6DDE1F31B55300F5C7B2 /* YWQuestionViewCell.m in Sources */,
 				55C502B11F2729560062DBE0 /* MJCTabItem.m in Sources */,
 				5575C8B41F288A1F003F12B8 /* UIColor+Hex.m in Sources */,
 			);

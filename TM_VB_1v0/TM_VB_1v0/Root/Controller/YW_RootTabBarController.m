@@ -20,6 +20,8 @@
 {
     [super viewDidLoad];
     
+    self.tabBar.tintColor = [UIColor redColor];
+    
     [self setupChildVC:[[YW_DiaryViewController alloc] init] title:@"Diary" image:@"" selectedImage:@""];
     [self setupChildVC:[[YW_ActivityViewController alloc] init] title:@"Activity" image:@"" selectedImage:@""];
     [self setupChildVC:[[YW_DiscoveryViewController alloc] init] title:@"Discovery" image:@"" selectedImage:@""];
