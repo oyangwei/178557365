@@ -20,11 +20,6 @@
 #define BottomTabBarHeight self.tabBar.frame.size.height
 
 #define CurrentTitle @"<<     Discovery     >>"
-#define MenuBarHeight 44
-#define SearchBarHeight 30
-#define TabBarHeight 30
-#define BarSpace 5
-#define MaskWidth 20
 
 @interface YW_DiscoveryViewController () <MJCSlideSwitchViewDelegate, UIPopoverPresentationControllerDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate>
 {
@@ -100,9 +95,9 @@
 {
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 22)];
     [leftBtn setSelected:NO];
-    [leftBtn setImage:[UIImage imageNamed:@"leftList"] forState:UIControlStateNormal];
-    [leftBtn setImage:[UIImage imageNamed:@"rightList"] forState:UIControlStateSelected];
-    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 0)];
+    [leftBtn setImage:[UIImage imageNamed:@"fold"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateSelected];
+    //    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 0)];
     [leftBtn addTarget:self action:@selector(showLeftList:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
@@ -130,19 +125,13 @@
     
     UIImageView *menuLeftMask = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, MaskWidth, MenuBarHeight)];
     menuLeftMask.backgroundColor = [UIColor whiteColor];
-    menuLeftMask.layer.shadowOffset = CGSizeMake(3, 0);
-    menuLeftMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    menuLeftMask.layer.shadowOpacity = 1.0;
-    menuLeftMask.layer.shadowRadius = 3;
+    menuLeftMask.contentMode = UIViewContentModeScaleAspectFit;
     menuLeftMask.alpha = 0.6;
     
     UIImageView *menuRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, 64, MaskWidth, MenuBarHeight)];
-    [menuRightMask setImage:[UIImage imageNamed:@"right_more"]];
+    [menuRightMask setImage:[UIImage imageNamed:RightMenuMaskArrow]];
     menuRightMask.backgroundColor = [UIColor whiteColor];
-    menuRightMask.layer.shadowOffset = CGSizeMake(-3, 0);
-    menuRightMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    menuRightMask.layer.shadowOpacity = 1.0;
-    menuRightMask.layer.shadowRadius = 3;
+    menuRightMask.contentMode = UIViewContentModeScaleAspectFit;
     menuRightMask.alpha = 0.6;
     
     self.menuLeftMask = menuLeftMask;
@@ -170,11 +159,17 @@
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    self.searchBar.backgroundColor = [UIColor whiteColor];
+    [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
     [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:@"Search"]];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    if (![self.searchBar.text isEqualToString:@""]) {
+        self.searchBar.backgroundColor = [UIColor colorWithHexString:SearBarSelectedBackgroudColor];
+        [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarSelectedBackgroudColor]] forState:UIControlStateNormal];
+    }
     [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]];
 }
 
@@ -229,21 +224,15 @@
     self.tabBar = lala;
     
     UIImageView *tabLeftMask = [[UIImageView alloc] initWithFrame:CGRectMake(0, lalaY, MaskWidth, TabBarHeight)];
-    [tabLeftMask setImage:[UIImage imageNamed:@"left_more"]];
+    [tabLeftMask setImage:[UIImage imageNamed:LeftTabMaskArrow]];
     tabLeftMask.backgroundColor = [UIColor whiteColor];
-    tabLeftMask.layer.shadowOffset = CGSizeMake(3, 0);
-    tabLeftMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    tabLeftMask.layer.shadowOpacity = 1.0;
-    tabLeftMask.layer.shadowRadius = 3;
+    tabLeftMask.contentMode = UIViewContentModeScaleAspectFit;
     tabLeftMask.alpha = 0.6;
     
     UIImageView *tabRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, lalaY, MaskWidth, TabBarHeight)];
-    [tabRightMask setImage:[UIImage imageNamed:@"right_more"]];
+    [tabRightMask setImage:[UIImage imageNamed:RightTabMaskArrow]];
     tabRightMask.backgroundColor = [UIColor whiteColor];
-    tabRightMask.layer.shadowOffset = CGSizeMake(-3, 0);
-    tabRightMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    tabRightMask.layer.shadowOpacity = 1.0;
-    tabRightMask.layer.shadowRadius = 3;
+    tabRightMask.contentMode = UIViewContentModeScaleAspectFit;
     tabRightMask.alpha = 0.6;
     
     self.tabLeftMask = tabLeftMask;
@@ -265,10 +254,10 @@
     CGPoint tabBarOffset = scrollView.contentOffset;
     
     //    self.tabLeftMask.backgroundColor = tabBarOffset.x > 0 ?[UIColor redColor]:[UIColor whiteColor];
-    [self.tabLeftMask setImage:tabBarOffset.x > 0?[UIImage imageNamed:@"left_more"]:NULL];
+    [self.tabLeftMask setImage:tabBarOffset.x > 0?[UIImage imageNamed:LeftTabMaskArrow]:NULL];
     
     //    self.tabRightMask.backgroundColor = tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIColor redColor]:[UIColor whiteColor];
-    [self.tabRightMask setImage:tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:@"right_more"]:NULL];
+    [self.tabRightMask setImage:tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:RightTabMaskArrow]:NULL];
 }
 
 -(void)childVC_scrollView:(UIScrollView *)scrollView
@@ -422,10 +411,10 @@
         CGPoint menuBarOffset = scrollView.contentOffset;
         
         //        self.menuLeftMask.backgroundColor = menuBarOffset.x > 0 ?[UIColor redColor]:[UIColor whiteColor];
-        [self.menuLeftMask setImage:menuBarOffset.x > 0?[UIImage imageNamed:@"left_more"]:NULL];
+        [self.menuLeftMask setImage:menuBarOffset.x > 0?[UIImage imageNamed:LeftMenuMaskArrow]:NULL];
         
         //        self.menuRightMask.backgroundColor = menuBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIColor redColor]:[UIColor whiteColor];
-        [self.menuRightMask setImage:menuBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:@"right_more"]:NULL];
+        [self.menuRightMask setImage:menuBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:RightMenuMaskArrow]:NULL];
     }
 }
 

@@ -16,15 +16,11 @@
 #import "MJCTitlesView.h"
 #import "YW_HistoryTableView.h"
 #import "SPContactListController.h"
+#import "YW_UIGestureRecognizer.h"
 
 #define BottomTabBarHeight self.tabBar.frame.size.height
 
 #define CurrentTitle @"<<     TM_VB_1v0     >>"
-#define MenuBarHeight 44
-#define SearchBarHeight 30
-#define TabBarHeight 30
-#define BarSpace 5
-#define MaskWidth 20
 
 @interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIPopoverPresentationControllerDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate>
 {
@@ -106,9 +102,9 @@
 {
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 22)];
     [leftBtn setSelected:NO];
-    [leftBtn setImage:[UIImage imageNamed:@"leftList"] forState:UIControlStateNormal];
-    [leftBtn setImage:[UIImage imageNamed:@"rightList"] forState:UIControlStateSelected];
-    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 0)];
+    [leftBtn setImage:[UIImage imageNamed:@"fold"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateSelected];
+//    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 0)];
     [leftBtn addTarget:self action:@selector(showLeftList:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
@@ -136,19 +132,14 @@
     
     UIImageView *menuLeftMask = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, MaskWidth, MenuBarHeight)];
     menuLeftMask.backgroundColor = [UIColor whiteColor];
-    menuLeftMask.layer.shadowOffset = CGSizeMake(3, 0);
-    menuLeftMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    menuLeftMask.layer.shadowOpacity = 1.0;
-    menuLeftMask.layer.shadowRadius = 3;
+    menuLeftMask.contentMode = UIViewContentModeScaleAspectFit;
+    [menuLeftMask setImage:[UIImage imageNamed:LeftMenuMaskArrow]];
     menuLeftMask.alpha = 0.6;
     
     UIImageView *menuRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, 64, MaskWidth, MenuBarHeight)];
-    [menuRightMask setImage:[UIImage imageNamed:@"right_more"]];
+    [menuRightMask setImage:[UIImage imageNamed:RightMenuMaskArrow]];
     menuRightMask.backgroundColor = [UIColor whiteColor];
-    menuRightMask.layer.shadowOffset = CGSizeMake(-3, 0);
-    menuRightMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    menuRightMask.layer.shadowOpacity = 1.0;
-    menuRightMask.layer.shadowRadius = 3;
+    menuRightMask.contentMode = UIViewContentModeScaleAspectFit;
     menuRightMask.alpha = 0.6;
     
     self.menuLeftMask = menuLeftMask;
@@ -176,11 +167,17 @@
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    self.searchBar.backgroundColor = [UIColor whiteColor];
+    [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
     [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:@"Search"]];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    if (![self.searchBar.text isEqualToString:@""]) {
+        self.searchBar.backgroundColor = [UIColor colorWithHexString:SearBarSelectedBackgroudColor];
+        [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarSelectedBackgroudColor]] forState:UIControlStateNormal];
+    }
     [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]];
 }
 
@@ -203,7 +200,6 @@
     
     //标题数据数组
     MJCSegmentInterface *lala = [[MJCSegmentInterface alloc]initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
-    lala.isChildScollEnabled = NO;
     lala.delegate = self;
     
     lala.titlesViewFrame = CGRectMake(0, 0, self.view.width, TabBarHeight);
@@ -234,21 +230,15 @@
     self.tabBar = lala;
     
     UIImageView *tabLeftMask = [[UIImageView alloc] initWithFrame:CGRectMake(0, lalaY, MaskWidth, TabBarHeight)];
-    [tabLeftMask setImage:[UIImage imageNamed:@"left_more"]];
-    tabLeftMask.backgroundColor = [UIColor whiteColor];
-    tabLeftMask.layer.shadowOffset = CGSizeMake(3, 0);
-    tabLeftMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    tabLeftMask.layer.shadowOpacity = 1.0;
-    tabLeftMask.layer.shadowRadius = 3;
+    [tabLeftMask setImage:[UIImage imageNamed:LeftTabMaskArrow]];
+    tabLeftMask.contentMode = UIViewContentModeScaleAspectFit;
     tabLeftMask.alpha = 0.6;
+    tabLeftMask.backgroundColor = [UIColor whiteColor];
     
     UIImageView *tabRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, lalaY, MaskWidth, TabBarHeight)];
-    [tabRightMask setImage:[UIImage imageNamed:@"right_more"]];
+    [tabRightMask setImage:[UIImage imageNamed:RightTabMaskArrow]];
+    tabRightMask.contentMode = UIViewContentModeScaleAspectFit;
     tabRightMask.backgroundColor = [UIColor whiteColor];
-    tabRightMask.layer.shadowOffset = CGSizeMake(-3, 0);
-    tabRightMask.layer.shadowColor = [UIColor orangeColor].CGColor;
-    tabRightMask.layer.shadowOpacity = 1.0;
-    tabRightMask.layer.shadowRadius = 3;
     tabRightMask.alpha = 0.6;
     
     self.tabLeftMask = tabLeftMask;
@@ -264,39 +254,68 @@
     
     [[SPKitExample sharedInstance] exampleCustomizeConversationCellWithConversationListController:conversationListController];
     
-    [conversationListController setConversationEditActionBlock:^NSArray *(YWConversation *aConversation, NSArray *editActions){
-        YWMoreActionItem *shareActionItem = [[YWMoreActionItem alloc] init];
-        
-        [shareActionItem setActionName:@"分享"];
-        [shareActionItem setActionBlock:^(NSDictionary *aUserInfo){
-            NSLog(@"分享");
-            [[SPUtil sharedInstance] showNotificationInViewController:self title:@"提示" subtitle:@"分享成功" type:SPMessageNotificationTypeSuccess];
-        }];
-        shareActionItem.backgroundColor = [UIColor grayColor];
-//        [shareActionItem setActionIcon:[UIImage imageNamed:@"rightList"]];
-        
-        YWMoreActionItem *deleteActionItem = nil;
-        
-        for (YWMoreActionItem *item in editActions) {
-            if ([item.actionName isEqualToString:@"删除"]) {
-                deleteActionItem = item;
-            }
-        }
-        
-        editActions = [NSArray arrayWithObjects: deleteActionItem, shareActionItem, nil];
-        return editActions;
-    }];
+//    [conversationListController setConversationEditActionBlock:^NSArray *(YWConversation *aConversation, NSArray *editActions){
+//        YWMoreActionItem *shareActionItem = [[YWMoreActionItem alloc] init];
+//        
+//        [shareActionItem setActionName:@"分享"];
+//        [shareActionItem setActionBlock:^(NSDictionary *aUserInfo){
+//            NSLog(@"分享");
+//            [[SPUtil sharedInstance] showNotificationInViewController:self title:@"提示" subtitle:@"分享成功" type:SPMessageNotificationTypeSuccess];
+//        }];
+//        shareActionItem.backgroundColor = [UIColor grayColor];
+////        [shareActionItem setActionIcon:[UIImage imageNamed:@"rightList"]];
+//        
+//        YWMoreActionItem *deleteActionItem = nil;
+//        
+//        for (YWMoreActionItem *item in editActions) {
+//            if ([item.actionName isEqualToString:@"删除"]) {
+//                deleteActionItem = item;
+//            }
+//        }
+//        
+//        editActions = [NSArray arrayWithObjects: deleteActionItem, shareActionItem, nil];
+//        return editActions;
+//    }];
     
     conversationListController.didSelectItemBlock = ^(YWConversation *aConversation)
     {
         [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation fromNavigationController:self.navigationController];
     };
+    
+    [conversationListController setConfigureCellBlock:^(UITableViewCell *cell, UITableView *tableView, NSIndexPath *indexPath, YWConversation *conversation)
+    {
+        YW_UIGestureRecognizer *tap = [[YW_UIGestureRecognizer alloc] initWithTarget:self action:@selector(chatCellLongPress:) parameter:conversation.conversationId];
+        tap.minimumPressDuration = 0.5;
+        [cell addGestureRecognizer:tap];
+        
+    }];
     return conversationListController;
+}
+
+- (void)chatCellLongPress:(YW_UIGestureRecognizer *)longPressGestureRecognizer
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *shareAction = [UIAlertAction actionWithTitle:@"分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[SPUtil sharedInstance] showNotificationInViewController:self title:@"" subtitle:@"分享成功" type:SPMessageNotificationTypeSuccess];
+    }];
+    
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[SPUtil sharedInstance] showNotificationInViewController:self title:@"" subtitle:@"删除成功" type:SPMessageNotificationTypeSuccess];
+        
+        [[[SPKitExample sharedInstance].ywIMKit.IMCore getConversationService] removeConversationByConversationId:longPressGestureRecognizer.name error:nil];
+    }];
+    
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alert addAction:shareAction];
+    [alert addAction:deleteAction];
+    [alert addAction:cancleAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)mjc_ClickEvent:(MJCTabItem *)tabItem childViewController:(UIViewController *)childViewController segmentInterface:(MJCSegmentInterface *)segmentInterface;
 {
-    NSLog(@"%@", tabItem.titlesLable.text);
     currentChildIndex = (int)[self.tabTitleArr indexOfObject:tabItem.titlesLable.text];
     [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:tabItem.titlesLable.text]];
 }
@@ -306,23 +325,23 @@
     CGPoint tabBarOffset = scrollView.contentOffset;
     
 //    self.tabLeftMask.backgroundColor = tabBarOffset.x > 0 ?[UIColor redColor]:[UIColor whiteColor];
-    [self.tabLeftMask setImage:tabBarOffset.x > 0?[UIImage imageNamed:@"left_more"]:NULL];
+    [self.tabLeftMask setImage:tabBarOffset.x > 0?[UIImage imageNamed:LeftTabMaskArrow]:NULL];
     
 //    self.tabRightMask.backgroundColor = tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIColor redColor]:[UIColor whiteColor];
     [self.tabRightMask setImage:tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:@"right_more"]:NULL];
 }
 
-//-(void)childVC_scrollView:(UIScrollView *)scrollView
-//{
-//    CGFloat value = scrollView.contentOffset.x / scrollView.frame.size.width;
-//    if (currentChildIndex == (int)value) {
-//        return;
-//    }
-//    currentChildIndex = value;
-//    
-//    [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]];
-//    
-//}
+-(void)childVC_scrollView:(UIScrollView *)scrollView
+{
+    CGFloat value = scrollView.contentOffset.x / scrollView.frame.size.width;
+    if (currentChildIndex == (int)value) {
+        return;
+    }
+    currentChildIndex = value;
+    
+    [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]];
+    
+}
 
 #pragma mark - 懒加载菜单标题栏
 -(NSDictionary *)menuTabArr
@@ -463,7 +482,7 @@
         CGPoint menuBarOffset = scrollView.contentOffset;
         
 //        self.menuLeftMask.backgroundColor = menuBarOffset.x > 0 ?[UIColor redColor]:[UIColor whiteColor];
-        [self.menuLeftMask setImage:menuBarOffset.x > 0?[UIImage imageNamed:@"left_more"]:NULL];
+        [self.menuLeftMask setImage:menuBarOffset.x > 0?[UIImage imageNamed:LeftMenuMaskArrow]:NULL];
         
 //        self.menuRightMask.backgroundColor = menuBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIColor redColor]:[UIColor whiteColor];
         [self.menuRightMask setImage:menuBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:@"right_more"]:NULL];

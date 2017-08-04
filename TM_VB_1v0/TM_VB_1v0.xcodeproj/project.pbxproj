@@ -10,6 +10,7 @@
 		5532EA401F3051930014C297 /* YW_HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA3F1F3051930014C297 /* YW_HistoryTableView.m */; };
 		5532EA451F3058F00014C297 /* YW_HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */; };
 		5532EA471F3064C40014C297 /* historyRecord.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5532EA461F3064C40014C297 /* historyRecord.plist */; };
+		557198471F3444A700C2328A /* YW_UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198461F3444A700C2328A /* YW_UIGestureRecognizer.m */; };
 		5575C8AC1F283A63003F12B8 /* YW_MenuBarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */; };
 		5575C8B41F288A1F003F12B8 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B31F288A1F003F12B8 /* UIColor+Hex.m */; };
 		5575C8B71F288A2B003F12B8 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B61F288A2B003F12B8 /* NSString+Ext.m */; };
@@ -135,6 +136,8 @@
 		55EC6E0D1F33030A00F5C7B2 /* SPSearchContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6E0B1F33030A00F5C7B2 /* SPSearchContactViewController.m */; };
 		55EC6E0E1F33030A00F5C7B2 /* SPSearchContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6E0C1F33030A00F5C7B2 /* SPSearchContactViewController.xib */; };
 		55EC6E101F330D2F00F5C7B2 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6E0F1F330D2F00F5C7B2 /* share.png */; };
+		55EC6E171F3322FE00F5C7B2 /* fold.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6E151F3322FE00F5C7B2 /* fold.png */; };
+		55EC6E181F3322FE00F5C7B2 /* expand.png in Resources */ = {isa = PBXBuildFile; fileRef = 55EC6E161F3322FE00F5C7B2 /* expand.png */; };
 		FC9E0AFFE644B15418D0A238 /* libPods-TM_VB_1v0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C47E0A9C8CCB52739566F688 /* libPods-TM_VB_1v0.a */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +185,8 @@
 		5532EA431F3058F00014C297 /* YW_HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_HistoryTableViewCell.h; sourceTree = "<group>"; };
 		5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_HistoryTableViewCell.m; sourceTree = "<group>"; };
 		5532EA461F3064C40014C297 /* historyRecord.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = historyRecord.plist; sourceTree = "<group>"; };
+		557198451F3444A700C2328A /* YW_UIGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIGestureRecognizer.h; sourceTree = "<group>"; };
+		557198461F3444A700C2328A /* YW_UIGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIGestureRecognizer.m; sourceTree = "<group>"; };
 		5575C8AA1F283A63003F12B8 /* YW_MenuBarLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MenuBarLabel.h; sourceTree = "<group>"; };
 		5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuBarLabel.m; sourceTree = "<group>"; };
 		5575C8B21F288A1F003F12B8 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -375,6 +380,8 @@
 		55EC6E0B1F33030A00F5C7B2 /* SPSearchContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSearchContactViewController.m; sourceTree = "<group>"; };
 		55EC6E0C1F33030A00F5C7B2 /* SPSearchContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPSearchContactViewController.xib; sourceTree = "<group>"; };
 		55EC6E0F1F330D2F00F5C7B2 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		55EC6E151F3322FE00F5C7B2 /* fold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fold.png; sourceTree = "<group>"; };
+		55EC6E161F3322FE00F5C7B2 /* expand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expand.png; sourceTree = "<group>"; };
 		B7908F8A70D76B5615F7CAA6 /* Pods-TM_VB_1v0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TM_VB_1v0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TM_VB_1v0/Pods-TM_VB_1v0.debug.xcconfig"; sourceTree = "<group>"; };
 		C47E0A9C8CCB52739566F688 /* libPods-TM_VB_1v0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TM_VB_1v0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C60A9345F83567DAED320 /* Pods-TM_VB_1v0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TM_VB_1v0.release.xcconfig"; path = "Pods/Target Support Files/Pods-TM_VB_1v0/Pods-TM_VB_1v0.release.xcconfig"; sourceTree = "<group>"; };
@@ -886,6 +893,8 @@
 				55EC6DC31F31ACA300F5C7B2 /* UILabel+YWUILabel.m */,
 				55EC6DC41F31ACA300F5C7B2 /* UIViewController+YWUIViewController.h */,
 				55EC6DC51F31ACA300F5C7B2 /* UIViewController+YWUIViewController.m */,
+				557198451F3444A700C2328A /* YW_UIGestureRecognizer.h */,
+				557198461F3444A700C2328A /* YW_UIGestureRecognizer.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -931,6 +940,8 @@
 		55C502721F2716AC0062DBE0 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				55EC6E151F3322FE00F5C7B2 /* fold.png */,
+				55EC6E161F3322FE00F5C7B2 /* expand.png */,
 				55EC6E0F1F330D2F00F5C7B2 /* share.png */,
 				5575C9381F29CB49003F12B8 /* left_more.png */,
 				5575C9391F29CB49003F12B8 /* right_more.png */,
@@ -1274,8 +1285,10 @@
 				5575C92D1F29B480003F12B8 /* icon_add@2x.png in Resources */,
 				55C5028D1F2716AC0062DBE0 /* programme_2.png in Resources */,
 				5575C9331F29B480003F12B8 /* profile.json in Resources */,
+				55EC6E181F3322FE00F5C7B2 /* expand.png in Resources */,
 				5575C8CD1F29B27D003F12B8 /* WXOpenIMSDKResource.bundle in Resources */,
 				55C502821F2716AC0062DBE0 /* securityQuestion.plist in Resources */,
+				55EC6E171F3322FE00F5C7B2 /* fold.png in Resources */,
 				5575C91F1F29B480003F12B8 /* SPCallingCardBubbleChatContentView.xib in Resources */,
 				5575C92E1F29B480003F12B8 /* icon_delete@2x.png in Resources */,
 				55C502871F2716AC0062DBE0 /* me_1.png in Resources */,
@@ -1415,6 +1428,7 @@
 				5575C9231F29B480003F12B8 /* SPGreetingBubbleChatView.m in Sources */,
 				55C502B01F2729560062DBE0 /* MJCIndicator.m in Sources */,
 				55C501F01F26E6F40062DBE0 /* main.m in Sources */,
+				557198471F3444A700C2328A /* YW_UIGestureRecognizer.m in Sources */,
 				55C502B61F2729560062DBE0 /* UIColor+MJCClassExtension.m in Sources */,
 				55EC6DE11F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m in Sources */,
 				55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */,
@@ -1568,6 +1582,7 @@
 			baseConfigurationReference = B7908F8A70D76B5615F7CAA6 /* Pods-TM_VB_1v0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YEZ42AE4QP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1579,6 +1594,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1587,6 +1603,7 @@
 			baseConfigurationReference = E89C60A9345F83567DAED320 /* Pods-TM_VB_1v0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YEZ42AE4QP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1598,6 +1615,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

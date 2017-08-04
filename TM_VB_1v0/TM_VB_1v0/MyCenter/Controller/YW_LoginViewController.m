@@ -44,6 +44,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UITextField *phoneTextField = [[UITextField alloc] init];
+    phoneTextField.text = @"visitor12";
     phoneTextField.placeholder = @"PhoneNumber";
     phoneTextField.layer.borderWidth = 1;
     phoneTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
@@ -61,6 +62,7 @@
     phoneLabel.textAlignment = NSTextAlignmentCenter;
     
     UITextField *passwordTextField = [[UITextField alloc] init];
+    passwordTextField.text = @"taobao1234";
     passwordTextField.placeholder = @"Password";
     passwordTextField.layer.borderWidth = 1;
     passwordTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;

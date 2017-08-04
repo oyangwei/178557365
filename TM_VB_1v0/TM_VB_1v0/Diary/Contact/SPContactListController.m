@@ -296,7 +296,7 @@
 {
     if (_fetchedResultsController == nil) {
         YWIMCore *imcore = [SPKitExample sharedInstance].ywIMKit.IMCore;
-        _fetchedResultsController = [[imcore getContactService] fetchedResultsControllerWithListMode:YWContactListModeAlphabetic imCore:imcore];
+        _fetchedResultsController = [[imcore getContactService] fetchedResultsControllerWithListMode:YWContactListModeGroup imCore:imcore];
         
         __weak typeof(self) weakSelf = self;
         [_fetchedResultsController setDidChangeContentBlock:^{

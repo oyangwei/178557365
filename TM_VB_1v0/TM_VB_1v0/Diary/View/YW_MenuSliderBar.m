@@ -21,7 +21,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.pagingEnabled = NO;
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithHexString:MenuBarNormalBackgroudColor];
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
         self.alwaysBounceVertical = NO;
@@ -64,14 +64,14 @@
 -(void)tapMenuItem:(UITapGestureRecognizer *)tapGestureRecognizer
 {
     YW_MenuBarLabel *label = (YW_MenuBarLabel *)tapGestureRecognizer.view;
-    label.backgroundColor = [UIColor colorWithHexString:@"#FF0000"];
+    label.backgroundColor = [UIColor colorWithHexString:MenuBarSelectedBackgroudColor];
     label.alpha = 0.5;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor colorWithHexString:MenuBarTextSelectedColor];
     
     for (YW_MenuBarLabel *otherLabel in self.subviews) {
         if (otherLabel != label) {
-            otherLabel.backgroundColor = [UIColor clearColor];
-            otherLabel.textColor = [UIColor blackColor];
+            otherLabel.backgroundColor = [UIColor colorWithHexString:MenuBarNormalBackgroudColor];
+            otherLabel.textColor = [UIColor colorWithHexString:MenuBarTextNormalColor];
             otherLabel.alpha = 1.0;
         }
     }
