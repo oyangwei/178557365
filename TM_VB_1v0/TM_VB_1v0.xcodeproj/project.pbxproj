@@ -11,6 +11,7 @@
 		5532EA451F3058F00014C297 /* YW_HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */; };
 		5532EA471F3064C40014C297 /* historyRecord.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5532EA461F3064C40014C297 /* historyRecord.plist */; };
 		557198471F3444A700C2328A /* YW_UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198461F3444A700C2328A /* YW_UIGestureRecognizer.m */; };
+		5571984E1F37FBCF00C2328A /* YW_ContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5571984D1F37FBCF00C2328A /* YW_ContactListViewController.m */; };
 		5575C8AC1F283A63003F12B8 /* YW_MenuBarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */; };
 		5575C8B41F288A1F003F12B8 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B31F288A1F003F12B8 /* UIColor+Hex.m */; };
 		5575C8B71F288A2B003F12B8 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B61F288A2B003F12B8 /* NSString+Ext.m */; };
@@ -187,6 +188,8 @@
 		5532EA461F3064C40014C297 /* historyRecord.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = historyRecord.plist; sourceTree = "<group>"; };
 		557198451F3444A700C2328A /* YW_UIGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIGestureRecognizer.h; sourceTree = "<group>"; };
 		557198461F3444A700C2328A /* YW_UIGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIGestureRecognizer.m; sourceTree = "<group>"; };
+		5571984C1F37FBCF00C2328A /* YW_ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ContactListViewController.h; sourceTree = "<group>"; };
+		5571984D1F37FBCF00C2328A /* YW_ContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_ContactListViewController.m; sourceTree = "<group>"; };
 		5575C8AA1F283A63003F12B8 /* YW_MenuBarLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MenuBarLabel.h; sourceTree = "<group>"; };
 		5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuBarLabel.m; sourceTree = "<group>"; };
 		5575C8B21F288A1F003F12B8 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -1072,6 +1075,8 @@
 				55EC6DF91F32FF7400F5C7B2 /* SPContactProfileController.m */,
 				55EC6DFA1F32FF7400F5C7B2 /* SPContactRequestListController.h */,
 				55EC6DFB1F32FF7400F5C7B2 /* SPContactRequestListController.m */,
+				5571984C1F37FBCF00C2328A /* YW_ContactListViewController.h */,
+				5571984D1F37FBCF00C2328A /* YW_ContactListViewController.m */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -1412,6 +1417,7 @@
 				55C502AF1F2729560062DBE0 /* MJCChildsView.m in Sources */,
 				5575C9371F29B480003F12B8 /* SPUtil.m in Sources */,
 				55EC6DCF1F31B3AD00F5C7B2 /* YW_LoginViewController.m in Sources */,
+				5571984E1F37FBCF00C2328A /* YW_ContactListViewController.m in Sources */,
 				55C502B51F2729560062DBE0 /* UIButton+MJCClassExtension.m in Sources */,
 				55C502391F26F56D0062DBE0 /* YW_RootTabBarController.m in Sources */,
 				5575C9221F29B480003F12B8 /* SPInputViewPluginCallingCard.m in Sources */,

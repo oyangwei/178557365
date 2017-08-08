@@ -15,7 +15,7 @@
 #import "MJCCommonTools.h"
 #import "MJCTitlesView.h"
 #import "YW_HistoryTableView.h"
-#import "SPContactListController.h"
+#import "YW_ContactListViewController.h"
 #import "YW_UIGestureRecognizer.h"
 
 #define BottomTabBarHeight self.tabBar.frame.size.height
@@ -210,7 +210,7 @@
     [lala intoTitlesArray:self.tabTitleArr hostController:self];
     [self.view addSubview:lala];
 
-    SPContactListController *contactListController = [[SPContactListController alloc] initWithNibName:@"SPContactListController" bundle:nil];
+    YW_ContactListViewController *contactListController = [[YW_ContactListViewController alloc] init];
     
     YWConversationListViewController *conversationListController = [self createYWConversationListViewController];
     
@@ -430,8 +430,10 @@
             CGRect tabBarRect = self.tabBar.frame;
             tabBarRect.size.height = self.view.height - 64 - 49 - MenuBarHeight - SearchBarHeight - 2 * BarSpace;
             self.tabBar.frame = tabBarRect;
+            
         }];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewFrameChange" object:nil userInfo:@{@"isHidden":[NSString stringWithFormat:@"%d", btn.isSelected]}];
 }
 
 - (void)showRightList
