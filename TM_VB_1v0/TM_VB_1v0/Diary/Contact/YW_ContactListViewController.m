@@ -18,10 +18,22 @@
 #import "AppDelegate.h"
 #import "SPContactCell.h"
 
+#define LabelHeight 44
+
 @interface YW_ContactListViewController ()<UITableViewDelegate, UITableViewDataSource>
+{
+    BOOL isContact;
+    BOOL isHidden;
+}
+
+/** 联系人标签  */
+@property(strong, nonatomic) UILabel *contactLabel;
 
 /** 联系人列表  */
 @property(strong, nonatomic) UITableView *contactTableView;
+
+/** 群组标签  */
+@property(strong, nonatomic) UILabel *tribeLabel;
 
 /** 群列表 */
 @property(strong, nonatomic) UITableView *tribeTableView;
@@ -32,12 +44,19 @@
 
 /** 用于检索和监听数据集 */
 @property(strong, nonatomic) YWFetchedResultsController *fetchedResultsController;
+
 @end
+
+static CGFloat defaultHeight;
+static CGFloat hiddenHeight;
 
 @implementation YW_ContactListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    defaultHeight = [UIScreen mainScreen].bounds.size.height - 64 - MenuBarHeight - SearchBarHeight - TabBarHeight - 2 * BarSpace - 49 - LabelHeight * 2;
+    hiddenHeight =  ([UIScreen mainScreen].bounds.size.height - 64 - 49 - TabBarHeight - 2 * LabelHeight);
     
     [self setUpView];
     
@@ -48,24 +67,53 @@
 
 -(void)setUpView
 {
-    CGFloat tableHeight = self.view.height - 64 - MenuBarHeight - SearchBarHeight - TabBarHeight - 2 * BarSpace - 49;
+    isContact = YES;
+    isHidden = NO;
     
-    self.contactTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, tableHeight / 2) style:UITableViewStylePlain];
+    UITapGestureRecognizer *tapContactGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
+    tapContactGestureRecogbizer.numberOfTapsRequired = 1;
+    UILabel *contactLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, LabelHeight)];
+    contactLabel.tag = 101;
+    contactLabel.userInteractionEnabled = YES;
+    contactLabel.text = @"联系人";
+    contactLabel.backgroundColor = [UIColor blueColor];
+    contactLabel.textColor = [UIColor whiteColor];
+    contactLabel.textAlignment = NSTextAlignmentCenter;
+    [contactLabel addGestureRecognizer:tapContactGestureRecogbizer];
+    
+    UITapGestureRecognizer *tapTribeGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
+    tapTribeGestureRecogbizer.numberOfTapsRequired = 1;
+    UILabel *tribeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, defaultHeight + LabelHeight, self.view.width, LabelHeight)];
+    tribeLabel.tag = 102;
+    tribeLabel.userInteractionEnabled = YES;
+    tribeLabel.text = @"群组";
+    tribeLabel.backgroundColor = [UIColor blueColor];
+    tribeLabel.textColor = [UIColor whiteColor];
+    tribeLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [tribeLabel addGestureRecognizer:tapTribeGestureRecogbizer];
+    
+    self.contactTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, LabelHeight, self.view.width, defaultHeight) style:UITableViewStylePlain];
     self.contactTableView.backgroundColor = [UIColor redColor];
     
     [self.contactTableView registerNib:[UINib nibWithNibName:@"SPContactCell" bundle:nil] forCellReuseIdentifier:@"ContactCell"];
     
-    self.tribeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableHeight / 2, self.view.width, tableHeight / 2) style:UITableViewStylePlain];
+    self.tribeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, defaultHeight / 2, self.view.width, 0) style:UITableViewStylePlain];
     self.tribeTableView.backgroundColor = [UIColor redColor];
     
     [self.tribeTableView registerNib:[UINib nibWithNibName:@"SPContactCell" bundle:nil] forCellReuseIdentifier:@"ContactCell"];
+    
+    self.contactLabel = contactLabel;
+    self.tribeLabel = tribeLabel;
     
     self.contactTableView.delegate = self;
     self.contactTableView.dataSource = self;
     self.tribeTableView.delegate = self;
     self.tribeTableView.dataSource = self;
     
+    [self.view addSubview:self.contactLabel];
     [self.view addSubview:self.contactTableView];
+    [self.view addSubview:self.tribeLabel];
     [self.view addSubview:self.tribeTableView];
 }
 
@@ -174,8 +222,18 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YWPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:person.personId fromNavigationController:self.navigationController];
+    if (tableView == self.contactTableView) {
+        YWPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:person.personId fromNavigationController:self.navigationController];
+    }
+    else
+    {
+        NSString *groupedTribeKey = @(indexPath.section).stringValue;
+        NSArray *tribes = self.groupedTribes[groupedTribeKey];
+        YWTribe *tribe = tribes[indexPath.row];
+        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithTribe:tribe fromNavigationController:self.navigationController];
+    }
+    
     
 }
 
@@ -196,7 +254,7 @@
         }
         else if (section == 1)
         {
-            return tribes.count ? @"普通群" : nil;
+            return tribes.count ? @"多聊群" : nil;
         }
         return nil;
     }
@@ -296,22 +354,95 @@
     self.groupedTribes = dictionary;
 }
 
+-(void)switchContact:(UITapGestureRecognizer *)tapGestureRecogbizer{
+    UILabel *label = (UILabel *)tapGestureRecogbizer.view;
+    switch (label.tag) {
+        case 101:{
+            if (isContact) {
+                return;
+            }
+            else
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    
+                    CGRect contactTableFrame = self.contactTableView.frame;
+                    contactTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
+                    self.contactTableView.frame = contactTableFrame;
+                } completion:^(BOOL finished) {
+                    CGRect tribeTableFrame = self.tribeTableView.frame;
+                    tribeTableFrame.size.height = 0;
+                    self.tribeTableView.frame = tribeTableFrame;
+                    
+                    CGRect tribeLabelFrame = self.tribeLabel.frame;
+                    tribeLabelFrame.origin.y = isHidden ? (hiddenHeight + LabelHeight) : (defaultHeight + LabelHeight);
+                    self.tribeLabel.frame = tribeLabelFrame;
+                }];
+                isContact = !isContact;
+            }
+            break;
+        }
+        case 102:{
+            if (!isContact) {
+                return;
+            }
+            else
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    CGRect contactTableFrame = self.contactTableView.frame;
+                    contactTableFrame.size.height = 0;
+                    self.contactTableView.frame = contactTableFrame;
+                    
+                    CGRect tribeLabelFrame = self.tribeLabel.frame;
+                    tribeLabelFrame.origin.y = LabelHeight;
+                    self.tribeLabel.frame = tribeLabelFrame;
+                    
+                } completion:^(BOOL finished) {
+                    CGRect tribeTableFrame = self.tribeTableView.frame;
+                    tribeTableFrame.origin.y = 2 * LabelHeight;
+                    tribeTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
+                    self.tribeTableView.frame = tribeTableFrame;
+                    
+                }];
+                isContact = !isContact;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 #pragma mark - 改变视图大小
 -(void)changeFrame:(NSNotification *)notification
 {
-    BOOL isHidden = [[[notification userInfo] objectForKey:@"isHidden"] boolValue];
-    CGFloat defaltHeight =  ([UIScreen mainScreen].bounds.size.height - 64 - 49 - MenuBarHeight - SearchBarHeight - TabBarHeight - 2 * BarSpace)/ 2;
-    CGFloat hiddenHeight =  ([UIScreen mainScreen].bounds.size.height - 64 - 49 - TabBarHeight) / 2;
-    [UIView animateWithDuration:0.5 animations:^{
-        CGRect contactFrame = self.contactTableView.frame;
-        contactFrame.size.height = isHidden ? hiddenHeight : defaltHeight;
-        self.contactTableView.frame = contactFrame;
-        
-        CGRect tribeFrame = self.tribeTableView.frame;
-        tribeFrame.size.height = isHidden ? hiddenHeight : defaltHeight;
-        tribeFrame.origin.y = isHidden ? hiddenHeight : defaltHeight;
-        self.tribeTableView.frame = tribeFrame;
-    }];
+    isHidden = [[[notification userInfo] objectForKey:@"isHidden"] boolValue];
+    
+    if (isContact) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect contactTableFrame = self.contactTableView.frame;
+            contactTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
+            self.contactTableView.frame = contactTableFrame;
+            
+            CGRect tribeLabelFrame = self.tribeLabel.frame;
+            tribeLabelFrame.origin.y = isHidden ? (hiddenHeight + LabelHeight) : (defaultHeight + LabelHeight);
+            self.tribeLabel.frame = tribeLabelFrame;
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            CGRect tribeLabelFrame = self.tribeLabel.frame;
+            tribeLabelFrame.origin.y = LabelHeight;
+            self.tribeLabel.frame = tribeLabelFrame;
+            
+            CGRect tribeTableFrame = self.tribeTableView.frame;
+            tribeTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
+            self.tribeTableView.frame = tribeTableFrame;
+            
+        }];
+    }
+    
 }
 
 @end
