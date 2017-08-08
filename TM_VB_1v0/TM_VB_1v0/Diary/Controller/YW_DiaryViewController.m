@@ -201,6 +201,7 @@
     //标题数据数组
     MJCSegmentInterface *lala = [[MJCSegmentInterface alloc]initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     lala.delegate = self;
+    lala.isChildScollEnabled = NO;
     
     lala.titlesViewFrame = CGRectMake(0, 0, self.view.width, TabBarHeight);
     lala.itemTextNormalColor = [UIColor redColor];
