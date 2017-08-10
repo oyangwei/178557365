@@ -70,7 +70,7 @@ static CGFloat const defaultItemFontSize = 14;
         layout.hlitemMaxLeftMargin = 0;
         layout.hlitemMaxRightMargin = 0;
         layout.hlitemLineMargin = 0;        
-        MJCTitlesView *titlesViews = [MJCTitlesView showTitlesViewFrame:CGRectMake(0,0,self.frame.size.width,defaultTitlesViewH) viewLayout:layout];
+        MJCTitlesView *titlesViews = [MJCTitlesView showTitlesViewFrame:_titlesViewFrame viewLayout:layout];
         titlesViews.delegate = self;
         titlesViews.dataSource = self;
         [self addSubview:titlesViews];
@@ -91,7 +91,6 @@ static CGFloat const defaultItemFontSize = 14;
 }
 -(void)setupUIFrame
 {
-    _titlesViews.jc_width = self.jc_width;
     if (_isLoadIndicatorFrame) {
         _indicator.jc_y = _indicatorFrame.origin.y;
         _indicator.jc_height = _indicatorFrame.size.height;
@@ -276,7 +275,6 @@ static CGFloat const defaultItemFontSize = 14;
             [self.delegate childVC_scrollView:scrollView];
         }
     }
-    
 }
 -(void)setupTiTlesViewDefaultItem:(NSIndexPath *)indexPath
 {
@@ -328,11 +326,12 @@ static CGFloat const defaultItemFontSize = 14;
         offsetX = maxOffsetX;
     }
     
-    if (indexPath.row == 1) {
-        offsetX += cell.width;
-    }
+//    if (indexPath.row == 1) {
+//        offsetX += cell.width;
+//    }
     
     [collectionViews setContentOffset:CGPointMake(offsetX,0) animated:YES];
+    NSLog(@"--- %@", NSStringFromCGPoint(collectionViews.contentOffset));
 }
 - (void)addChildVcView
 {
