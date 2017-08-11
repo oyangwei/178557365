@@ -7,7 +7,6 @@
 //
 
 #import "YW_MenuSliderBar.h"
-#import "YW_MenuBarLabel.h"
 #import "UIView+YW_ScreenFrame.h"
 
 
@@ -31,6 +30,7 @@
 
 -(void)setUpMenuWithTitleArr:(NSArray *)titleArr
 {
+    self.currentTab = titleArr[0];
     CGFloat labelW = (self.width) / self.maxShowNum;
     CGFloat labelH = self.height;
     CGFloat labelY = 0;
@@ -64,7 +64,6 @@
 -(void)tapMenuItem:(UITapGestureRecognizer *)tapGestureRecognizer
 {
     YW_MenuBarLabel *label = (YW_MenuBarLabel *)tapGestureRecognizer.view;
-    label.backgroundColor = [UIColor colorWithHexString:MenuBarSelectedBackgroudColor];
     label.alpha = 0.5;
     label.textColor = [UIColor colorWithHexString:MenuBarTextSelectedColor];
     
@@ -87,6 +86,10 @@
     }
     
     [self setContentOffset:titleOffset animated:YES];
+    
+    if (self.clickItemBlock) {
+        self.clickItemBlock(label);
+    }
 }
 
 @end

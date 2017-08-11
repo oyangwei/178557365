@@ -33,7 +33,7 @@
 #define CustomBorderColor @"#D2D2D2"
 
 #define MenuBarTextNormalColor @"#333333"  //菜单栏常规字体颜色
-#define MenuBarTextSelectedColor @"#FFFFFF" //菜单栏选中颜色
+#define MenuBarTextSelectedColor @"#FF0000" //菜单栏选中颜色
 
 #define MenuBarNormalBackgroudColor @"#FFFFFF"  //菜单栏未选中背景颜色
 #define MenuBarSelectedBackgroudColor @"#FF0000" //菜单栏选中背景颜色
@@ -51,10 +51,10 @@
 
 #pragma mark - 图标名称
 
-#define LeftMenuMaskArrow @"left_more"  //菜单栏左蒙版图片名称
-#define RightMenuMaskArrow @"right_more"  //菜单栏右蒙版图片名称
+#define LeftMenuMaskArrow @"arrow_L"  //菜单栏左蒙版图片名称
+#define RightMenuMaskArrow @"arrow_R"  //菜单栏右蒙版图片名称
 
-#define LeftTabMaskArrow @"left_more"   //标签栏左蒙版图片名称
-#define RightTabMaskArrow @"right_more"   //标签栏右蒙版图片名称
+#define LeftTabMaskArrow @"arrow_L"   //标签栏左蒙版图片名称
+#define RightTabMaskArrow @"arrow_R"   //标签栏右蒙版图片名称
 
 #endif /* CustomDefine_h */

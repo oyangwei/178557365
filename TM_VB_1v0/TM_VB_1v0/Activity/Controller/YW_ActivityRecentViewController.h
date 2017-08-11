@@ -1,5 +1,5 @@
 //
-//  YW_ActovotyViewController.h
+//  YW_ActivityRecentViewController.h
 //  TM_VB_1v0
 //
 //  Created by Oyw on 2017/8/9.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YW_ActovotyViewController : UIViewController
+@interface YW_ActivityRecentViewController : UIViewController
+
+-(void)setEditing:(BOOL)editing cancle:(BOOL)cancle;
 
 @end

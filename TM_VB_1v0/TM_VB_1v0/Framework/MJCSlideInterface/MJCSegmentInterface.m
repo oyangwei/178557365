@@ -15,7 +15,6 @@
 
 static NSString *const MJCItemCellID = @"itemCell";
 static CGFloat const animalTime = 0.25;
-static CGFloat const defaultTitlesViewH = 50;
 static CGFloat const defaultIndicatorH = 1.5;
 static CGFloat const defaultShowCountItem = 4;
 static CGFloat const defaultItemFontSize = 14;
@@ -254,6 +253,7 @@ static CGFloat const defaultItemFontSize = 14;
     if (scrollView == _childScrollView) {
         NSInteger itemIndex = scrollView.contentOffset.x / scrollView.jc_width;
         _selectedTag = itemIndex;
+        
         if (itemIndex != _titlesItemArr.count-1)_isScrollMax = NO;
         if (_isScrollMax == YES) return;
         if (itemIndex == _titlesItemArr.count-1)_isScrollMax = YES;
@@ -326,12 +326,11 @@ static CGFloat const defaultItemFontSize = 14;
         offsetX = maxOffsetX;
     }
     
-//    if (indexPath.row == 1) {
-//        offsetX += cell.width;
-//    }
+    if (indexPath.row == 1) {
+        offsetX += cell.width;
+    }
     
     [collectionViews setContentOffset:CGPointMake(offsetX,0) animated:YES];
-    NSLog(@"--- %@", NSStringFromCGPoint(collectionViews.contentOffset));
 }
 - (void)addChildVcView
 {
@@ -470,7 +469,6 @@ static CGFloat const defaultItemFontSize = 14;
 }
 
 -(void)setCurrentSelectedItem:(NSInteger)currentItemNum{
-    NSLog(@"%s, line = %d", __func__, __LINE__);
     dispatch_async(dispatch_get_main_queue(), ^{
         _isLoadDefaultChildVC = YES;
         [_titlesViews selectItemAtIndexPath:[NSIndexPath indexPathForItem:currentItemNum inSection:0] animated:YES scrollPosition:(UICollectionViewScrollPositionNone)];

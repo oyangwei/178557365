@@ -46,8 +46,6 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#E3E3E3"];
-//    cell.backgroundColor = [UIColor yellowColor];
-//    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.text = self.titles[indexPath.row];
     
     return cell;
@@ -60,7 +58,6 @@
         self.listItemBlock(indexPath.row);
         
     }
-    NSLog(@"%zd",indexPath.row);
 }
 
 #pragma mark 重写 preferredContentSize, 返回 popover 的大小

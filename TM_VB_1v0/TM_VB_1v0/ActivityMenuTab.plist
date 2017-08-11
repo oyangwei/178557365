@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   ActivityMenuTab.plist
-   TM_VB_1v0
-
-   Created by Oyw on 2017/8/9.
-   Copyright (c) 2017年 TeleconMobile. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-    
-    </dict>
+<dict>
+	<key>Contact</key>
+	<array>
+		<string>Contact</string>
+		<string>Edit</string>
+		<string>Delete</string>
+		<string>More</string>
+		<string>Mark</string>
+	</array>
+	<key>Recent</key>
+	<array>
+		<string>Recent</string>
+		<string>Edit</string>
+		<string>View</string>
+		<string>Mark</string>
+		<string>More</string>
+	</array>
+	<key>Life</key>
+	<array>
+		<string>Life</string>
+		<string>Edit</string>
+		<string>Delete</string>
+		<string>Mark</string>
+		<string>More</string>
+	</array>
+	<key>Search</key>
+	<array>
+		<string>Search</string>
+		<string>Edit</string>
+		<string>Delete</string>
+		<string>Mark</string>
+		<string>More</string>
+	</array>
+</dict>
 </plist>

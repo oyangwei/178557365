@@ -23,6 +23,7 @@
 #import "MJCCommonTools.h"
 #import "MJCTitlesView.h"
 #import "YW_HistoryTableView.h"
+#import "YW_MenuBarLabel.h"
 
 #define BottomTabBarHeight self.tabBar.frame.size.height
 
@@ -399,7 +400,6 @@
     __weak typeof(self) weakSelf = self;
     
     self.listViewPopVC.listItemBlock = ^(NSInteger index){
-        NSLog(@"index : %ld", (long)index);
         [weakSelf.listViewPopVC dismissViewControllerAnimated:YES completion:nil];
     };
 }

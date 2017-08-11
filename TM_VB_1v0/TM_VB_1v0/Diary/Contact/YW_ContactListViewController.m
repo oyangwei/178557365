@@ -20,6 +20,10 @@
 
 #define LabelHeight 44
 #define SplitLineHeight 1
+#define ContactNormalBackgroudColor @"#AAAAAA"
+#define ContactSelectBackgroudColor @"#EEEEEE"
+#define ContactLabelNormalTextColor @"#AAAAAA"
+#define ContactLabelSelectTextColor @"#FFFFFF"
 
 @interface YW_ContactListViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -73,7 +77,7 @@ static CGFloat hiddenHeight;
     
     CALayer *tribeLabelBorder = [CALayer layer];
     tribeLabelBorder.frame = CGRectMake(0.0f, LabelHeight - SplitLineHeight, self.view.width, SplitLineHeight);
-    tribeLabelBorder.backgroundColor = [UIColor colorWithHexString:@"#AAAAAA"].CGColor;
+    tribeLabelBorder.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"].CGColor;
     
     UITapGestureRecognizer *tapTribeGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
     tapTribeGestureRecogbizer.numberOfTapsRequired = 1;
@@ -81,15 +85,15 @@ static CGFloat hiddenHeight;
     tribeLabel.tag = 101;
     tribeLabel.userInteractionEnabled = YES;
     tribeLabel.text = @"Group";
-    tribeLabel.backgroundColor = [UIColor colorWithHexString:@"#FF6666"];
-    tribeLabel.textColor = [UIColor whiteColor];
+    tribeLabel.backgroundColor = [UIColor colorWithHexString:ContactNormalBackgroudColor];
+    tribeLabel.textColor = [UIColor colorWithHexString:ContactLabelSelectTextColor];
     tribeLabel.textAlignment = NSTextAlignmentCenter;
     [tribeLabel.layer addSublayer:tribeLabelBorder];
     [tribeLabel addGestureRecognizer:tapTribeGestureRecogbizer];
     
     CALayer *contactLabelBorder = [CALayer layer];
     contactLabelBorder.frame = CGRectMake(0.0f, LabelHeight - SplitLineHeight, self.view.width, SplitLineHeight);
-    contactLabelBorder.backgroundColor = [UIColor colorWithHexString:@"#AAAAAA"].CGColor;
+    contactLabelBorder.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"].CGColor;
     
     UITapGestureRecognizer *tapContactGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
     tapContactGestureRecogbizer.numberOfTapsRequired = 1;
@@ -97,8 +101,8 @@ static CGFloat hiddenHeight;
     contactLabel.tag = 102;
     contactLabel.userInteractionEnabled = YES;
     contactLabel.text = @"Contact";
-    contactLabel.backgroundColor = [UIColor colorWithHexString:@"#FF6666"];
-    contactLabel.textColor = [UIColor whiteColor];
+    contactLabel.backgroundColor = [UIColor colorWithHexString:ContactSelectBackgroudColor];
+    contactLabel.textColor = [UIColor colorWithHexString:ContactLabelNormalTextColor];
     contactLabel.textAlignment = NSTextAlignmentCenter;
     [contactLabel.layer addSublayer:contactLabelBorder];
     [contactLabel addGestureRecognizer:tapContactGestureRecogbizer];
@@ -436,6 +440,11 @@ static CGFloat hiddenHeight;
         default:
             break;
     }
+    
+    self.contactLabel.backgroundColor = [UIColor colorWithHexString:isTribe?ContactSelectBackgroudColor:ContactNormalBackgroudColor];
+    self.tribeLabel.backgroundColor = [UIColor colorWithHexString:isTribe?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
+    self.contactLabel.textColor = [UIColor colorWithHexString:isTribe?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
+    self.tribeLabel.textColor = [UIColor colorWithHexString:isTribe?ContactLabelSelectTextColor:ContactLabelNormalTextColor];
 }
 
 #pragma mark - 改变视图大小

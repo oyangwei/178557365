@@ -17,15 +17,18 @@
 #import "YW_HistoryTableView.h"
 #import "YW_ContactListViewController.h"
 #import "YW_UIGestureRecognizer.h"
+#import "YW_MenuBarLabel.h"
 
 #define BottomTabBarHeight self.tabBar.frame.size.height
 
 #define CurrentTitle @"<<     TM_VB_1v0     >>"
 
-@interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIPopoverPresentationControllerDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate>
+@interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIPopoverPresentationControllerDelegate,
+                    UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 {
     CGFloat keyBoardHeight; // 键盘高度
     int currentChildIndex;  // 当前标签视图序号
+    NSArray *subScollArr;
     UIControl *coverView;   // 蒙版
     NSString *pathStr;   //历史记录文件路径
     YW_HistoryTableView *historyTableView; // 历史记录
@@ -122,7 +125,7 @@
 #pragma mark - 初始化 MenuBar, SearchBar, TabBar
 -(void)setupMenuBar
 {
-    YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MenuBarHeight)];
+    YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(MaskWidth, 64, self.view.width - MaskWidth, MenuBarHeight)];
     menuBar.maxShowNum = 4;
     [menuBar setUpMenuWithTitleArr:[self.menuTabArr objectForKey:@"Chat"]];
 
@@ -134,19 +137,23 @@
     menuLeftMask.backgroundColor = [UIColor whiteColor];
     menuLeftMask.contentMode = UIViewContentModeScaleAspectFit;
     [menuLeftMask setImage:[UIImage imageNamed:LeftMenuMaskArrow]];
-    menuLeftMask.alpha = 0.6;
     
     UIImageView *menuRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, 64, MaskWidth, MenuBarHeight)];
     [menuRightMask setImage:[UIImage imageNamed:RightMenuMaskArrow]];
     menuRightMask.backgroundColor = [UIColor whiteColor];
     menuRightMask.contentMode = UIViewContentModeScaleAspectFit;
-    menuRightMask.alpha = 0.6;
     
     self.menuLeftMask = menuLeftMask;
     self.menuRightMask = menuRightMask;
     [self.view addSubview:menuLeftMask];
     [self.view addSubview:menuRightMask];
     
+    __weak typeof(self) weakSelf = self;
+    menuBar.clickItemBlock = ^(YW_MenuBarLabel *label) {
+        if ([weakSelf.menuBar.currentTab isEqualToString:@"Chat"] && [label.text isEqualToString:@"View"]) {
+            [weakSelf viewScrollStyle:label];
+        }
+    };
 }
 
 -(void)setUpSearchBar
@@ -201,16 +208,19 @@
     //标题数据数组
     MJCSegmentInterface *lala = [[MJCSegmentInterface alloc]initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     lala.delegate = self;
-    lala.isChildScollEnabled = NO;
+    lala.isChildScollEnabled = YES;
+    lala.indicatorHidden = YES;
+    lala.itemBackSelectedImage = [MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:@"#FF6666"]];
     
-    lala.titlesViewFrame = CGRectMake(0, 0, self.view.width, TabBarHeight);
-    lala.itemTextNormalColor = [UIColor redColor];
-    lala.itemTextSelectedColor = [UIColor purpleColor];
-    lala.isIndicatorFollow = YES;
+    lala.titlesViewFrame = CGRectMake( MaskWidth, 0, self.view.width - 2 * MaskWidth, TabBarHeight);
+    lala.itemTextNormalColor = [UIColor colorWithHexString:@"#FF6666"];
+    lala.itemTextSelectedColor = [UIColor whiteColor];
     lala.itemTextFontSize = 13;
+    lala.defaultShowItemCount = 2;
     [lala intoTitlesArray:self.tabTitleArr hostController:self];
     [self.view addSubview:lala];
-
+    
+    
     YW_ContactListViewController *contactListController = [[YW_ContactListViewController alloc] init];
     
     YWConversationListViewController *conversationListController = [self createYWConversationListViewController];
@@ -226,21 +236,18 @@
     
     lala.defaultItemNumber = 1;
     currentChildIndex = 1;
-    lala.defaultShowItemCount = 2;
     
     self.tabBar = lala;
     
     UIImageView *tabLeftMask = [[UIImageView alloc] initWithFrame:CGRectMake(0, lalaY, MaskWidth, TabBarHeight)];
     [tabLeftMask setImage:[UIImage imageNamed:LeftTabMaskArrow]];
     tabLeftMask.contentMode = UIViewContentModeScaleAspectFit;
-    tabLeftMask.alpha = 0.6;
     tabLeftMask.backgroundColor = [UIColor whiteColor];
     
     UIImageView *tabRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, lalaY, MaskWidth, TabBarHeight)];
     [tabRightMask setImage:[UIImage imageNamed:RightTabMaskArrow]];
     tabRightMask.contentMode = UIViewContentModeScaleAspectFit;
     tabRightMask.backgroundColor = [UIColor whiteColor];
-    tabRightMask.alpha = 0.6;
     
     self.tabLeftMask = tabLeftMask;
     self.tabRightMask = tabRightMask;
@@ -329,7 +336,7 @@
     [self.tabLeftMask setImage:tabBarOffset.x > 0?[UIImage imageNamed:LeftTabMaskArrow]:NULL];
     
 //    self.tabRightMask.backgroundColor = tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIColor redColor]:[UIColor whiteColor];
-    [self.tabRightMask setImage:tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:@"right_more"]:NULL];
+    [self.tabRightMask setImage:tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:RightTabMaskArrow]:NULL];
 }
 
 -(void)childVC_scrollView:(UIScrollView *)scrollView
@@ -350,7 +357,6 @@
     if (!_menuTabArr) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"MenuTab" ofType:@"plist"];
         _menuTabArr = [[NSDictionary alloc] initWithContentsOfFile:path];
-        NSLog(@"%@", _menuTabArr);
     }
     return _menuTabArr;
 }
@@ -466,7 +472,42 @@
     __weak typeof(self) weakSelf = self;
     
     self.listViewPopVC.listItemBlock = ^(NSInteger index){
-        NSLog(@"index : %ld", (long)index);
+        [weakSelf.listViewPopVC dismissViewControllerAnimated:YES completion:nil];
+    };
+}
+
+#pragma mark - 是否允许子页面滚动
+- (void)viewScrollStyle:(id)sender
+{
+    YW_MenuBarLabel *label = (YW_MenuBarLabel *)sender;
+
+    subScollArr = [NSArray arrayWithObject:self.tabBar.isChildScollEnabled?@"Fixed":@"Slide"];
+    CGFloat itemLineH = 1.5;
+    
+    self.listViewPopVC = [[YW_NaviBarListViewController alloc] init];
+    self.listViewPopVC.titles = subScollArr;
+    self.listViewPopVC.labelLineH = itemLineH;
+    
+    //设置 VC 弹出方式
+    self.listViewPopVC.modalPresentationStyle = UIModalPresentationPopover;
+    
+    //设置依附的按钮
+    self.listViewPopVC.popoverPresentationController.barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:label];
+    //可以指示小箭头颜色
+    self.listViewPopVC.popoverPresentationController.backgroundColor = [UIColor whiteColor];
+    
+    self.listViewPopVC.popoverPresentationController.sourceRect = self.view.frame;
+    
+    //代理
+    self.listViewPopVC.popoverPresentationController.delegate = self;
+    [self presentViewController:self.listViewPopVC animated:YES completion:nil];
+    
+    self.listViewPopVC.titles = subScollArr;
+    
+    __weak typeof(self) weakSelf = self;
+    
+    self.listViewPopVC.listItemBlock = ^(NSInteger index){
+        weakSelf.tabBar.isChildScollEnabled = !weakSelf.tabBar.isChildScollEnabled;
         [weakSelf.listViewPopVC dismissViewControllerAnimated:YES completion:nil];
     };
 }
@@ -656,4 +697,14 @@
 {
     [self removeCoverView];
 }
+
+#pragma mark - UI
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    return YES;
+}
+
 @end

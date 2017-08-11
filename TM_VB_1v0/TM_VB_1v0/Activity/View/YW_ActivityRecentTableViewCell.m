@@ -8,11 +8,37 @@
 
 #import "YW_ActivityRecentTableViewCell.h"
 
+@interface YW_ActivityRecentTableViewCell()
+
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@end
+
 @implementation YW_ActivityRecentTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    if ([UIDevice currentDevice].systemVersion.floatValue < 7.0) {
+        self.backgroundView = [[UIView alloc] init];
+        self.backgroundView.backgroundColor = [UIColor whiteColor];
+    }
+}
+
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.avatarImageView.layer.cornerRadius = CGRectGetHeight(self.avatarImageView.frame) * 0.5;
+    self.avatarImageView.clipsToBounds = YES;
+}
+
+-(void)configureWithAvatar:(UIImage *)image title:(NSString *)title
+{
+    self.avatarImageView.image = image;
+    self.titleLabel.text = title;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

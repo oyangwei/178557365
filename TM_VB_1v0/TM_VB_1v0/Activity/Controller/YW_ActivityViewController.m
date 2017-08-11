@@ -16,8 +16,10 @@
 #import "MJCCommonTools.h"
 #import "MJCTitlesView.h"
 #import "YW_HistoryTableView.h"
+#import "YW_ActivityRecentViewController.h"
 
-#define BottomTabBarHeight self.tabBar.frame.size.height
+#define BottomTabBarHeight 49
+#define EditBtnHeight 44
 
 #define CurrentTitle @"<<     Acitivity     >>"
 
@@ -59,8 +61,16 @@
 /** 标签子控制器标题 */
 @property(strong, nonatomic) NSArray *tabTitleArr;
 
+/** 编辑确认按钮 */
+@property(strong, nonatomic) UIButton *deleteBtn;
+
+/** 取消确认按钮 */
+@property(strong, nonatomic) UIButton *cancleBtn;
+
 /** 历史记录 */
 @property(strong, nonatomic) NSMutableArray *historyRecord;
+
+@property(strong, nonatomic) YW_ActivityRecentViewController *activityRecentVC;
 
 @end
 
@@ -117,7 +127,7 @@
 {
     YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MenuBarHeight)];
     menuBar.maxShowNum = 4;
-    [menuBar setUpMenuWithTitleArr:[self.menuTabArr objectForKey:@"Chat"]];
+    [menuBar setUpMenuWithTitleArr:[self.menuTabArr objectForKey:@"Recent"]];
     
     self.menuBar = menuBar;
     self.menuBar.delegate = self;
@@ -138,6 +148,13 @@
     self.menuRightMask = menuRightMask;
     [self.view addSubview:menuLeftMask];
     [self.view addSubview:menuRightMask];
+    
+    __weak typeof(self) weakSelf = self;
+    menuBar.clickItemBlock = ^(YW_MenuBarLabel *label) {
+        if ([weakSelf.menuBar.currentTab isEqualToString:@"Recent"] && [label.text isEqualToString:@"Edit"]) {
+            [weakSelf RecentEdit:label];
+        }
+    };
     
 }
 
@@ -188,22 +205,24 @@
     CGFloat lalaW = self.view.width;
     CGFloat lalaH = self.view.height - (lalaY + 49);
     
-    self.tabTitleArr = [NSArray arrayWithObjects:@"Contact", @"Chat", @"Life", @"Search", nil];
+    self.tabTitleArr = [NSArray arrayWithObjects:@"Contact", @"Recent", @"Life", @"Search", nil];
     
     //标题数据数组
     MJCSegmentInterface *lala = [[MJCSegmentInterface alloc]initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     lala.delegate = self;
+    lala.isChildScollEnabled = YES;
+    lala.indicatorHidden = YES;
+    lala.itemBackSelectedImage = [MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:@"#FF6666"]];
     
-    lala.titlesViewFrame = CGRectMake(0, 0, self.view.width, TabBarHeight);
-    lala.itemTextNormalColor = [UIColor redColor];
-    lala.itemTextSelectedColor = [UIColor purpleColor];
-    lala.isIndicatorFollow = YES;
+    lala.titlesViewFrame = CGRectMake( MaskWidth, 0, self.view.width - 2 * MaskWidth, TabBarHeight);
+    lala.itemTextNormalColor = [UIColor colorWithHexString:@"#FF6666"];
+    lala.itemTextSelectedColor = [UIColor whiteColor];
     lala.itemTextFontSize = 13;
+    lala.defaultShowItemCount = 2;
     [lala intoTitlesArray:self.tabTitleArr hostController:self];
     [self.view addSubview:lala];
     
-    UIViewController *vc1 = [[UIViewController alloc]init];
-    vc1.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
+    self.activityRecentVC = [[YW_ActivityRecentViewController alloc]init];
     
     UIViewController *vc2 = [[UIViewController alloc]init];
     vc2.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
@@ -214,7 +233,7 @@
     UIViewController *vc4 = [[UIViewController alloc]init];
     vc4.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    NSArray *vcarrr = @[vc1,vc2,vc3,vc4];
+    NSArray *vcarrr = @[vc2,self.activityRecentVC,vc3,vc4];
     [lala intoChildControllerArray:vcarrr];
     
     lala.defaultItemNumber = 1;
@@ -276,9 +295,8 @@
 -(NSDictionary *)menuTabArr
 {
     if (!_menuTabArr) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"MenuTab" ofType:@"plist"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"ActivityMenuTab" ofType:@"plist"];
         _menuTabArr = [[NSDictionary alloc] initWithContentsOfFile:path];
-        NSLog(@"%@", _menuTabArr);
     }
     return _menuTabArr;
 }
@@ -397,6 +415,82 @@
     };
 }
 
+#pragma mark - MenuBar 点击事件
+- (void)RecentEdit:(id)sender
+{
+    [self.activityRecentVC setEditing:YES cancle:YES];
+    
+    if (!self.deleteBtn || !self.cancleBtn) {
+        UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.height, self.view.width / 2, EditBtnHeight)];
+        cancleBtn.tag = 101;
+        cancleBtn.backgroundColor = [UIColor grayColor];
+        cancleBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        [cancleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [cancleBtn setTitle:@"Cancle" forState:UIControlStateNormal];
+        [cancleBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width / 2, self.view.height - BottomTabBarHeight, self.view.width / 2, EditBtnHeight)];
+        deleteBtn.tag = 102;
+        deleteBtn.backgroundColor = [UIColor redColor];
+        deleteBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [deleteBtn setTitle:@"Delete" forState:UIControlStateNormal];
+        [deleteBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.deleteBtn = deleteBtn;
+        self.cancleBtn = cancleBtn;
+        [self.view addSubview:self.deleteBtn];
+        [self.view addSubview:self.cancleBtn];
+    }
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect deleteFrame = self.deleteBtn.frame;
+        deleteFrame.origin.y = self.view.height - BottomTabBarHeight - EditBtnHeight;
+        self.deleteBtn.frame = deleteFrame;
+        
+        CGRect cancleFrame = self.cancleBtn.frame;
+        cancleFrame.origin.y = self.view.height - BottomTabBarHeight - EditBtnHeight;
+        self.cancleBtn.frame = cancleFrame;
+    }];
+}
+
+-(void)RecenttEditBtn:(UIButton *)btn
+{
+    switch (btn.tag) {
+        case 101:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect deleteFrame = self.deleteBtn.frame;
+                deleteFrame.origin.y = self.view.height;
+                self.deleteBtn.frame = deleteFrame;
+                
+                CGRect cancleFrame = self.cancleBtn.frame;
+                cancleFrame.origin.y = self.view.height;
+                self.cancleBtn.frame = cancleFrame;
+            }];
+            
+            [self.activityRecentVC setEditing:NO cancle:YES];
+            break;
+        }
+        case 102:
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect deleteFrame = self.deleteBtn.frame;
+                deleteFrame.origin.y = self.view.height;
+                self.deleteBtn.frame = deleteFrame;
+                
+                CGRect cancleFrame = self.cancleBtn.frame;
+                cancleFrame.origin.y = self.view.height;
+                self.cancleBtn.frame = cancleFrame;
+            }];
+            [self.activityRecentVC setEditing:NO cancle:NO];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
     return UIModalPresentationNone;
 }
@@ -487,12 +581,6 @@
 -(void)keyBoardWillHide:(NSNotification *)notification
 {
     [self removeCoverView];
-}
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    
 }
 
 #pragma mark - 移除监听事件
