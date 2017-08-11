@@ -75,6 +75,8 @@ typedef NS_OPTIONS(NSUInteger,MJCImageEffectStyles) {
 @property (nonatomic,assign) BOOL isChildScollEnabled;
 /** 子界面滚动是否有动画 */
 @property(nonatomic,assign) BOOL isChildScollAnimal;
+
+@property (nonatomic,weak) MJCTabItem *selectedItem;
 /** 用于缩放功能的修改字体的属性 */
 -(void)tabItemTitlezoomBigEnabled:(BOOL)zoomBigEnabled tabItemTitleMaxfont:(CGFloat)tabItemTitleMaxfont;
 

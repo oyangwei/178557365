@@ -18,6 +18,7 @@
 #import "YW_ContactListViewController.h"
 #import "YW_UIGestureRecognizer.h"
 #import "YW_MenuBarLabel.h"
+#import "YW_NavigationController.h"
 
 #define BottomTabBarHeight self.tabBar.frame.size.height
 
@@ -62,6 +63,9 @@
 @property(strong, nonatomic) UIImageView *tabRightMask;
 /** 标签子控制器标题 */
 @property(strong, nonatomic) NSArray *tabTitleArr;
+
+/** chat子控制器 */
+@property(strong, nonatomic) YWConversationListViewController *conversationListController;
 
 /** 历史记录 */
 @property(strong, nonatomic) NSMutableArray *historyRecord;
@@ -206,7 +210,7 @@
     self.tabTitleArr = [NSArray arrayWithObjects:@"Contact", @"Chat", @"Life", @"Search", nil];
     
     //标题数据数组
-    MJCSegmentInterface *lala = [[MJCSegmentInterface alloc]initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
+    MJCSegmentInterface *lala = [[MJCSegmentInterface alloc] initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     lala.delegate = self;
     lala.isChildScollEnabled = YES;
     lala.indicatorHidden = YES;
@@ -224,6 +228,10 @@
     YW_ContactListViewController *contactListController = [[YW_ContactListViewController alloc] init];
     
     YWConversationListViewController *conversationListController = [self createYWConversationListViewController];
+
+    YW_NavigationController *conversationNVC = [[YW_NavigationController alloc] initWithRootViewController:conversationListController];
+    [conversationNVC.navigationBar setHidden:YES];
+    
     
     UIViewController *vc3 = [[UIViewController alloc]init];
     vc3.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
@@ -231,7 +239,7 @@
     UIViewController *vc4 = [[UIViewController alloc]init];
     vc4.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    NSArray *vcarrr = @[contactListController,conversationListController,vc3,vc4];
+    NSArray *vcarrr = @[contactListController,conversationNVC,vc3,vc4];
     [lala intoChildControllerArray:vcarrr];
     
     lala.defaultItemNumber = 1;
@@ -284,10 +292,26 @@
 //        editActions = [NSArray arrayWithObjects: deleteActionItem, shareActionItem, nil];
 //        return editActions;
 //    }];
-    
+    __block typeof (YWConversationListViewController) *blockConversationListController = conversationListController;
+    __weak typeof (self) weakSelf = self;
     conversationListController.didSelectItemBlock = ^(YWConversation *aConversation)
     {
-        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation fromNavigationController:self.navigationController];
+        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation fromNavigationController:blockConversationListController.navigationController];
+        MJCTabItem *chatLabel = weakSelf.tabBar.selectedItem;
+        if ([chatLabel.itemText isEqualToString:@"Chat"]) {
+            UIButton *btn = [[UIButton alloc] init];
+            [btn setTitle:@"<" forState:UIControlStateNormal];
+            btn.backgroundColor = [UIColor clearColor];
+            [btn addTarget:weakSelf action:@selector(backToChatList) forControlEvents:UIControlEventTouchUpInside];
+            [chatLabel addSubview:btn];
+            
+            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(chatLabel.mas_centerY);
+                make.leading.mas_equalTo(chatLabel.mas_leading).offset(10);
+                make.width.mas_equalTo(25);
+                make.height.mas_equalTo(30);
+            }];
+        }
     };
     
     [conversationListController setConfigureCellBlock:^(UITableViewCell *cell, UITableView *tableView, NSIndexPath *indexPath, YWConversation *conversation)
@@ -297,6 +321,8 @@
         [cell addGestureRecognizer:tap];
         
     }];
+    
+    self.conversationListController = conversationListController;
     return conversationListController;
 }
 
@@ -386,7 +412,7 @@
             
             CGRect tabBarRect = self.tabBar.frame;
             tabBarRect.origin.y = 64;
-            tabBarRect.size.height = self.view.height - 64 - 49;
+            tabBarRect.size.height = self.view.height - 64;
             self.tabBar.frame = tabBarRect;
             
             CGRect tabLeftMaskRect = self.tabLeftMask.frame;
@@ -398,6 +424,8 @@
             self.tabRightMask.frame = tabRightMaskRect;
             
             [btn setSelected:YES];
+            
+            [self.tabBarController.tabBar setHidden:YES];
         }];
     }
     else
@@ -437,6 +465,8 @@
             CGRect tabBarRect = self.tabBar.frame;
             tabBarRect.size.height = self.view.height - 64 - 49 - MenuBarHeight - SearchBarHeight - 2 * BarSpace;
             self.tabBar.frame = tabBarRect;
+            
+            [self.tabBarController.tabBar setHidden:NO];
             
         }];
     }
@@ -535,6 +565,10 @@
 
 -(void)keyBoardWillShow:(NSNotification *)notification
 {
+    if (![self.searchBar isFirstResponder]) {
+        return;
+    }
+    
     if (coverView) {
         return;
     }
@@ -583,6 +617,10 @@
 
 -(void)keyBoardWillChange:(NSNotification *)notification
 {
+    if (![self.searchBar isFirstResponder]) {
+        return;
+    }
+    
     if (!coverView) {
         return;
     }
@@ -705,6 +743,20 @@
         return NO;
     }
     return YES;
+}
+
+-(void)backToChatList
+{
+    MJCTabItem *label = self.tabBar.selectedItem;
+    if ([label.itemText isEqualToString:@"Chat"]) {
+        for (id sender in self.tabBar.selectedItem.subviews) {
+            if ([sender isKindOfClass:[UIButton class]]) {
+                [sender removeFromSuperview];
+            }
+        }
+    }
+    
+    [self.conversationListController.navigationController popViewControllerAnimated:YES];
 }
 
 @end

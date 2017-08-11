@@ -51,10 +51,10 @@
 
 #pragma mark - 图标名称
 
-#define LeftMenuMaskArrow @"arrow_L"  //菜单栏左蒙版图片名称
-#define RightMenuMaskArrow @"arrow_R"  //菜单栏右蒙版图片名称
+#define LeftMenuMaskArrow @"arrow_L_64"  //菜单栏左蒙版图片名称
+#define RightMenuMaskArrow @"arrow_R_64"  //菜单栏右蒙版图片名称
 
-#define LeftTabMaskArrow @"arrow_L"   //标签栏左蒙版图片名称
-#define RightTabMaskArrow @"arrow_R"   //标签栏右蒙版图片名称
+#define LeftTabMaskArrow @"arrow_L_64"   //标签栏左蒙版图片名称
+#define RightTabMaskArrow @"arrow_R_64"   //标签栏右蒙版图片名称
 
-#endif /* CustomDefine_h */
+#endif /* CustomDefine_h */.

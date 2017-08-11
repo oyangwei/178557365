@@ -28,7 +28,6 @@ static CGFloat const defaultItemFontSize = 14;
 @property (nonatomic,weak) NSArray *childControllerArray;
 @property (nonatomic,assign) BOOL zoomBigEnabled;
 @property (nonatomic,assign) CGFloat tabItemTitleMaxfont;
-@property (nonatomic,weak) MJCTabItem *selectedItem;
 @property (nonatomic,assign) BOOL isScrollMax;
 @property (nonatomic,weak) UIViewController *childVC;
 @property (nonatomic,assign) BOOL isLoadDefaultChildVC;
@@ -46,7 +45,6 @@ static CGFloat const defaultItemFontSize = 14;
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self titlesViews];
         [self setupOtherUI];
     }
     return self;
@@ -326,9 +324,9 @@ static CGFloat const defaultItemFontSize = 14;
         offsetX = maxOffsetX;
     }
     
-    if (indexPath.row == 1) {
-        offsetX += cell.width;
-    }
+//    if (indexPath.row == 1) {
+//        offsetX += cell.width;
+//    }
     
     [collectionViews setContentOffset:CGPointMake(offsetX,0) animated:YES];
 }
@@ -407,6 +405,7 @@ static CGFloat const defaultItemFontSize = 14;
 //    dispatch_async(dispatch_get_main_queue(), ^{
     _indicator.frame = CGRectMake(0,CGRectGetMaxY(_titlesViews.frame)-defaultIndicatorH,0,defaultIndicatorH);
 //    });
+    [self titlesViews];
 }
 -(void)setTitlesViewBackColor:(UIColor *)titlesViewBackColor
 {
