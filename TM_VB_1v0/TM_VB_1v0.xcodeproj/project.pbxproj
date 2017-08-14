@@ -21,6 +21,7 @@
 		5571986A1F3C4E2000C2328A /* arrow_R.png in Resources */ = {isa = PBXBuildFile; fileRef = 557198681F3C4E2000C2328A /* arrow_R.png */; };
 		5571986D1F3D88FB00C2328A /* arrow_L_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 5571986B1F3D88F900C2328A /* arrow_L_64.png */; };
 		5571986E1F3D88FB00C2328A /* arrow_R_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 5571986C1F3D88FA00C2328A /* arrow_R_64.png */; };
+		557198731F3DA2B600C2328A /* YW_SegmentInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198721F3DA2B500C2328A /* YW_SegmentInterface.m */; };
 		5575C8AC1F283A63003F12B8 /* YW_MenuBarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */; };
 		5575C8B41F288A1F003F12B8 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B31F288A1F003F12B8 /* UIColor+Hex.m */; };
 		5575C8B71F288A2B003F12B8 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C8B61F288A2B003F12B8 /* NSString+Ext.m */; };
@@ -208,6 +209,8 @@
 		557198681F3C4E2000C2328A /* arrow_R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_R.png; sourceTree = "<group>"; };
 		5571986B1F3D88F900C2328A /* arrow_L_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_L_64.png; sourceTree = "<group>"; };
 		5571986C1F3D88FA00C2328A /* arrow_R_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_R_64.png; sourceTree = "<group>"; };
+		557198711F3DA2B500C2328A /* YW_SegmentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_SegmentInterface.h; sourceTree = "<group>"; };
+		557198721F3DA2B500C2328A /* YW_SegmentInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_SegmentInterface.m; sourceTree = "<group>"; };
 		5575C8AA1F283A63003F12B8 /* YW_MenuBarLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MenuBarLabel.h; sourceTree = "<group>"; };
 		5575C8AB1F283A63003F12B8 /* YW_MenuBarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuBarLabel.m; sourceTree = "<group>"; };
 		5575C8B21F288A1F003F12B8 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -453,6 +456,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5571986F1F3DA27000C2328A /* YW_SlideInterface */ = {
+			isa = PBXGroup;
+			children = (
+				557198701F3DA28B00C2328A /* Child */,
+				557198711F3DA2B500C2328A /* YW_SegmentInterface.h */,
+				557198721F3DA2B500C2328A /* YW_SegmentInterface.m */,
+			);
+			path = YW_SlideInterface;
+			sourceTree = "<group>";
+		};
+		557198701F3DA28B00C2328A /* Child */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Child;
+			sourceTree = "<group>";
+		};
 		5575C8C01F29B27D003F12B8 /* WXFrameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,6 +691,7 @@
 		55C5022B1F26F0280062DBE0 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				5571986F1F3DA27000C2328A /* YW_SlideInterface */,
 				5575C8C01F29B27D003F12B8 /* WXFrameworks */,
 				55C502961F2729560062DBE0 /* MJCSlideInterface */,
 				55EC6DE31F31BB9C00F5C7B2 /* YWNetworking */,
@@ -1469,6 +1490,7 @@
 				557198471F3444A700C2328A /* YW_UIGestureRecognizer.m in Sources */,
 				55C502B61F2729560062DBE0 /* UIColor+MJCClassExtension.m in Sources */,
 				55EC6DE11F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m in Sources */,
+				557198731F3DA2B600C2328A /* YW_SegmentInterface.m in Sources */,
 				55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */,
 				55C5024F1F26F93C0062DBE0 /* YW_ActivityViewController.m in Sources */,
 				55EC6DC71F31ACA300F5C7B2 /* UIImage+YWUIImage.m in Sources */,

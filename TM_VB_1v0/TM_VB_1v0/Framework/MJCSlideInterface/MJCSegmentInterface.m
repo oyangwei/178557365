@@ -45,6 +45,7 @@ static CGFloat const defaultItemFontSize = 14;
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        [self titlesViews];
         [self setupOtherUI];
     }
     return self;
@@ -405,7 +406,6 @@ static CGFloat const defaultItemFontSize = 14;
 //    dispatch_async(dispatch_get_main_queue(), ^{
     _indicator.frame = CGRectMake(0,CGRectGetMaxY(_titlesViews.frame)-defaultIndicatorH,0,defaultIndicatorH);
 //    });
-    [self titlesViews];
 }
 -(void)setTitlesViewBackColor:(UIColor *)titlesViewBackColor
 {
