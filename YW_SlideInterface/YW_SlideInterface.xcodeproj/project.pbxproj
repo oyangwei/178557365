@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5531F8B61F4814A500BCC28A /* YW_UIViewController01.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8B51F4814A500BCC28A /* YW_UIViewController01.m */; };
+		5531F8B91F4814CD00BCC28A /* YW_UIViewController02.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8B81F4814CD00BCC28A /* YW_UIViewController02.m */; };
+		5531F8BC1F4814DF00BCC28A /* YW_UIViewController03.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8BB1F4814DF00BCC28A /* YW_UIViewController03.m */; };
+		5531F8BF1F4814EA00BCC28A /* YW_UIViewController04.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8BE1F4814EA00BCC28A /* YW_UIViewController04.m */; };
+		5531F8C21F48248100BCC28A /* YW_UIViewController05.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8C11F48248100BCC28A /* YW_UIViewController05.m */; };
 		557198821F3DA45000C2328A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198811F3DA45000C2328A /* main.m */; };
 		557198851F3DA45000C2328A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198841F3DA45000C2328A /* AppDelegate.m */; };
 		557198881F3DA45000C2328A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198871F3DA45000C2328A /* ViewController.m */; };
@@ -15,6 +20,10 @@
 		557198901F3DA45000C2328A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5571988E1F3DA45000C2328A /* LaunchScreen.storyboard */; };
 		5571989B1F3DA45100C2328A /* YW_SlideInterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5571989A1F3DA45100C2328A /* YW_SlideInterfaceTests.m */; };
 		557198A61F3DA45100C2328A /* YW_SlideInterfaceUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198A51F3DA45100C2328A /* YW_SlideInterfaceUITests.m */; };
+		557198B71F3DA46800C2328A /* YW_SegmentInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198B61F3DA46800C2328A /* YW_SegmentInterface.m */; };
+		557198BA1F3DA4FC00C2328A /* YW_ChildScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198B91F3DA4FC00C2328A /* YW_ChildScrollView.m */; };
+		557198BD1F3DA58600C2328A /* YW_TitleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198BC1F3DA58600C2328A /* YW_TitleScrollView.m */; };
+		557198C01F3DA6A000C2328A /* YW_TabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198BF1F3DA6A000C2328A /* YW_TabItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5531F8B41F4814A500BCC28A /* YW_UIViewController01.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIViewController01.h; sourceTree = "<group>"; };
+		5531F8B51F4814A500BCC28A /* YW_UIViewController01.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIViewController01.m; sourceTree = "<group>"; };
+		5531F8B71F4814CD00BCC28A /* YW_UIViewController02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIViewController02.h; sourceTree = "<group>"; };
+		5531F8B81F4814CD00BCC28A /* YW_UIViewController02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIViewController02.m; sourceTree = "<group>"; };
+		5531F8BA1F4814DF00BCC28A /* YW_UIViewController03.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIViewController03.h; sourceTree = "<group>"; };
+		5531F8BB1F4814DF00BCC28A /* YW_UIViewController03.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIViewController03.m; sourceTree = "<group>"; };
+		5531F8BD1F4814E900BCC28A /* YW_UIViewController04.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIViewController04.h; sourceTree = "<group>"; };
+		5531F8BE1F4814EA00BCC28A /* YW_UIViewController04.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIViewController04.m; sourceTree = "<group>"; };
+		5531F8C01F48248100BCC28A /* YW_UIViewController05.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIViewController05.h; sourceTree = "<group>"; };
+		5531F8C11F48248100BCC28A /* YW_UIViewController05.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIViewController05.m; sourceTree = "<group>"; };
 		5571987D1F3DA45000C2328A /* YW_SlideInterface.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YW_SlideInterface.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557198811F3DA45000C2328A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		557198831F3DA45000C2328A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +70,14 @@
 		557198A11F3DA45100C2328A /* YW_SlideInterfaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YW_SlideInterfaceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		557198A51F3DA45100C2328A /* YW_SlideInterfaceUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YW_SlideInterfaceUITests.m; sourceTree = "<group>"; };
 		557198A71F3DA45100C2328A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		557198B51F3DA46800C2328A /* YW_SegmentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_SegmentInterface.h; sourceTree = "<group>"; };
+		557198B61F3DA46800C2328A /* YW_SegmentInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_SegmentInterface.m; sourceTree = "<group>"; };
+		557198B81F3DA4FC00C2328A /* YW_ChildScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ChildScrollView.h; sourceTree = "<group>"; };
+		557198B91F3DA4FC00C2328A /* YW_ChildScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_ChildScrollView.m; sourceTree = "<group>"; };
+		557198BB1F3DA58600C2328A /* YW_TitleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_TitleScrollView.h; sourceTree = "<group>"; };
+		557198BC1F3DA58600C2328A /* YW_TitleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_TitleScrollView.m; sourceTree = "<group>"; };
+		557198BE1F3DA6A000C2328A /* YW_TabItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_TabItem.h; sourceTree = "<group>"; };
+		557198BF1F3DA6A000C2328A /* YW_TabItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_TabItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +128,7 @@
 		5571987F1F3DA45000C2328A /* YW_SlideInterface */ = {
 			isa = PBXGroup;
 			children = (
+				557198B31F3DA46800C2328A /* YW_SlideInterface */,
 				557198831F3DA45000C2328A /* AppDelegate.h */,
 				557198841F3DA45000C2328A /* AppDelegate.m */,
 				557198861F3DA45000C2328A /* ViewController.h */,
@@ -138,6 +166,39 @@
 				557198A71F3DA45100C2328A /* Info.plist */,
 			);
 			path = YW_SlideInterfaceUITests;
+			sourceTree = "<group>";
+		};
+		557198B31F3DA46800C2328A /* YW_SlideInterface */ = {
+			isa = PBXGroup;
+			children = (
+				557198B41F3DA46800C2328A /* Child */,
+				557198B51F3DA46800C2328A /* YW_SegmentInterface.h */,
+				557198B61F3DA46800C2328A /* YW_SegmentInterface.m */,
+				5531F8B41F4814A500BCC28A /* YW_UIViewController01.h */,
+				5531F8B51F4814A500BCC28A /* YW_UIViewController01.m */,
+				5531F8B71F4814CD00BCC28A /* YW_UIViewController02.h */,
+				5531F8B81F4814CD00BCC28A /* YW_UIViewController02.m */,
+				5531F8BA1F4814DF00BCC28A /* YW_UIViewController03.h */,
+				5531F8BB1F4814DF00BCC28A /* YW_UIViewController03.m */,
+				5531F8BD1F4814E900BCC28A /* YW_UIViewController04.h */,
+				5531F8BE1F4814EA00BCC28A /* YW_UIViewController04.m */,
+				5531F8C01F48248100BCC28A /* YW_UIViewController05.h */,
+				5531F8C11F48248100BCC28A /* YW_UIViewController05.m */,
+			);
+			path = YW_SlideInterface;
+			sourceTree = "<group>";
+		};
+		557198B41F3DA46800C2328A /* Child */ = {
+			isa = PBXGroup;
+			children = (
+				557198B81F3DA4FC00C2328A /* YW_ChildScrollView.h */,
+				557198B91F3DA4FC00C2328A /* YW_ChildScrollView.m */,
+				557198BB1F3DA58600C2328A /* YW_TitleScrollView.h */,
+				557198BC1F3DA58600C2328A /* YW_TitleScrollView.m */,
+				557198BE1F3DA6A000C2328A /* YW_TabItem.h */,
+				557198BF1F3DA6A000C2328A /* YW_TabItem.m */,
+			);
+			path = Child;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +263,7 @@
 		557198751F3DA44F00C2328A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = YW_;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = TeleconMobile;
 				TargetAttributes = {
@@ -279,6 +341,15 @@
 				557198881F3DA45000C2328A /* ViewController.m in Sources */,
 				557198851F3DA45000C2328A /* AppDelegate.m in Sources */,
 				557198821F3DA45000C2328A /* main.m in Sources */,
+				557198BA1F3DA4FC00C2328A /* YW_ChildScrollView.m in Sources */,
+				5531F8C21F48248100BCC28A /* YW_UIViewController05.m in Sources */,
+				5531F8B91F4814CD00BCC28A /* YW_UIViewController02.m in Sources */,
+				5531F8BF1F4814EA00BCC28A /* YW_UIViewController04.m in Sources */,
+				557198BD1F3DA58600C2328A /* YW_TitleScrollView.m in Sources */,
+				557198C01F3DA6A000C2328A /* YW_TabItem.m in Sources */,
+				557198B71F3DA46800C2328A /* YW_SegmentInterface.m in Sources */,
+				5531F8B61F4814A500BCC28A /* YW_UIViewController01.m in Sources */,
+				5531F8BC1F4814DF00BCC28A /* YW_UIViewController03.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +587,7 @@
 				557198AC1F3DA45100C2328A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		557198AD1F3DA45100C2328A /* Build configuration list for PBXNativeTarget "YW_SlideInterfaceTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +596,7 @@
 				557198AF1F3DA45100C2328A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		557198B01F3DA45100C2328A /* Build configuration list for PBXNativeTarget "YW_SlideInterfaceUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +605,7 @@
 				557198B21F3DA45100C2328A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

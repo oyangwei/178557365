@@ -10,4 +10,15 @@
 
 @interface YW_TabItem : UIView
 
+@property (nonatomic,weak) UILabel *titlesLable;
+
+/** item文字 */
+@property(strong, nonatomic) NSString *itemText;
+
+/** item文字颜色 */
+@property(strong, nonatomic) UIColor *itemTitleNormalColor;
+
+/** item选中文字颜色 */
+@property(strong, nonatomic) UIColor *itemTitleSelectedColor;
+
 @end
