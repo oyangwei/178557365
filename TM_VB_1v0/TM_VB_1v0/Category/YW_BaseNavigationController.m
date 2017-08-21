@@ -1,12 +1,12 @@
 //
-//  YW_NavigationController.m
+//  YW_BaseNavigationController.m
 //  Teleconmobile
 //
 //  Created by YangWei on 17/6/26.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_NavigationController.h"
+#import "YW_BaseNavigationController.h"
 
 @interface YW_BaseNavigationController () <UINavigationControllerDelegate>
 
@@ -14,7 +14,7 @@
 
 @end
 
-@implementation YW_NavigationController
+@implementation YW_BaseNavigationController
 
 +(void)initialize
 {

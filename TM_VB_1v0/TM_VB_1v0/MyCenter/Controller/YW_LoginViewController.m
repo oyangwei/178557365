@@ -7,7 +7,8 @@
 //
 
 #import "YW_LoginViewController.h"
-#import "YW_RootTabBarController.h"
+#import "YW_NavigationController.h"
+#import "YW_DiaryViewController.h"
 #import "SPUtil.h"
 #import "SPKitExample.h"
 
@@ -155,20 +156,14 @@
             NSLog(@"%@", aError);
         }
     }];
-    
 }
 
 -(void)_pushMainControllerAnimated:(BOOL)aAnimated
 {
-    if ([self.view.window.rootViewController isKindOfClass:[YW_RootTabBarController class]]){
-        //已经进入主界面
-        return;
-    }
-    
-    YW_RootTabBarController *homeTBVC = [[YW_RootTabBarController alloc] init];
-    homeTBVC.view.frame = self.view.window.bounds;
+    YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
+    YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
     [UIView transitionWithView:self.view.window duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.view.window.rootViewController = homeTBVC;
+        self.view.window.rootViewController = nVC;
     } completion:nil];
 }
 

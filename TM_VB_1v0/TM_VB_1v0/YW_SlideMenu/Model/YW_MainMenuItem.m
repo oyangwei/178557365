@@ -10,4 +10,13 @@
 
 @implementation YW_MainMenuItem
 
++(instancetype)itemWithIcon:(NSString *)icon title:(NSString *)title destVcClass:(Class)destClass
+{
+    YW_MainMenuItem *item = [[self alloc] init];
+    item.icon = icon;
+    item.title = title;
+    item.destVcClass = destClass;
+    return item;
+}
+
 @end

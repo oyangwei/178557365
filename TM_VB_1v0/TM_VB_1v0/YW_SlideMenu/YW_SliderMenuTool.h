@@ -7,7 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface YW_SliderMenuTool : NSObject
+
+/**
+ * 根据底部控制器展示
+ */
++ (void)showMenuWithRootViewController:(UIViewController *)rootViewController withToViewController:(Class)class;
+
++(void)showFunctionMenuWithRootViewController:(UIViewController *)rootViewController withToViewController:(Class)class;
+/**
+ * 隐藏菜单栏
+ */
++ (void)hide;
 
 @end

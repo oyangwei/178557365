@@ -16,6 +16,7 @@
     if (self) {
         self.font = [UIFont systemFontOfSize:15];
         self.textAlignment = NSTextAlignmentCenter;
+        self.textColor = [UIColor colorWithHexString:MenuBarTextNormalColor];
         self.backgroundColor = [UIColor clearColor];
         self.userInteractionEnabled = YES;
     }

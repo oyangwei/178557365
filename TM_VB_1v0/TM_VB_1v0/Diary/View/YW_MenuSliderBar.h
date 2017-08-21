@@ -19,7 +19,7 @@ typedef void(^ClickItemBlock)(YW_MenuBarLabel *label);
 /** 当前标签 */
 @property(strong, nonatomic) NSString *currentTab;
 
--(void)setUpMenuWithTitleArr:(NSArray *)titleArr;
+-(void)setUpMenuWithTitleArr:(NSMutableArray *)titleArr;
 
 - (void)updateMenuWithTitleArr:(NSMutableArray *)titleArr;
 

@@ -1,12 +1,12 @@
 //
-//  YW_SubMenuViewController.m
+//  YW_SubControllerMenuViewController.m
 //  TM_VB_1v0
 //
 //  Created by Oyw on 2017/8/16.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_SubMenuViewController.h"
+#import "YW_SubControllerMenuViewController.h"
 #import "YW_MainMenuItem.h"
 #import "YW_TableViewCell.h"
 #import "YW_AnimateMemuViewController.h"
@@ -18,7 +18,7 @@
 #import "YW_MeViewController.h"
 #import "YW_SliderMenuTool.h"
 
-@interface YW_SubMenuViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface YW_SubControllerMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 
 /** TableView */
 @property(strong, nonatomic) UITableView *tableView;
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation YW_SubMenuViewController
+@implementation YW_SubControllerMenuViewController
 
 -(NSArray *)data
 {
@@ -133,16 +133,8 @@
     YW_AnimateMemuViewController *animateVC = (YW_AnimateMemuViewController *)self.parentViewController;
     [animateVC closeMenu];
     
-    UIViewController *vc = [[item.destVcClass alloc] init];
-    
-    YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:vc];
-
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        window.rootViewController = nVC;
-        [YW_SliderMenuTool hide];
-    });
+    YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animateVC.rootViewController;
+    [diaryVC setCurrentSelectedViewController:indexPath.row];
 }
 
 @end

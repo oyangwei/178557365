@@ -1,5 +1,5 @@
 //
-//  YW_SubMenuViewController.h
+//  YW_SubControllerMenuViewController.h
 //  TM_VB_1v0
 //
 //  Created by Oyw on 2017/8/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YW_SubMenuViewController : UIViewController
+@interface YW_SubControllerMenuViewController : UIViewController
 
 @end

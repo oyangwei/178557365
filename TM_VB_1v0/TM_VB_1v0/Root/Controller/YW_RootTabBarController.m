@@ -37,7 +37,6 @@
     vc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImage];
     
     YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:vc];
-    [nVC setupNavigationBar];
     [self addChildViewController:nVC];
 }
 

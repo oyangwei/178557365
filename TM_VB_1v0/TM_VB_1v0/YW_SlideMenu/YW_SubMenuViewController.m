@@ -1,12 +1,12 @@
 //
-//  YW_MainMenuViewController.m
+//  YW_SubMenuViewController.m
 //  TM_VB_1v0
 //
 //  Created by Oyw on 2017/8/16.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_MainMenuViewController.h"
+#import "YW_SubMenuViewController.h"
 #import "YW_MainMenuItem.h"
 #import "YW_TableViewCell.h"
 #import "YW_AnimateMemuViewController.h"
@@ -18,7 +18,7 @@
 #import "YW_MeViewController.h"
 #import "YW_SliderMenuTool.h"
 
-@interface YW_MainMenuViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface YW_SubMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 
 /** TableView */
 @property(strong, nonatomic) UITableView *tableView;
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation YW_MainMenuViewController
+@implementation YW_SubMenuViewController
 
 -(NSArray *)data
 {
@@ -76,7 +76,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = @"TM_Menu";
+    titleLabel.text = @"Diary_Menu";
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:20];
     [self.headerView addSubview:titleLabel];
@@ -90,17 +90,15 @@
 
 -(void)setupData
 {
-    YW_MainMenuItem *diary = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:@"Diary" destVcClass:[YW_DiaryViewController class]];
+    YW_MainMenuItem *Contact = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:@"Contact" destVcClass:[YW_DiaryViewController class]];
     
-    YW_MainMenuItem *activity = [YW_MainMenuItem itemWithIcon:@"menu_promo" title:@"activity" destVcClass:[YW_ActivityViewController class]];
+    YW_MainMenuItem *Chat = [YW_MainMenuItem itemWithIcon:@"menu_promo" title:@"Chat" destVcClass:[YW_ActivityViewController class]];
     
-    YW_MainMenuItem *discovery = [YW_MainMenuItem itemWithIcon:@"menu_trips" title:@"discovery" destVcClass:[YW_ShopViewController class]];
+    YW_MainMenuItem *Life = [YW_MainMenuItem itemWithIcon:@"menu_trips" title:@"Life" destVcClass:[YW_ShopViewController class]];
     
-    YW_MainMenuItem *shop = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"shop" destVcClass:[YW_ShopViewController class]];
-    
-    YW_MainMenuItem *me = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"me" destVcClass:[YW_MeViewController class]];
-    
-    self.data = @[diary, activity, discovery, shop, me];
+    YW_MainMenuItem *Search = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Search" destVcClass:[YW_ShopViewController class]];
+
+    self.data = @[Contact, Chat, Life, Search];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

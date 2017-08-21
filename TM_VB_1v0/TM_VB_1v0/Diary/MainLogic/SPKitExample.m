@@ -628,6 +628,19 @@ UIAlertViewDelegate>
     [conversationNavigationController setViewControllers:viewControllers animated:YES];
 }
 
+// 打开某个会话
+- (YWConversationViewController *)openConversationViewControllerWithConversation:(YWConversation *)aConversation
+{
+    if ([aConversation isKindOfClass:[YWP2PConversation class]]) {
+        aConversation = [YWP2PConversation fetchConversationByPerson:[(YWP2PConversation *)aConversation person] creatIfNotExist:YES baseContext:self.ywIMKit.IMCore];
+    } else if ([aConversation isKindOfClass:[YWTribeConversation class]])
+    {
+        aConversation = [YWTribeConversation fetchConversationByTribe:[(YWTribeConversation *)aConversation tribe] createIfNotExist:YES baseContext:self.ywIMKit.IMCore];
+    }
+    YWConversationViewController *conversationViewController = [self exampleMakeConversationViewControllerWithConversation:aConversation];
+    return conversationViewController;
+}
+
 /**
  *  打开单聊页面
  */

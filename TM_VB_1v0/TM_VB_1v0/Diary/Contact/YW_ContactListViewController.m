@@ -53,21 +53,17 @@
 @end
 
 static CGFloat defaultHeight;
-static CGFloat hiddenHeight;
 
 @implementation YW_ContactListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    defaultHeight = [UIScreen mainScreen].bounds.size.height - 64 - MenuBarHeight - SearchBarHeight - TabBarHeight - 2 * BarSpace - 49 - LabelHeight * 2;
-    hiddenHeight =  ([UIScreen mainScreen].bounds.size.height - 64 - 49 - TabBarHeight - 2 * LabelHeight);
+    defaultHeight = ScreenHeight - 64 - TabBarHeight - SearchBarHeight - 2 * LabelHeight;
     
     [self setUpView];
     
     [self reloadTribeData];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFrame:) name:@"ViewFrameChange" object:nil];
 }
 
 -(void)setUpView
@@ -396,7 +392,7 @@ static CGFloat hiddenHeight;
             {
                 [UIView animateWithDuration:0.2 animations:^{
                     CGRect tribeTableFrame = self.tribeTableView.frame;
-                    tribeTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
+                    tribeTableFrame.size.height = defaultHeight;
                     self.tribeTableView.frame = tribeTableFrame;
                 } completion:^(BOOL finished) {
                     CGRect contactTableFrame = self.contactTableView.frame;
@@ -404,7 +400,7 @@ static CGFloat hiddenHeight;
                     self.contactTableView.frame = contactTableFrame;
                     
                     CGRect contactLabelFrame = self.contactLabel.frame;
-                    contactLabelFrame.origin.y = isHidden ? (hiddenHeight + LabelHeight) : (defaultHeight + LabelHeight);
+                    contactLabelFrame.origin.y = defaultHeight + LabelHeight;
                     self.contactLabel.frame = contactLabelFrame;
                 }];
                 isTribe = !isTribe;
@@ -429,7 +425,7 @@ static CGFloat hiddenHeight;
                 } completion:^(BOOL finished) {
                     CGRect contactTableFrame = self.contactTableView.frame;
                     contactTableFrame.origin.y = 2 * LabelHeight;
-                    contactTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
+                    contactTableFrame.size.height = defaultHeight;
                     self.contactTableView.frame = contactTableFrame;
                     
                 }];
@@ -445,39 +441,6 @@ static CGFloat hiddenHeight;
     self.tribeLabel.backgroundColor = [UIColor colorWithHexString:isTribe?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
     self.contactLabel.textColor = [UIColor colorWithHexString:isTribe?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
     self.tribeLabel.textColor = [UIColor colorWithHexString:isTribe?ContactLabelSelectTextColor:ContactLabelNormalTextColor];
-}
-
-#pragma mark - 改变视图大小
--(void)changeFrame:(NSNotification *)notification
-{
-    isHidden = [[[notification userInfo] objectForKey:@"isHidden"] boolValue];
-    
-    if (isTribe) {
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect tribeTableFrame = self.tribeTableView.frame;
-            tribeTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
-            self.tribeTableView.frame = tribeTableFrame;
-            
-            CGRect contactLabelFrame = self.contactLabel.frame;
-            contactLabelFrame.origin.y = isHidden ? (hiddenHeight + LabelHeight) : (defaultHeight + LabelHeight);
-            self.contactLabel.frame = contactLabelFrame;
-        }];
-    }
-    else
-    {
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            CGRect contactLabelFrame = self.contactLabel.frame;
-            contactLabelFrame.origin.y = LabelHeight;
-            self.contactLabel.frame = contactLabelFrame;
-            
-            CGRect contactTableFrame = self.contactTableView.frame;
-            contactTableFrame.size.height = isHidden ? hiddenHeight : defaultHeight;
-            self.contactTableView.frame = contactTableFrame;
-            
-        }];
-    }
-    
 }
 
 @end

@@ -1,18 +1,19 @@
 //
-//  YW_MemuViewController.m
+//  YW_AnimateMemuViewController.m
 //  TM_VB_1v0
 //
 //  Created by Oyw on 2017/8/16.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_MemuViewController.h"
+#import "YW_AnimateMemuViewController.h"
 #import "YW_SliderMenuTool.h"
 #import "YW_ActivityViewController.h"
+#import "YW_MainMenuViewController.h"
 
 static CGFloat const animationTime = 0.4;
 
-@interface YW_MemuViewController ()
+@interface YW_AnimateMemuViewController ()
 
 /** Backgroud View */
 @property(strong, nonatomic) UIView *bgView;
@@ -25,7 +26,7 @@ static CGFloat const animationTime = 0.4;
 
 @end
 
-@implementation YW_MemuViewController
+@implementation YW_AnimateMemuViewController
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -37,7 +38,7 @@ static CGFloat const animationTime = 0.4;
         self.hideStatusBar = YES;
         [UIView animateWithDuration:animationTime animations:^{
             [self setNeedsStatusBarAppearanceUpdate];
-            self.rootViewController.navigationController.navigationBar.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
+            self.rootViewController.navigationController.navigationBar.frame = CGRectMake(0, 0, ScreenWitdh, 64);
         }];
         
         [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -77,19 +78,29 @@ static CGFloat const animationTime = 0.4;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeMenu)];
     [bgView addGestureRecognizer:tapGestureRecognizer];
     
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithGesture:)];
-    [self.view addGestureRecognizer:panGestureRecognizer];
+    UIPanGestureRecognizer *leftPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithLeftGesture:)];
+    
+    UIPanGestureRecognizer *rightPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithRightGesture:)];
     
     // 添加控制器
-    UIViewController *menuVC = [[UIViewController alloc] init];
-    menuVC.view.backgroundColor = [UIColor redColor];
-    CGFloat width = [UIScreen mainScreen].bounds.size.width - 50;
-    if ([UIScreen mainScreen].bounds.size.width > 375) {
+    if (self.destClass == nil) return;
+    
+    UIViewController *menuVC = [[self.destClass alloc] init];
+    CGFloat width = ScreenWitdh - 50;
+    if (ScreenWitdh > 375) {
         width -= 50;
-    } else if ([UIScreen mainScreen].bounds.size.width > 320) {
+    } else if (ScreenWitdh > 320) {
         width = width - 25;
     }
-    menuVC.view.frame = CGRectMake(-width, 0, width, [UIScreen mainScreen].bounds.size.height);
+    
+    if (self.showMenuStyle == YW_ShowMenuFromLeft) {
+        [self.view addGestureRecognizer:leftPanGestureRecognizer];
+        menuVC.view.frame = CGRectMake( -width, 0, width, ScreenHeight);
+    }else{
+        [self.view addGestureRecognizer:rightPanGestureRecognizer];
+        menuVC.view.frame = CGRectMake( ScreenWitdh, 0, width, ScreenHeight);
+    }
+    
     [self.view addSubview:menuVC.view];
     [self addChildViewController:menuVC];
     self.menuVC = menuVC;
@@ -98,39 +109,85 @@ static CGFloat const animationTime = 0.4;
 -(void)showMenu
 {
     self.view.userInteractionEnabled = NO;
-    
-    //根据当前x，计算显示时间
-    CGFloat time = fabs(self.menuVC.view.frame.origin.x / self.menuVC.view.frame.size.width) * animationTime;
-    [UIView animateWithDuration:time animations:^{
-        self.menuVC.view.frame= CGRectMake(0, 0, self.menuVC.view.frame.size.width, [UIScreen mainScreen].bounds.size.height);
-        self.bgView.alpha = 0.5;
-    }completion:^(BOOL finished) {
-        self.view.userInteractionEnabled = YES;
-    }];
+    switch (self.showMenuStyle) {
+        case YW_ShowMenuFromLeft:
+        {
+            //根据当前x，计算显示时间
+            CGFloat time = fabs(self.menuVC.view.frame.origin.x / self.menuVC.view.frame.size.width) * animationTime;
+            [UIView animateWithDuration:time animations:^{
+                self.menuVC.view.frame= CGRectMake(0, 0, self.menuVC.view.frame.size.width, ScreenHeight);
+                self.bgView.alpha = 0.5;
+            }completion:^(BOOL finished) {
+                self.view.userInteractionEnabled = YES;
+            }];
+            break;
+        }
+        case YW_ShowMenuFromRight:
+        {
+            //根据当前x，计算显示时间
+            CGFloat time = fabs(1 - (ScreenWitdh - self.menuVC.view.frame.origin.x) / self.menuVC.view.frame.size.width) * animationTime;
+            [UIView animateWithDuration:time animations:^{
+                self.menuVC.view.frame= CGRectMake(ScreenWitdh - self.menuVC.view.frame.size.width, 0, self.menuVC.view.frame.size.width, ScreenHeight);
+                self.bgView.alpha = 0.5;
+            }completion:^(BOOL finished) {
+                self.view.userInteractionEnabled = YES;
+            }];
+            break;
+        }
+        default:
+            self.view.userInteractionEnabled = YES;
+            break;
+    }
 }
 
 -(void)closeMenu
 {
     self.view.userInteractionEnabled = YES;
     
-    //根据当前x，计算隐藏时间
-    CGFloat time = (1 - fabs(self.menuVC.view.frame.origin.x / self.menuVC.view.frame.size.width)) * animationTime;
-    [UIView animateWithDuration:time animations:^{
-        self.menuVC.view.frame = CGRectMake(-self.menuVC.view.frame.size.width, 0, self.menuVC.view.frame.size.width, [UIScreen mainScreen].bounds.size.height);
-        self.bgView.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        self.hideStatusBar = NO;
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
-            [UIView animateWithDuration:animationTime animations:^{
-                [self setNeedsFocusUpdate];
+    switch (self.showMenuStyle) {
+        case YW_ShowMenuFromLeft:
+        {
+            //根据当前x，计算隐藏时间
+            CGFloat time = (1 - fabs(self.menuVC.view.frame.origin.x / self.menuVC.view.frame.size.width)) * animationTime;
+            [UIView animateWithDuration:time animations:^{
+                self.menuVC.view.frame = CGRectMake(-self.menuVC.view.frame.size.width, 0, self.menuVC.view.frame.size.width, ScreenHeight);
+                self.bgView.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                self.hideStatusBar = NO;
+                if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+                    [UIView animateWithDuration:animationTime animations:^{
+                        [self setNeedsFocusUpdate];
+                    }];
+                }
+                
+                [YW_SliderMenuTool hide];
             }];
+            break;
         }
-        
-        [YW_SliderMenuTool hide];
-    }];
+        case YW_ShowMenuFromRight:
+        {
+            //根据当前x，计算隐藏时间
+            CGFloat time = fabs((ScreenWitdh - self.menuVC.view.x) / self.menuVC.view.frame.size.width) * animationTime;
+            [UIView animateWithDuration:time animations:^{
+                self.menuVC.view.frame = CGRectMake(ScreenWitdh, 0, self.menuVC.view.frame.size.width, ScreenHeight);
+                self.bgView.alpha = 0.0;
+            } completion:^(BOOL finished) {
+                self.hideStatusBar = NO;
+                if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+                    [UIView animateWithDuration:animationTime animations:^{
+                        [self setNeedsFocusUpdate];
+                    }];
+                }
+                [YW_SliderMenuTool hide];
+            }];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
--(void)moveViewWithGesture:(UIPanGestureRecognizer *)panGestureRecognizer
+-(void)moveViewWithLeftGesture:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     static CGFloat startX;
     static CGFloat endX;
@@ -167,7 +224,45 @@ static CGFloat const animationTime = 0.4;
     // 手势结束
     if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
         // 结束为止超时屏幕一半
-        if (self.menuVC.view.frame.origin.x > - self.menuVC.view.frame.size.width + [UIScreen mainScreen].bounds.size.width / 2) {
+        if (self.menuVC.view.frame.origin.x > - self.menuVC.view.frame.size.width + ScreenWitdh / 2) {
+            [self showMenu];
+        } else {
+            [self closeMenu];
+        }
+    }
+}
+
+- (void)moveViewWithRightGesture:(UIPanGestureRecognizer *)panGestureRecognizer
+{
+    static CGFloat startX;
+    static CGFloat endX;
+    CGPoint touchPoint = [panGestureRecognizer locationInView:[[UIApplication sharedApplication] keyWindow]];
+    if (panGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        startX = touchPoint.x;
+        endX = touchPoint.x;
+    }
+    
+    if (panGestureRecognizer.state == UIGestureRecognizerStateChanged)
+    {
+        CGFloat menuVC_X = touchPoint.x;
+        //如果控制器的x大于屏幕宽度，则直接返回
+        if (menuVC_X >= ScreenWitdh) {
+            menuVC_X = ScreenWitdh;
+        }
+        if (menuVC_X <= ScreenWitdh - self.menuVC.view.frame.size.width) {
+            menuVC_X = ScreenWitdh - self.menuVC.view.frame.size.width;
+        }
+        
+        //计算bgView的透明度
+        self.bgView.alpha =  ((ScreenWitdh - menuVC_X) / self.menuVC.view.frame.size.width) * 0.5;
+        
+        [self.menuVC.view setFrame:CGRectMake(menuVC_X, 0, self.menuVC.view.frame.size.width, self.menuVC.view.frame.size.height)];
+    }
+    
+    // 手势结束
+    if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        // 结束为止超时屏幕一半
+        if (self.menuVC.view.frame.origin.x < ScreenWitdh / 2) {
             [self showMenu];
         } else {
             [self closeMenu];

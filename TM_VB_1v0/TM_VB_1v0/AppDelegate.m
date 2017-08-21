@@ -25,7 +25,6 @@
     YW_RootViewController *rootVC = [[YW_RootViewController alloc] init];
     
     YW_NavigationController *navigationVC = [[YW_NavigationController alloc] initWithRootViewController:rootVC];
-    [navigationVC setupNavigationBar];
     self.window.rootViewController = navigationVC;
     [self.window makeKeyAndVisible];
     

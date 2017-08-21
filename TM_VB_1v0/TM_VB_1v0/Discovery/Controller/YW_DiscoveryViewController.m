@@ -95,10 +95,8 @@
 {
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 22)];
     [leftBtn setSelected:NO];
-    [leftBtn setImage:[UIImage imageNamed:@"fold"] forState:UIControlStateNormal];
     [leftBtn setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateSelected];
-    //    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 0)];
-    [leftBtn addTarget:self action:@selector(showLeftList:) forControlEvents:UIControlEventTouchUpInside];
+    [leftBtn addTarget:self action:@selector(showLeftSlideMenu) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     [rightBtn setImage:[UIImage imageNamed:@"rightList"] forState:UIControlStateNormal];
@@ -284,83 +282,10 @@
 }
 
 #pragma mark - NavigationBar 左右按钮事件
-- (void)showLeftList:(UIButton *)btn
+- (void)showLeftSlideMenu
 {
-    [self removeCoverView];
     
-    if (!btn.isSelected) {
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect menuBarRect = self.menuBar.frame;
-            menuBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-            self.menuBar.frame = menuBarRect;
-            
-            CGRect menuLeftMaskRect = self.menuLeftMask.frame;
-            menuLeftMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-            self.menuLeftMask.frame = menuLeftMaskRect;
-            
-            CGRect menuRightMaskRect = self.menuRightMask.frame;
-            menuRightMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-            self.menuRightMask.frame = menuRightMaskRect;
-            
-            CGRect searchBarRect = self.searchBar.frame;
-            searchBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace;
-            self.searchBar.frame = searchBarRect;
-            
-            CGRect tabBarRect = self.tabBar.frame;
-            tabBarRect.origin.y = 64;
-            tabBarRect.size.height = self.view.height - 64 - 49;
-            self.tabBar.frame = tabBarRect;
-            
-            CGRect tabLeftMaskRect = self.tabLeftMask.frame;
-            tabLeftMaskRect.origin.y = 64;
-            self.tabLeftMask.frame = tabLeftMaskRect;
-            
-            CGRect tabRightMaskRect = self.tabRightMask.frame;
-            tabRightMaskRect.origin.y = 64;
-            self.tabRightMask.frame = tabRightMaskRect;
-            
-            [btn setSelected:YES];
-        }];
-    }
-    else
-    {
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            CGRect menuBarRect = self.menuBar.frame;
-            menuBarRect.origin.y = 64;
-            self.menuBar.frame = menuBarRect;
-            
-            CGRect menuLeftMaskRect = self.menuLeftMask.frame;
-            menuLeftMaskRect.origin.y = 64;
-            self.menuLeftMask.frame = menuLeftMaskRect;
-            
-            CGRect menuRightMaskRect = self.menuRightMask.frame;
-            menuRightMaskRect.origin.y = 64;
-            self.menuRightMask.frame = menuRightMaskRect;
-            
-            CGRect searchBarRect = self.searchBar.frame;
-            searchBarRect.origin.y = 64 + MenuBarHeight + BarSpace;
-            self.searchBar.frame = searchBarRect;
-            
-            CGRect tabBarRect = self.tabBar.frame;
-            tabBarRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-            self.tabBar.frame = tabBarRect;
-            
-            CGRect tabLeftMaskRect = self.tabLeftMask.frame;
-            tabLeftMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-            self.tabLeftMask.frame = tabLeftMaskRect;
-            
-            CGRect tabRightMaskRect = self.tabRightMask.frame;
-            tabRightMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-            self.tabRightMask.frame = tabRightMaskRect;
-            
-            [btn setSelected:NO];
-        } completion:^(BOOL finished) {
-            CGRect tabBarRect = self.tabBar.frame;
-            tabBarRect.size.height = self.view.height - 64 - 49 - MenuBarHeight - SearchBarHeight - 2 * BarSpace;
-            self.tabBar.frame = tabBarRect;
-        }];
-    }
+    
 }
 
 - (void)showRightList

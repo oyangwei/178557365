@@ -149,6 +149,7 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
 /**
  *  打开某个会话
  */
+- (YWConversationViewController *)openConversationViewControllerWithConversation:(YWConversation *)aConversation;
 - (void)exampleOpenConversationViewControllerWithConversation:(YWConversation *)aConversation fromNavigationController:(UINavigationController *)aNavigationController;
 
 /**

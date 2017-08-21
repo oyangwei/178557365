@@ -371,39 +371,6 @@
     }
 }
 
-- (void)showRightList
-{
-    
-    [self removeCoverView];
-    
-    NSMutableArray *rightItems = [NSMutableArray arrayWithObjects:@"Contacst", @"Things", nil];
-    CGFloat itemLineH = 1.5;
-    
-    self.listViewPopVC = [[YW_NaviBarListViewController alloc] init];
-    self.listViewPopVC.titles = rightItems;
-    self.listViewPopVC.labelLineH = itemLineH;
-    
-    //设置 VC 弹出方式
-    self.listViewPopVC.modalPresentationStyle = UIModalPresentationPopover;
-    
-    //设置依附的按钮
-    self.listViewPopVC.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
-    //可以指示小箭头颜色
-    self.listViewPopVC.popoverPresentationController.backgroundColor = [UIColor whiteColor];
-    
-    //代理
-    self.listViewPopVC.popoverPresentationController.delegate = self;
-    [self presentViewController:self.listViewPopVC animated:YES completion:nil];
-    
-    self.listViewPopVC.titles = rightItems;
-    
-    __weak typeof(self) weakSelf = self;
-    
-    self.listViewPopVC.listItemBlock = ^(NSInteger index){
-        [weakSelf.listViewPopVC dismissViewControllerAnimated:YES completion:nil];
-    };
-}
-
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
     return UIModalPresentationNone;
 }

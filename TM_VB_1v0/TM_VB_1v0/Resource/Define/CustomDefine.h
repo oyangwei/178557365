@@ -21,22 +21,22 @@
 #define NavigationBarHeight 44  //导航栏高度
 #define UITabBarHeight 49       //底部栏高度
 #define MenuBarHeight 44        //菜单栏高度
-#define SearchBarHeight 30      //搜索栏高度
+#define SearchBarHeight 44      //搜索栏高度
 #define TabBarHeight 44         //标签栏高度
 #define BarSpace 5              //各栏间隔
 #define MaskWidth 20            //蒙版宽度
 
 #pragma mark - 颜色
 
-#define ThemeColor @""
+#define ThemeColor @"#418ACE"
 
 #define CustomBorderColor @"#D2D2D2"
 
-#define MenuBarTextNormalColor @"#333333"  //菜单栏常规字体颜色
+#define MenuBarTextNormalColor @"#FFFFFF"  //菜单栏常规字体颜色
 #define MenuBarTextSelectedColor @"#FF0000" //菜单栏选中颜色
 
-#define MenuBarNormalBackgroudColor @"#FFFFFF"  //菜单栏未选中背景颜色
-#define MenuBarSelectedBackgroudColor @"#FF0000" //菜单栏选中背景颜色
+#define MenuBarNormalBackgroudColor @"#418ACE"  //菜单栏未选中背景颜色
+#define MenuBarSelectedBackgroudColor @"#FFFFFF" //菜单栏选中背景颜色
 
 #define SearBarNormalBackgourdColor @"FFFFFF"  //搜索栏常规背景色
 #define SearBarSelectedBackgroudColor @"E3E3E3" //搜索栏选中背景色
@@ -45,7 +45,7 @@
 #define TabBarTextSelectedColor @"#FFFFFF" //标签栏选中字体颜色
 
 #define TabBarNormalBackgroudColor @"#FFFFFF"  //标签栏未选中背景颜色
-#define TabBarSelectedBackgroudColor @"#FF0000" //标签栏选中背景颜色
+#define TabBarSelectedBackgroudColor @"#418ACE" //标签栏选中背景颜色
 
 #define TabBarUnderLineColor @"#333333"  //标签栏选中下划线颜色
 
@@ -57,4 +57,13 @@
 #define LeftTabMaskArrow @"arrow_L_64"   //标签栏左蒙版图片名称
 #define RightTabMaskArrow @"arrow_R_64"   //标签栏右蒙版图片名称
 
-#endif /* CustomDefine_h */.
+#define LeftArrow @"arrow_L_64"  //菜单栏左蒙版图片名称
+#define RightArrow @"arrow_R_64"  //菜单栏右蒙版图片名称
+
+typedef NS_ENUM(NSInteger, YW_ShowMenuStyles){
+    YW_ShowMenuFromLeft = 1 << 1,
+    YW_ShowMenuFromRight = 1 << 3,
+};
+
+
+#endif /* CustomDefine_h */

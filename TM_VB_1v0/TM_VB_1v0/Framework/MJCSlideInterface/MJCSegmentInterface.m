@@ -15,6 +15,7 @@
 
 static NSString *const MJCItemCellID = @"itemCell";
 static CGFloat const animalTime = 0.25;
+static CGFloat const defaultTitlesViewH = 44;
 static CGFloat const defaultIndicatorH = 1.5;
 static CGFloat const defaultShowCountItem = 4;
 static CGFloat const defaultItemFontSize = 14;
@@ -68,7 +69,7 @@ static CGFloat const defaultItemFontSize = 14;
         layout.hlitemMaxLeftMargin = 0;
         layout.hlitemMaxRightMargin = 0;
         layout.hlitemLineMargin = 0;        
-        MJCTitlesView *titlesViews = [MJCTitlesView showTitlesViewFrame:_titlesViewFrame viewLayout:layout];
+        MJCTitlesView *titlesViews = [MJCTitlesView showTitlesViewFrame:CGRectMake(0,0,self.frame.size.width,defaultTitlesViewH) viewLayout:layout];
         titlesViews.delegate = self;
         titlesViews.dataSource = self;
         [self addSubview:titlesViews];
@@ -264,6 +265,7 @@ static CGFloat const defaultItemFontSize = 14;
         }
         
         [_titlesViews selectItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0] animated:YES scrollPosition:(UICollectionViewScrollPositionNone)];
+        
         MJCTabItem *cell = (MJCTabItem *)[_titlesViews cellForItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
         if (_zoomBigEnabled) {
             cell.itemTextFontSize = _tabItemTitleMaxfont;
@@ -315,8 +317,7 @@ static CGFloat const defaultItemFontSize = 14;
 }
 - (void)selectedTitleCenter:(MJCTabItem *)cell titlesScrollView:(UICollectionView *)collectionViews withIndexPath:(NSIndexPath *)indexPath
 {
-    
-    CGFloat offsetX = cell.center.x - collectionViews.jc_width * 0.7;
+    CGFloat offsetX = cell.center.x - collectionViews.jc_width * 0.5;
     if (offsetX < 0) {
         offsetX = 0;
     }
@@ -324,10 +325,6 @@ static CGFloat const defaultItemFontSize = 14;
     if (offsetX > maxOffsetX) {
         offsetX = maxOffsetX;
     }
-    
-//    if (indexPath.row == 1) {
-//        offsetX += cell.width;
-//    }
     
     [collectionViews setContentOffset:CGPointMake(offsetX,0) animated:YES];
 }
@@ -366,6 +363,7 @@ static CGFloat const defaultItemFontSize = 14;
 }
 - (void)collectV:(UICollectionView *)collectV cellForItemAtIndexPath:(NSIndexPath *)indexPath itemBtn:(MJCTabItem *)itemBtn
 {
+    NSLog(@"%@", NSStringFromCGRect(itemBtn.frame));
     [self setupTiTlesViewDefaultItem:indexPath];
     [self selectedTitleCenter:itemBtn titlesScrollView:collectV withIndexPath:indexPath];
     [self setupChildViewScollAnimal:indexPath.row];

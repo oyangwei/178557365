@@ -20,7 +20,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.pagingEnabled = NO;
-        self.backgroundColor = [UIColor colorWithHexString:MenuBarNormalBackgroudColor];
+        self.backgroundColor = [UIColor clearColor];
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
         self.alwaysBounceVertical = NO;
@@ -28,7 +28,7 @@
     return self;
 }
 
--(void)setUpMenuWithTitleArr:(NSArray *)titleArr
+-(void)setUpMenuWithTitleArr:(NSMutableArray *)titleArr
 {
     self.currentTab = titleArr[0];
     CGFloat labelW = (self.width) / self.maxShowNum;
@@ -69,7 +69,6 @@
     
     for (YW_MenuBarLabel *otherLabel in self.subviews) {
         if (otherLabel != label) {
-            otherLabel.backgroundColor = [UIColor colorWithHexString:MenuBarNormalBackgroudColor];
             otherLabel.textColor = [UIColor colorWithHexString:MenuBarTextNormalColor];
             otherLabel.alpha = 1.0;
         }

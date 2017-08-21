@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YW_BaseNavigationController.h"
 
-@interface YW_NavigationController : UINavigationController <UIGestureRecognizerDelegate>
-
--(void)setupNavigationBar;
+@interface YW_NavigationController : YW_BaseNavigationController
 
 @end

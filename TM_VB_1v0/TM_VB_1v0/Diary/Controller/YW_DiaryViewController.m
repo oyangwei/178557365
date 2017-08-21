@@ -19,13 +19,17 @@
 #import "YW_UIGestureRecognizer.h"
 #import "YW_MenuBarLabel.h"
 #import "YW_NavigationController.h"
+#import "YW_SliderMenuTool.h"
+#import "YW_SubMenuViewController.h"
+#import "YW_MainMenuViewController.h"
+#import "YW_SubControllerMenuViewController.h"
+#import "YW_SuspendUIButton.h"
+#import "YW_SegmentInterface.h"
 
-#define BottomTabBarHeight self.tabBar.frame.size.height
+#define BottomTabBarHeight self.tabViewController.frame.size.height
 
-#define CurrentTitle @"<<     TM_VB_1v0     >>"
 
-@interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIPopoverPresentationControllerDelegate,
-                    UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate>
 {
     CGFloat keyBoardHeight; // 键盘高度
     int currentChildIndex;  // 当前标签视图序号
@@ -38,31 +42,17 @@
 /** 菜单栏按钮标题 */
 @property(strong, nonatomic) NSDictionary *menuTabArr;
 
-/** 弹出菜单栏 */
-@property(strong, nonatomic) YW_NaviBarListViewController *listViewPopVC;
-
 /** MenuBar */
 @property(strong, nonatomic) YW_MenuSliderBar *menuBar;
-
-/** 菜单栏左边蒙版 */
-@property(strong, nonatomic) UIImageView *menuLeftMask;
-/** 菜单栏右边蒙版 */
-@property(strong, nonatomic) UIImageView *menuRightMask;
 
 /** 搜索栏 */
 @property(strong, nonatomic) UISearchBar *searchBar;
 
-/** 搜索栏附着视图 */
-@property(strong, nonatomic) UIView *inputAccessoryView;
-
 /** 标签栏 */
-@property(strong, nonatomic) MJCSegmentInterface *tabBar;
-/** 标签栏左边蒙版 */
-@property(strong, nonatomic) UIImageView *tabLeftMask;
-/** 标签栏右边蒙版 */
-@property(strong, nonatomic) UIImageView *tabRightMask;
+@property(strong, nonatomic) YW_SegmentInterface *tabViewController;
+
 /** 标签子控制器标题 */
-@property(strong, nonatomic) NSArray *tabTitleArr;
+@property(strong, nonatomic) NSMutableArray *tabTitleArr;
 
 /** chat子控制器 */
 @property(strong, nonatomic) YWConversationListViewController *conversationListController;
@@ -70,27 +60,61 @@
 /** 历史记录 */
 @property(strong, nonatomic) NSMutableArray *historyRecord;
 
+/** window */
+@property (nonatomic, strong) UIWindow *window;
+
+/** 悬浮按钮 */
+@property (nonatomic, strong) YW_SuspendUIButton *suspendBtn;
+
+/** 聊天会话是否已经存在 */
+@property(assign, nonatomic) BOOL isExistOfConversition;
+
+/** 聊天会话界面 */
+@property(strong, nonatomic) YWConversationViewController *conversationVC;
+
 @end
 
 @implementation YW_DiaryViewController 
+
+#pragma mark - 懒加载菜单标题栏
+-(NSDictionary *)menuTabArr
+{
+    if (!_menuTabArr) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"MenuTab" ofType:@"plist"];
+        _menuTabArr = [[NSDictionary alloc] initWithContentsOfFile:path];
+    }
+    return _menuTabArr;
+}
+
+-(NSMutableArray *)menuArr:(NSArray *)array
+{
+    NSMutableArray *menuArr = [NSMutableArray array];
+    [menuArr addObject:@"Diary"];
+    [menuArr addObjectsFromArray:array];
+    return menuArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = CurrentTitle;
     
     self.automaticallyAdjustsScrollViewInsets = false;
     pathStr = [[NSBundle mainBundle] pathForResource:@"historyRecord" ofType:@"plist"];
     
     [self setupNavigationBar];  //设置导航栏
     
-    [self setupMenuBar];  //初始化 MenuBar
-    
     [self setUpSearchBar];  //初始化搜索栏
     
     [self setUpTabBar];  //初始化标签栏
     
+    [self performSelector:@selector(creatSuspendBtn) withObject:nil afterDelay:1.0];
+    
+    UIScreenEdgePanGestureRecognizer *panEdgeGestureRecognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(moveViewWithLeftGesture:)];
+    panEdgeGestureRecognizer.edges = UIRectEdgeLeft;
+    [self.view addGestureRecognizer:panEdgeGestureRecognizer];
+    
+    panEdgeGestureRecognizer.delegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -107,62 +131,159 @@
 #pragma mark - 初始化 NavigationBar
 - (void)setupNavigationBar
 {
-    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 22)];
-    [leftBtn setSelected:NO];
-    [leftBtn setImage:[UIImage imageNamed:@"fold"] forState:UIControlStateNormal];
-    [leftBtn setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateSelected];
-//    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 0)];
-    [leftBtn addTarget:self action:@selector(showLeftList:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -15;
     
-    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
-    [rightBtn setImage:[UIImage imageNamed:@"rightList"] forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(showRightList) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [leftBtn setImage:[UIImage imageNamed:@"navigationbar_list_normal"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"navigationbar_list_hl"] forState:UIControlStateHighlighted];
+    [leftBtn addTarget:self action:@selector(showMainMenu) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
-    [self.navigationItem setLeftBarButtonItem:leftBarItem];
+    YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, MenuBarHeight)];
+    menuBar.maxShowNum = 3;
+    [menuBar setUpMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Chat"]]];
+    menuBar.backgroundColor = [UIColor clearColor];
     
-    UIBarButtonItem *rightBatItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self.navigationItem setRightBarButtonItem:rightBatItem];
-    
-}
-
-#pragma mark - 初始化 MenuBar, SearchBar, TabBar
--(void)setupMenuBar
-{
-    YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(MaskWidth, 64, self.view.width - MaskWidth, MenuBarHeight)];
-    menuBar.maxShowNum = 4;
-    [menuBar setUpMenuWithTitleArr:[self.menuTabArr objectForKey:@"Chat"]];
-
     self.menuBar = menuBar;
     self.menuBar.delegate = self;
-    [self.view addSubview:menuBar];
     
-    UIImageView *menuLeftMask = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, MaskWidth, MenuBarHeight)];
-    menuLeftMask.backgroundColor = [UIColor whiteColor];
-    menuLeftMask.contentMode = UIViewContentModeScaleAspectFit;
-    [menuLeftMask setImage:[UIImage imageNamed:LeftMenuMaskArrow]];
-    
-    UIImageView *menuRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, 64, MaskWidth, MenuBarHeight)];
-    [menuRightMask setImage:[UIImage imageNamed:RightMenuMaskArrow]];
-    menuRightMask.backgroundColor = [UIColor whiteColor];
-    menuRightMask.contentMode = UIViewContentModeScaleAspectFit;
-    
-    self.menuLeftMask = menuLeftMask;
-    self.menuRightMask = menuRightMask;
-    [self.view addSubview:menuLeftMask];
-    [self.view addSubview:menuRightMask];
-    
-    __weak typeof(self) weakSelf = self;
     menuBar.clickItemBlock = ^(YW_MenuBarLabel *label) {
-        if ([weakSelf.menuBar.currentTab isEqualToString:@"Chat"] && [label.text isEqualToString:@"View"]) {
-            [weakSelf viewScrollStyle:label];
-        }
+        [self clickMenuItem:label];
     };
+    
+    self.navigationItem.titleView = menuBar;
+    
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItems = @[negativeSpacer, leftBarItem];
+    
 }
 
+-(void)clickMenuItem:(YW_MenuBarLabel *)label
+{
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Contact"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Contact"]] indexOfObject:label.text];
+        switch (index) {
+            case 0:
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 1:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 2:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 3:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 4:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 5:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Chat"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Chat"]] indexOfObject:label.text];
+        switch (index) {
+            case 0:
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 1:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 2:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 3:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 4:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 5:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Life"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Life"]] indexOfObject:label.text];
+        switch (index) {
+            case 0:
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 1:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 2:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 3:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 4:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 5:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Search"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Search"]] indexOfObject:label.text];
+        switch (index) {
+            case 0:
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 1:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 2:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 3:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 4:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 5:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark - 初始化搜索栏
 -(void)setUpSearchBar
 {
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake( MaskWidth, 64 + MenuBarHeight + BarSpace, self.view.width - 2 * MaskWidth, SearchBarHeight)];
+    UIView *serarchBarView = [[UIView alloc] init];
+    serarchBarView.backgroundColor  = [UIColor clearColor];
+    serarchBarView.userInteractionEnabled = YES;
+    
+    UIButton *backBtn = [[UIButton alloc] init];
+    backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [backBtn setImage:[UIImage imageNamed:LeftArrow] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:LeftArrow] forState:UIControlStateHighlighted];
+//    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *goBtn = [[UIButton alloc] init];
+    [goBtn setImage:[UIImage imageNamed:RightArrow] forState:UIControlStateNormal];
+    [goBtn setImage:[UIImage imageNamed:RightArrow] forState:UIControlStateHighlighted];
+//    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.searchBar = [[UISearchBar alloc] init];
     self.searchBar.delegate = self;
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
@@ -173,14 +294,45 @@
     self.searchBar.layer.cornerRadius = 10;
     self.searchBar.returnKeyType = UIReturnKeySearch;
     
-    [self.view addSubview:self.searchBar];
+    [serarchBarView addSubview:backBtn];
+    [serarchBarView addSubview:goBtn];
+    [serarchBarView addSubview:self.searchBar];
+    [self.view addSubview:serarchBarView];
+    
+    [serarchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.top.equalTo(self.view.mas_top).offset(64);
+        make.height.mas_equalTo(44);
+    }];
+    
+    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(serarchBarView.mas_leading).offset(10);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
+        make.centerY.equalTo(serarchBarView.mas_centerY);
+    }];
+    
+    [goBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(backBtn.mas_trailing).offset(10);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
+        make.centerY.equalTo(serarchBarView.mas_centerY);
+    }];
+    
+    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(goBtn.mas_trailing).offset(10);
+        make.trailing.equalTo(self.view.mas_trailing).offset(-10);
+        make.height.mas_equalTo(30);
+        make.centerY.equalTo(serarchBarView.mas_centerY);
+    }];
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     self.searchBar.backgroundColor = [UIColor whiteColor];
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
-    [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:@"Search"]];
+    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Search"]]];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -189,46 +341,43 @@
         self.searchBar.backgroundColor = [UIColor colorWithHexString:SearBarSelectedBackgroudColor];
         [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarSelectedBackgroudColor]] forState:UIControlStateNormal];
     }
-    [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]];
+    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]]];
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self WriteToPlistFile:self.searchBar.text];
     [self removeCoverView];
-    [self.tabBar setCurrentSelectedItem:3];
+    [self.tabViewController setCurrentSelectedItemNum:3];
     [self.searchBar resignFirstResponder];
 }
 
-
+#pragma mark - 初始化子控制器栏
 - (void)setUpTabBar
 {
-    CGFloat lalaY = MenuBarHeight + SearchBarHeight + BarSpace * 2 + 64;
-    CGFloat lalaW = self.view.width;
-    CGFloat lalaH = self.view.height - (lalaY + 49);
+    CGFloat lalaY = 64 + SearchBarHeight;
+    CGFloat lalaW = ScreenWitdh;
+    CGFloat lalaH = ScreenHeight - lalaY;
     
-    self.tabTitleArr = [NSArray arrayWithObjects:@"Contact", @"Chat", @"Life", @"Search", nil];
+    self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Contact", @"Chat", @"Life", @"Search", nil];
     
-    //标题数据数组
-    MJCSegmentInterface *lala = [[MJCSegmentInterface alloc] initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
-    lala.delegate = self;
-    lala.isChildScollEnabled = YES;
-    lala.indicatorHidden = YES;
-    lala.itemBackSelectedImage = [MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:@"#FF6666"]];
+    YW_SegmentInterface *interface = [[YW_SegmentInterface alloc] initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     
-    lala.titlesViewFrame = CGRectMake( MaskWidth, 0, self.view.width - 2 * MaskWidth, TabBarHeight);
-    lala.itemTextNormalColor = [UIColor colorWithHexString:@"#FF6666"];
-    lala.itemTextSelectedColor = [UIColor whiteColor];
-    lala.itemTextFontSize = 13;
-    lala.defaultShowItemCount = 2;
-    [lala intoTitlesArray:self.tabTitleArr hostController:self];
-    [self.view addSubview:lala];
+    interface.delegate = self;
+    interface.showItemCount = 1;
+    interface.defaultSelectNum = 1;
+    currentChildIndex = 1;
     
+    interface.itemNormalTextColor = [UIColor colorWithHexString:ThemeColor];
+    interface.itemSelectedTextColor = [UIColor whiteColor];
+    
+    interface.itemNormalBackgroudColor = [UIColor whiteColor];
+    interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:ThemeColor];
     
     YW_ContactListViewController *contactListController = [[YW_ContactListViewController alloc] init];
     
     YWConversationListViewController *conversationListController = [self createYWConversationListViewController];
-
+    
     YW_NavigationController *conversationNVC = [[YW_NavigationController alloc] initWithRootViewController:conversationListController];
     [conversationNVC.navigationBar setHidden:YES];
     
@@ -240,28 +389,34 @@
     vc4.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
     NSArray *vcarrr = @[contactListController,conversationNVC,vc3,vc4];
-    [lala intoChildControllerArray:vcarrr];
     
-    lala.defaultItemNumber = 1;
-    currentChildIndex = 1;
+    [interface intoTitlesArray:self.tabTitleArr hostController:self];
     
-    self.tabBar = lala;
+    [interface intoChildControllerArray:[NSMutableArray arrayWithArray:vcarrr] isInsert:NO];
     
-    UIImageView *tabLeftMask = [[UIImageView alloc] initWithFrame:CGRectMake(0, lalaY, MaskWidth, TabBarHeight)];
-    [tabLeftMask setImage:[UIImage imageNamed:LeftTabMaskArrow]];
-    tabLeftMask.contentMode = UIViewContentModeScaleAspectFit;
-    tabLeftMask.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *tabRightMask = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width - MaskWidth, lalaY, MaskWidth, TabBarHeight)];
-    [tabRightMask setImage:[UIImage imageNamed:RightTabMaskArrow]];
-    tabRightMask.contentMode = UIViewContentModeScaleAspectFit;
-    tabRightMask.backgroundColor = [UIColor whiteColor];
     
-    self.tabLeftMask = tabLeftMask;
-    self.tabRightMask = tabRightMask;
-    [self.view addSubview:tabLeftMask];
-    [self.view addSubview:tabRightMask];
+    self.tabViewController = interface;
+    [self.view addSubview:interface];
+}
+
+
+#pragma mark - SegmentInterfaceDelegate
+-(void)yw_ClickEvent:(YW_TabItem *)tabItem childViewController:(UIViewController *)childViewController segmentInterface:(YW_SegmentInterface *)segmentInterface
+{
+    currentChildIndex = (int)[self.tabTitleArr indexOfObject:tabItem.titlesLable.text];
+    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:tabItem.titlesLable.text]]];
+}
+
+-(void)childVC_scrollView:(UIScrollView *)scrollView
+{
+    CGFloat value = scrollView.contentOffset.x / scrollView.frame.size.width;
+    if (currentChildIndex == (int)value) {
+        return;
+    }
+    currentChildIndex = value;
     
+    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]]];
 }
 
 - (YWConversationListViewController *)createYWConversationListViewController
@@ -292,26 +447,33 @@
 //        editActions = [NSArray arrayWithObjects: deleteActionItem, shareActionItem, nil];
 //        return editActions;
 //    }];
-    __block typeof (YWConversationListViewController) *blockConversationListController = conversationListController;
     __weak typeof (self) weakSelf = self;
     conversationListController.didSelectItemBlock = ^(YWConversation *aConversation)
     {
-        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation fromNavigationController:blockConversationListController.navigationController];
-        MJCTabItem *chatLabel = weakSelf.tabBar.selectedItem;
-        if ([chatLabel.itemText isEqualToString:@"Chat"]) {
-            UIButton *btn = [[UIButton alloc] init];
-            [btn setTitle:@"<" forState:UIControlStateNormal];
-            btn.backgroundColor = [UIColor clearColor];
-            [btn addTarget:weakSelf action:@selector(backToChatList) forControlEvents:UIControlEventTouchUpInside];
-            [chatLabel addSubview:btn];
-            
-            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(chatLabel.mas_centerY);
-                make.leading.mas_equalTo(chatLabel.mas_leading).offset(10);
-                make.width.mas_equalTo(25);
-                make.height.mas_equalTo(30);
-            }];
+        weakSelf.conversationVC = [[SPKitExample sharedInstance] openConversationViewControllerWithConversation:aConversation];
+        if (!weakSelf.isExistOfConversition) {
+            [weakSelf.tabViewController insertTitle:aConversation.conversationLatestFromPerson.personId childVC:weakSelf.conversationVC position:2];
+            weakSelf.isExistOfConversition = YES;
+        }else
+        {
+            [weakSelf.tabViewController updateTitle:aConversation.conversationId childVC:weakSelf.conversationVC position:2];
         }
+//        weakSelf.tabViewController
+//        MJCTabItem *chatLabel = weakSelf.tabViewController.currentItemNum;
+//        if ([chatLabel.itemText isEqualToString:@"Chat"]) {
+//            UIButton *btn = [[UIButton alloc] init];
+//            [btn setTitle:@"<" forState:UIControlStateNormal];
+//            btn.backgroundColor = [UIColor clearColor];
+//            [btn addTarget:weakSelf action:@selector(backToChatList) forControlEvents:UIControlEventTouchUpInside];
+//            [chatLabel addSubview:btn];
+//            
+//            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.centerY.equalTo(chatLabel.mas_centerY);
+//                make.leading.mas_equalTo(chatLabel.mas_leading).offset(10);
+//                make.width.mas_equalTo(25);
+//                make.height.mas_equalTo(30);
+//            }];
+//        }
     };
     
     [conversationListController setConfigureCellBlock:^(UITableViewCell *cell, UITableView *tableView, NSIndexPath *indexPath, YWConversation *conversation)
@@ -348,218 +510,31 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)mjc_ClickEvent:(MJCTabItem *)tabItem childViewController:(UIViewController *)childViewController segmentInterface:(MJCSegmentInterface *)segmentInterface;
-{
-    currentChildIndex = (int)[self.tabTitleArr indexOfObject:tabItem.titlesLable.text];
-    [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:tabItem.titlesLable.text]];
-}
-
-- (void)title_scrollView:(UIScrollView *)scrollView
-{
-    CGPoint tabBarOffset = scrollView.contentOffset;
-    
-//    self.tabLeftMask.backgroundColor = tabBarOffset.x > 0 ?[UIColor redColor]:[UIColor whiteColor];
-    [self.tabLeftMask setImage:tabBarOffset.x > 0?[UIImage imageNamed:LeftTabMaskArrow]:NULL];
-    
-//    self.tabRightMask.backgroundColor = tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIColor redColor]:[UIColor whiteColor];
-    [self.tabRightMask setImage:tabBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:RightTabMaskArrow]:NULL];
-}
-
--(void)childVC_scrollView:(UIScrollView *)scrollView
-{
-    CGFloat value = scrollView.contentOffset.x / scrollView.frame.size.width;
-    if (currentChildIndex == (int)value) {
-        return;
-    }
-    currentChildIndex = value;
-    
-    [self.menuBar updateMenuWithTitleArr:[_menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]];
-    
-}
-
-#pragma mark - 懒加载菜单标题栏
--(NSDictionary *)menuTabArr
-{
-    if (!_menuTabArr) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"MenuTab" ofType:@"plist"];
-        _menuTabArr = [[NSDictionary alloc] initWithContentsOfFile:path];
-    }
-    return _menuTabArr;
-}
-
 #pragma mark - NavigationBar 左右按钮事件
-- (void)showLeftList:(UIButton *)btn
+- (void)showMainMenu
 {
-    [self removeCoverView];
-    
-    if (!btn.isSelected) {
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect menuBarRect = self.menuBar.frame;
-            menuBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-            self.menuBar.frame = menuBarRect;
-            
-            CGRect menuLeftMaskRect = self.menuLeftMask.frame;
-            menuLeftMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-            self.menuLeftMask.frame = menuLeftMaskRect;
-            
-            CGRect menuRightMaskRect = self.menuRightMask.frame;
-            menuRightMaskRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace * 2;
-            self.menuRightMask.frame = menuRightMaskRect;
-            
-            CGRect searchBarRect = self.searchBar.frame;
-            searchBarRect.origin.y -= MenuBarHeight + SearchBarHeight + BarSpace;
-            self.searchBar.frame = searchBarRect;
-            
-            CGRect tabBarRect = self.tabBar.frame;
-            tabBarRect.origin.y = 64;
-            tabBarRect.size.height = self.view.height - 64;
-            self.tabBar.frame = tabBarRect;
-            
-            CGRect tabLeftMaskRect = self.tabLeftMask.frame;
-            tabLeftMaskRect.origin.y = 64;
-            self.tabLeftMask.frame = tabLeftMaskRect;
-            
-            CGRect tabRightMaskRect = self.tabRightMask.frame;
-            tabRightMaskRect.origin.y = 64;
-            self.tabRightMask.frame = tabRightMaskRect;
-            
-            [btn setSelected:YES];
-            
-            [self.tabBarController.tabBar setHidden:YES];
-        }];
+    [YW_SliderMenuTool showMenuWithRootViewController:self withToViewController:[YW_MainMenuViewController class]];
+}
+
+- (void)showSlideMenu:(YW_ShowMenuStyles)showMenuStyle withViewController:(Class)class
+{
+    if (showMenuStyle != YW_ShowMenuFromLeft && showMenuStyle != YW_ShowMenuFromRight) {
+        showMenuStyle = YW_ShowMenuFromLeft;
     }
-    else
-    {
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            CGRect menuBarRect = self.menuBar.frame;
-            menuBarRect.origin.y = 64;
-            self.menuBar.frame = menuBarRect;
-            
-            CGRect menuLeftMaskRect = self.menuLeftMask.frame;
-            menuLeftMaskRect.origin.y = 64;
-            self.menuLeftMask.frame = menuLeftMaskRect;
-            
-            CGRect menuRightMaskRect = self.menuRightMask.frame;
-            menuRightMaskRect.origin.y = 64;
-            self.menuRightMask.frame = menuRightMaskRect;
-            
-            CGRect searchBarRect = self.searchBar.frame;
-            searchBarRect.origin.y = 64 + MenuBarHeight + BarSpace;
-            self.searchBar.frame = searchBarRect;
-            
-            CGRect tabBarRect = self.tabBar.frame;
-            tabBarRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-            self.tabBar.frame = tabBarRect;
-            
-            CGRect tabLeftMaskRect = self.tabLeftMask.frame;
-            tabLeftMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-            self.tabLeftMask.frame = tabLeftMaskRect;
-            
-            CGRect tabRightMaskRect = self.tabRightMask.frame;
-            tabRightMaskRect.origin.y = 64 + MenuBarHeight + SearchBarHeight + 2 * BarSpace;
-            self.tabRightMask.frame = tabRightMaskRect;
-            
-            [btn setSelected:NO];
-        } completion:^(BOOL finished) {
-            CGRect tabBarRect = self.tabBar.frame;
-            tabBarRect.size.height = self.view.height - 64 - 49 - MenuBarHeight - SearchBarHeight - 2 * BarSpace;
-            self.tabBar.frame = tabBarRect;
-            
-            [self.tabBarController.tabBar setHidden:NO];
-            
-        }];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ViewFrameChange" object:nil userInfo:@{@"isHidden":[NSString stringWithFormat:@"%d", btn.isSelected]}];
-}
-
-- (void)showRightList
-{
     
-    [self removeCoverView];
-    
-    NSMutableArray *rightItems = [NSMutableArray arrayWithObjects:@"Contacst", @"Things", nil];
-    CGFloat itemLineH = 1.5;
-    
-    self.listViewPopVC = [[YW_NaviBarListViewController alloc] init];
-    self.listViewPopVC.titles = rightItems;
-    self.listViewPopVC.labelLineH = itemLineH;
-    
-    //设置 VC 弹出方式
-    self.listViewPopVC.modalPresentationStyle = UIModalPresentationPopover;
-    
-    //设置依附的按钮
-    self.listViewPopVC.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
-    //可以指示小箭头颜色
-    self.listViewPopVC.popoverPresentationController.backgroundColor = [UIColor whiteColor];
-    
-    //代理
-    self.listViewPopVC.popoverPresentationController.delegate = self;
-    [self presentViewController:self.listViewPopVC animated:YES completion:nil];
-    
-    self.listViewPopVC.titles = rightItems;
-    
-    __weak typeof(self) weakSelf = self;
-    
-    self.listViewPopVC.listItemBlock = ^(NSInteger index){
-        [weakSelf.listViewPopVC dismissViewControllerAnimated:YES completion:nil];
-    };
-}
-
-#pragma mark - 是否允许子页面滚动
-- (void)viewScrollStyle:(id)sender
-{
-    YW_MenuBarLabel *label = (YW_MenuBarLabel *)sender;
-
-    subScollArr = [NSArray arrayWithObject:self.tabBar.isChildScollEnabled?@"Fixed":@"Slide"];
-    CGFloat itemLineH = 1.5;
-    
-    self.listViewPopVC = [[YW_NaviBarListViewController alloc] init];
-    self.listViewPopVC.titles = subScollArr;
-    self.listViewPopVC.labelLineH = itemLineH;
-    
-    //设置 VC 弹出方式
-    self.listViewPopVC.modalPresentationStyle = UIModalPresentationPopover;
-    
-    //设置依附的按钮
-    self.listViewPopVC.popoverPresentationController.barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:label];
-    //可以指示小箭头颜色
-    self.listViewPopVC.popoverPresentationController.backgroundColor = [UIColor whiteColor];
-    
-    self.listViewPopVC.popoverPresentationController.sourceRect = self.view.frame;
-    
-    //代理
-    self.listViewPopVC.popoverPresentationController.delegate = self;
-    [self presentViewController:self.listViewPopVC animated:YES completion:nil];
-    
-    self.listViewPopVC.titles = subScollArr;
-    
-    __weak typeof(self) weakSelf = self;
-    
-    self.listViewPopVC.listItemBlock = ^(NSInteger index){
-        weakSelf.tabBar.isChildScollEnabled = !weakSelf.tabBar.isChildScollEnabled;
-        [weakSelf.listViewPopVC dismissViewControllerAnimated:YES completion:nil];
-    };
-}
-
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
-    return UIModalPresentationNone;
-}
-
-- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
-    return YES;   //点击蒙版popover消失， 默认YES
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if ([scrollView class] == [YW_MenuSliderBar class]) {
-        CGPoint menuBarOffset = scrollView.contentOffset;
-        
-//        self.menuLeftMask.backgroundColor = menuBarOffset.x > 0 ?[UIColor redColor]:[UIColor whiteColor];
-        [self.menuLeftMask setImage:menuBarOffset.x > 0?[UIImage imageNamed:LeftMenuMaskArrow]:NULL];
-        
-//        self.menuRightMask.backgroundColor = menuBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIColor redColor]:[UIColor whiteColor];
-        [self.menuRightMask setImage:menuBarOffset.x < scrollView.contentSize.width - scrollView.width ?[UIImage imageNamed:@"right_more"]:NULL];
+    switch (showMenuStyle) {
+        case YW_ShowMenuFromLeft:
+        {
+            [YW_SliderMenuTool showMenuWithRootViewController:self withToViewController:class];
+            break;
+        }
+        case YW_ShowMenuFromRight:
+        {
+            [YW_SliderMenuTool showFunctionMenuWithRootViewController:self withToViewController:class];
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -575,11 +550,11 @@
     
     CGRect rect = [[[notification userInfo] valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
-    coverView = [[UIControl alloc] initWithFrame:CGRectMake(0, self.view.height, self.view.width, self.view.height - rect.size.height - 64 - MenuBarHeight - SearchBarHeight - BarSpace)];
+    coverView = [[UIControl alloc] initWithFrame:CGRectMake(0, self.view.height, self.view.width, self.view.height - rect.size.height - 108)];
     coverView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5];
     [coverView addTarget:self action:@selector(removeCoverView) forControlEvents:UIControlEventTouchUpInside];
     
-    historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( MaskWidth + 30, 64 + MenuBarHeight + SearchBarHeight + BarSpace, self.view.width - MaskWidth * 2 - 30, (self.historyRecord.count + 1) * 30)];
+    historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( 30, 108, self.view.width - 30, (self.historyRecord.count + 1) * 30)];
             __weak typeof(self) weakSelf = self;
             historyTableView.historyRecord = self.historyRecord;
             historyTableView.clearBlock = ^(){
@@ -605,7 +580,7 @@
     //    3.执行动画
     [UIView animateWithDuration:duration animations:^{
         CGRect coverViewFrame = coverView.frame;
-        coverViewFrame.origin.y = 64 + MenuBarHeight + SearchBarHeight + BarSpace;
+        coverViewFrame.origin.y = 108;
         coverView.frame = coverViewFrame;
         
         CGRect historyTableViewFrame = historyTableView.frame;
@@ -631,7 +606,7 @@
     //    3.执行动画
     [UIView animateWithDuration:duration animations:^{
         CGRect coverViewFrame = coverView.frame;
-        coverViewFrame.size.height = self.view.height - rect.size.height - 64 - MenuBarHeight - SearchBarHeight - BarSpace;
+        coverViewFrame.size.height = self.view.height - rect.size.height - 108;
         coverView.frame = coverViewFrame;
     }];
     
@@ -646,6 +621,10 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    [_window resignKeyWindow];
+    _window  = nil;
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -707,7 +686,7 @@
         [historyTableView removeFromSuperview];
     }
     
-    historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( MaskWidth + 30, 64 + MenuBarHeight + SearchBarHeight + BarSpace, self.view.width - MaskWidth * 2 - 30, (self.historyRecord.count + 1) * 30)];
+    historyTableView = [[YW_HistoryTableView alloc] initWithFrame:CGRectMake( 30, 108, self.view.width - 30, (self.historyRecord.count + 1) * 30)];
     __weak typeof(self) weakSelf = self;
     historyTableView.historyRecord = self.historyRecord;
     historyTableView.clearBlock = ^(){
@@ -730,33 +709,69 @@
     
 }
 
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    BOOL result = NO;
+    if ([gestureRecognizer isKindOfClass:[UIScreenEdgePanGestureRecognizer class]]) {
+        result = YES;
+    }
+    return result;
+}
+
+-(void)moveViewWithLeftGesture:(UIPanGestureRecognizer *)panGestureRecognizer
+{
+    if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        [self showMainMenu];
+    }
+}
+
+-(void)backToChatList
+{
+//    MJCTabItem *label = self.tabViewController.selectedItem;
+//    if ([label.itemText isEqualToString:@"Chat"]) {
+//        for (id sender in self.tabViewController.selectedItem.subviews) {
+//            if ([sender isKindOfClass:[UIButton class]]) {
+//                [sender removeFromSuperview];
+//            }
+//        }
+//    }
+    
+    [self.conversationListController.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 创建悬浮按钮
+-(void)creatSuspendBtn{
+    //悬浮按钮
+    _suspendBtn = [[YW_SuspendUIButton alloc] initWithFrame:CGRectMake(0,0, 80, 80)];
+    _suspendBtn.backgroundColor = [UIColor colorWithHexString:ThemeColor];
+    [_suspendBtn setTitle:@"Menu" forState:UIControlStateNormal];
+//    [_button addTarget:self action:@selector(suspendBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    _suspendBtn.rootView = self.view.superview;
+    
+    //悬浮按钮所处的顶端UIWindow
+    _window = [[UIWindow alloc] initWithFrame:CGRectMake(ScreenWitdh - 90, ScreenHeight - 90, 80, 80)];
+    //使得新建window在最顶端
+    _window.windowLevel = UIWindowLevelAlert + 1;
+    _window.backgroundColor = [UIColor clearColor];
+    _window.layer.cornerRadius = 40;
+    _window.layer.masksToBounds = YES;
+    [_window addSubview:_suspendBtn];
+    //显示window
+    [_window makeKeyAndVisible];
+}
+
+#pragma mark - 设置当前选择的子控制器
+-(void)setCurrentSelectedViewController:(NSInteger)currentItemNum
+{
+    [self.tabViewController setCurrentSelectedItemNum:(int)currentItemNum];
+}
+
 #pragma mark - TouchBegan
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self removeCoverView];
 }
 
-#pragma mark - UI
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
-        return NO;
-    }
-    return YES;
-}
-
--(void)backToChatList
-{
-    MJCTabItem *label = self.tabBar.selectedItem;
-    if ([label.itemText isEqualToString:@"Chat"]) {
-        for (id sender in self.tabBar.selectedItem.subviews) {
-            if ([sender isKindOfClass:[UIButton class]]) {
-                [sender removeFromSuperview];
-            }
-        }
-    }
-    
-    [self.conversationListController.navigationController popViewControllerAnimated:YES];
-}
 
 @end
