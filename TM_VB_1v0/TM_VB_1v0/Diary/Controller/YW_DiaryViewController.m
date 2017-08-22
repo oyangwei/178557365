@@ -29,7 +29,7 @@
 #define BottomTabBarHeight self.tabViewController.frame.size.height
 
 
-@interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate>
+@interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate, ConversationListVCDelegate>
 {
     CGFloat keyBoardHeight; // 键盘高度
     int currentChildIndex;  // 当前标签视图序号
@@ -348,7 +348,7 @@
 {
     [self WriteToPlistFile:self.searchBar.text];
     [self removeCoverView];
-    [self.tabViewController setCurrentSelectedItemNum:3];
+    [self.tabViewController setCurrentSelectedItemNum:_isExistOfConversition?4:3];
     [self.searchBar resignFirstResponder];
 }
 
@@ -375,6 +375,7 @@
     interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:ThemeColor];
     
     YW_ContactListViewController *contactListController = [[YW_ContactListViewController alloc] init];
+    contactListController.delegate = self;
     
     YWConversationListViewController *conversationListController = [self createYWConversationListViewController];
     
@@ -393,7 +394,6 @@
     [interface intoTitlesArray:self.tabTitleArr hostController:self];
     
     [interface intoChildControllerArray:[NSMutableArray arrayWithArray:vcarrr] isInsert:NO];
-    
     
     
     self.tabViewController = interface;
@@ -417,6 +417,18 @@
     currentChildIndex = value;
     
     [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:self.tabTitleArr[currentChildIndex]]]];
+}
+
+-(void)didSelectCellWithViewController:(YWConversationViewController *)aConversation
+{
+    self.conversationVC = aConversation;
+    if (!_isExistOfConversition) {
+        [self.tabViewController insertTitle:aConversation.conversation.conversationId childVC:aConversation position:2];
+        _isExistOfConversition = YES;
+    }else
+    {
+        [self.tabViewController updateTitle:aConversation.conversation.conversationId childVC:aConversation position:2];
+    }
 }
 
 - (YWConversationListViewController *)createYWConversationListViewController

@@ -191,7 +191,7 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     YWPerson *person = self.results[indexPath.row];
 
-    [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithPerson:person fromNavigationController:self.navigationController];
+    [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithPerson:person];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {

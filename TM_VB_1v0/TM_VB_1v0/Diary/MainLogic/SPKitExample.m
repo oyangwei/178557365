@@ -369,7 +369,7 @@ UIAlertViewDelegate>
         if (aError.code == 0 || [[self.ywIMKit.IMCore getLoginService] isCurrentLogined]) {
             /// 登录成功
 #ifdef DEBUG
-            [[SPUtil sharedInstance] showNotificationInViewController:self.rootWindow.rootViewController title:@"登录成功" subtitle:nil type:SPMessageNotificationTypeSuccess];
+//            [[SPUtil sharedInstance] showNotificationInViewController:self.rootWindow.rootViewController title:@"登录成功" subtitle:nil type:SPMessageNotificationTypeSuccess];
 #endif
             
             
@@ -382,7 +382,7 @@ UIAlertViewDelegate>
             }
         } else {
             /// 登录失败
-            [[SPUtil sharedInstance] showNotificationInViewController:self.rootWindow.rootViewController title:@"登录失败" subtitle:aError.description type:SPMessageNotificationTypeError];
+//            [[SPUtil sharedInstance] showNotificationInViewController:self.rootWindow.rootViewController title:@"登录失败" subtitle:aError.description type:SPMessageNotificationTypeError];
             
             if (aFailedBlock) {
                 aFailedBlock(aError);
@@ -644,27 +644,27 @@ UIAlertViewDelegate>
 /**
  *  打开单聊页面
  */
-- (void)exampleOpenConversationViewControllerWithPerson:(YWPerson *)aPerson fromNavigationController:(UINavigationController *)aNavigationController
+- (YWConversationViewController *)exampleOpenConversationViewControllerWithPerson:(YWPerson *)aPerson
 {
     YWConversation *conversation = [YWP2PConversation fetchConversationByPerson:aPerson creatIfNotExist:YES baseContext:self.ywIMKit.IMCore];
     
-    [self exampleOpenConversationViewControllerWithConversation:conversation fromNavigationController:aNavigationController];
+    return [self openConversationViewControllerWithConversation:conversation];
 }
 
 /**
  *  打开群聊页面
  */
-- (void)exampleOpenConversationViewControllerWithTribe:(YWTribe *)aTribe fromNavigationController:(UINavigationController *)aNavigationController
+- (YWConversationViewController *)exampleOpenConversationViewControllerWithTribe:(YWTribe *)aTribe
 {
     YWConversation *conversation = [YWTribeConversation fetchConversationByTribe:aTribe createIfNotExist:YES baseContext:self.ywIMKit.IMCore];
     
-    [self exampleOpenConversationViewControllerWithConversation:conversation fromNavigationController:aNavigationController];
+    return [self openConversationViewControllerWithConversation:conversation];
 }
 
-- (void)exampleOpenEServiceConversationWithPersonId:(NSString *)aPersonId fromNavigationController:(UINavigationController *)aNavigationController
+- (YWConversationViewController *)exampleOpenEServiceConversationWithPersonId:(NSString *)aPersonId
 {
     YWPerson *person = [[SPKitExample sharedInstance] exampleFetchEServicePersonWithPersonId:aPersonId groupId:nil];
-    [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithPerson:person fromNavigationController:aNavigationController];
+    return [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithPerson:person];
 }
 
 /**
@@ -961,7 +961,7 @@ UIAlertViewDelegate>
                 BOOL isMe = [weakModel.person.personId isEqualToString:[[weakController.kitRef.IMCore getLoginService] currentLoginedUserId]];
                 
                 if ( isMe == NO ) {
-                    [weakSelf exampleOpenConversationViewControllerWithPerson:weakModel.person fromNavigationController:weakController.navigationController];
+                    [weakSelf exampleOpenConversationViewControllerWithPerson:weakModel.person];
                 }
                 else if (weakController.kitRef.openProfileBlock) {
                     weakController.kitRef.openProfileBlock(weakModel.person, weakController);
@@ -1442,7 +1442,7 @@ const CGFloat kSPCustomConversationCellContentMargin =10;
         BOOL isMe = [aPerson isEqualToPerson:[[weakSelf.ywIMKit.IMCore getLoginService] currentLoginedUser]];
         
         if (isMe == NO && [aParentController isKindOfClass:[YWConversationViewController class]] && [((YWConversationViewController *)aParentController).conversation isKindOfClass:[YWTribeConversation class]]) {
-            [weakSelf exampleOpenConversationViewControllerWithPerson:aPerson fromNavigationController:aParentController.navigationController];
+            [weakSelf exampleOpenConversationViewControllerWithPerson:aPerson];
         }
         else {
             /// 您可以打开该用户的profile页面

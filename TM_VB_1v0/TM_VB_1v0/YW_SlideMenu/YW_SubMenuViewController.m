@@ -14,7 +14,7 @@
 #import "YW_DiaryViewController.h"
 #import "YW_ActivityViewController.h"
 #import "YW_DiscoveryViewController.h"
-#import "YW_ShopViewController.h"
+#import "YW_NewsViewController.h"
 #import "YW_MeViewController.h"
 #import "YW_SliderMenuTool.h"
 
@@ -94,9 +94,9 @@
     
     YW_MainMenuItem *Chat = [YW_MainMenuItem itemWithIcon:@"menu_promo" title:@"Chat" destVcClass:[YW_ActivityViewController class]];
     
-    YW_MainMenuItem *Life = [YW_MainMenuItem itemWithIcon:@"menu_trips" title:@"Life" destVcClass:[YW_ShopViewController class]];
+    YW_MainMenuItem *Life = [YW_MainMenuItem itemWithIcon:@"menu_trips" title:@"Life" destVcClass:[YW_NewsViewController class]];
     
-    YW_MainMenuItem *Search = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Search" destVcClass:[YW_ShopViewController class]];
+    YW_MainMenuItem *Search = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Search" destVcClass:[YW_NewsViewController class]];
 
     self.data = @[Contact, Chat, Life, Search];
 }

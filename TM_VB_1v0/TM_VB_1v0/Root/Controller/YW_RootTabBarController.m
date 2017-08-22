@@ -11,7 +11,7 @@
 #import "YW_DiaryViewController.h"
 #import "YW_ActivityViewController.h"
 #import "YW_DiscoveryViewController.h"
-#import "YW_ShopViewController.h"
+#import "YW_NewsViewController.h"
 #import "YW_MeViewController.h"
 
 @implementation YW_RootTabBarController
@@ -25,7 +25,7 @@
     [self setupChildVC:[[YW_DiaryViewController alloc] init] title:@"Diary" image:@"" selectedImage:@""];
     [self setupChildVC:[[YW_ActivityViewController alloc] init] title:@"Activity" image:@"" selectedImage:@""];
     [self setupChildVC:[[YW_DiscoveryViewController alloc] init] title:@"Discovery" image:@"" selectedImage:@""];
-    [self setupChildVC:[[YW_ShopViewController alloc] init] title:@"Shop" image:@"" selectedImage:@""];
+    [self setupChildVC:[[YW_NewsViewController alloc] init] title:@"Shop" image:@"" selectedImage:@""];
     [self setupChildVC:[[YW_MeViewController alloc] init] title:@"Me" image:@"" selectedImage:@""];
     
 }

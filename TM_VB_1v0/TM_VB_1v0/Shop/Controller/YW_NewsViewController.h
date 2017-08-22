@@ -1,5 +1,5 @@
 //
-//  YW_ShopViewController.h
+//  YW_NewsViewController.h
 //  TM_VB_1v0
 //
 //  Created by z°先森 on 2017/7/25.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YW_ShopViewController : UIViewController
+@interface YW_NewsViewController : UIViewController
 
 @end

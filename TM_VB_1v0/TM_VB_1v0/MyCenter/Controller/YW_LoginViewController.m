@@ -140,8 +140,6 @@
     
     [[SPUtil sharedInstance] setWaitingIndicatorShown:YES withKey:self.description];
     
-    NSLog(@"%@ %@", self.phoneTextField.text, self.passwordTextField.text);
-    
     [[SPKitExample sharedInstance] callThisAfterISVAccountLoginSuccessWithYWLoginId:self.phoneTextField.text passWord:self.passwordTextField.text preloginedBlock:^{
         [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
         [weakSelf _pushMainControllerAnimated:YES];
@@ -152,7 +150,6 @@
         NSLog(@"aError : %@", aError);
         if (aError.code == YWLoginErrorCodePasswordError || aError.code == YWLoginErrorCodePasswordInvalid || aError.code == YWLoginErrorCodeUserNotExsit) {
             [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
-            
             NSLog(@"%@", aError);
         }
     }];

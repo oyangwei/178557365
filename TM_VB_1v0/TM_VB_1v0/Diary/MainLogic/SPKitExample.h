@@ -155,19 +155,18 @@ FOUNDATION_EXTERN NSString *const kSPCustomConversationIdForFAQ;
 /**
  *  打开单聊页面
  */
-- (void)exampleOpenConversationViewControllerWithPerson:(YWPerson *)aPerson fromNavigationController:(UINavigationController *)aNavigationController;
+- (YWConversationViewController *)exampleOpenConversationViewControllerWithPerson:(YWPerson *)aPerson;
 
 /**
  *  打开群聊页面
  */
-- (void)exampleOpenConversationViewControllerWithTribe:(YWTribe *)aTribe fromNavigationController:(UINavigationController *)aNavigationController;
+- (YWConversationViewController *)exampleOpenConversationViewControllerWithTribe:(YWTribe *)aTribe;
 
 /**
  *  打开客服会话
  *  @param aPersonId 客服Id
  */
-- (void)exampleOpenEServiceConversationWithPersonId:(NSString *)aPersonId
-                    fromNavigationController:(UINavigationController *)aNavigationController;
+- (YWConversationViewController *)exampleOpenEServiceConversationWithPersonId:(NSString *)aPersonId;
 
 /**
  *  创建某个会话Controller

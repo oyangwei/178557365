@@ -25,6 +25,7 @@
 #define TabBarHeight 44         //标签栏高度
 #define BarSpace 5              //各栏间隔
 #define MaskWidth 20            //蒙版宽度
+#define EditBtnHeight 50        //底部弹出取消确定按钮高度
 
 #pragma mark - 颜色
 

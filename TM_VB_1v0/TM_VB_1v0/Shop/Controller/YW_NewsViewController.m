@@ -1,12 +1,12 @@
 //
-//  YW_ActivityViewController.m
+//  YW_NewsViewController.m
 //  TM_VB_1v0
 //
 //  Created by z°先森 on 2017/7/25.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_ActivityViewController.h"
+#import "YW_NewsViewController.h"
 
 #import "MJCSegmentInterface.h"
 #import "YW_MenuSliderBar.h"
@@ -17,7 +17,6 @@
 #import "MJCTitlesView.h"
 #import "YW_HistoryTableView.h"
 #import "YW_ActivityRecentViewController.h"
-#import "YW_ActivityThingsViewController.h"
 #import "YW_SubControllerMenuViewController.h"
 #import "YW_SubMenuViewController.h"
 #import "YW_MainMenuViewController.h"
@@ -26,10 +25,11 @@
 #import "YW_SegmentInterface.h"
 
 #define BottomTabBarHeight 49
+#define EditBtnHeight 44
 
 #define CurrentTitle @"<<     Acitivity     >>"
 
-@interface YW_ActivityViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate>
+@interface YW_NewsViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate>
 {
     CGFloat keyBoardHeight; // 键盘高度
     int currentChildIndex;  // 当前标签视图序号
@@ -67,8 +67,6 @@
 
 @property(strong, nonatomic) YW_ActivityRecentViewController *activityRecentVC;
 
-@property(strong, nonatomic) YW_ActivityThingsViewController *activityThingsVC;
-
 /** window */
 @property (nonatomic, strong) UIWindow *window;
 
@@ -77,12 +75,12 @@
 
 @end
 
-@implementation YW_ActivityViewController
+@implementation YW_NewsViewController
 
 -(NSMutableArray *)menuArr:(NSArray *)array
 {
     NSMutableArray *menuArr = [NSMutableArray array];
-    [menuArr addObject:@"Activity"];
+    [menuArr addObject:@"News"];
     [menuArr addObjectsFromArray:array];
     self.menuArr = menuArr;
     return menuArr;
@@ -176,7 +174,7 @@
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self CommonEditClick];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
                 break;
             case 3:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
@@ -202,7 +200,7 @@
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self CommonEditClick];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
                 break;
             case 3:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
@@ -378,12 +376,11 @@
     
     interface.itemNormalBackgroudColor = [UIColor whiteColor];
     interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:ThemeColor];
-
-    YW_ActivityThingsViewController *thingsActivityViewController = [[YW_ActivityThingsViewController alloc]init];
-    self.activityThingsVC = thingsActivityViewController;
+    
+    UIViewController *vc1 = [[UIViewController alloc]init];
+    vc1.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
     YW_ActivityRecentViewController *recentActivityController = [[YW_ActivityRecentViewController alloc] init];
-    self.activityRecentVC = recentActivityController;
     
     UIViewController *vc3 = [[UIViewController alloc]init];
     vc3.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
@@ -391,7 +388,7 @@
     UIViewController *vc4 = [[UIViewController alloc]init];
     vc4.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    NSArray *vcarrr = @[thingsActivityViewController,recentActivityController,vc3,vc4];
+    NSArray *vcarrr = @[vc1,recentActivityController,vc3,vc4];
     
     [interface intoTitlesArray:self.tabTitleArr hostController:self];
     
@@ -450,24 +447,26 @@
 }
 
 #pragma mark - MenuBar 点击事件
-- (void)CommonEditClick
+- (void)RecentEdit:(id)sender
 {
+    [self.activityRecentVC setEditing:YES cancle:YES];
+    
     if (!self.deleteBtn || !self.cancleBtn) {
-        UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWitdh / 2, EditBtnHeight)];
+        UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.height, self.view.width / 2, EditBtnHeight)];
         cancleBtn.tag = 101;
-        cancleBtn.backgroundColor = [UIColor whiteColor];
-        cancleBtn.layer.borderWidth = 1.0;
-        cancleBtn.layer.borderColor = [UIColor colorWithHexString:ThemeColor].CGColor;
-        cancleBtn.titleLabel.font = [UIFont systemFontOfSize:20];
-        [cancleBtn setTitleColor:[UIColor colorWithHexString:ThemeColor] forState:UIControlStateNormal];
+        cancleBtn.backgroundColor = [UIColor grayColor];
+        cancleBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        [cancleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [cancleBtn setTitle:@"Cancle" forState:UIControlStateNormal];
+        [cancleBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWitdh / 2, ScreenHeight, ScreenWitdh / 2, EditBtnHeight)];
+        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width / 2, self.view.height - BottomTabBarHeight, self.view.width / 2, EditBtnHeight)];
         deleteBtn.tag = 102;
-        deleteBtn.backgroundColor = [UIColor colorWithHexString:ThemeColor];
-        deleteBtn.titleLabel.font = [UIFont systemFontOfSize:20];
+        deleteBtn.backgroundColor = [UIColor redColor];
+        deleteBtn.titleLabel.font = [UIFont systemFontOfSize:18];
         [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [deleteBtn setTitle:@"Delete" forState:UIControlStateNormal];
+        [deleteBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
         
         self.deleteBtn = deleteBtn;
         self.cancleBtn = cancleBtn;
@@ -475,45 +474,29 @@
         [self.view addSubview:self.cancleBtn];
     }
     
-    switch (currentChildIndex) {
-        case 0:
-            [self.activityThingsVC setEditing:YES cancle:YES];
-            [_cancleBtn addTarget:self action:@selector(ThingsEditBtn:) forControlEvents:UIControlEventTouchUpInside];
-            [_deleteBtn addTarget:self action:@selector(ThingsEditBtn:) forControlEvents:UIControlEventTouchUpInside];
-            break;
-        case 1:
-            [self.activityRecentVC setEditing:YES cancle:YES];
-            [_cancleBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
-            [_deleteBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
-            break;
-        default:
-            break;
-    }
-    
     [UIView animateWithDuration:0.5 animations:^{
         CGRect deleteFrame = self.deleteBtn.frame;
-        deleteFrame.origin.y = ScreenHeight - EditBtnHeight;
+        deleteFrame.origin.y = self.view.height - BottomTabBarHeight - EditBtnHeight;
         self.deleteBtn.frame = deleteFrame;
         
         CGRect cancleFrame = self.cancleBtn.frame;
-        cancleFrame.origin.y = ScreenHeight - EditBtnHeight;
+        cancleFrame.origin.y = self.view.height - BottomTabBarHeight - EditBtnHeight;
         self.cancleBtn.frame = cancleFrame;
     }];
 }
 
 -(void)RecenttEditBtn:(UIButton *)btn
 {
-    NSLog(@"%ld", (long)btn.tag);
     switch (btn.tag) {
         case 101:
         {
             [UIView animateWithDuration:0.5 animations:^{
                 CGRect deleteFrame = self.deleteBtn.frame;
-                deleteFrame.origin.y = ScreenHeight;
+                deleteFrame.origin.y = self.view.height;
                 self.deleteBtn.frame = deleteFrame;
                 
                 CGRect cancleFrame = self.cancleBtn.frame;
-                cancleFrame.origin.y = ScreenHeight;
+                cancleFrame.origin.y = self.view.height;
                 self.cancleBtn.frame = cancleFrame;
             }];
             
@@ -524,51 +507,14 @@
         {
             [UIView animateWithDuration:0.5 animations:^{
                 CGRect deleteFrame = self.deleteBtn.frame;
-                deleteFrame.origin.y = ScreenHeight;
+                deleteFrame.origin.y = self.view.height;
                 self.deleteBtn.frame = deleteFrame;
                 
                 CGRect cancleFrame = self.cancleBtn.frame;
-                cancleFrame.origin.y = ScreenHeight;
+                cancleFrame.origin.y = self.view.height;
                 self.cancleBtn.frame = cancleFrame;
             }];
             [self.activityRecentVC setEditing:NO cancle:NO];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
--(void)ThingsEditBtn:(UIButton *)btn
-{
-    switch (btn.tag) {
-        case 101:
-        {
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect deleteFrame = self.deleteBtn.frame;
-                deleteFrame.origin.y = self.view.height;
-                self.deleteBtn.frame = deleteFrame;
-                
-                CGRect cancleFrame = self.cancleBtn.frame;
-                cancleFrame.origin.y = self.view.height;
-                self.cancleBtn.frame = cancleFrame;
-            }];
-            
-            [self.activityThingsVC setEditing:NO cancle:YES];
-            break;
-        }
-        case 102:
-        {
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect deleteFrame = self.deleteBtn.frame;
-                deleteFrame.origin.y = self.view.height;
-                self.deleteBtn.frame = deleteFrame;
-                
-                CGRect cancleFrame = self.cancleBtn.frame;
-                cancleFrame.origin.y = self.view.height;
-                self.cancleBtn.frame = cancleFrame;
-            }];
-            [self.activityThingsVC setEditing:NO cancle:NO];
             break;
         }
         default:

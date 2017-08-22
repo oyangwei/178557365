@@ -46,6 +46,8 @@
 /** 群组 */
 @property(strong, nonatomic) NSMutableDictionary *groupedTribes;
 
+/** 聊天会话控制器 */
+@property(strong, nonatomic) YWConversationViewController *conversationVC;
 
 /** 用于检索和监听数据集 */
 @property(strong, nonatomic) YWFetchedResultsController *fetchedResultsController;
@@ -231,17 +233,21 @@ static CGFloat defaultHeight;
 {
     if (tableView == self.contactTableView) {
         YWPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:person.personId fromNavigationController:self.navigationController];
+        self.conversationVC = [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:person.personId];
+
+
     }
     else
     {
         NSString *groupedTribeKey = @(indexPath.section).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
         YWTribe *tribe = tribes[indexPath.row];
-        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithTribe:tribe fromNavigationController:self.navigationController];
+        self.conversationVC = [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithTribe:tribe];
     }
     
-    
+    if ([self.delegate respondsToSelector:@selector(didSelectCellWithViewController:)]) {
+        [self.delegate didSelectCellWithViewController:self.conversationVC];
+    }
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

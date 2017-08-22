@@ -14,7 +14,7 @@
 #import "YW_DiaryViewController.h"
 #import "YW_ActivityViewController.h"
 #import "YW_DiscoveryViewController.h"
-#import "YW_ShopViewController.h"
+#import "YW_NewsViewController.h"
 #import "YW_MeViewController.h"
 #import "YW_SliderMenuTool.h"
 
@@ -106,13 +106,15 @@
 
 -(void)setupData
 {
-    YW_MainMenuItem *user_name = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"UserName" destVcClass:[YW_ShopViewController class]];
+    YW_MainMenuItem *user_name = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"UserName" destVcClass:nil];
     
     YW_MainMenuItem *diary = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:@"Diary" destVcClass:[YW_DiaryViewController class]];
     
     YW_MainMenuItem *activity = [YW_MainMenuItem itemWithIcon:@"menu_promo" title:@"Activity" destVcClass:[YW_ActivityViewController class]];
     
-    self.data = @[user_name, diary, activity];
+    YW_MainMenuItem *news = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"News" destVcClass:[YW_NewsViewController class]];
+    
+    self.data = @[user_name, diary, activity, news];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

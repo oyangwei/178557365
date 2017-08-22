@@ -1,16 +1,16 @@
 //
-//  YW_ActivityRecentViewController.m
+//  YW_ActivityThingsViewController.m
 //  TM_VB_1v0
 //
 //  Created by Oyw on 2017/8/9.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_ActivityRecentViewController.h"
-#import "YW_ActivityRecentTableViewCell.h"
+#import "YW_ActivityThingsViewController.h"
+#import "YW_ActivityThingsTableViewCell.h"
 #import "SPUtil.h"
 
-@interface YW_ActivityRecentViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface YW_ActivityThingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -22,12 +22,12 @@
 
 @end
 
-@implementation YW_ActivityRecentViewController
+@implementation YW_ActivityThingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"YW_ActivityRecentTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"YW_ActivityThingsTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     
 }
 
@@ -55,7 +55,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YW_ActivityRecentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    YW_ActivityThingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
     [cell configureWithAvatar:[UIImage imageNamed:@"login_bg"] title:_activityArray[indexPath.row]];
     return cell;

@@ -19,6 +19,10 @@
 		5531F8CF1F483D8300BCC28A /* YW_TitleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8CA1F483D8300BCC28A /* YW_TitleScrollView.m */; };
 		5531F8D01F483D8300BCC28A /* YW_SegmentInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8CC1F483D8300BCC28A /* YW_SegmentInterface.m */; };
 		5531F8D21F4A95A000BCC28A /* me.png in Resources */ = {isa = PBXBuildFile; fileRef = 5531F8D11F4A95A000BCC28A /* me.png */; };
+		5531F8D61F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8D41F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.m */; };
+		5531F8D71F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5531F8D51F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.xib */; };
+		5531F8DB1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531F8D91F4ABFFC00BCC28A /* YW_ActivityThingsViewController.m */; };
+		5531F8DC1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5531F8DA1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.xib */; };
 		5532EA401F3051930014C297 /* YW_HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA3F1F3051930014C297 /* YW_HistoryTableView.m */; };
 		5532EA451F3058F00014C297 /* YW_HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */; };
 		5532EA471F3064C40014C297 /* historyRecord.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5532EA461F3064C40014C297 /* historyRecord.plist */; };
@@ -101,7 +105,7 @@
 		55C5024F1F26F93C0062DBE0 /* YW_ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C5024E1F26F93C0062DBE0 /* YW_ActivityViewController.m */; };
 		55C502521F26F9540062DBE0 /* YW_DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502511F26F9540062DBE0 /* YW_DiscoveryViewController.m */; };
 		55C502551F26F9600062DBE0 /* YW_MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502541F26F9600062DBE0 /* YW_MeViewController.m */; };
-		55C502581F26F96C0062DBE0 /* YW_ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502571F26F96C0062DBE0 /* YW_ShopViewController.m */; };
+		55C502581F26F96C0062DBE0 /* YW_NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502571F26F96C0062DBE0 /* YW_NewsViewController.m */; };
 		55C502681F27142D0062DBE0 /* YW_NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502671F27142D0062DBE0 /* YW_NavigationController.m */; };
 		55C502801F2716AC0062DBE0 /* YWCommonMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C5026C1F2716AC0062DBE0 /* YWCommonMethod.m */; };
 		55C502811F2716AC0062DBE0 /* areaCode.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C5026E1F2716AC0062DBE0 /* areaCode.plist */; };
@@ -225,6 +229,12 @@
 		5531F8CB1F483D8300BCC28A /* YW_SegmentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_SegmentInterface.h; sourceTree = "<group>"; };
 		5531F8CC1F483D8300BCC28A /* YW_SegmentInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_SegmentInterface.m; sourceTree = "<group>"; };
 		5531F8D11F4A95A000BCC28A /* me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me.png; sourceTree = "<group>"; };
+		5531F8D31F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ActivityThingsTableViewCell.h; sourceTree = "<group>"; };
+		5531F8D41F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_ActivityThingsTableViewCell.m; sourceTree = "<group>"; };
+		5531F8D51F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YW_ActivityThingsTableViewCell.xib; sourceTree = "<group>"; };
+		5531F8D81F4ABFFC00BCC28A /* YW_ActivityThingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ActivityThingsViewController.h; sourceTree = "<group>"; };
+		5531F8D91F4ABFFC00BCC28A /* YW_ActivityThingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_ActivityThingsViewController.m; sourceTree = "<group>"; };
+		5531F8DA1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YW_ActivityThingsViewController.xib; sourceTree = "<group>"; };
 		5532EA3E1F3051930014C297 /* YW_HistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_HistoryTableView.h; sourceTree = "<group>"; };
 		5532EA3F1F3051930014C297 /* YW_HistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_HistoryTableView.m; sourceTree = "<group>"; };
 		5532EA431F3058F00014C297 /* YW_HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_HistoryTableViewCell.h; sourceTree = "<group>"; };
@@ -344,8 +354,8 @@
 		55C502511F26F9540062DBE0 /* YW_DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_DiscoveryViewController.m; sourceTree = "<group>"; };
 		55C502531F26F9600062DBE0 /* YW_MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MeViewController.h; sourceTree = "<group>"; };
 		55C502541F26F9600062DBE0 /* YW_MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MeViewController.m; sourceTree = "<group>"; };
-		55C502561F26F96C0062DBE0 /* YW_ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ShopViewController.h; sourceTree = "<group>"; };
-		55C502571F26F96C0062DBE0 /* YW_ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_ShopViewController.m; sourceTree = "<group>"; };
+		55C502561F26F96C0062DBE0 /* YW_NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_NewsViewController.h; sourceTree = "<group>"; };
+		55C502571F26F96C0062DBE0 /* YW_NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_NewsViewController.m; sourceTree = "<group>"; };
 		55C502661F27142D0062DBE0 /* YW_NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_NavigationController.h; sourceTree = "<group>"; };
 		55C502671F27142D0062DBE0 /* YW_NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_NavigationController.m; sourceTree = "<group>"; };
 		55C5026B1F2716AC0062DBE0 /* YWCommonMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWCommonMethod.h; sourceTree = "<group>"; };
@@ -716,7 +726,7 @@
 				55C5022C1F26F0310062DBE0 /* Diary */,
 				55C5023A1F26F8E10062DBE0 /* Activity */,
 				55C5023E1F26F8E10062DBE0 /* Discovery */,
-				55C502461F26F8E10062DBE0 /* Shop */,
+				55C502461F26F8E10062DBE0 /* News */,
 				55C502421F26F8E10062DBE0 /* Me */,
 				55EC6D9E1F31AC6500F5C7B2 /* MyCenter */,
 				55C502691F2716AC0062DBE0 /* Resource */,
@@ -884,6 +894,9 @@
 				5571985D1F3ADC0F00C2328A /* YW_ActivityRecentViewController.h */,
 				5571985E1F3ADC0F00C2328A /* YW_ActivityRecentViewController.m */,
 				5571985F1F3ADC0F00C2328A /* YW_ActivityRecentViewController.xib */,
+				5531F8D81F4ABFFC00BCC28A /* YW_ActivityThingsViewController.h */,
+				5531F8D91F4ABFFC00BCC28A /* YW_ActivityThingsViewController.m */,
+				5531F8DA1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -901,6 +914,9 @@
 				557198621F3AE2EC00C2328A /* YW_ActivityRecentTableViewCell.h */,
 				557198631F3AE2EC00C2328A /* YW_ActivityRecentTableViewCell.m */,
 				557198641F3AE2EC00C2328A /* YW_ActivityRecentTableViewCell.xib */,
+				5531F8D31F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.h */,
+				5531F8D41F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.m */,
+				5531F8D51F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -971,21 +987,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		55C502461F26F8E10062DBE0 /* Shop */ = {
+		55C502461F26F8E10062DBE0 /* News */ = {
 			isa = PBXGroup;
 			children = (
 				55C502471F26F8E10062DBE0 /* Controller */,
 				55C502481F26F8E10062DBE0 /* Model */,
 				55C502491F26F8E10062DBE0 /* View */,
 			);
+			name = News;
 			path = Shop;
 			sourceTree = "<group>";
 		};
 		55C502471F26F8E10062DBE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				55C502561F26F96C0062DBE0 /* YW_ShopViewController.h */,
-				55C502571F26F96C0062DBE0 /* YW_ShopViewController.m */,
+				55C502561F26F96C0062DBE0 /* YW_NewsViewController.h */,
+				55C502571F26F96C0062DBE0 /* YW_NewsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1330,7 +1347,7 @@
 				TargetAttributes = {
 					55C501EA1F26E6F40062DBE0 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = YEZ42AE4QP;
+						DevelopmentTeam = D8M9Q9D8CF;
 						ProvisioningStyle = Automatic;
 					};
 					55C502031F26E6F40062DBE0 = {
@@ -1430,6 +1447,7 @@
 				55C502821F2716AC0062DBE0 /* securityQuestion.plist in Resources */,
 				55EC6E171F3322FE00F5C7B2 /* fold.png in Resources */,
 				5575C91F1F29B480003F12B8 /* SPCallingCardBubbleChatContentView.xib in Resources */,
+				5531F8D71F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.xib in Resources */,
 				5575C92E1F29B480003F12B8 /* icon_delete@2x.png in Resources */,
 				55C502871F2716AC0062DBE0 /* me_1.png in Resources */,
 				5571986E1F3D88FB00C2328A /* arrow_R_64.png in Resources */,
@@ -1449,6 +1467,7 @@
 				5571986D1F3D88FB00C2328A /* arrow_L_64.png in Resources */,
 				55C502841F2716AC0062DBE0 /* contact_1.png in Resources */,
 				5575C9301F29B480003F12B8 /* input_plug_ico_hi_nor@2x.png in Resources */,
+				5531F8DC1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.xib in Resources */,
 				55C501FB1F26E6F40062DBE0 /* Assets.xcassets in Resources */,
 				5575C92A1F29B480003F12B8 /* CustomizedUIResources.bundle in Resources */,
 				5575C92C1F29B480003F12B8 /* greeting_message@2x.png in Resources */,
@@ -1536,10 +1555,11 @@
 				55EC6DC91F31ACA300F5C7B2 /* UIViewController+YWUIViewController.m in Sources */,
 				55C502551F26F9600062DBE0 /* YW_MeViewController.m in Sources */,
 				5575C8BC1F297A70003F12B8 /* MJCSegmentInterface.m in Sources */,
-				55C502581F26F96C0062DBE0 /* YW_ShopViewController.m in Sources */,
+				55C502581F26F96C0062DBE0 /* YW_NewsViewController.m in Sources */,
 				5531F8D01F483D8300BCC28A /* YW_SegmentInterface.m in Sources */,
 				5575C9271F29B480003F12B8 /* SPBubbleViewModelCustomize.m in Sources */,
 				55EC6DDB1F31B55300F5C7B2 /* YWAreaCodeView.m in Sources */,
+				5531F8D61F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.m in Sources */,
 				55EC6DFC1F32FF7400F5C7B2 /* SPContactCell.m in Sources */,
 				5575C9281F29B480003F12B8 /* SPInputViewPluginTransparent.m in Sources */,
 				55EC6DDD1F31B55300F5C7B2 /* YWQuestionView.m in Sources */,
@@ -1583,6 +1603,7 @@
 				55C502681F27142D0062DBE0 /* YW_NavigationController.m in Sources */,
 				557198D91F41AF1500C2328A /* YW_BaseNavigationController.m in Sources */,
 				55EC6DCC1F31AD3C00F5C7B2 /* YW_RootViewController.m in Sources */,
+				5531F8DB1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.m in Sources */,
 				5575C9231F29B480003F12B8 /* SPGreetingBubbleChatView.m in Sources */,
 				55C502B01F2729560062DBE0 /* MJCIndicator.m in Sources */,
 				55C501F01F26E6F40062DBE0 /* main.m in Sources */,
@@ -1744,7 +1765,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = YEZ42AE4QP;
+				DEVELOPMENT_TEAM = D8M9Q9D8CF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TM_VB_1v0/Framework/WXFrameworks",
@@ -1753,7 +1774,7 @@
 				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/文稿 - pg的iMac/Git/TM_VB_1v0/TM_VB_1v0/PrefixHeader.pch";
 				INFOPLIST_FILE = TM_VB_1v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
+				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1765,7 +1786,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = YEZ42AE4QP;
+				DEVELOPMENT_TEAM = D8M9Q9D8CF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TM_VB_1v0/Framework/WXFrameworks",
@@ -1774,7 +1795,7 @@
 				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/文稿 - pg的iMac/Git/TM_VB_1v0/TM_VB_1v0/PrefixHeader.pch";
 				INFOPLIST_FILE = TM_VB_1v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
+				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};

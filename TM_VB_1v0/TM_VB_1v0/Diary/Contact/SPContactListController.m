@@ -223,7 +223,7 @@
     else {
         YWPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithPerson:person fromNavigationController:self.navigationController];
+        [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithPerson:person];
     }
 }
 
