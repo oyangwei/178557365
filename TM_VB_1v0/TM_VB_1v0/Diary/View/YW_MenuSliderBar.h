@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "YW_MenuBarLabel.h"
+#import "DMPagingScrollView.h"
 
 typedef void(^ClickItemBlock)(YW_MenuBarLabel *label);
 
-@interface YW_MenuSliderBar : UIScrollView <UIScrollViewDelegate>
+@interface YW_MenuSliderBar : DMPagingScrollView <UIScrollViewDelegate>
 
 /** 屏幕可显示的最大数量 */
 @property(assign, nonatomic) int maxShowNum;

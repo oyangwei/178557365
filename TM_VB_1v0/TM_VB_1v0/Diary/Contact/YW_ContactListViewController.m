@@ -234,8 +234,6 @@ static CGFloat defaultHeight;
     if (tableView == self.contactTableView) {
         YWPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
         self.conversationVC = [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:person.personId];
-
-
     }
     else
     {

@@ -19,7 +19,7 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.pagingEnabled = NO;
+        self.pagingEnabled = YES;
         self.backgroundColor = [UIColor clearColor];
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
@@ -50,6 +50,7 @@
     }
     
     self.contentSize = CGSizeMake(titleArr.count * labelW, 0);
+    [self setPageWidth:labelW];
 }
 
 - (void)updateMenuWithTitleArr:(NSMutableArray *)titleArr

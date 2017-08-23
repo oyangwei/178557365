@@ -21,7 +21,7 @@
 #define NavigationBarHeight 44  //导航栏高度
 #define UITabBarHeight 49       //底部栏高度
 #define MenuBarHeight 44        //菜单栏高度
-#define SearchBarHeight 44      //搜索栏高度
+#define SearchBarHeight 64      //搜索栏高度
 #define TabBarHeight 44         //标签栏高度
 #define BarSpace 5              //各栏间隔
 #define MaskWidth 20            //蒙版宽度
@@ -58,8 +58,11 @@
 #define LeftTabMaskArrow @"arrow_L_64"   //标签栏左蒙版图片名称
 #define RightTabMaskArrow @"arrow_R_64"   //标签栏右蒙版图片名称
 
-#define LeftArrow @"arrow_L_64"  //菜单栏左蒙版图片名称
-#define RightArrow @"arrow_R_64"  //菜单栏右蒙版图片名称
+#define LeftArrow @"back"  //菜单栏左蒙版图片名称
+#define RightArrow @"go"  //菜单栏右蒙版图片名称
+
+#define BackBtnImageName @"back"  //菜单栏左蒙版图片名称
+#define GoBtnImageName @"go"  //菜单栏右蒙版图片名称
 
 typedef NS_ENUM(NSInteger, YW_ShowMenuStyles){
     YW_ShowMenuFromLeft = 1 << 1,

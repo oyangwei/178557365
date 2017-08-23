@@ -35,11 +35,11 @@ static CGFloat const animationTime = 0.4;
     //第一次进来，隐藏状态栏
     if (!self.hasShow) {
         self.hasShow = YES;
-        self.hideStatusBar = YES;
-        [UIView animateWithDuration:animationTime animations:^{
-            [self setNeedsStatusBarAppearanceUpdate];
-            self.rootViewController.navigationController.navigationBar.frame = CGRectMake(0, 0, ScreenWitdh, 64);
-        }];
+//        self.hideStatusBar = YES;
+//        [UIView animateWithDuration:animationTime animations:^{
+//            [self setNeedsStatusBarAppearanceUpdate];
+//            self.rootViewController.navigationController.navigationBar.frame = CGRectMake(0, 0, ScreenWitdh, 64);
+//        }];
         
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         [self showMenu];

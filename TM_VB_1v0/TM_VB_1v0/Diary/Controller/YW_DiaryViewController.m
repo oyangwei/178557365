@@ -28,7 +28,7 @@
 
 #define BottomTabBarHeight self.tabViewController.frame.size.height
 
-
+static CGFloat viewOriginY = 64;
 @interface YW_DiaryViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate, ConversationListVCDelegate>
 {
     CGFloat keyBoardHeight; // 键盘高度
@@ -134,9 +134,19 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -15;
     
+    self.navigationController.navigationBar.translucent = NO;
+    if (!self.navigationController.navigationBar.translucent) {
+        viewOriginY = 0;
+    }
+    
+    //自定义一个NaVIgationBar
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //消除阴影
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [leftBtn setImage:[UIImage imageNamed:@"navigationbar_list_normal"] forState:UIControlStateNormal];
-    [leftBtn setImage:[UIImage imageNamed:@"navigationbar_list_hl"] forState:UIControlStateHighlighted];
+    [leftBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateHighlighted];
     [leftBtn addTarget:self action:@selector(showMainMenu) forControlEvents:UIControlEventTouchUpInside];
     
     YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, MenuBarHeight)];
@@ -269,18 +279,19 @@
 -(void)setUpSearchBar
 {
     UIView *serarchBarView = [[UIView alloc] init];
-    serarchBarView.backgroundColor  = [UIColor clearColor];
+    serarchBarView.backgroundColor  = [UIColor colorWithHexString:ThemeColor];
     serarchBarView.userInteractionEnabled = YES;
     
     UIButton *backBtn = [[UIButton alloc] init];
-    backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [backBtn setImage:[UIImage imageNamed:LeftArrow] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:LeftArrow] forState:UIControlStateHighlighted];
+    backBtn.imageView.contentMode = UIViewContentModeScaleToFill;
+    [backBtn setImage:[UIImage imageNamed:BackBtnImageName] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:BackBtnImageName] forState:UIControlStateHighlighted];
 //    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *goBtn = [[UIButton alloc] init];
-    [goBtn setImage:[UIImage imageNamed:RightArrow] forState:UIControlStateNormal];
-    [goBtn setImage:[UIImage imageNamed:RightArrow] forState:UIControlStateHighlighted];
+    goBtn.imageView.contentMode = UIViewContentModeScaleToFill;
+    [goBtn setImage:[UIImage imageNamed:GoBtnImageName] forState:UIControlStateNormal];
+    [goBtn setImage:[UIImage imageNamed:GoBtnImageName] forState:UIControlStateHighlighted];
 //    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
     
     self.searchBar = [[UISearchBar alloc] init];
@@ -289,9 +300,9 @@
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     self.searchBar.searchTextPositionAdjustment = UIOffsetMake(10, 0);
     self.searchBar.barTintColor = [UIColor clearColor];
-    self.searchBar.layer.borderWidth = 1.0;
-    self.searchBar.layer.borderColor = [UIColor grayColor].CGColor;
-    self.searchBar.layer.cornerRadius = 10;
+//    self.searchBar.layer.borderWidth = 1.0;
+//    self.searchBar.layer.borderColor = [UIColor grayColor].CGColor;
+//    self.searchBar.layer.cornerRadius = 10;
     self.searchBar.returnKeyType = UIReturnKeySearch;
     
     [serarchBarView addSubview:backBtn];
@@ -302,26 +313,26 @@
     [serarchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.view.mas_leading);
         make.trailing.equalTo(self.view.mas_trailing);
-        make.top.equalTo(self.view.mas_top).offset(64);
-        make.height.mas_equalTo(44);
+        make.top.equalTo(self.view.mas_top);
+        make.height.mas_equalTo(SearchBarHeight);
     }];
     
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(serarchBarView.mas_leading).offset(10);
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
+        make.width.mas_equalTo(35);
+        make.height.mas_equalTo(35);
         make.centerY.equalTo(serarchBarView.mas_centerY);
     }];
     
     [goBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(backBtn.mas_trailing).offset(10);
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
+        make.leading.equalTo(backBtn.mas_trailing).offset(15);
+        make.width.mas_equalTo(35);
+        make.height.mas_equalTo(35);
         make.centerY.equalTo(serarchBarView.mas_centerY);
     }];
     
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(goBtn.mas_trailing).offset(10);
+        make.leading.equalTo(goBtn.mas_trailing).offset(15);
         make.trailing.equalTo(self.view.mas_trailing).offset(-10);
         make.height.mas_equalTo(30);
         make.centerY.equalTo(serarchBarView.mas_centerY);
@@ -355,9 +366,9 @@
 #pragma mark - 初始化子控制器栏
 - (void)setUpTabBar
 {
-    CGFloat lalaY = 64 + SearchBarHeight;
+    CGFloat lalaY = SearchBarHeight + viewOriginY;
     CGFloat lalaW = ScreenWitdh;
-    CGFloat lalaH = ScreenHeight - lalaY;
+    CGFloat lalaH = viewOriginY == 0 ? ScreenHeight - lalaY - 64 : ScreenHeight - lalaY ;
     
     self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Contact", @"Chat", @"Life", @"Search", nil];
     
@@ -368,17 +379,17 @@
     interface.defaultSelectNum = 1;
     currentChildIndex = 1;
     
-    interface.itemNormalTextColor = [UIColor colorWithHexString:ThemeColor];
+    interface.itemNormalTextColor = [UIColor colorWithHexString:@"#8EAFD3"];
     interface.itemSelectedTextColor = [UIColor whiteColor];
     
     interface.itemNormalBackgroudColor = [UIColor whiteColor];
-    interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:ThemeColor];
+    interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:@"#8EAFD3"];
     
     YW_ContactListViewController *contactListController = [[YW_ContactListViewController alloc] init];
     contactListController.delegate = self;
     
     YWConversationListViewController *conversationListController = [self createYWConversationListViewController];
-    
+
     YW_NavigationController *conversationNVC = [[YW_NavigationController alloc] initWithRootViewController:conversationListController];
     [conversationNVC.navigationBar setHidden:YES];
     

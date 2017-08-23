@@ -19,6 +19,9 @@
 #define LeftTime 20
 
 @interface YW_SignUpFirstViewController () <UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+{
+    CGFloat moveHeight;
+}
 
 @property(strong, nonatomic) UITextField *areaCodeTextField;
 @property(strong, nonatomic) YWAreaCodeView *areaCodeView;
@@ -45,6 +48,9 @@
     [super viewDidLoad];
     
     [self setupView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(NSMutableArray *)areaCodeArray
@@ -61,12 +67,23 @@
     return _areaCodeArray;
 }
 
-#pragma mark -- 当View加载时
+#pragma mark -- 当View即将出现时
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
 }
+
+#pragma mark -- 当View即将消失时
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+
 
 #pragma mark -- 初始化界面
 -(void)setupView
@@ -262,7 +279,6 @@
 #pragma mark -- 下拉选择国家区号
 -(void)selectAreaCode:(UITapGestureRecognizer *)tap
 {
-    NSLog(@"%s %d", __func__, __LINE__);
     self.areaCodePickerView.alpha = 1.0;
 }
 
@@ -363,7 +379,46 @@
 {
     [self.phoneTextField resignFirstResponder];
     [self.codeTextField resignFirstResponder];
+    [self.userNameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
     self.areaCodePickerView.alpha = 0;
 }
+#pragma mark - 监听键盘弹出
+-(void)keyBoardWillShow:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    CGFloat animationDurationValue = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    CGFloat nextBtnMaxY = CGRectGetMaxY(self.nextBtn.frame);
+    
+    if (keyBoardFrame.origin.y <= nextBtnMaxY) {
+        moveHeight = nextBtnMaxY - keyBoardFrame.origin.y + 10;
+        [UIView animateWithDuration:animationDurationValue animations:^{
+            CGRect viewFrame = self.view.frame;
+            viewFrame.origin.y -= moveHeight;
+            self.view.frame = viewFrame;
+        }];
+    }
+}
+
+#pragma mark - 监听键盘隐藏
+-(void)keyBoardWillHide:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    CGFloat animationDurationValue = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    if (moveHeight) {
+        [UIView animateWithDuration:animationDurationValue animations:^{
+            CGRect viewFrame = self.view.frame;
+            viewFrame.origin.y += moveHeight;
+            self.view.frame = viewFrame;
+        }];
+    }
+}
+
 
 @end

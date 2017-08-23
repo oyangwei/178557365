@@ -45,7 +45,7 @@
         
         //设置导航栏按钮
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
-        [button setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"default_back"] forState:UIControlStateNormal];
         [button setImageEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
         [button addTarget:self action:@selector(popView) forControlEvents:UIControlEventTouchUpInside];
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -59,8 +59,10 @@
 +(void)setupNavigationBar
 {
     UINavigationBar *appearance = [UINavigationBar appearance];
+//    appearance.translucent = NO;
+    
     //统一设置导航栏颜色，如果单个界面需要设置，可以再viewWillAppear里面设置，在viewWillDisappear设置回统一格式。
-    [appearance setBarTintColor:[UIColor colorWithHexString:ThemeColor]];
+    [appearance setBarTintColor:[UIColor colorWithHexString:ThemeColor alpha:1.0]];
     NSMutableDictionary *textAttribute = [NSMutableDictionary dictionary];
     textAttribute[NSForegroundColorAttributeName] = [UIColor whiteColor];
     textAttribute[NSFontAttributeName] = [UIFont systemFontOfSize:15];

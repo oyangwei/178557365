@@ -18,7 +18,7 @@ static CGFloat itemH = 0;
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.pagingEnabled = NO;
+        self.pagingEnabled = YES;
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.scrollEnabled = YES;
@@ -114,7 +114,7 @@ static CGFloat itemH = 0;
     if (currentOffset.x > maxtTitleOffsetX) {
         currentOffset.x = maxtTitleOffsetX;
     }
-    [self setContentOffset:currentOffset animated:YES];
+    [self setContentOffset:currentOffset animated:NO];
     
 }
 
