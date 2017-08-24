@@ -128,6 +128,8 @@ static CGFloat viewOriginY = 64;
 {
     [super viewWillAppear:animated];
     
+    self.navigationController.navigationBar.alpha = 0.0;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
