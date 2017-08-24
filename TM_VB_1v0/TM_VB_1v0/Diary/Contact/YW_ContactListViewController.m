@@ -20,6 +20,8 @@
 
 #define LabelHeight 44
 #define SplitLineHeight 1
+#define CellHeight 64
+
 #define ContactNormalBackgroudColor @"#EEEEEE"
 #define ContactLabelNormalTextColor @"#AAAAAA"
 
@@ -36,6 +38,9 @@ typedef NS_ENUM(NSInteger, CurrentShowContactStyle){
 @interface YW_ContactListViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     CurrentShowContactStyle showStyle;
+    CGFloat myTribeTableHeight;
+    CGFloat invitedTableHeight;
+    CGFloat contactTableHeight;
 }
 
 /** 联系人标签  */
@@ -173,7 +178,7 @@ static CGFloat defaultHeight;
         make.leading.equalTo(self.view.mas_leading);
         make.trailing.equalTo(self.view.mas_trailing);
         make.top.equalTo(myTribeLabel.mas_bottom);
-        make.height.mas_equalTo(defaultHeight);
+        make.height.mas_equalTo(0);
     }];
     
     [invitedTribeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -221,18 +226,21 @@ static CGFloat defaultHeight;
 {
     if (tableView == self.contactTableView) {
         id<NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        
+        contactTableHeight = [sectionInfo numberOfObjects] * CellHeight;
         return [sectionInfo numberOfObjects];
     }
     else if(tableView == self.myTribeTableView)
     {
         NSString *groupedTribeKey = @(0).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
-        
+        myTribeTableHeight = tribes.count * CellHeight;
         return tribes.count;
     }else
     {
         NSString *groupedTribeKey = @(1).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
+        invitedTableHeight = tribes.count * CellHeight;
         return tribes.count;
     }
 }
@@ -348,7 +356,7 @@ static CGFloat defaultHeight;
         self.conversationVC = [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithTribe:tribe];
     }else
     {
-        NSString *groupedTribeKey = @(indexPath.section).stringValue;
+        NSString *groupedTribeKey = @(indexPath.section + 1).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
         YWTribe *tribe = tribes[indexPath.row];
         self.conversationVC = [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithTribe:tribe];
@@ -501,7 +509,7 @@ static CGFloat defaultHeight;
                 [self HideAllContact];
                 [UIView animateWithDuration:0.2 animations:^{
                     [_myTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.mas_equalTo(defaultHeight);
+                        make.height.mas_equalTo(myTribeTableHeight > defaultHeight ? defaultHeight : myTribeTableHeight);
                     }];
                 }];
                 showStyle = ShowMyGroups;
@@ -523,7 +531,7 @@ static CGFloat defaultHeight;
                 [self HideAllContact];
                 [UIView animateWithDuration:0.2 animations:^{
                     [_invitedTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.mas_equalTo(defaultHeight);
+                        make.height.mas_equalTo(invitedTableHeight > defaultHeight ? defaultHeight : invitedTableHeight);
                     }];
                 }];
                 showStyle = ShowInvitedGourps;
@@ -545,7 +553,7 @@ static CGFloat defaultHeight;
                 [self HideAllContact];
                 [UIView animateWithDuration:0.2 animations:^{
                     [_contactTableView mas_updateConstraints:^(MASConstraintMaker *make) {
-                        make.height.mas_equalTo(defaultHeight);
+                        make.height.mas_equalTo(contactTableHeight > defaultHeight ? defaultHeight : contactTableHeight);
                     }];
                 }];
                 showStyle = ShowContacts;
