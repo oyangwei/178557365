@@ -20,15 +20,22 @@
 
 #define LabelHeight 44
 #define SplitLineHeight 1
-#define ContactNormalBackgroudColor @"#AAAAAA"
-#define ContactSelectBackgroudColor @"#EEEEEE"
+#define ContactNormalBackgroudColor @"#EEEEEE"
 #define ContactLabelNormalTextColor @"#AAAAAA"
+
+#define ContactSelectBackgroudColor @"#AAAAAA"
 #define ContactLabelSelectTextColor @"#FFFFFF"
+
+typedef NS_ENUM(NSInteger, CurrentShowContactStyle){
+    ShowNone = 1 << 0,
+    ShowMyGroups = 1 << 1,
+    ShowInvitedGourps = 1 << 2,
+    ShowContacts = 1 << 3
+};
 
 @interface YW_ContactListViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
-    BOOL isTribe;
-    BOOL isHidden;
+    CurrentShowContactStyle showStyle;
 }
 
 /** 联系人标签  */
@@ -38,10 +45,16 @@
 @property(strong, nonatomic) UITableView *contactTableView;
 
 /** 群组标签  */
-@property(strong, nonatomic) UILabel *tribeLabel;
+@property(strong, nonatomic) UILabel *myTribeLabel;
+
+/** 群组标签  */
+@property(strong, nonatomic) UILabel *invitedTribeLabel;
 
 /** 群列表 */
-@property(strong, nonatomic) UITableView *tribeTableView;
+@property(strong, nonatomic) UITableView *myTribeTableView;
+
+/** 群列表 */
+@property(strong, nonatomic) UITableView *invitedTribeTableView;
 
 /** 群组 */
 @property(strong, nonatomic) NSMutableDictionary *groupedTribes;
@@ -61,7 +74,7 @@ static CGFloat defaultHeight;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    defaultHeight = ScreenHeight - 64 - TabBarHeight - SearchBarHeight - 2 * LabelHeight;
+    defaultHeight = ScreenHeight - 64 - TabBarHeight - SearchBarHeight - 3 * LabelHeight;
     
     [self setUpView];
     
@@ -70,24 +83,39 @@ static CGFloat defaultHeight;
 
 -(void)setUpView
 {
-    isTribe = YES;
-    isHidden = NO;
+    showStyle = ShowMyGroups;
     
-    CALayer *tribeLabelBorder = [CALayer layer];
-    tribeLabelBorder.frame = CGRectMake(0.0f, LabelHeight - SplitLineHeight, self.view.width, SplitLineHeight);
-    tribeLabelBorder.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"].CGColor;
+    CALayer *myTribeLabelBorder = [CALayer layer];
+    myTribeLabelBorder.frame = CGRectMake(0.0f, LabelHeight - SplitLineHeight, self.view.width, SplitLineHeight);
+    myTribeLabelBorder.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"].CGColor;
     
-    UITapGestureRecognizer *tapTribeGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
-    tapTribeGestureRecogbizer.numberOfTapsRequired = 1;
-    UILabel *tribeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, LabelHeight)];
-    tribeLabel.tag = 101;
-    tribeLabel.userInteractionEnabled = YES;
-    tribeLabel.text = @"Group";
-    tribeLabel.backgroundColor = [UIColor colorWithHexString:ContactNormalBackgroudColor];
-    tribeLabel.textColor = [UIColor colorWithHexString:ContactLabelSelectTextColor];
-    tribeLabel.textAlignment = NSTextAlignmentCenter;
-    [tribeLabel.layer addSublayer:tribeLabelBorder];
-    [tribeLabel addGestureRecognizer:tapTribeGestureRecogbizer];
+    UITapGestureRecognizer *tapMyTribeGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
+    tapMyTribeGestureRecogbizer.numberOfTapsRequired = 1;
+    UILabel *myTribeLabel = [[UILabel alloc] init];
+    myTribeLabel.tag = 101;
+    myTribeLabel.userInteractionEnabled = YES;
+    myTribeLabel.text = @"My Groups";
+    myTribeLabel.backgroundColor = [UIColor colorWithHexString:ContactSelectBackgroudColor];
+    myTribeLabel.textColor = [UIColor colorWithHexString:ContactLabelSelectTextColor];
+    myTribeLabel.textAlignment = NSTextAlignmentCenter;
+    [myTribeLabel.layer addSublayer:myTribeLabelBorder];
+    [myTribeLabel addGestureRecognizer:tapMyTribeGestureRecogbizer];
+    
+    CALayer *invitedTribeLabelBorder = [CALayer layer];
+    invitedTribeLabelBorder.frame = CGRectMake(0.0f, LabelHeight - SplitLineHeight, self.view.width, SplitLineHeight);
+    invitedTribeLabelBorder.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"].CGColor;
+    
+    UITapGestureRecognizer *tapInvitedTribeGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
+    tapInvitedTribeGestureRecogbizer.numberOfTapsRequired = 1;
+    UILabel *invitedTribeLabel = [[UILabel alloc] init];
+    invitedTribeLabel.tag = 102;
+    invitedTribeLabel.userInteractionEnabled = YES;
+    invitedTribeLabel.text = @"Invited Groups";
+    invitedTribeLabel.backgroundColor = [UIColor colorWithHexString:ContactNormalBackgroudColor];
+    invitedTribeLabel.textColor = [UIColor colorWithHexString:ContactLabelNormalTextColor];
+    invitedTribeLabel.textAlignment = NSTextAlignmentCenter;
+    [invitedTribeLabel.layer addSublayer:invitedTribeLabelBorder];
+    [invitedTribeLabel addGestureRecognizer:tapInvitedTribeGestureRecogbizer];
     
     CALayer *contactLabelBorder = [CALayer layer];
     contactLabelBorder.frame = CGRectMake(0.0f, LabelHeight - SplitLineHeight, self.view.width, SplitLineHeight);
@@ -95,44 +123,99 @@ static CGFloat defaultHeight;
     
     UITapGestureRecognizer *tapContactGestureRecogbizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchContact:)];
     tapContactGestureRecogbizer.numberOfTapsRequired = 1;
-    UILabel *contactLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, defaultHeight + LabelHeight, self.view.width, LabelHeight)];
-    contactLabel.tag = 102;
+    UILabel *contactLabel = [[UILabel alloc] init];
+    contactLabel.tag = 103;
     contactLabel.userInteractionEnabled = YES;
-    contactLabel.text = @"Contact";
-    contactLabel.backgroundColor = [UIColor colorWithHexString:ContactSelectBackgroudColor];
+    contactLabel.text = @"Contacts";
+    contactLabel.backgroundColor = [UIColor colorWithHexString:ContactNormalBackgroudColor];
     contactLabel.textColor = [UIColor colorWithHexString:ContactLabelNormalTextColor];
     contactLabel.textAlignment = NSTextAlignmentCenter;
     [contactLabel.layer addSublayer:contactLabelBorder];
     [contactLabel addGestureRecognizer:tapContactGestureRecogbizer];
     
-    self.tribeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, LabelHeight, self.view.width, defaultHeight) style:UITableViewStylePlain];
-    [self.tribeTableView registerNib:[UINib nibWithNibName:@"SPContactCell" bundle:nil] forCellReuseIdentifier:@"ContactCell"];
+    self.myTribeTableView = [[UITableView alloc] init];
+    [self.myTribeTableView registerNib:[UINib nibWithNibName:@"SPContactCell" bundle:nil] forCellReuseIdentifier:@"ContactCell"];
     
-    self.contactTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, defaultHeight / 2, self.view.width, 0) style:UITableViewStylePlain];
+    self.invitedTribeTableView = [[UITableView alloc] init];
+    [self.invitedTribeTableView registerNib:[UINib nibWithNibName:@"SPContactCell" bundle:nil] forCellReuseIdentifier:@"ContactCell"];
+    
+    self.contactTableView = [[UITableView alloc] init];
     [self.contactTableView registerNib:[UINib nibWithNibName:@"SPContactCell" bundle:nil] forCellReuseIdentifier:@"ContactCell"];
     
-    self.tribeLabel = tribeLabel;
+    self.myTribeLabel = myTribeLabel;
+    self.invitedTribeLabel = invitedTribeLabel;
     self.contactLabel = contactLabel;
     
-    self.tribeTableView.delegate = self;
-    self.tribeTableView.dataSource = self;
+    self.myTribeTableView.delegate = self;
+    self.myTribeTableView.dataSource = self;
+    
+    self.invitedTribeTableView.delegate = self;
+    self.invitedTribeTableView.dataSource = self;
     
     self.contactTableView.delegate = self;
     self.contactTableView.dataSource = self;
     
-    [self.view addSubview:self.tribeLabel];
-    [self.view addSubview:self.tribeTableView];
+    [self.view addSubview:self.myTribeLabel];
+    [self.view addSubview:self.myTribeTableView];
+    [self.view addSubview:self.invitedTribeLabel];
+    [self.view addSubview:self.invitedTribeTableView];
     [self.view addSubview:self.contactLabel];
     [self.view addSubview:self.contactTableView];
+    
+    [myTribeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.top.equalTo(self.view.mas_top);
+        make.height.mas_equalTo(LabelHeight);
+    }];
+    
+    [_myTribeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.top.equalTo(myTribeLabel.mas_bottom);
+        make.height.mas_equalTo(defaultHeight);
+    }];
+    
+    [invitedTribeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.top.equalTo(_myTribeTableView.mas_bottom);
+        make.height.mas_equalTo(LabelHeight);
+    }];
+    
+    [_invitedTribeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.top.equalTo(invitedTribeLabel.mas_bottom);
+        make.height.mas_equalTo(0);
+    }];
+    
+    [contactLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.top.equalTo(_invitedTribeTableView.mas_bottom);
+        make.height.mas_equalTo(LabelHeight);
+    }];
+    
+    [_contactTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view.mas_leading);
+        make.trailing.equalTo(self.view.mas_trailing);
+        make.top.equalTo(contactLabel.mas_bottom);
+        make.height.mas_equalTo(0);
+    }];
 }
 
 #pragma mark - UITableViewDataSource & Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.contactTableView) {
+        NSLog(@"sections -- %lu", (unsigned long)self.fetchedResultsController.sections.count);
         return self.fetchedResultsController.sections.count;
     }
-    else
+    else if (tableView == self.myTribeTableView)
+    {
+        return self.groupedTribes.count;
+    }else
     {
         return self.groupedTribes.count;
     }
@@ -144,7 +227,12 @@ static CGFloat defaultHeight;
         id<NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
         return [sectionInfo numberOfObjects];
     }
-    else
+    else if(tableView == self.myTribeTableView)
+    {
+        NSString *groupedTribeKey = @(section).stringValue;
+        NSArray *tribes = self.groupedTribes[groupedTribeKey];
+        return tribes.count;
+    }else
     {
         NSString *groupedTribeKey = @(section).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
@@ -201,7 +289,27 @@ static CGFloat defaultHeight;
         
         return cell;
     }
-    else
+    else if(tableView == self.myTribeTableView)
+    {
+        NSString *groupedTribesKey = @(indexPath.section).stringValue;
+        NSArray *tribes = self.groupedTribes[groupedTribesKey];
+        
+        SPContactCell *cell = nil;
+        if( indexPath.row >= [tribes count] ) {
+            NSAssert(0, @"数据出错了");
+        }
+        else {
+            YWTribe *tribe = tribes[indexPath.row];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"
+                                                   forIndexPath:indexPath];
+            
+            UIImage *avatar = [[SPUtil sharedInstance] avatarForTribe:tribe];
+            [cell configureWithAvatar:avatar
+                                title:tribe.tribeName
+                             subtitle:nil];
+        }
+        return cell;
+    }else
     {
         NSString *groupedTribesKey = @(indexPath.section).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribesKey];
@@ -235,7 +343,13 @@ static CGFloat defaultHeight;
         YWPerson *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
         self.conversationVC = [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:person.personId];
     }
-    else
+    else if(tableView == self.myTribeTableView)
+    {
+        NSString *groupedTribeKey = @(indexPath.section).stringValue;
+        NSArray *tribes = self.groupedTribes[groupedTribeKey];
+        YWTribe *tribe = tribes[indexPath.row];
+        self.conversationVC = [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithTribe:tribe];
+    }else
     {
         NSString *groupedTribeKey = @(indexPath.section).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
@@ -256,16 +370,29 @@ static CGFloat defaultHeight;
         }
         return [self.fetchedResultsController sectionIndexTitles][(NSUInteger)section];
     }
+    else if(tableView == self.myTribeTableView)
+    {
+        NSString *groupedTribeKey = @(section).stringValue;
+        NSArray *tribes = self.groupedTribes[groupedTribeKey];
+        if (section == 0) {
+            return tribes.count ? @"My" : nil;
+        }
+        else if (section == 1)
+        {
+            return tribes.count ? @"Invited" : nil;
+        }
+        return nil;
+    }
     else
     {
         NSString *groupedTribeKey = @(section).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
         if (section == 0) {
-            return tribes.count ? @"普通群" : nil;
+            return tribes.count ? @"My" : nil;
         }
         else if (section == 1)
         {
-            return tribes.count ? @"多聊群" : nil;
+            return tribes.count ? @"Invited" : nil;
         }
         return nil;
     }
@@ -312,8 +439,9 @@ static CGFloat defaultHeight;
 -(YWFetchedResultsController *)fetchedResultsController
 {
     if (_fetchedResultsController == nil) {
-        YWIMCore *imcore = [SPKitExample sharedInstance].ywIMKit.IMCore;
-        _fetchedResultsController = [[imcore getContactService] fetchedResultsControllerWithListMode:YWContactListModeAlphabetic imCore:imcore];
+        _fetchedResultsController = [[[self ywIMCore] getContactService] fetchedResultsControllerWithListMode:YWContactListModeAlphabetic imCore:[self ywIMCore]];
+        
+        NSLog(@"countOfFetchedObjects--%lu", (unsigned long)_fetchedResultsController.countOfFetchedObjects);
         
         __weak typeof(self) weakSelf = self;
         [_fetchedResultsController setDidChangeContentBlock:^{
@@ -342,7 +470,7 @@ static CGFloat defaultHeight;
 -(void)reloadTribeData {
     NSArray *tribes = [[self ywTribeService] fetchAllTribes];
     [self configureDataWithTribes:tribes];
-    [self.tribeTableView reloadData];
+    [self.myTribeTableView reloadData];
 }
 
 -(void)requestData {
@@ -351,7 +479,7 @@ static CGFloat defaultHeight;
         [[self ywTribeService] requestAllTribesFromServer:^(NSArray *tribes, NSError *error) {
             if (error == nil) {
                 [weakSelf configureDataWithTribes:tribes];
-                [weakSelf.tribeTableView reloadData];
+                [weakSelf.myTribeTableView reloadData];
             }
             else
             {
@@ -389,51 +517,68 @@ static CGFloat defaultHeight;
     UILabel *label = (UILabel *)tapGestureRecogbizer.view;
     switch (label.tag) {
         case 101:{
-            if (isTribe) {
+            if (showStyle == ShowMyGroups) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    [_myTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(0);
+                    }];
+                }];
+                showStyle = ShowNone;
                 return;
             }
             else
             {
+                [self HideAllContact];
                 [UIView animateWithDuration:0.2 animations:^{
-                    CGRect tribeTableFrame = self.tribeTableView.frame;
-                    tribeTableFrame.size.height = defaultHeight;
-                    self.tribeTableView.frame = tribeTableFrame;
-                } completion:^(BOOL finished) {
-                    CGRect contactTableFrame = self.contactTableView.frame;
-                    contactTableFrame.size.height = 0;
-                    self.contactTableView.frame = contactTableFrame;
-                    
-                    CGRect contactLabelFrame = self.contactLabel.frame;
-                    contactLabelFrame.origin.y = defaultHeight + LabelHeight;
-                    self.contactLabel.frame = contactLabelFrame;
+                    [_myTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(defaultHeight);
+                    }];
                 }];
-                isTribe = !isTribe;
+                showStyle = ShowMyGroups;
             }
             break;
         }
         case 102:{
-            if (!isTribe) {
+            if (showStyle == ShowInvitedGourps) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    [_invitedTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(0);
+                    }];
+                }];
+                showStyle = ShowNone;
                 return;
             }
             else
             {
+                [self HideAllContact];
                 [UIView animateWithDuration:0.2 animations:^{
-                    CGRect tribeTableFrame = self.tribeTableView.frame;
-                    tribeTableFrame.size.height = 0;
-                    self.tribeTableView.frame = tribeTableFrame;
-                    
-                    CGRect contactLabelFrame = self.contactLabel.frame;
-                    contactLabelFrame.origin.y = LabelHeight;
-                    self.contactLabel.frame = contactLabelFrame;
-                    
-                } completion:^(BOOL finished) {
-                    CGRect contactTableFrame = self.contactTableView.frame;
-                    contactTableFrame.origin.y = 2 * LabelHeight;
-                    contactTableFrame.size.height = defaultHeight;
-                    self.contactTableView.frame = contactTableFrame;
-                    
+                    [_invitedTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(defaultHeight);
+                    }];
                 }];
-                isTribe = !isTribe;
+                showStyle = ShowInvitedGourps;
+            }
+            break;
+        }
+        case 103:{
+            if (showStyle == ShowContacts) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    [_contactTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(0);
+                    }];
+                }];
+                showStyle = ShowNone;
+                return;
+            }
+            else
+            {
+                [self HideAllContact];
+                [UIView animateWithDuration:0.2 animations:^{
+                    [_contactTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(defaultHeight);
+                    }];
+                }];
+                showStyle = ShowContacts;
             }
             break;
         }
@@ -441,10 +586,29 @@ static CGFloat defaultHeight;
             break;
     }
     
-    self.contactLabel.backgroundColor = [UIColor colorWithHexString:isTribe?ContactSelectBackgroudColor:ContactNormalBackgroudColor];
-    self.tribeLabel.backgroundColor = [UIColor colorWithHexString:isTribe?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
-    self.contactLabel.textColor = [UIColor colorWithHexString:isTribe?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
-    self.tribeLabel.textColor = [UIColor colorWithHexString:isTribe?ContactLabelSelectTextColor:ContactLabelNormalTextColor];
+    self.contactLabel.backgroundColor = [UIColor colorWithHexString:showStyle == ShowContacts?ContactSelectBackgroudColor:ContactNormalBackgroudColor];
+    self.myTribeLabel.backgroundColor = [UIColor colorWithHexString:showStyle == ShowMyGroups?ContactSelectBackgroudColor:ContactNormalBackgroudColor];
+    self.invitedTribeLabel.backgroundColor = [UIColor colorWithHexString:showStyle == ShowInvitedGourps?ContactSelectBackgroudColor:ContactNormalBackgroudColor];
+    self.contactLabel.textColor = [UIColor colorWithHexString:showStyle == ShowContacts?ContactLabelSelectTextColor:ContactLabelNormalTextColor];
+    self.myTribeLabel.textColor = [UIColor colorWithHexString:showStyle == ShowMyGroups?ContactLabelSelectTextColor:ContactLabelNormalTextColor];
+    self.invitedTribeLabel.textColor = [UIColor colorWithHexString:showStyle == ShowInvitedGourps?ContactLabelSelectTextColor:ContactLabelNormalTextColor];
+}
+
+- (void)HideAllContact
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        [_myTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+        
+        [_invitedTribeTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+        
+        [_contactTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }];
 }
 
 @end
