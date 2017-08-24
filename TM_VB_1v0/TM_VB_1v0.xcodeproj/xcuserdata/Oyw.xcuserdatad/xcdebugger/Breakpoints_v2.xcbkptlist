@@ -138,7 +138,7 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525257363.653021"
+                  timestampString = "525260762.363288"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "524"
@@ -153,7 +153,7 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525257363.655703"
+                  timestampString = "525260762.373541"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "525"
@@ -186,7 +186,7 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525257363.662159"
+                  timestampString = "525260762.382665"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "524"
@@ -201,7 +201,7 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525257363.664844"
+                  timestampString = "525260762.419668"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "525"
@@ -250,7 +250,7 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525257363.677361"
+                  timestampString = "525260762.429379"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "539"
@@ -265,7 +265,7 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525257363.679526"
+                  timestampString = "525260762.431704"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "540"
@@ -273,22 +273,6 @@
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Contact/YW_ContactListViewController.m"
-            timestampString = "525257255.934346"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446"
-            landmarkName = "-fetchedResultsController"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

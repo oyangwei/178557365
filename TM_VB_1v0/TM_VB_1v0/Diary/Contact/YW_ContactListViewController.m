@@ -209,15 +209,11 @@ static CGFloat defaultHeight;
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.contactTableView) {
-        NSLog(@"sections -- %lu", (unsigned long)self.fetchedResultsController.sections.count);
         return self.fetchedResultsController.sections.count;
     }
-    else if (tableView == self.myTribeTableView)
+    else
     {
-        return self.groupedTribes.count;
-    }else
-    {
-        return self.groupedTribes.count;
+        return 1;
     }
 }
 
@@ -229,12 +225,13 @@ static CGFloat defaultHeight;
     }
     else if(tableView == self.myTribeTableView)
     {
-        NSString *groupedTribeKey = @(section).stringValue;
+        NSString *groupedTribeKey = @(0).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
+        
         return tribes.count;
     }else
     {
-        NSString *groupedTribeKey = @(section).stringValue;
+        NSString *groupedTribeKey = @(1).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribeKey];
         return tribes.count;
     }
@@ -311,7 +308,7 @@ static CGFloat defaultHeight;
         return cell;
     }else
     {
-        NSString *groupedTribesKey = @(indexPath.section).stringValue;
+        NSString *groupedTribesKey = @(indexPath.section + 1).stringValue;
         NSArray *tribes = self.groupedTribes[groupedTribesKey];
         
         SPContactCell *cell = nil;
@@ -370,32 +367,7 @@ static CGFloat defaultHeight;
         }
         return [self.fetchedResultsController sectionIndexTitles][(NSUInteger)section];
     }
-    else if(tableView == self.myTribeTableView)
-    {
-        NSString *groupedTribeKey = @(section).stringValue;
-        NSArray *tribes = self.groupedTribes[groupedTribeKey];
-        if (section == 0) {
-            return tribes.count ? @"My" : nil;
-        }
-        else if (section == 1)
-        {
-            return tribes.count ? @"Invited" : nil;
-        }
-        return nil;
-    }
-    else
-    {
-        NSString *groupedTribeKey = @(section).stringValue;
-        NSArray *tribes = self.groupedTribes[groupedTribeKey];
-        if (section == 0) {
-            return tribes.count ? @"My" : nil;
-        }
-        else if (section == 1)
-        {
-            return tribes.count ? @"Invited" : nil;
-        }
-        return nil;
-    }
+    return nil;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -440,8 +412,6 @@ static CGFloat defaultHeight;
 {
     if (_fetchedResultsController == nil) {
         _fetchedResultsController = [[[self ywIMCore] getContactService] fetchedResultsControllerWithListMode:YWContactListModeAlphabetic imCore:[self ywIMCore]];
-        
-        NSLog(@"countOfFetchedObjects--%lu", (unsigned long)_fetchedResultsController.countOfFetchedObjects);
         
         __weak typeof(self) weakSelf = self;
         [_fetchedResultsController setDidChangeContentBlock:^{

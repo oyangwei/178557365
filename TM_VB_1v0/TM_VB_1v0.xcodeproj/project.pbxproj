@@ -1352,7 +1352,7 @@
 				TargetAttributes = {
 					55C501EA1F26E6F40062DBE0 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = YEZ42AE4QP;
+						DevelopmentTeam = D8M9Q9D8CF;
 						ProvisioningStyle = Automatic;
 					};
 					55C502031F26E6F40062DBE0 = {
@@ -1771,7 +1771,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = YEZ42AE4QP;
+				DEVELOPMENT_TEAM = D8M9Q9D8CF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TM_VB_1v0/Framework/WXFrameworks",
@@ -1780,7 +1780,7 @@
 				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/文稿 - pg的iMac/Git/TM_VB_1v0/TM_VB_1v0/PrefixHeader.pch";
 				INFOPLIST_FILE = TM_VB_1v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
+				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1792,7 +1792,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = YEZ42AE4QP;
+				DEVELOPMENT_TEAM = D8M9Q9D8CF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TM_VB_1v0/Framework/WXFrameworks",
@@ -1801,7 +1801,7 @@
 				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/文稿 - pg的iMac/Git/TM_VB_1v0/TM_VB_1v0/PrefixHeader.pch";
 				INFOPLIST_FILE = TM_VB_1v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
+				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
