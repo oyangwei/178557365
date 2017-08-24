@@ -59,8 +59,12 @@
 +(void)setupNavigationBar
 {
     UINavigationBar *appearance = [UINavigationBar appearance];
-//    appearance.translucent = NO;
     
+    appearance.translucent = NO;
+    //自定义一个NaVIgationBar
+    [appearance setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //消除阴影
+    appearance.shadowImage = [UIImage new];
     //统一设置导航栏颜色，如果单个界面需要设置，可以再viewWillAppear里面设置，在viewWillDisappear设置回统一格式。
     [appearance setBarTintColor:[UIColor colorWithHexString:ThemeColor alpha:1.0]];
     NSMutableDictionary *textAttribute = [NSMutableDictionary dictionary];

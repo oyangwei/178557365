@@ -106,45 +106,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-            timestampString = "524998947.379874"
+            timestampString = "525232203.683519"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
+            landmarkName = "-RecenttEditBtn:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
+            timestampString = "525232203.683519"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
+            landmarkName = "-RecenttEditBtn:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
+            timestampString = "525232203.683519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "520"
             endingLineNumber = "520"
             landmarkName = "-RecenttEditBtn:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-            timestampString = "524998947.379874"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "507"
-            endingLineNumber = "507"
-            landmarkName = "-RecenttEditBtn:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-            timestampString = "524998947.379874"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
-            landmarkName = "-RecenttEditBtn:"
-            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -154,11 +154,11 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525170830.793034"
+                  timestampString = "525234236.694269"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "510"
-                  endingLineNumber = "510"
+                  startingLineNumber = "522"
+                  endingLineNumber = "522"
                   offsetFromSymbolStart = "184">
                </Location>
                <Location
@@ -169,11 +169,11 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525170830.795403"
+                  timestampString = "525234236.696635"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "511"
-                  endingLineNumber = "511"
+                  startingLineNumber = "523"
+                  endingLineNumber = "523"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-            timestampString = "524998947.379874"
+            timestampString = "525232203.683519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "-RecenttEditBtn:"
             landmarkType = "7">
             <Locations>
@@ -202,11 +202,11 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525170830.800579"
+                  timestampString = "525234236.702294"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "510"
-                  endingLineNumber = "510"
+                  startingLineNumber = "522"
+                  endingLineNumber = "522"
                   offsetFromSymbolStart = "184">
                </Location>
                <Location
@@ -217,11 +217,11 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525170830.803277"
+                  timestampString = "525234236.704726"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "511"
-                  endingLineNumber = "511"
+                  startingLineNumber = "523"
+                  endingLineNumber = "523"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-            timestampString = "524998947.379874"
+            timestampString = "525232203.683519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
             landmarkName = "-RecenttEditBtn:"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-            timestampString = "524998947.379874"
+            timestampString = "525232203.683519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
+            startingLineNumber = "537"
+            endingLineNumber = "537"
             landmarkName = "-RecenttEditBtn:"
             landmarkType = "7">
             <Locations>
@@ -266,29 +266,61 @@
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525170830.813982"
+                  timestampString = "525234236.724341"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "525"
-                  endingLineNumber = "525"
+                  startingLineNumber = "537"
+                  endingLineNumber = "537"
                   offsetFromSymbolStart = "420">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_ActivityViewController RecenttEditBtn:]_block_invoke.367"
+                  symbolName = "__44-[YW_ActivityViewController RecenttEditBtn:]_block_invoke.375"
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
-                  timestampString = "525170830.81666"
+                  timestampString = "525234236.727554"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "526"
-                  endingLineNumber = "526"
+                  startingLineNumber = "538"
+                  endingLineNumber = "538"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
+            timestampString = "525234962.56609"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
+            landmarkName = "-setUpTabBar"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
+            timestampString = "525234962.56609"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
+            landmarkName = "-setUpTabBar"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -99,7 +99,7 @@ static CGFloat viewOriginY = 64;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.automaticallyAdjustsScrollViewInsets = false;
+    self.automaticallyAdjustsScrollViewInsets = YES;
     pathStr = [[NSBundle mainBundle] pathForResource:@"historyRecord" ofType:@"plist"];
     
     [self setupNavigationBar];  //设置导航栏
@@ -134,15 +134,9 @@ static CGFloat viewOriginY = 64;
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -15;
     
-    self.navigationController.navigationBar.translucent = NO;
     if (!self.navigationController.navigationBar.translucent) {
         viewOriginY = 0;
     }
-    
-    //自定义一个NaVIgationBar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    //消除阴影
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [leftBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
@@ -379,11 +373,11 @@ static CGFloat viewOriginY = 64;
     interface.defaultSelectNum = 1;
     currentChildIndex = 1;
     
-    interface.itemNormalTextColor = [UIColor colorWithHexString:@"#8EAFD3"];
+    interface.itemNormalTextColor = [UIColor whiteColor];
     interface.itemSelectedTextColor = [UIColor whiteColor];
     
-    interface.itemNormalBackgroudColor = [UIColor whiteColor];
-    interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:@"#8EAFD3"];
+    interface.itemNormalBackgroudColor = [UIColor colorWithHexString:@"#8EAFD3"];
+    interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:ThemeColor];
     
     YW_ContactListViewController *contactListController = [[YW_ContactListViewController alloc] init];
     contactListController.delegate = self;
