@@ -147,7 +147,7 @@ static CGFloat viewOriginY = 64;
     
     YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, MenuBarHeight)];
     menuBar.maxShowNum = 3;
-    [menuBar setUpMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Chat"]]];
+    [menuBar setUpMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"ShortList"]]];
     menuBar.backgroundColor = [UIColor clearColor];
     
     self.menuBar = menuBar;
@@ -166,26 +166,47 @@ static CGFloat viewOriginY = 64;
 
 -(void)clickMenuItem:(YW_MenuBarLabel *)label
 {
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Contact"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Contact"]] indexOfObject:label.text];
+    [[YW_MenuSingleton shareMenuInstance] setMenuTitle:label.text];
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Contacts"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Contacts"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+            default:
+                break;
+        }
+    }
+    
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"ShortList"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"ShortList"]] indexOfObject:label.text];
+        switch (index) {
+            case 0:
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 1:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 2:
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 3:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 4:
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
@@ -196,74 +217,42 @@ static CGFloat viewOriginY = 64;
         int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Chat"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
         }
     }
     
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Life"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Life"]] indexOfObject:label.text];
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Help"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Help"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            default:
-                break;
-        }
-    }
-    
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Search"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Search"]] indexOfObject:label.text];
-        switch (index) {
-            case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
-                break;
-            case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
-            case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
             case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
@@ -339,7 +328,7 @@ static CGFloat viewOriginY = 64;
 {
     self.searchBar.backgroundColor = [UIColor whiteColor];
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
-    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Search"]]];
+    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Help"]]];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -366,7 +355,7 @@ static CGFloat viewOriginY = 64;
     CGFloat lalaW = ScreenWitdh;
     CGFloat lalaH = viewOriginY == 0 ? ScreenHeight - lalaY - 64 : ScreenHeight - lalaY ;
     
-    self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Contact", @"Chat", @"Life", @"Search", nil];
+    self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Contacts", @"ShortList", @"Help", nil];
     
     YW_SegmentInterface *interface = [[YW_SegmentInterface alloc] initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     
@@ -393,15 +382,11 @@ static CGFloat viewOriginY = 64;
     UIViewController *vc3 = [[UIViewController alloc]init];
     vc3.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    UIViewController *vc4 = [[UIViewController alloc]init];
-    vc4.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
-    
-    NSArray *vcarrr = @[contactListController,conversationNVC,vc3,vc4];
+    NSArray *vcarrr = @[contactListController,conversationNVC,vc3];
     
     [interface intoTitlesArray:self.tabTitleArr hostController:self];
     
     [interface intoChildControllerArray:[NSMutableArray arrayWithArray:vcarrr] isInsert:NO];
-    
     
     self.tabViewController = interface;
     [self.view addSubview:interface];
@@ -430,11 +415,13 @@ static CGFloat viewOriginY = 64;
 {
     self.conversationVC = aConversation;
     if (!_isExistOfConversition) {
-        [self.tabViewController insertTitle:aConversation.conversation.conversationId childVC:aConversation position:2];
+        [self.tabViewController insertTitle:@"Chat" childVC:aConversation position:2];
+        [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Chat"]]];
         _isExistOfConversition = YES;
     }else
     {
-        [self.tabViewController updateTitle:aConversation.conversation.conversationId childVC:aConversation position:2];
+        [self.tabViewController insertTitle:@"Chat" childVC:aConversation position:2];
+        [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Chat"]]];
     }
 }
 
@@ -471,11 +458,13 @@ static CGFloat viewOriginY = 64;
     {
         weakSelf.conversationVC = [[SPKitExample sharedInstance] openConversationViewControllerWithConversation:aConversation];
         if (!weakSelf.isExistOfConversition) {
-            [weakSelf.tabViewController insertTitle:aConversation.conversationLatestFromPerson.personId childVC:weakSelf.conversationVC position:2];
+            [weakSelf.tabViewController insertTitle:@"Chat" childVC:weakSelf.conversationVC position:2];
+            [weakSelf.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Chat"]]];
             weakSelf.isExistOfConversition = YES;
         }else
         {
-            [weakSelf.tabViewController updateTitle:aConversation.conversationId childVC:weakSelf.conversationVC position:2];
+            [weakSelf.tabViewController updateTitle:@"Chat" childVC:weakSelf.conversationVC position:2];
+            [weakSelf.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Chat"]]];
         }
 //        weakSelf.tabViewController
 //        MJCTabItem *chatLabel = weakSelf.tabViewController.currentItemNum;

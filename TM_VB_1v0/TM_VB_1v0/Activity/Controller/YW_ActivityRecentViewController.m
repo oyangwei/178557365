@@ -10,60 +10,186 @@
 #import "YW_ActivityRecentTableViewCell.h"
 #import "SPUtil.h"
 
+#define HeaderViewHeight 44
+
+#define ContactNormalBackgroudColor @"#EEEEEE"
+#define ContactLabelNormalTextColor @"#AAAAAA"
+
+#define ContactSelectBackgroudColor @"#AAAAAA"
+#define ContactLabelSelectTextColor @"#FFFFFF"
+
+typedef NS_ENUM(NSInteger, CurentShowThings){
+    ShowNone = 1 << 0,
+    ShowFavorite = 1 << 1,
+    ShowCollections = 1 << 2,
+    ShowThings = 1 << 3
+};
+
 @interface YW_ActivityRecentViewController ()<UITableViewDelegate, UITableViewDataSource>
+{
+    BOOL isHideFavorite;
+    BOOL isHideCollections;
+    BOOL isHideThings;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 /** Activity Data List */
-@property(strong, nonatomic) NSMutableArray *activityArray;
+@property(strong, nonatomic) NSMutableDictionary *dataDict;
 
 /** 选中的行列表 */
 @property(strong, nonatomic) NSMutableArray *deleteArray;
+
+/** HeaderTitles */
+@property(strong, nonatomic) NSArray *headerTitleArr;
+
+/** FavoriteArr */
+@property(strong, nonatomic) NSArray *favoriteArr;
+
+/** CollectionsArr */
+@property(strong, nonatomic) NSArray *collectionsArr;
+
+/** ThingsArr */
+@property(strong, nonatomic) NSArray *thingsArr;
 
 @end
 
 @implementation YW_ActivityRecentViewController
 
+#pragma mark - 懒加载
+-(NSArray *)headerTitleArr
+{
+    if (!_headerTitleArr) {
+        _headerTitleArr = [NSArray arrayWithObjects:@"Favorites", @"Collections", @"Things", nil];
+    }
+    return _headerTitleArr;
+}
+
+-(NSMutableDictionary *)dataDict
+{
+    if (!_dataDict) {
+        _dataDict = [NSMutableDictionary dictionary];
+        
+        for (int i = 0; i < self.headerTitleArr.count; i++) {
+            NSMutableArray *arr = [NSMutableArray array];
+            int arrCount = arc4random_uniform(20);
+            for (int j = 0; j < arrCount; j++) {
+                [arr addObject:[NSString stringWithFormat:@"%@%.2d", _headerTitleArr[i], j]];
+            }
+            [_dataDict addEntriesFromDictionary:@{_headerTitleArr[i]:arr}];
+        }
+    }
+    return _dataDict;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isHideFavorite = YES;
+    isHideCollections = YES;
+    isHideThings = YES;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"YW_ActivityRecentTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     
 }
 
-#pragma mark - 懒加载Activity Data List
--(NSMutableArray *)activityArray
-{
-    if (!_activityArray) {
-        _activityArray = [NSMutableArray array];
-        for (int i = 1; i <= 50; i++) {
-            [_activityArray addObject:[NSString stringWithFormat:@"%d", i]];
-        }
-    }
-    return _activityArray;
-}
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.headerTitleArr.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.activityArray.count;
+    NSArray *arr = self.dataDict[_headerTitleArr[section]];
+    
+    if (section == 0) {
+        self.favoriteArr = !isHideFavorite?arr:[NSArray array];
+        return self.favoriteArr.count;
+    }else if (section == 1)
+    {
+        self.collectionsArr = !isHideCollections?arr:[NSArray array];
+        return self.collectionsArr.count;
+    }else
+    {
+        self.thingsArr = !isHideThings?arr:[NSArray array];
+        return self.thingsArr.count;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSArray *arr = self.dataDict[_headerTitleArr[indexPath.section]];
+    
+    switch (indexPath.section) {
+        case 0:
+            arr = self.favoriteArr;
+            break;
+        case 1:
+            arr = self.collectionsArr;
+            break;
+        case 2:
+            arr = self.thingsArr;
+            break;
+        default:
+            break;
+    }
+    
     YW_ActivityRecentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-    [cell configureWithAvatar:[UIImage imageNamed:@"login_bg"] title:_activityArray[indexPath.row]];
+    [cell configureWithAvatar:[UIImage imageNamed:@"login_bg"] title:arr[indexPath.row]];
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64.0;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWitdh, HeaderViewHeight)];
+    
+    
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchShowThings:)];
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.tag = section + 100;
+    titleLabel.userInteractionEnabled = YES;
+    titleLabel.text = self.headerTitleArr[section];
+    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel addGestureRecognizer:tapGestureRecognizer];
+    
+    switch (section) {
+        case 0:
+            headerView.backgroundColor = [UIColor colorWithHexString:isHideFavorite?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
+            titleLabel.textColor = [UIColor colorWithHexString:isHideFavorite?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
+            break;
+        case 1:
+            headerView.backgroundColor = [UIColor colorWithHexString:isHideCollections?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
+            titleLabel.textColor = [UIColor colorWithHexString:isHideCollections?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
+        case 2:
+            headerView.backgroundColor = [UIColor colorWithHexString:isHideThings?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
+            titleLabel.textColor = [UIColor colorWithHexString:isHideThings?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
+        default:
+            break;
+    }
+    
+    [headerView addSubview:titleLabel];
+    
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(headerView.mas_leading);
+        make.top.equalTo(headerView.mas_top);
+        make.trailing.equalTo(headerView.mas_trailing);
+        make.height.mas_equalTo(HeaderViewHeight);
+    }];
+    
+    return headerView;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return HeaderViewHeight;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,6 +226,28 @@
     return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
 }
 
+-(void)switchShowThings:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    UILabel *label = (UILabel *)tapGestureRecognizer.view;
+    NSLog(@"tap--%ld", (long)label.tag);
+    
+    switch (label.tag) {
+        case 100:
+            isHideFavorite = !isHideFavorite;
+            break;
+        case 101:
+            isHideCollections = !isHideCollections;
+            break;
+        case 102:
+            isHideThings = !isHideThings;
+            break;
+        default:
+            break;
+    }
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:label.tag - 100] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 -(void)setEditing:(BOOL)editing cancle:(BOOL)cancle
 {
     [self.tableView setEditing:editing animated:YES];
@@ -133,7 +281,7 @@
         return NSOrderedDescending;
     }];
     for (NSIndexPath *indexPath in sortDeleteArray) {
-        [_activityArray removeObjectAtIndex:indexPath.row];
+//        [_activityArray removeObjectAtIndex:indexPath.row];
     }
     [self.tableView deleteRowsAtIndexPaths:sortDeleteArray withRowAnimation:UITableViewRowAnimationFade];
 //    [self.tableView reloadData];

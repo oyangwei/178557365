@@ -95,6 +95,7 @@
 		5575C9351F29B480003F12B8 /* pub_title_ico_back_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5575C91A1F29B480003F12B8 /* pub_title_ico_back_white@2x.png */; };
 		5575C9361F29B480003F12B8 /* SPKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C91C1F29B480003F12B8 /* SPKitExample.m */; };
 		5575C9371F29B480003F12B8 /* SPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C91E1F29B480003F12B8 /* SPUtil.m */; };
+		5595735F1F4FC35E009E928C /* YW_MenuSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5595735E1F4FC35E009E928C /* YW_MenuSingleton.m */; };
 		559654591F2F118B00C7F073 /* MenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 559654581F2F118B00C7F073 /* MenuTab.plist */; };
 		55C501F01F26E6F40062DBE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501EF1F26E6F40062DBE0 /* main.m */; };
 		55C501F31F26E6F40062DBE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501F21F26E6F40062DBE0 /* AppDelegate.m */; };
@@ -332,6 +333,8 @@
 		5575C91C1F29B480003F12B8 /* SPKitExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPKitExample.m; sourceTree = "<group>"; };
 		5575C91D1F29B480003F12B8 /* SPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUtil.h; sourceTree = "<group>"; };
 		5575C91E1F29B480003F12B8 /* SPUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtil.m; sourceTree = "<group>"; };
+		5595735D1F4FC35E009E928C /* YW_MenuSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MenuSingleton.h; sourceTree = "<group>"; };
+		5595735E1F4FC35E009E928C /* YW_MenuSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuSingleton.m; sourceTree = "<group>"; };
 		559654581F2F118B00C7F073 /* MenuTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTab.plist; sourceTree = "<group>"; };
 		55C501EB1F26E6F40062DBE0 /* TM_VB_1v0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TM_VB_1v0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C501EF1F26E6F40062DBE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1071,6 +1074,8 @@
 			children = (
 				55C5026B1F2716AC0062DBE0 /* YWCommonMethod.h */,
 				55C5026C1F2716AC0062DBE0 /* YWCommonMethod.m */,
+				5595735D1F4FC35E009E928C /* YW_MenuSingleton.h */,
+				5595735E1F4FC35E009E928C /* YW_MenuSingleton.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1604,6 +1609,7 @@
 				5575C8B71F288A2B003F12B8 /* NSString+Ext.m in Sources */,
 				5531F8B01F46789E00BCC28A /* YW_SubControllerMenuViewController.m in Sources */,
 				55EC6DFE1F32FF7400F5C7B2 /* SPContactListController.m in Sources */,
+				5595735F1F4FC35E009E928C /* YW_MenuSingleton.m in Sources */,
 				5531F8A71F4426F600BCC28A /* YW_TableViewCell.m in Sources */,
 				55EC6E091F33028900F5C7B2 /* UIControl+BlockSupport.m in Sources */,
 				55C502681F27142D0062DBE0 /* YW_NavigationController.m in Sources */,

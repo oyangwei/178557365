@@ -76,7 +76,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = @"Diary_Menu";
+    titleLabel.text = [[YW_MenuSingleton shareMenuInstance] menuTitle];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:20];
     [self.headerView addSubview:titleLabel];

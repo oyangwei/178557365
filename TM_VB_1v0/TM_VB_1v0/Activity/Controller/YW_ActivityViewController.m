@@ -159,7 +159,7 @@ static CGFloat viewOriginY = 64;
     
     YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, MenuBarHeight)];
     menuBar.maxShowNum = 3;
-    [menuBar setUpMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Active"]]];
+    [menuBar setUpMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"HotList"]]];
     menuBar.backgroundColor = [UIColor clearColor];
     
     self.menuBar = menuBar;
@@ -178,26 +178,70 @@ static CGFloat viewOriginY = 64;
 
 -(void)clickMenuItem:(YW_MenuBarLabel *)label
 {
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Things"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Things"]] indexOfObject:label.text];
+    [[YW_MenuSingleton shareMenuInstance] setMenuTitle:label.text];
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Shares"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Shares"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self CommonEditClick];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+            default:
+                break;
+        }
+    }
+    
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Things"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Things"]] indexOfObject:label.text];
+        switch (index) {
+            case 0:
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 1:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 2:
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 3:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 4:
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"HotList"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"HotList"]] indexOfObject:label.text];
+        switch (index) {
+            case 0:
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
+                break;
+            case 1:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 2:
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 3:
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
+                break;
+            case 4:
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
@@ -208,22 +252,19 @@ static CGFloat viewOriginY = 64;
         int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Active"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self CommonEditClick];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
@@ -234,48 +275,19 @@ static CGFloat viewOriginY = 64;
         int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Help"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            default:
-                break;
-        }
-    }
-    
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Search"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Search"]] indexOfObject:label.text];
-        switch (index) {
-            case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
-                break;
-            case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
-            case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
             case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+//                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
@@ -351,7 +363,7 @@ static CGFloat viewOriginY = 64;
 {
     self.searchBar.backgroundColor = [UIColor whiteColor];
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
-    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Search"]]];
+    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Help"]]];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -378,14 +390,14 @@ static CGFloat viewOriginY = 64;
     CGFloat lalaW = ScreenWitdh;
     CGFloat lalaH = viewOriginY == 0 ? ScreenHeight - lalaY - 64 : ScreenHeight - lalaY ;
     
-    self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Things", @"Active", @"Help", @"Search", nil];
+    self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Shares", @"Things", @"HotList", @"Active", @"Help", nil];
     
     YW_SegmentInterface *interface = [[YW_SegmentInterface alloc] initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     
     interface.delegate = self;
     interface.showItemCount = 1;
-    interface.defaultSelectNum = 1;
-    currentChildIndex = 1;
+    interface.defaultSelectNum = 2;
+    currentChildIndex = 2;
     
     interface.itemNormalTextColor = [UIColor whiteColor];
     interface.itemSelectedTextColor = [UIColor whiteColor];
@@ -517,7 +529,6 @@ static CGFloat viewOriginY = 64;
 
 -(void)RecenttEditBtn:(UIButton *)btn
 {
-    NSLog(@"%ld", (long)btn.tag);
     switch (btn.tag) {
         case 101:
         {

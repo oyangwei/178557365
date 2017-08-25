@@ -2,37 +2,40 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Shares</key>
+	<array>
+		<string>Shares</string>
+		<string>Share</string>
+		<string>View</string>
+		<string>Help</string>
+	</array>
 	<key>Things</key>
 	<array>
 		<string>Things</string>
-		<string>Edit</string>
-		<string>Delete</string>
-		<string>More</string>
-		<string>Mark</string>
+		<string>Share</string>
+		<string>View</string>
+		<string>Help</string>
+	</array>
+	<key>HotList</key>
+	<array>
+		<string>HotList</string>
+		<string>Share</string>
+		<string>View</string>
+		<string>Help</string>
 	</array>
 	<key>Active</key>
 	<array>
 		<string>Active</string>
-		<string>Edit</string>
+		<string>Share</string>
 		<string>View</string>
-		<string>Mark</string>
-		<string>More</string>
+		<string>Help</string>
 	</array>
 	<key>Help</key>
 	<array>
 		<string>Help</string>
-		<string>Edit</string>
-		<string>Delete</string>
-		<string>Mark</string>
-		<string>More</string>
-	</array>
-	<key>Search</key>
-	<array>
-		<string>Search</string>
-		<string>Edit</string>
-		<string>Delete</string>
-		<string>Mark</string>
-		<string>More</string>
+		<string>Share</string>
+		<string>View</string>
+		<string>Help</string>
 	</array>
 </dict>
 </plist>

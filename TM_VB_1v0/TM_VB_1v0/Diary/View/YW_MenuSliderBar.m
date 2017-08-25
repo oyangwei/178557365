@@ -60,6 +60,7 @@
     }
     
     [self setUpMenuWithTitleArr:titleArr];
+    
 }
 
 -(void)tapMenuItem:(UITapGestureRecognizer *)tapGestureRecognizer

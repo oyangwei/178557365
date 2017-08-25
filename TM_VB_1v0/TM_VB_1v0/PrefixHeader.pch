@@ -24,4 +24,6 @@
 #import "UIButton+YWUIButton.h" //UIButton类别
 #import "UIViewController+YWUIViewController.h"  //UIViewController类别
 
+#import "YW_MenuSingleton.h"  //菜单栏单例
+
 #endif /* PrefixHeader_pch */

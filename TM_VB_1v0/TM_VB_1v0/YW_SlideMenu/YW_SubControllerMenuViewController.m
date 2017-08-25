@@ -17,6 +17,7 @@
 #import "YW_NewsViewController.h"
 #import "YW_MeViewController.h"
 #import "YW_SliderMenuTool.h"
+#import "SPUtil.h"
 
 @interface YW_SubControllerMenuViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -76,7 +77,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = @"Diary_Menu";
+    titleLabel.text = [[YW_MenuSingleton shareMenuInstance] menuTitle];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:20];
     [self.headerView addSubview:titleLabel];
@@ -90,15 +91,18 @@
 
 -(void)setupData
 {
-    YW_MainMenuItem *Contact = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:@"Contact" destVcClass:[YW_DiaryViewController class]];
-    
-    YW_MainMenuItem *Chat = [YW_MainMenuItem itemWithIcon:@"menu_promo" title:@"Chat" destVcClass:[YW_ActivityViewController class]];
-    
-    YW_MainMenuItem *Life = [YW_MainMenuItem itemWithIcon:@"menu_trips" title:@"Life" destVcClass:[YW_NewsViewController class]];
-    
-    YW_MainMenuItem *Search = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Search" destVcClass:[YW_NewsViewController class]];
-
-    self.data = @[Contact, Chat, Life, Search];
+    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"View"])
+    {
+        
+        YW_MainMenuItem *Slide = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Slide" destVcClass:[YW_NewsViewController class]];
+        YW_MainMenuItem *Fixed = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Fixed" destVcClass:[YW_NewsViewController class]];
+        self.data = @[Slide, Fixed];
+    }
+    else
+    {
+        YW_MainMenuItem *Select = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Select" destVcClass:[YW_NewsViewController class]];
+        self.data = @[Select];
+    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -127,14 +131,13 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    YW_MainMenuItem *item = _data[indexPath.row];
-    if (item.destVcClass == nil) return;
+    YW_AnimateMemuViewController *animVC = (YW_AnimateMemuViewController *)self.parentViewController;
+    [animVC closeMenu];
     
-    YW_AnimateMemuViewController *animateVC = (YW_AnimateMemuViewController *)self.parentViewController;
-    [animateVC closeMenu];
-    
-    YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animateVC.rootViewController;
-    [diaryVC setCurrentSelectedViewController:indexPath.row];
+//    YW_MainMenuItem *cell = (YW_MainMenuItem *)[tableView cellForRowAtIndexPath:indexPath];
+//    NSLog(@"%@", cell);
+//    [[SPUtil sharedInstance] showNotificationInViewController:animVC.rootViewController title:@"AAAA" subtitle:nil type:SPMessageNotificationTypeMessage];
+//    NSLog(@"%s, line = %d", __func__, __LINE__);
 }
 
 @end
