@@ -27,16 +27,16 @@
 @property(strong, nonatomic) UIView *headerView;
 
 /** Data */
-@property(strong, nonatomic) NSArray *data;
+@property(strong, nonatomic) NSMutableArray *data;
 
 @end
 
 @implementation YW_SubMenuViewController
 
--(NSArray *)data
+-(NSMutableArray *)data
 {
     if (!_data) {
-        _data = [NSArray array];
+        _data = [NSMutableArray array];
     }
     return _data;
 }
@@ -90,15 +90,13 @@
 
 -(void)setupData
 {
-    YW_MainMenuItem *Contact = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:@"Contact" destVcClass:[YW_DiaryViewController class]];
+    NSArray *arr = [[YW_MenuSingleton shareMenuInstance] menuControllersTitlesArr];
     
-    YW_MainMenuItem *Chat = [YW_MainMenuItem itemWithIcon:@"menu_promo" title:@"Chat" destVcClass:[YW_ActivityViewController class]];
+    for (int i = 0; i < arr.count; i++) {
+        YW_MainMenuItem *item = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:arr[i] destVcNumber:i];
+        [self.data addObject:item];
+    }
     
-    YW_MainMenuItem *Life = [YW_MainMenuItem itemWithIcon:@"menu_trips" title:@"Life" destVcClass:[YW_NewsViewController class]];
-    
-    YW_MainMenuItem *Search = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Search" destVcClass:[YW_NewsViewController class]];
-
-    self.data = @[Contact, Chat, Life, Search];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -128,21 +126,25 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YW_MainMenuItem *item = _data[indexPath.row];
-    if (item.destVcClass == nil) return;
     
     YW_AnimateMemuViewController *animateVC = (YW_AnimateMemuViewController *)self.parentViewController;
     [animateVC closeMenu];
     
-    UIViewController *vc = [[item.destVcClass alloc] init];
+    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Diary"]) {
+        YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animateVC.rootViewController;
+        [diaryVC setCurrentSelectedViewController:item.destVcNum];
+    }
+    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Activity"]) {
+        YW_ActivityViewController *activityVC = (YW_ActivityViewController *)animateVC.rootViewController;
+        [activityVC setCurrentSelectedViewController:item.destVcNum];
+    }
+    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Me"]) {
+        YW_MeViewController *meVC = (YW_MeViewController *)animateVC.rootViewController;
+        [meVC setCurrentSelectedViewController:item.destVcNum];
+    }
     
-    YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:vc];
 
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        window.rootViewController = nVC;
-        [YW_SliderMenuTool hide];
-    });
 }
 
 @end

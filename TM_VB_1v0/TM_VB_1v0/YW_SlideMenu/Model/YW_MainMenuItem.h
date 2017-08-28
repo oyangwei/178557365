@@ -21,9 +21,14 @@ typedef void (^ItemAction)();
 /**  点击事件 */
 @property(copy, nonatomic) ItemAction action;
 
+/** 选择Item的序号 */
+@property(assign, nonatomic) int destVcNum;
+
 /** 点击某行跳转的控制器 */
 @property(strong, nonatomic) Class destVcClass;
 
 +(instancetype)itemWithIcon:(NSString *)icon title:(NSString *)title destVcClass:(Class)destClass;
+
++(instancetype)itemWithIcon:(NSString *)icon title:(NSString *)title destVcNumber:(int)num;
 
 @end

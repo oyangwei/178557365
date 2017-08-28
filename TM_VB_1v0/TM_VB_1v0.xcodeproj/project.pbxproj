@@ -96,6 +96,8 @@
 		5575C9361F29B480003F12B8 /* SPKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C91C1F29B480003F12B8 /* SPKitExample.m */; };
 		5575C9371F29B480003F12B8 /* SPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575C91E1F29B480003F12B8 /* SPUtil.m */; };
 		5595735F1F4FC35E009E928C /* YW_MenuSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5595735E1F4FC35E009E928C /* YW_MenuSingleton.m */; };
+		559573641F53B595009E928C /* MeMenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 559573631F53B595009E928C /* MeMenuTab.plist */; };
+		559573661F53EEB9009E928C /* NewsMenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 559573651F53EEB9009E928C /* NewsMenuTab.plist */; };
 		559654591F2F118B00C7F073 /* MenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 559654581F2F118B00C7F073 /* MenuTab.plist */; };
 		55C501F01F26E6F40062DBE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501EF1F26E6F40062DBE0 /* main.m */; };
 		55C501F31F26E6F40062DBE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501F21F26E6F40062DBE0 /* AppDelegate.m */; };
@@ -335,6 +337,8 @@
 		5575C91E1F29B480003F12B8 /* SPUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtil.m; sourceTree = "<group>"; };
 		5595735D1F4FC35E009E928C /* YW_MenuSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MenuSingleton.h; sourceTree = "<group>"; };
 		5595735E1F4FC35E009E928C /* YW_MenuSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuSingleton.m; sourceTree = "<group>"; };
+		559573631F53B595009E928C /* MeMenuTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MeMenuTab.plist; sourceTree = "<group>"; };
+		559573651F53EEB9009E928C /* NewsMenuTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NewsMenuTab.plist; sourceTree = "<group>"; };
 		559654581F2F118B00C7F073 /* MenuTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTab.plist; sourceTree = "<group>"; };
 		55C501EB1F26E6F40062DBE0 /* TM_VB_1v0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TM_VB_1v0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C501EF1F26E6F40062DBE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -743,7 +747,9 @@
 				55C501FC1F26E6F40062DBE0 /* LaunchScreen.storyboard */,
 				55C501FF1F26E6F40062DBE0 /* Info.plist */,
 				559654581F2F118B00C7F073 /* MenuTab.plist */,
+				559573631F53B595009E928C /* MeMenuTab.plist */,
 				557198501F3AB12800C2328A /* ActivityMenuTab.plist */,
+				559573651F53EEB9009E928C /* NewsMenuTab.plist */,
 				5532EA461F3064C40014C297 /* historyRecord.plist */,
 				55C501EE1F26E6F40062DBE0 /* Supporting Files */,
 			);
@@ -1465,6 +1471,7 @@
 				55EC6DFD1F32FF7400F5C7B2 /* SPContactCell.xib in Resources */,
 				5575C9291F29B480003F12B8 /* calling_card_bg@2x.png in Resources */,
 				5575C9321F29B480003F12B8 /* YW_TGZ_Emoitons.emo in Resources */,
+				559573661F53EEB9009E928C /* NewsMenuTab.plist in Resources */,
 				55C5028B1F2716AC0062DBE0 /* more_unfold.png in Resources */,
 				55C501FE1F26E6F40062DBE0 /* LaunchScreen.storyboard in Resources */,
 				55C502811F2716AC0062DBE0 /* areaCode.plist in Resources */,
@@ -1477,6 +1484,7 @@
 				5571986D1F3D88FB00C2328A /* arrow_L_64.png in Resources */,
 				55C502841F2716AC0062DBE0 /* contact_1.png in Resources */,
 				5575C9301F29B480003F12B8 /* input_plug_ico_hi_nor@2x.png in Resources */,
+				559573641F53B595009E928C /* MeMenuTab.plist in Resources */,
 				5531F8DC1F4ABFFC00BCC28A /* YW_ActivityThingsViewController.xib in Resources */,
 				55C501FB1F26E6F40062DBE0 /* Assets.xcassets in Resources */,
 				5575C92A1F29B480003F12B8 /* CustomizedUIResources.bundle in Resources */,

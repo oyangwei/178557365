@@ -1,5 +1,13 @@
 //
-//  YW_NewsViewController.m
+//  YW_MeViewController.m
+//  TM_VB_1v0
+//
+//  Created by z°先森 on 2017/7/25.
+//  Copyright © 2017年 TeleconMobile. All rights reserved.
+//
+
+//
+//  YW_ShopViewController.m
 //  TM_VB_1v0
 //
 //  Created by z°先森 on 2017/7/25.
@@ -7,7 +15,6 @@
 //
 
 #import "YW_NewsViewController.h"
-
 #import "MJCSegmentInterface.h"
 #import "YW_MenuSliderBar.h"
 #import "YW_NaviBarListViewController.h"
@@ -16,20 +23,19 @@
 #import "MJCCommonTools.h"
 #import "MJCTitlesView.h"
 #import "YW_HistoryTableView.h"
-#import "YW_ActivityRecentViewController.h"
-#import "YW_SubControllerMenuViewController.h"
-#import "YW_SubMenuViewController.h"
-#import "YW_MainMenuViewController.h"
-#import "YW_SliderMenuTool.h"
-#import "YW_SuspendUIButton.h"
+#import "YW_MenuBarLabel.h"
 #import "YW_SegmentInterface.h"
+#import "YW_SuspendUIButton.h"
+#import "YW_SubMenuViewController.h"
+#import "YW_SubControllerMenuViewController.h"
+#import "YW_SliderMenuTool.h"
+#import "YW_MainMenuViewController.h"
 
-#define BottomTabBarHeight 49
-#define EditBtnHeight 44
+#define BottomTabBarHeight self.tabBar.frame.size.height
 
-#define CurrentTitle @"<<     Acitivity     >>"
+static CGFloat viewOriginY = 64;
 
-@interface YW_NewsViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate>
+@interface YW_NewsViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, SegmentInterfaceDelegate, UIGestureRecognizerDelegate>
 {
     CGFloat keyBoardHeight; // 键盘高度
     int currentChildIndex;  // 当前标签视图序号
@@ -56,16 +62,8 @@
 /** 标签子控制器标题 */
 @property(strong, nonatomic) NSMutableArray *tabTitleArr;
 
-/** 编辑确认按钮 */
-@property(strong, nonatomic) UIButton *deleteBtn;
-
-/** 取消确认按钮 */
-@property(strong, nonatomic) UIButton *cancleBtn;
-
 /** 历史记录 */
 @property(strong, nonatomic) NSMutableArray *historyRecord;
-
-@property(strong, nonatomic) YW_ActivityRecentViewController *activityRecentVC;
 
 /** window */
 @property (nonatomic, strong) UIWindow *window;
@@ -90,7 +88,7 @@
 -(NSDictionary *)menuTabArr
 {
     if (!_menuTabArr) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"ActivityMenuTab" ofType:@"plist"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"NewsMenuTab" ofType:@"plist"];
         _menuTabArr = [[NSDictionary alloc] initWithContentsOfFile:path];
     }
     return _menuTabArr;
@@ -100,7 +98,6 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = CurrentTitle;
     
     self.automaticallyAdjustsScrollViewInsets = false;
     pathStr = [[NSBundle mainBundle] pathForResource:@"historyRecord" ofType:@"plist"];
@@ -125,6 +122,8 @@
 {
     [super viewWillAppear:animated];
     
+    self.navigationController.navigationBar.alpha = 0.0;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -138,14 +137,23 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -15;
     
+    if (!self.navigationController.navigationBar.translucent) {
+        viewOriginY = 0;
+    }
+    
+    //自定义一个NaVIgationBar
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //消除阴影
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [leftBtn setImage:[UIImage imageNamed:@"navigationbar_list_normal"] forState:UIControlStateNormal];
-    [leftBtn setImage:[UIImage imageNamed:@"navigationbar_list_hl"] forState:UIControlStateHighlighted];
+    [leftBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateHighlighted];
     [leftBtn addTarget:self action:@selector(showMainMenu) forControlEvents:UIControlEventTouchUpInside];
     
     YW_MenuSliderBar *menuBar = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, MenuBarHeight)];
     menuBar.maxShowNum = 3;
-    [menuBar setUpMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Active"]]];
+    [menuBar setUpMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Title01"]]];
     menuBar.backgroundColor = [UIColor clearColor];
     
     self.menuBar = menuBar;
@@ -162,106 +170,64 @@
     
 }
 
+
 -(void)clickMenuItem:(YW_MenuBarLabel *)label
 {
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Things"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Things"]] indexOfObject:label.text];
+    [[YW_MenuSingleton shareMenuInstance] setMenuTitle:label.text];
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Title01"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Title01"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                //                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
         }
     }
     
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Active"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Active"]] indexOfObject:label.text];
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Title02"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Title02"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                //                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
         }
     }
     
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Help"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Help"]] indexOfObject:label.text];
+    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Title03"]) {
+        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Title03"]] indexOfObject:label.text];
         switch (index) {
             case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
+                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubMenuViewController class]];
                 break;
             case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            default:
-                break;
-        }
-    }
-    
-    if ([self.tabTitleArr[currentChildIndex] isEqualToString:@"Search"]) {
-        int index = (int)[[self menuArr:[self.menuTabArr objectForKey:@"Search"]] indexOfObject:label.text];
-        switch (index) {
-            case 0:
-                [self showSlideMenu:YW_ShowMenuFromLeft withViewController:[YW_SubControllerMenuViewController class]];
-                break;
-            case 1:
                 [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
-            case 2:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
             case 3:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 4:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
-                break;
-            case 5:
-                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubMenuViewController class]];
+                //                [self showSlideMenu:YW_ShowMenuFromRight withViewController:[YW_SubControllerMenuViewController class]];
                 break;
             default:
                 break;
@@ -269,21 +235,23 @@
     }
 }
 
+#pragma mark - 初始化搜索栏
 -(void)setUpSearchBar
 {
     UIView *serarchBarView = [[UIView alloc] init];
-    serarchBarView.backgroundColor  = [UIColor clearColor];
+    serarchBarView.backgroundColor  = [UIColor colorWithHexString:ThemeColor];
     serarchBarView.userInteractionEnabled = YES;
     
     UIButton *backBtn = [[UIButton alloc] init];
-    backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [backBtn setImage:[UIImage imageNamed:LeftArrow] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:LeftArrow] forState:UIControlStateHighlighted];
+    backBtn.imageView.contentMode = UIViewContentModeScaleToFill;
+    [backBtn setImage:[UIImage imageNamed:BackBtnImageName] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:BackBtnImageName] forState:UIControlStateHighlighted];
     //    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *goBtn = [[UIButton alloc] init];
-    [goBtn setImage:[UIImage imageNamed:RightArrow] forState:UIControlStateNormal];
-    [goBtn setImage:[UIImage imageNamed:RightArrow] forState:UIControlStateHighlighted];
+    goBtn.imageView.contentMode = UIViewContentModeScaleToFill;
+    [goBtn setImage:[UIImage imageNamed:GoBtnImageName] forState:UIControlStateNormal];
+    [goBtn setImage:[UIImage imageNamed:GoBtnImageName] forState:UIControlStateHighlighted];
     //    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
     
     self.searchBar = [[UISearchBar alloc] init];
@@ -292,9 +260,9 @@
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     self.searchBar.searchTextPositionAdjustment = UIOffsetMake(10, 0);
     self.searchBar.barTintColor = [UIColor clearColor];
-    self.searchBar.layer.borderWidth = 1.0;
-    self.searchBar.layer.borderColor = [UIColor grayColor].CGColor;
-    self.searchBar.layer.cornerRadius = 10;
+    //    self.searchBar.layer.borderWidth = 1.0;
+    //    self.searchBar.layer.borderColor = [UIColor grayColor].CGColor;
+    //    self.searchBar.layer.cornerRadius = 10;
     self.searchBar.returnKeyType = UIReturnKeySearch;
     
     [serarchBarView addSubview:backBtn];
@@ -305,26 +273,26 @@
     [serarchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.view.mas_leading);
         make.trailing.equalTo(self.view.mas_trailing);
-        make.top.equalTo(self.view.mas_top).offset(64);
-        make.height.mas_equalTo(44);
+        make.top.equalTo(self.view.mas_top);
+        make.height.mas_equalTo(SearchBarHeight);
     }];
     
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(serarchBarView.mas_leading).offset(10);
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
+        make.width.mas_equalTo(35);
+        make.height.mas_equalTo(35);
         make.centerY.equalTo(serarchBarView.mas_centerY);
     }];
     
     [goBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(backBtn.mas_trailing).offset(10);
-        make.width.mas_equalTo(20);
-        make.height.mas_equalTo(20);
+        make.leading.equalTo(backBtn.mas_trailing).offset(15);
+        make.width.mas_equalTo(35);
+        make.height.mas_equalTo(35);
         make.centerY.equalTo(serarchBarView.mas_centerY);
     }];
     
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(goBtn.mas_trailing).offset(10);
+        make.leading.equalTo(goBtn.mas_trailing).offset(15);
         make.trailing.equalTo(self.view.mas_trailing).offset(-10);
         make.height.mas_equalTo(30);
         make.centerY.equalTo(serarchBarView.mas_centerY);
@@ -335,7 +303,7 @@
 {
     self.searchBar.backgroundColor = [UIColor whiteColor];
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
-    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Search"]]];
+    [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Title03"]]];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -358,43 +326,41 @@
 #pragma mark - 初始化子控制器栏
 - (void)setUpTabBar
 {
-    CGFloat lalaY = 64 + SearchBarHeight;
+    CGFloat lalaY = SearchBarHeight + viewOriginY;
     CGFloat lalaW = ScreenWitdh;
-    CGFloat lalaH = ScreenHeight - lalaY;
+    CGFloat lalaH = viewOriginY == 0 ? ScreenHeight - lalaY - 64 : ScreenHeight - lalaY ;
     
-    self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Things", @"Active", @"Help", @"Search", nil];
+    self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Title01", @"Title02", @"Title03", nil];
     
     YW_SegmentInterface *interface = [[YW_SegmentInterface alloc] initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     
     interface.delegate = self;
     interface.showItemCount = 1;
-    interface.defaultSelectNum = 1;
-    currentChildIndex = 1;
+    interface.defaultSelectNum = 0;
+    currentChildIndex = 0;
     
-    interface.itemNormalTextColor = [UIColor colorWithHexString:ThemeColor];
+    interface.itemNormalTextColor = [UIColor whiteColor];
     interface.itemSelectedTextColor = [UIColor whiteColor];
     
-    interface.itemNormalBackgroudColor = [UIColor whiteColor];
+    interface.itemNormalBackgroudColor = [UIColor colorWithHexString:@"#8EAFD3"];
     interface.itemSelectedBackgroudColor = [UIColor colorWithHexString:ThemeColor];
     
     UIViewController *vc1 = [[UIViewController alloc]init];
     vc1.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    YW_ActivityRecentViewController *recentActivityController = [[YW_ActivityRecentViewController alloc] init];
+    UIViewController *vc2 = [[UIViewController alloc]init];
+    vc2.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
     UIViewController *vc3 = [[UIViewController alloc]init];
     vc3.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    UIViewController *vc4 = [[UIViewController alloc]init];
-    vc4.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
+    NSArray *vcarrr = @[vc1,vc2,vc3];
     
-    NSArray *vcarrr = @[vc1,recentActivityController,vc3,vc4];
+    [[YW_MenuSingleton shareMenuInstance] setMenuControllersTitlesArr:self.tabTitleArr];
     
     [interface intoTitlesArray:self.tabTitleArr hostController:self];
     
     [interface intoChildControllerArray:[NSMutableArray arrayWithArray:vcarrr] isInsert:NO];
-    
-    
     
     self.tabViewController = interface;
     [self.view addSubview:interface];
@@ -439,82 +405,6 @@
         case YW_ShowMenuFromRight:
         {
             [YW_SliderMenuTool showFunctionMenuWithRootViewController:self withToViewController:class];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-#pragma mark - MenuBar 点击事件
-- (void)RecentEdit:(id)sender
-{
-    [self.activityRecentVC setEditing:YES cancle:YES];
-    
-    if (!self.deleteBtn || !self.cancleBtn) {
-        UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.height, self.view.width / 2, EditBtnHeight)];
-        cancleBtn.tag = 101;
-        cancleBtn.backgroundColor = [UIColor grayColor];
-        cancleBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-        [cancleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [cancleBtn setTitle:@"Cancle" forState:UIControlStateNormal];
-        [cancleBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.width / 2, self.view.height - BottomTabBarHeight, self.view.width / 2, EditBtnHeight)];
-        deleteBtn.tag = 102;
-        deleteBtn.backgroundColor = [UIColor redColor];
-        deleteBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-        [deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [deleteBtn setTitle:@"Delete" forState:UIControlStateNormal];
-        [deleteBtn addTarget:self action:@selector(RecenttEditBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.deleteBtn = deleteBtn;
-        self.cancleBtn = cancleBtn;
-        [self.view addSubview:self.deleteBtn];
-        [self.view addSubview:self.cancleBtn];
-    }
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        CGRect deleteFrame = self.deleteBtn.frame;
-        deleteFrame.origin.y = self.view.height - BottomTabBarHeight - EditBtnHeight;
-        self.deleteBtn.frame = deleteFrame;
-        
-        CGRect cancleFrame = self.cancleBtn.frame;
-        cancleFrame.origin.y = self.view.height - BottomTabBarHeight - EditBtnHeight;
-        self.cancleBtn.frame = cancleFrame;
-    }];
-}
-
--(void)RecenttEditBtn:(UIButton *)btn
-{
-    switch (btn.tag) {
-        case 101:
-        {
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect deleteFrame = self.deleteBtn.frame;
-                deleteFrame.origin.y = self.view.height;
-                self.deleteBtn.frame = deleteFrame;
-                
-                CGRect cancleFrame = self.cancleBtn.frame;
-                cancleFrame.origin.y = self.view.height;
-                self.cancleBtn.frame = cancleFrame;
-            }];
-            
-            [self.activityRecentVC setEditing:NO cancle:YES];
-            break;
-        }
-        case 102:
-        {
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect deleteFrame = self.deleteBtn.frame;
-                deleteFrame.origin.y = self.view.height;
-                self.deleteBtn.frame = deleteFrame;
-                
-                CGRect cancleFrame = self.cancleBtn.frame;
-                cancleFrame.origin.y = self.view.height;
-                self.cancleBtn.frame = cancleFrame;
-            }];
-            [self.activityRecentVC setEditing:NO cancle:NO];
             break;
         }
         default:
@@ -736,4 +626,3 @@
 }
 
 @end
-

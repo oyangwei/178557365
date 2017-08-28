@@ -19,6 +19,9 @@
 /** Current SubMenu Title */
 @property(strong, nonatomic) NSString *subMenuTitle;
 
+/** 菜单项 */
+@property(strong, nonatomic) NSMutableArray *menuControllersTitlesArr;
+
 +(instancetype)shareMenuInstance;
 
 @end

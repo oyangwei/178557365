@@ -378,11 +378,12 @@ static CGFloat viewOriginY = 64;
     YW_NavigationController *conversationNVC = [[YW_NavigationController alloc] initWithRootViewController:conversationListController];
     [conversationNVC.navigationBar setHidden:YES];
     
-    
     UIViewController *vc3 = [[UIViewController alloc]init];
     vc3.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
     NSArray *vcarrr = @[contactListController,conversationNVC,vc3];
+    
+    [[YW_MenuSingleton shareMenuInstance] setMenuControllersTitlesArr:self.tabTitleArr];
     
     [interface intoTitlesArray:self.tabTitleArr hostController:self];
     

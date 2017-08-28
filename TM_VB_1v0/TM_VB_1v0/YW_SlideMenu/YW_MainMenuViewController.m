@@ -106,7 +106,7 @@
 
 -(void)setupData
 {
-    YW_MainMenuItem *user_name = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"UserName" destVcClass:nil];
+    YW_MainMenuItem *user_name = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"UserName" destVcClass:[YW_MeViewController class]];
     
     YW_MainMenuItem *diary = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:@"Diary" destVcClass:[YW_DiaryViewController class]];
     

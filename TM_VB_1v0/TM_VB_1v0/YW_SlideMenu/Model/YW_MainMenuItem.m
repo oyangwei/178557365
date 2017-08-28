@@ -19,4 +19,13 @@
     return item;
 }
 
++(instancetype)itemWithIcon:(NSString *)icon title:(NSString *)title destVcNumber:(int)destVcNum
+{
+    YW_MainMenuItem *item = [[self alloc] init];
+    item.icon = icon;
+    item.title = title;
+    item.destVcNum = destVcNum;
+    return item;
+}
+
 @end

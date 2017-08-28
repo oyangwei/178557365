@@ -417,7 +417,12 @@ static CGFloat viewOriginY = 64;
     UIViewController *vc4 = [[UIViewController alloc]init];
     vc4.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    NSArray *vcarrr = @[thingsActivityViewController,recentActivityController,vc3,vc4];
+    UIViewController *vc5 = [[UIViewController alloc]init];
+    vc5.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
+    
+    NSArray *vcarrr = @[thingsActivityViewController,recentActivityController,vc3,vc4, vc5];
+    
+    [[YW_MenuSingleton shareMenuInstance] setMenuControllersTitlesArr:self.tabTitleArr];
     
     [interface intoTitlesArray:self.tabTitleArr hostController:self];
     
