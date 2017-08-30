@@ -261,6 +261,10 @@ typedef NS_ENUM(NSInteger, CurrentShowContactStyle){
         [self.deleteArray removeObject:indexPath];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+    else
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath

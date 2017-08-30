@@ -73,9 +73,17 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
         for (int i = 0; i < self.headerTitleArr.count; i++) {
             NSMutableArray *arr = [NSMutableArray array];
             int arrCount = arc4random_uniform(20);
-            for (int j = 0; j < arrCount; j++) {
-                [arr addObject:[NSString stringWithFormat:@"%@%.2d", _headerTitleArr[i], j]];
+            
+            if (i == 0) {
+                arrCount = 6;
+                arr = [NSMutableArray arrayWithObjects:@"One Btn", @"Tow Btn", @"Three Btn", @"Four Btn", @"BLE Btn", @"Six Btn", nil];
+            }else
+            {
+                for (int j = 0; j < arrCount; j++) {
+                    [arr addObject:[NSString stringWithFormat:@"%@%.2d", _headerTitleArr[i], j]];
+                }
             }
+            
             [_dataDict addEntriesFromDictionary:@{_headerTitleArr[i]:arr}];
         }
     }
@@ -85,7 +93,7 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    isHideFavorite = YES;
+    isHideFavorite = NO;
     isHideCollections = YES;
     isHideThings = YES;
     
@@ -168,6 +176,7 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
         case 1:
             headerView.backgroundColor = [UIColor colorWithHexString:isHideCollections?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
             titleLabel.textColor = [UIColor colorWithHexString:isHideCollections?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
+            break;
         case 2:
             headerView.backgroundColor = [UIColor colorWithHexString:isHideThings?ContactNormalBackgroudColor:ContactSelectBackgroudColor];
             titleLabel.textColor = [UIColor colorWithHexString:isHideThings?ContactLabelNormalTextColor:ContactLabelSelectTextColor];
@@ -194,8 +203,23 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    YW_ActivityRecentTableViewCell *cell = (YW_ActivityRecentTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
     if ([self.tableView isEditing]) {
         [self.deleteArray addObject:indexPath];
+    }else
+    {
+        if (indexPath.section == 0) {
+            if ([self.delegate respondsToSelector:@selector(activityItemSelected: itemNum:)]) {
+                [self.delegate activityItemSelected:cell.title itemNum:(int)indexPath.row];
+            }
+        }else
+        {
+            if ([self.delegate respondsToSelector:@selector(activityItemSelected:)]) {
+                [self.delegate activityItemSelected:cell.title];
+            }
+        }
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
@@ -205,6 +229,7 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
         [self.deleteArray removeObject:indexPath];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+    
 }
 
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -229,7 +254,6 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 -(void)switchShowThings:(UITapGestureRecognizer *)tapGestureRecognizer
 {
     UILabel *label = (UILabel *)tapGestureRecognizer.view;
-    NSLog(@"tap--%ld", (long)label.tag);
     
     switch (label.tag) {
         case 100:

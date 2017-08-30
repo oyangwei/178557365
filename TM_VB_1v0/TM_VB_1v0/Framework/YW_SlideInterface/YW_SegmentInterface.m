@@ -36,6 +36,7 @@ static CGFloat const defaultShowCountItem = 4;
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        self.isChildScrollEnabel = YES;
         [self titleScrollView];
         [self childScrollView];
     }
@@ -68,6 +69,12 @@ static CGFloat const defaultShowCountItem = 4;
 {
     [super layoutSubviews];
 
+    [_childScrollView setFrame:CGRectMake(0, CGRectGetMaxY(_titleScrollView.frame), ScreenWitdh, self.height - _titleScrollView.frame.size.height)];
+}
+
+-(void)layoutIfNeeded
+{
+    [super layoutIfNeeded];
 }
 
 -(void)intoTitlesArray:(NSMutableArray *)titlesArray hostController:(UIViewController *)hostController
@@ -231,6 +238,20 @@ static CGFloat const defaultShowCountItem = 4;
     }
 }
 
+-(void)setChildScrollViewFrame:(CGRect)childScrollViewFrame
+{
+    _childScrollViewFrame = childScrollViewFrame;
+    if (!CGRectIsNull(childScrollViewFrame)) {
+        self.childScrollViewFrame = childScrollViewFrame;
+    }
+}
+
+-(void)setIsChildScrollEnabel:(BOOL)isChildScrollEnabel
+{
+    _isChildScrollEnabel = isChildScrollEnabel;
+    self.childScrollView.scrollEnabled = isChildScrollEnabel;
+}
+
 -(void)setDefaultSelectNum:(int)defaultSelectNum
 {
     if (!defaultSelectNum) {
@@ -241,6 +262,5 @@ static CGFloat const defaultShowCountItem = 4;
     [_childScrollView setContentOffset:CGPointMake(_childScrollView.frame.size.width * defaultSelectNum, 0)];
     [self addChildView];
 }
-
 
 @end

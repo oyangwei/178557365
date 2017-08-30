@@ -360,6 +360,7 @@ static CGFloat viewOriginY = 64;
     YW_SegmentInterface *interface = [[YW_SegmentInterface alloc] initWithFrame:CGRectMake(0, lalaY, lalaW, lalaH)];
     
     interface.delegate = self;
+    interface.isChildScrollEnabel = YES;
     interface.showItemCount = 1;
     interface.defaultSelectNum = 1;
     currentChildIndex = 1;

@@ -30,6 +30,9 @@
 /** 设置TitleScrollView的Frame */
 @property(assign, nonatomic) CGRect titleScrollViewFrame;
 
+/** 设置ChildScrollView的Frame */
+@property(assign, nonatomic) CGRect childScrollViewFrame;
+
 #pragma mark - TitleScrollView属性设置
 /** 当前屏幕显示的个数 */
 @property(assign, nonatomic) int showItemCount;
@@ -51,6 +54,9 @@
 
 /** 当前页面选择的item序号 */
 @property(assign, nonatomic) int currentItemNum;
+
+/** 子控制器是否可以滚动 */
+@property(assign, nonatomic) BOOL isChildScrollEnabel;
 
 
 /** 添加控制器的方法(添加控制器按照控制器添加的先后顺序与按钮对应的 */

@@ -39,6 +39,7 @@
 {
     self.avatarImageView.image = image;
     self.titleLabel.text = title;
+    self.title = title;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

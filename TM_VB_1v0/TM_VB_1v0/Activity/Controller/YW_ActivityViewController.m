@@ -24,19 +24,27 @@
 #import "YW_SliderMenuTool.h"
 #import "YW_SuspendUIButton.h"
 #import "YW_SegmentInterface.h"
+#import "YW_ActivityTestBaseViewController.h"
+#import "YW_AcitivityTestViewController.h"
+#import "YW_ActivityTestStyleViewController_01.h"
+#import "YW_ActivityTestStyleViewController_02.h"
+#import "YW_ActivityTestStyleViewController_03.h"
+#import "YW_ActivityTestStyleViewController_04.h"
+#import "YW_ActivityTestStyleViewController_05.h"
 
 #define BottomTabBarHeight 49
 
 #define CurrentTitle @"<<     Acitivity     >>"
 
 static CGFloat viewOriginY = 64;
-@interface YW_ActivityViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate>
+@interface YW_ActivityViewController () <MJCSlideSwitchViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, SegmentInterfaceDelegate, ActivityItemSelectedDelegate>
 {
     CGFloat keyBoardHeight; // 键盘高度
     int currentChildIndex;  // 当前标签视图序号
     UIControl *coverView;   // 蒙版
     NSString *pathStr;   //历史记录文件路径
     YW_HistoryTableView *historyTableView; // 历史记录
+    BOOL hasTestActiity; //是否已经打开测试详情界面
 }
 
 /** 菜单栏按钮标题 */
@@ -49,6 +57,9 @@ static CGFloat viewOriginY = 64;
 @property(strong, nonatomic) YW_MenuSliderBar *menuBar;
 
 /** 搜索栏 */
+@property(strong, nonatomic) UIView *searchBarView;
+
+/** 搜索框 */
 @property(strong, nonatomic) UISearchBar *searchBar;
 
 /** 标签栏 */
@@ -69,6 +80,8 @@ static CGFloat viewOriginY = 64;
 @property(strong, nonatomic) YW_ActivityRecentViewController *activityRecentVC;
 
 @property(strong, nonatomic) YW_ActivityThingsViewController *activityThingsVC;
+
+@property(strong, nonatomic) YW_ActivityTestBaseViewController *testVC;
 
 /** window */
 @property (nonatomic, strong) UIWindow *window;
@@ -105,7 +118,6 @@ static CGFloat viewOriginY = 64;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = CurrentTitle;
     
-    self.automaticallyAdjustsScrollViewInsets = false;
     pathStr = [[NSBundle mainBundle] pathForResource:@"historyRecord" ofType:@"plist"];
     
     [self setupNavigationBar];  //设置导航栏
@@ -298,9 +310,9 @@ static CGFloat viewOriginY = 64;
 #pragma mark - 初始化搜索栏
 -(void)setUpSearchBar
 {
-    UIView *serarchBarView = [[UIView alloc] init];
-    serarchBarView.backgroundColor  = [UIColor colorWithHexString:ThemeColor];
-    serarchBarView.userInteractionEnabled = YES;
+    UIView *searchBarView = [[UIView alloc] init];
+    searchBarView.backgroundColor  = [UIColor colorWithHexString:ThemeColor];
+    searchBarView.userInteractionEnabled = YES;
     
     UIButton *backBtn = [[UIButton alloc] init];
     backBtn.imageView.contentMode = UIViewContentModeScaleToFill;
@@ -314,23 +326,25 @@ static CGFloat viewOriginY = 64;
     [goBtn setImage:[UIImage imageNamed:GoBtnImageName] forState:UIControlStateHighlighted];
     //    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
     
-    self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.delegate = self;
-    self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-    self.searchBar.searchTextPositionAdjustment = UIOffsetMake(10, 0);
-    self.searchBar.barTintColor = [UIColor clearColor];
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    searchBar.delegate = self;
+    searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    [searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    searchBar.searchTextPositionAdjustment = UIOffsetMake(10, 0);
+    searchBar.barTintColor = [UIColor clearColor];
     //    self.searchBar.layer.borderWidth = 1.0;
     //    self.searchBar.layer.borderColor = [UIColor grayColor].CGColor;
     //    self.searchBar.layer.cornerRadius = 10;
-    self.searchBar.returnKeyType = UIReturnKeySearch;
+    searchBar.returnKeyType = UIReturnKeySearch;
+    self.searchBar = searchBar;
+    self.searchBarView = searchBarView;
     
-    [serarchBarView addSubview:backBtn];
-    [serarchBarView addSubview:goBtn];
-    [serarchBarView addSubview:self.searchBar];
-    [self.view addSubview:serarchBarView];
+    [searchBarView addSubview:backBtn];
+    [searchBarView addSubview:goBtn];
+    [searchBarView addSubview:searchBar];
+    [self.view addSubview:searchBarView];
     
-    [serarchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [searchBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.view.mas_leading);
         make.trailing.equalTo(self.view.mas_trailing);
         make.top.equalTo(self.view.mas_top);
@@ -338,24 +352,24 @@ static CGFloat viewOriginY = 64;
     }];
     
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(serarchBarView.mas_leading).offset(10);
+        make.leading.equalTo(searchBarView.mas_leading).offset(10);
         make.width.mas_equalTo(35);
         make.height.mas_equalTo(35);
-        make.centerY.equalTo(serarchBarView.mas_centerY);
+        make.centerY.equalTo(searchBarView.mas_centerY);
     }];
     
     [goBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(backBtn.mas_trailing).offset(15);
         make.width.mas_equalTo(35);
         make.height.mas_equalTo(35);
-        make.centerY.equalTo(serarchBarView.mas_centerY);
+        make.centerY.equalTo(searchBarView.mas_centerY);
     }];
     
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(goBtn.mas_trailing).offset(15);
         make.trailing.equalTo(self.view.mas_trailing).offset(-10);
         make.height.mas_equalTo(30);
-        make.centerY.equalTo(serarchBarView.mas_centerY);
+        make.centerY.equalTo(searchBarView.mas_centerY);
     }];
 }
 
@@ -386,9 +400,9 @@ static CGFloat viewOriginY = 64;
 #pragma mark - 初始化子控制器栏
 - (void)setUpTabBar
 {
-    CGFloat lalaY = SearchBarHeight + viewOriginY;
+    CGFloat lalaY = SearchBarHeight;
     CGFloat lalaW = ScreenWitdh;
-    CGFloat lalaH = viewOriginY == 0 ? ScreenHeight - lalaY - 64 : ScreenHeight - lalaY ;
+    CGFloat lalaH = ScreenHeight - lalaY - 64;
     
     self.tabTitleArr = [NSMutableArray arrayWithObjects:@"Shares", @"Things", @"HotList", @"Active", @"Help", nil];
     
@@ -410,6 +424,7 @@ static CGFloat viewOriginY = 64;
     
     YW_ActivityRecentViewController *recentActivityController = [[YW_ActivityRecentViewController alloc] init];
     self.activityRecentVC = recentActivityController;
+    recentActivityController.delegate = self;
     
     UIViewController *vc3 = [[UIViewController alloc]init];
     vc3.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
@@ -428,10 +443,171 @@ static CGFloat viewOriginY = 64;
     
     [interface intoChildControllerArray:[NSMutableArray arrayWithArray:vcarrr] isInsert:NO];
     
-    
-    
     self.tabViewController = interface;
     [self.view addSubview:interface];
+}
+
+#pragma mark - ActivityItemSelectedDelegate
+-(void)activityItemSelected:(NSString *)title
+{
+    YW_AcitivityTestViewController *testVC = [[YW_AcitivityTestViewController alloc] init];
+    if (!hasTestActiity) {
+        [self.tabViewController insertTitle:title childVC:testVC position:2];
+        hasTestActiity = YES;
+    }else
+    {
+        [self.tabViewController updateTitle:title childVC:testVC position:2];
+    }
+    
+    self.testVC = testVC;
+    
+    [self entryOrExitFullScreen];
+}
+
+-(void)entryOrExitFullScreen
+{
+    __weak typeof(self) weakSelf = self;
+    _testVC.fullScreenPattern = ^(BOOL isFullScreen) {
+        if (!isFullScreen) {
+            weakSelf.tabViewController.isChildScrollEnabel = NO;
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect navFrame = weakSelf.navigationController.navigationBar.frame;
+                navFrame.origin.y = -64;
+                weakSelf.navigationController.navigationBar.frame = navFrame;
+                
+                CGRect tabViewFrame = weakSelf.tabViewController.frame;
+                tabViewFrame.origin.y = - 44;
+                tabViewFrame.size.height = ScreenHeight + 44;
+                weakSelf.tabViewController.frame = tabViewFrame;
+                
+                CGRect searchBarViewFrame = weakSelf.searchBarView.frame;
+                searchBarViewFrame.origin.y = - 44 - SearchBarHeight;
+                weakSelf.searchBarView.frame = searchBarViewFrame;
+                
+            } completion:^(BOOL finished) {
+                weakSelf.navigationController.navigationBar.translucent = YES;
+                [weakSelf.navigationController.navigationBar setHidden:YES];
+            }];
+        }
+        else {
+            weakSelf.navigationController.navigationBar.translucent = NO;
+            [weakSelf.navigationController.navigationBar setHidden:NO];
+            [UIView animateWithDuration:0.5 animations:^{
+                
+                CGRect navFrame = weakSelf.navigationController.navigationBar.frame;
+                navFrame.origin.y = 0;
+                weakSelf.navigationController.navigationBar.frame = navFrame;
+                
+                CGRect searchBarFrame = weakSelf.searchBarView.frame;
+                searchBarFrame.origin.y = 64;
+                weakSelf.searchBarView.frame = searchBarFrame;
+                
+                CGRect tabViewFrame = weakSelf.tabViewController.frame;
+                tabViewFrame.origin.y = SearchBarHeight + 64;
+                weakSelf.tabViewController.frame = tabViewFrame;
+            } completion:^(BOOL finished) {
+                CGRect tabViewFrame = weakSelf.tabViewController.frame;
+                tabViewFrame.size.height = ScreenHeight - SearchBarHeight - 64;
+                weakSelf.tabViewController.frame = tabViewFrame;
+                
+                weakSelf.tabViewController.isChildScrollEnabel = YES;
+            }];
+        }
+    };
+}
+
+-(void)activityItemSelected:(NSString *)title itemNum:(int)num
+{
+    switch (num) {
+        case 0:
+        {
+            YW_ActivityTestStyleViewController_02 *testVC = [[YW_ActivityTestStyleViewController_02 alloc] init];
+            if (!hasTestActiity) {
+                [self.tabViewController insertTitle:title childVC:testVC position:2];
+                hasTestActiity = YES;
+            }else
+            {
+                [self.tabViewController updateTitle:title childVC:testVC position:2];
+            }
+            self.testVC = testVC;
+            break;
+        }
+            
+        case 1:
+        {
+            YW_ActivityTestStyleViewController_03 *testVC = [[YW_ActivityTestStyleViewController_03 alloc] init];
+            if (!hasTestActiity) {
+                [self.tabViewController insertTitle:title childVC:testVC position:2];
+                hasTestActiity = YES;
+            }else
+            {
+                [self.tabViewController updateTitle:title childVC:testVC position:2];
+            }
+            self.testVC = testVC;
+            break;
+        }
+            
+        case 2:
+        {
+            YW_ActivityTestStyleViewController_04 *testVC = [[YW_ActivityTestStyleViewController_04 alloc] init];
+            if (!hasTestActiity) {
+                [self.tabViewController insertTitle:title childVC:testVC position:2];
+                hasTestActiity = YES;
+            }else
+            {
+                [self.tabViewController updateTitle:title childVC:testVC position:2];
+            }
+            self.testVC = testVC;
+            break;
+        }
+            
+        case 3:
+        {
+            YW_ActivityTestStyleViewController_05 *testVC = [[YW_ActivityTestStyleViewController_05 alloc] init];
+            if (!hasTestActiity) {
+                [self.tabViewController insertTitle:title childVC:testVC position:2];
+                hasTestActiity = YES;
+            }else
+            {
+                [self.tabViewController updateTitle:title childVC:testVC position:2];
+            }
+            self.testVC = testVC;
+            break;
+        }
+            
+        case 4:
+        {
+            YW_ActivityTestStyleViewController_01 *testVC = [[YW_ActivityTestStyleViewController_01 alloc] init];
+            if (!hasTestActiity) {
+                [self.tabViewController insertTitle:title childVC:testVC position:2];
+                hasTestActiity = YES;
+            }else
+            {
+                [self.tabViewController updateTitle:title childVC:testVC position:2];
+            }
+            self.testVC = testVC;
+            break;
+        }
+            
+        case 5:
+        {
+            YW_AcitivityTestViewController *testVC = [[YW_AcitivityTestViewController alloc] init];
+            if (!hasTestActiity) {
+                [self.tabViewController insertTitle:title childVC:testVC position:2];
+                hasTestActiity = YES;
+            }else
+            {
+                [self.tabViewController updateTitle:title childVC:testVC position:2];
+            }
+            self.testVC = testVC;
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    [self entryOrExitFullScreen];
 }
 
 #pragma mark - SegmentInterfaceDelegate
@@ -802,7 +978,7 @@ static CGFloat viewOriginY = 64;
     _suspendBtn.rootView = self.view.superview;
     
     //悬浮按钮所处的顶端UIWindow
-    _window = [[UIWindow alloc] initWithFrame:CGRectMake(ScreenWitdh - 90, ScreenHeight - 90, 80, 80)];
+    _window = [[UIWindow alloc] initWithFrame:CGRectMake( 10, ScreenHeight - 90, 80, 80)];
     //使得新建window在最顶端
     _window.windowLevel = UIWindowLevelAlert + 1;
     _window.backgroundColor = [UIColor clearColor];

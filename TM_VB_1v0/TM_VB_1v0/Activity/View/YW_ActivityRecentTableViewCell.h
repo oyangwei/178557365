@@ -10,6 +10,9 @@
 
 @interface YW_ActivityRecentTableViewCell : UITableViewCell
 
+/** 标题 */
+@property(strong, nonatomic) NSString *title;
+
 -(void)configureWithAvatar:(UIImage *)image title:(NSString *)title;
 
 /** 标识符 */
