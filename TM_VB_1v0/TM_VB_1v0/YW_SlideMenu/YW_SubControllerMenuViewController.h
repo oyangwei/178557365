@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YW_MainMenuItem.h"
+
+typedef void (^ItemClickBlcok)(NSString *itemTitle);
 
 @interface YW_SubControllerMenuViewController : UIViewController
+
+/** ItemClickBlcok */
+@property(copy, nonatomic) ItemClickBlcok itemClickBlcok;
 
 @end

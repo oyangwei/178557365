@@ -14,7 +14,7 @@
 {
     YW_MainMenuItem *item = [[self alloc] init];
     item.icon = icon;
-    item.title = title;
+    item.itmeTitle = title;
     item.destVcClass = destClass;
     return item;
 }
@@ -23,7 +23,7 @@
 {
     YW_MainMenuItem *item = [[self alloc] init];
     item.icon = icon;
-    item.title = title;
+    item.itmeTitle = title;
     item.destVcNum = destVcNum;
     return item;
 }

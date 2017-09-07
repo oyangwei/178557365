@@ -8,7 +8,10 @@
 
 #import "YW_ActivityRecentViewController.h"
 #import "YW_ActivityRecentTableViewCell.h"
+#import "YW_ActivityCollectionViewController.h"
 #import "SPUtil.h"
+#import "YWNetworkingMamager.h"
+#import "YW_ThingsModel.h"
 
 #define HeaderViewHeight 44
 
@@ -47,10 +50,10 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 @property(strong, nonatomic) NSArray *favoriteArr;
 
 /** CollectionsArr */
-@property(strong, nonatomic) NSArray *collectionsArr;
+@property(strong, nonatomic) NSMutableArray *collectionsArr;
 
 /** ThingsArr */
-@property(strong, nonatomic) NSArray *thingsArr;
+@property(strong, nonatomic) NSMutableArray *thingsArr;
 
 @end
 
@@ -63,6 +66,22 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
         _headerTitleArr = [NSArray arrayWithObjects:@"Favorites", @"Collections", @"Things", nil];
     }
     return _headerTitleArr;
+}
+
+-(NSMutableArray *)collectionsArr
+{
+    if (!_collectionsArr) {
+        _collectionsArr = [NSMutableArray array];
+    }
+    return _collectionsArr;
+}
+
+-(NSMutableArray *)thingsArr
+{
+    if (!_thingsArr) {
+        _thingsArr = [NSMutableArray array];
+    }
+    return _thingsArr;
 }
 
 -(NSMutableDictionary *)dataDict
@@ -93,12 +112,48 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    isHideFavorite = NO;
+    isHideFavorite = YES;
     isHideCollections = YES;
     isHideThings = YES;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"YW_ActivityRecentTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self requestCollectionsData];
+    [self requestThingsData];
+}
+
+- (void)requestThingsData
+{
+    [YWNetworkingMamager postWithURLString:GetUserThingsURL parameters:@"" progress:nil success:^(NSDictionary *data) {
+        NSLog(@"data--%@", data);
+        NSArray *dataArr = (NSArray *)data;
+        
+        for (NSDictionary *dic in dataArr) {
+            NSLog(@"dic--%@", dic[@"Thing_Type"]);
+            [self.thingsArr addObject:dic[@"Thing_Type"]];
+        }
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)requestCollectionsData
+{
+    [YWNetworkingMamager postWithURLString:GetUserCollectionsURL parameters:@"" progress:nil success:^(NSDictionary *data) {
+        NSArray *dataArr = (NSArray *)data;
+        
+        for (NSDictionary *dic in dataArr) {
+            [self.collectionsArr addObject:dic[@"Collection_Name"]];
+        }
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -115,12 +170,16 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
         return self.favoriteArr.count;
     }else if (section == 1)
     {
-        self.collectionsArr = !isHideCollections?arr:[NSArray array];
-        return self.collectionsArr.count;
+        if (isHideCollections)
+            return 0;
+        else
+            return self.collectionsArr.count;
     }else
     {
-        self.thingsArr = !isHideThings?arr:[NSArray array];
-        return self.thingsArr.count;
+        if (isHideThings)
+            return 0;
+        else
+            return self.thingsArr.count;
     }
 }
 
@@ -213,7 +272,12 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
             if ([self.delegate respondsToSelector:@selector(activityItemSelected: itemNum:)]) {
                 [self.delegate activityItemSelected:cell.title itemNum:(int)indexPath.row];
             }
-        }else
+        }
+        else if (indexPath.section == 1)
+        {
+            [self.navigationController pushViewController:[[YW_ActivityCollectionViewController alloc] init] animated:YES];
+        }
+        else
         {
             if ([self.delegate respondsToSelector:@selector(activityItemSelected:)]) {
                 [self.delegate activityItemSelected:cell.title];
@@ -311,5 +375,7 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 //    [self.tableView reloadData];
 //    self.deleteArray = [NSMutableArray array];
 }
+
+//- cre
 
 @end

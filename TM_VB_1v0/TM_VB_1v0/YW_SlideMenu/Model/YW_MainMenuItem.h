@@ -16,10 +16,10 @@ typedef void (^ItemAction)();
 @property(strong, nonatomic) NSString *icon;
 
 /** 标题 */
-@property(strong, nonatomic) NSString *title;
+@property(strong, nonatomic) NSString *itmeTitle;
 
 /**  点击事件 */
-@property(copy, nonatomic) ItemAction action;
+@property(copy, nonatomic) ItemAction itemAction;
 
 /** 选择Item的序号 */
 @property(assign, nonatomic) int destVcNum;

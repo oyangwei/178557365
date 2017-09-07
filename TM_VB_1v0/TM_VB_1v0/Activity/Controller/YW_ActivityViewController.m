@@ -24,6 +24,7 @@
 #import "YW_SliderMenuTool.h"
 #import "YW_SuspendUIButton.h"
 #import "YW_SegmentInterface.h"
+#import "YW_NavigationController.h"
 #import "YW_ActivityTestBaseViewController.h"
 #import "YW_AcitivityTestViewController.h"
 #import "YW_ActivityTestStyleViewController_01.h"
@@ -31,6 +32,7 @@
 #import "YW_ActivityTestStyleViewController_03.h"
 #import "YW_ActivityTestStyleViewController_04.h"
 #import "YW_ActivityTestStyleViewController_05.h"
+#import "YW_ActivityCreateCollectionViewController.h"
 
 #define BottomTabBarHeight 49
 
@@ -74,6 +76,9 @@ static CGFloat viewOriginY = 64;
 /** 取消确认按钮 */
 @property(strong, nonatomic) UIButton *cancleBtn;
 
+/** YW_NavigationController */
+@property(strong, nonatomic) YW_NavigationController *testNVC;
+
 /** 历史记录 */
 @property(strong, nonatomic) NSMutableArray *historyRecord;
 
@@ -115,6 +120,7 @@ static CGFloat viewOriginY = 64;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[YW_MenuSingleton shareMenuInstance] setViewTitle:@"Activity"];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = CurrentTitle;
     
@@ -142,11 +148,6 @@ static CGFloat viewOriginY = 64;
     
     self.navigationController.navigationBar.alpha = 0.0;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - 初始化 NavigationBar
@@ -318,7 +319,7 @@ static CGFloat viewOriginY = 64;
     backBtn.imageView.contentMode = UIViewContentModeScaleToFill;
     [backBtn setImage:[UIImage imageNamed:BackBtnImageName] forState:UIControlStateNormal];
     [backBtn setImage:[UIImage imageNamed:BackBtnImageName] forState:UIControlStateHighlighted];
-    //    [backBtn addTarget:self action:@selector(selector) forControlEvents:UIControlEventTouchUpInside];
+        [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *goBtn = [[UIButton alloc] init];
     goBtn.imageView.contentMode = UIViewContentModeScaleToFill;
@@ -373,8 +374,19 @@ static CGFloat viewOriginY = 64;
     }];
 }
 
+-(void)back
+{
+    if (self.testNVC.childViewControllers.count >= 1) {
+        [self.testNVC popViewControllerAnimated:YES];
+    }
+}
+
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     self.searchBar.backgroundColor = [UIColor whiteColor];
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
     [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Help"]]];
@@ -382,6 +394,11 @@ static CGFloat viewOriginY = 64;
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
     if (![self.searchBar.text isEqualToString:@""]) {
         self.searchBar.backgroundColor = [UIColor colorWithHexString:SearBarSelectedBackgroudColor];
         [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarSelectedBackgroudColor]] forState:UIControlStateNormal];
@@ -426,6 +443,9 @@ static CGFloat viewOriginY = 64;
     self.activityRecentVC = recentActivityController;
     recentActivityController.delegate = self;
     
+    self.testNVC = [[YW_NavigationController alloc] initWithRootViewController:recentActivityController];
+    self.testNVC.navigationBarHidden = YES;
+    
     UIViewController *vc3 = [[UIViewController alloc]init];
     vc3.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
@@ -435,7 +455,7 @@ static CGFloat viewOriginY = 64;
     UIViewController *vc5 = [[UIViewController alloc]init];
     vc5.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100.0)/100.0 green:arc4random_uniform(100.0)/100.0 blue:arc4random_uniform(100.0)/100.0 alpha:1];
     
-    NSArray *vcarrr = @[thingsActivityViewController,recentActivityController,vc3,vc4, vc5];
+    NSArray *vcarrr = @[thingsActivityViewController,self.testNVC,vc3,vc4, vc5];
     
     [[YW_MenuSingleton shareMenuInstance] setMenuControllersTitlesArr:self.tabTitleArr];
     
@@ -450,6 +470,7 @@ static CGFloat viewOriginY = 64;
 #pragma mark - ActivityItemSelectedDelegate
 -(void)activityItemSelected:(NSString *)title
 {
+    
     YW_AcitivityTestViewController *testVC = [[YW_AcitivityTestViewController alloc] init];
     if (!hasTestActiity) {
         [self.tabViewController insertTitle:title childVC:testVC position:2];
@@ -699,11 +720,11 @@ static CGFloat viewOriginY = 64;
     
     [UIView animateWithDuration:0.5 animations:^{
         CGRect deleteFrame = self.deleteBtn.frame;
-        deleteFrame.origin.y = ScreenHeight - EditBtnHeight;
+        deleteFrame.origin.y = ScreenHeight - EditBtnHeight - 64;
         self.deleteBtn.frame = deleteFrame;
         
         CGRect cancleFrame = self.cancleBtn.frame;
-        cancleFrame.origin.y = ScreenHeight - EditBtnHeight;
+        cancleFrame.origin.y = ScreenHeight - EditBtnHeight - 64;
         self.cancleBtn.frame = cancleFrame;
     }];
 }
@@ -861,7 +882,6 @@ static CGFloat viewOriginY = 64;
     [_window resignKeyWindow];
     _window  = nil;
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 // 移除遮罩层
@@ -993,6 +1013,20 @@ static CGFloat viewOriginY = 64;
 -(void)setCurrentSelectedViewController:(NSInteger)currentItemNum
 {
     [self.tabViewController setCurrentSelectedItemNum:(int)currentItemNum];
+}
+
+#pragma mark - 菜单功能选项
+-(void)selectFunctionOfItemTitle:(NSString *)itemTitle
+{
+    NSLog(@"--%@", itemTitle);
+    
+    if ([itemTitle isEqualToString:@"Select"]) {
+        [self CommonEditClick];
+    }
+    
+    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Things"] && [itemTitle isEqualToString:@"CreateCollection"]) {
+        [self.activityRecentVC.navigationController pushViewController:[[YW_ActivityCreateCollectionViewController alloc] init] animated:YES];
+    }
 }
 
 @end

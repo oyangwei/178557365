@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "exit_full_screen.png",
+      "filename" : "退出全屏.png",
       "scale" : "1x"
     },
     {

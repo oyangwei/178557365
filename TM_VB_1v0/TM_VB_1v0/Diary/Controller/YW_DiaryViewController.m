@@ -97,6 +97,7 @@ static CGFloat viewOriginY = 64;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[YW_MenuSingleton shareMenuInstance] setViewTitle:@"Diary"];
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.automaticallyAdjustsScrollViewInsets = YES;
@@ -122,19 +123,13 @@ static CGFloat viewOriginY = 64;
     [super viewWillAppear:animated];
  
     self.navigationController.navigationBar.alpha = 0.0;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - 初始化 NavigationBar
 - (void)setupNavigationBar
 {
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = -15;
+    negativeSpacer.width = -12;
     
     if (!self.navigationController.navigationBar.translucent) {
         viewOriginY = 0;
@@ -326,6 +321,10 @@ static CGFloat viewOriginY = 64;
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     self.searchBar.backgroundColor = [UIColor whiteColor];
     [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarNormalBackgourdColor]] forState:UIControlStateNormal];
     [self.menuBar updateMenuWithTitleArr:[self menuArr:[self.menuTabArr objectForKey:@"Help"]]];
@@ -333,6 +332,10 @@ static CGFloat viewOriginY = 64;
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
     if (![self.searchBar.text isEqualToString:@""]) {
         self.searchBar.backgroundColor = [UIColor colorWithHexString:SearBarSelectedBackgroudColor];
         [self.searchBar setSearchFieldBackgroundImage:[MJCCommonTools jc_imageWithColor:[UIColor colorWithHexString:SearBarSelectedBackgroudColor]] forState:UIControlStateNormal];

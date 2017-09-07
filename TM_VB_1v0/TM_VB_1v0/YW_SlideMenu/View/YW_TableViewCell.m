@@ -105,7 +105,7 @@
 {
     _item = item;
     self.iconView.image = [UIImage imageNamed:item.icon];
-    self.titleLabel.text = item.title;
+    self.titleLabel.text = item.itmeTitle;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

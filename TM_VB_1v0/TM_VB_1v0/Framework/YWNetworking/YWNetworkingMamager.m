@@ -33,7 +33,9 @@
 +(void)postWithURLString:(NSString *)urlString parameters:(id)parameters progress:(ProgressBlock)progressBlock success:(SuccessBlock)successBlock failure:(FailureBlock)failureBlock
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", nil];
+//    manager.requestSerializer=[AFHTTPRequestSerializer serializer];
     [manager POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         if (progressBlock) {
             progressBlock(downloadProgress);

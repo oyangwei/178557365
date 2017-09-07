@@ -97,6 +97,7 @@ static CGFloat viewOriginY = 64;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[YW_MenuSingleton shareMenuInstance] setViewTitle:@"Me"];
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.automaticallyAdjustsScrollViewInsets = false;

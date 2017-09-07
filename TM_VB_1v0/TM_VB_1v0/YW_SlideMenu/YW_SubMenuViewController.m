@@ -142,9 +142,6 @@
         YW_MeViewController *meVC = (YW_MeViewController *)animateVC.rootViewController;
         [meVC setCurrentSelectedViewController:item.destVcNum];
     }
-    
-
-    
 }
 
 @end
