@@ -10,4 +10,7 @@
 
 @interface YW_ActivityCollectionViewController : UIViewController
 
+/** CollectionName */
+@property(strong, nonatomic) NSString *collectionName;
+
 @end

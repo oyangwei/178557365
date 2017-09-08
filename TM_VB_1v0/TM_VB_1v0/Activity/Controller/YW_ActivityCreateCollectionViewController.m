@@ -114,7 +114,7 @@
 - (void)requestCreateCollection:(NSDictionary *)condition
 {
     NSLog(@"condition--%@", condition);
-    [YWNetworkingMamager postWithURLString:@"http://192.168.3.4/Test_TM/Collections.php" parameters:condition progress:nil success:^(NSDictionary *data) {
+    [YWNetworkingMamager postWithURLString:InsertMembersCollectionURL parameters:condition progress:nil success:^(NSDictionary *data) {
         NSLog(@"data--%@", data);
         
         int result = [data[@"result"] intValue];

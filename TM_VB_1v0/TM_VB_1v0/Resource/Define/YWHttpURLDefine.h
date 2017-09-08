@@ -12,8 +12,14 @@
 #define GetCodeURL @"http://192.168.3.4/test/SmsSenderDemo.php"
 #define CheckCodeURL @"http://192.168.3.4/test/Response.php"
 
-#define GetUserThingsURL @"http://192.168.3.4/Test_TM/Things.php"
+#define GetUserThingsURL @"http://192.168.3.4/Test_TM/Show_Things.php"
+
 #define GetUserCollectionsURL @"http://192.168.3.4/Test_TM/Show_Collections.php"
+
+#define GetCollectionMembersURL @"http://192.168.3.4/Test_TM/Show_Collections_Members.php"
+
 #define CreateCollectionURL @"http://192.168.3.4/Test_TM/Show_Collections.php"
+
+#define InsertMembersCollectionURL @"http://192.168.3.4/Test_TM/Insert_Collections.php"
 
 #endif /* YWHttpURLDefine_h */

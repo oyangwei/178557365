@@ -129,11 +129,9 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 - (void)requestThingsData
 {
     [YWNetworkingMamager postWithURLString:GetUserThingsURL parameters:@"" progress:nil success:^(NSDictionary *data) {
-        NSLog(@"data--%@", data);
         NSArray *dataArr = (NSArray *)data;
         
         for (NSDictionary *dic in dataArr) {
-            NSLog(@"dic--%@", dic[@"Thing_Type"]);
             [self.thingsArr addObject:dic[@"Thing_Type"]];
         }
         [self.tableView reloadData];
@@ -275,7 +273,9 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
         }
         else if (indexPath.section == 1)
         {
-            [self.navigationController pushViewController:[[YW_ActivityCollectionViewController alloc] init] animated:YES];
+            YW_ActivityCollectionViewController *collectionVC = [[YW_ActivityCollectionViewController alloc] init];
+            collectionVC.collectionName = _collectionsArr[indexPath.row];
+            [self.navigationController pushViewController:collectionVC animated:YES];
         }
         else
         {
