@@ -129,7 +129,6 @@
 		55C502881F2716AC0062DBE0 /* me_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C502781F2716AC0062DBE0 /* me_2.png */; };
 		55C502891F2716AC0062DBE0 /* message_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C502791F2716AC0062DBE0 /* message_1.png */; };
 		55C5028A1F2716AC0062DBE0 /* message_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C5027A1F2716AC0062DBE0 /* message_2.png */; };
-		55C5028B1F2716AC0062DBE0 /* more_unfold.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C5027B1F2716AC0062DBE0 /* more_unfold.png */; };
 		55C5028C1F2716AC0062DBE0 /* programme_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C5027C1F2716AC0062DBE0 /* programme_1.png */; };
 		55C5028D1F2716AC0062DBE0 /* programme_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C5027D1F2716AC0062DBE0 /* programme_2.png */; };
 		55C5028E1F2716AC0062DBE0 /* wifi_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C5027E1F2716AC0062DBE0 /* wifi_1.png */; };
@@ -407,7 +406,6 @@
 		55C502781F2716AC0062DBE0 /* me_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_2.png; sourceTree = "<group>"; };
 		55C502791F2716AC0062DBE0 /* message_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_1.png; sourceTree = "<group>"; };
 		55C5027A1F2716AC0062DBE0 /* message_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_2.png; sourceTree = "<group>"; };
-		55C5027B1F2716AC0062DBE0 /* more_unfold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_unfold.png; sourceTree = "<group>"; };
 		55C5027C1F2716AC0062DBE0 /* programme_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = programme_1.png; sourceTree = "<group>"; };
 		55C5027D1F2716AC0062DBE0 /* programme_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = programme_2.png; sourceTree = "<group>"; };
 		55C5027E1F2716AC0062DBE0 /* wifi_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi_1.png; sourceTree = "<group>"; };
@@ -1181,7 +1179,6 @@
 				55C502781F2716AC0062DBE0 /* me_2.png */,
 				55C502791F2716AC0062DBE0 /* message_1.png */,
 				55C5027A1F2716AC0062DBE0 /* message_2.png */,
-				55C5027B1F2716AC0062DBE0 /* more_unfold.png */,
 				55C5027C1F2716AC0062DBE0 /* programme_1.png */,
 				55C5027D1F2716AC0062DBE0 /* programme_2.png */,
 				55C5027E1F2716AC0062DBE0 /* wifi_1.png */,
@@ -1530,7 +1527,6 @@
 				5575C9291F29B480003F12B8 /* calling_card_bg@2x.png in Resources */,
 				5575C9321F29B480003F12B8 /* YW_TGZ_Emoitons.emo in Resources */,
 				559573661F53EEB9009E928C /* NewsMenuTab.plist in Resources */,
-				55C5028B1F2716AC0062DBE0 /* more_unfold.png in Resources */,
 				55C501FE1F26E6F40062DBE0 /* LaunchScreen.storyboard in Resources */,
 				55C502811F2716AC0062DBE0 /* areaCode.plist in Resources */,
 				55C502881F2716AC0062DBE0 /* me_2.png in Resources */,

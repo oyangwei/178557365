@@ -24,7 +24,7 @@
         UILabel *splitLabel = [[UILabel alloc] init];
         self.splitLabel = splitLabel;
         
-        UIButton *selectBtn = [[UIButton alloc] init];
+        UIImageView *selectBtn = [[UIImageView alloc] init];
         self.selectBtn = selectBtn;
         
         [self addSubview:codeLabel];
@@ -42,9 +42,9 @@
     self.areaLabel.textAlignment = NSTextAlignmentLeft;
 
     self.splitLabel.backgroundColor = [UIColor colorWithHexString:CustomBorderColor];
-    
-    self.selectBtn.imageEdgeInsets = UIEdgeInsetsMake(EdgeInsetsWidth, EdgeInsetsWidth, EdgeInsetsWidth, EdgeInsetsWidth);
-    [self.selectBtn setImage:[UIImage imageNamed:@"more_unfold"] forState:UIControlStateNormal];
+
+    [self.selectBtn setImage:[UIImage imageNamed:@"more_unfold"]];
+    self.selectBtn.contentMode = UIViewContentModeCenter;
     
     [self.codeLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.mas_leading).offset(10);

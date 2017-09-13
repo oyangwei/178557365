@@ -154,14 +154,14 @@
     passwordTextField.secureTextEntry = YES;
     
     UIButton *getCodeBtn = [UIButton createButtonWithFrame:CGRectMake(0, 0, 0, 0) Title:@"获取验证码" Target:self Selector:@selector(getCode:)];
-    getCodeBtn.backgroundColor = [UIColor colorWithHexString:@"#FC4F52"];
+    getCodeBtn.backgroundColor = [UIColor colorWithHexString:ThemeColor];
     getCodeBtn.tintColor = [UIColor whiteColor];
     getCodeBtn.layer.cornerRadius = TextFieldCornerRadius;
     
     UIButton *nextBtn = [UIButton createButtonWithFrame:CGRectMake(0, 0, 0, 0) Title:@"Next\n下一步" Target:self Selector:@selector(next:)];
     nextBtn.backgroundColor = [UIColor whiteColor];
-    nextBtn.tintColor = [UIColor colorWithHexString:@"#FC4F52"];
-    [nextBtn setUIButtonBorderColor:[UIColor colorWithHexString:@"FC4F52"].CGColor borderWidth:1.0 borderRadius:TextFieldCornerRadius];
+    nextBtn.tintColor = [UIColor colorWithHexString:ThemeColor];
+    [nextBtn setUIButtonBorderColor:[UIColor colorWithHexString:ThemeColor].CGColor borderWidth:1.0 borderRadius:TextFieldCornerRadius];
     nextBtn.titleLabel.numberOfLines = 0;
     nextBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -347,6 +347,7 @@
 {
     NSDictionary * dicData = _areaCodeArray[row];
     [self.areaCodeView setCodeLabel:dicData[@"code"] areaLabel:dicData[@"area"]];
+    self.areaCodePickerView.alpha = 0;
 }
 
 //判断手机号码格式是否正确

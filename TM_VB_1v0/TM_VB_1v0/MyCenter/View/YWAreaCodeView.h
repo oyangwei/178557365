@@ -13,7 +13,7 @@
 @property(strong, nonatomic) UILabel *codeLable;
 @property(strong, nonatomic) UILabel *areaLabel;
 @property(strong, nonatomic) UILabel *splitLabel;
-@property(strong, nonatomic) UIButton *selectBtn;
+@property(strong, nonatomic) UIImageView *selectBtn;
 
 -(void)setCodeLabel:(NSString *)code areaLabel:(NSString *)area;
 
