@@ -28,6 +28,10 @@
 		5532EA401F3051930014C297 /* YW_HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA3F1F3051930014C297 /* YW_HistoryTableView.m */; };
 		5532EA451F3058F00014C297 /* YW_HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */; };
 		5532EA471F3064C40014C297 /* historyRecord.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5532EA461F3064C40014C297 /* historyRecord.plist */; };
+		556BB7991F68C12C0045986C /* YW_AddThingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556BB7981F68C12C0045986C /* YW_AddThingsViewController.m */; };
+		556BB79D1F68CA420045986C /* YW_ThingPairTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 556BB79B1F68CA420045986C /* YW_ThingPairTableViewCell.m */; };
+		556BB79E1F68CA420045986C /* YW_ThingPairTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556BB79C1F68CA420045986C /* YW_ThingPairTableViewCell.xib */; };
+		556BB7A11F68CEAC0045986C /* YW_PairCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556BB7A01F68CEAC0045986C /* YW_PairCellModel.m */; };
 		557198471F3444A700C2328A /* YW_UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 557198461F3444A700C2328A /* YW_UIGestureRecognizer.m */; };
 		5571984E1F37FBCF00C2328A /* YW_ContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5571984D1F37FBCF00C2328A /* YW_ContactListViewController.m */; };
 		557198511F3AB12800C2328A /* ActivityMenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 557198501F3AB12800C2328A /* ActivityMenuTab.plist */; };
@@ -258,6 +262,13 @@
 		5532EA431F3058F00014C297 /* YW_HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_HistoryTableViewCell.h; sourceTree = "<group>"; };
 		5532EA441F3058F00014C297 /* YW_HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_HistoryTableViewCell.m; sourceTree = "<group>"; };
 		5532EA461F3064C40014C297 /* historyRecord.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = historyRecord.plist; sourceTree = "<group>"; };
+		556BB7971F68C12C0045986C /* YW_AddThingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_AddThingsViewController.h; sourceTree = "<group>"; };
+		556BB7981F68C12C0045986C /* YW_AddThingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_AddThingsViewController.m; sourceTree = "<group>"; };
+		556BB79A1F68CA420045986C /* YW_ThingPairTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ThingPairTableViewCell.h; sourceTree = "<group>"; };
+		556BB79B1F68CA420045986C /* YW_ThingPairTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_ThingPairTableViewCell.m; sourceTree = "<group>"; };
+		556BB79C1F68CA420045986C /* YW_ThingPairTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YW_ThingPairTableViewCell.xib; sourceTree = "<group>"; };
+		556BB79F1F68CEAC0045986C /* YW_PairCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_PairCellModel.h; sourceTree = "<group>"; };
+		556BB7A01F68CEAC0045986C /* YW_PairCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_PairCellModel.m; sourceTree = "<group>"; };
 		557198451F3444A700C2328A /* YW_UIGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_UIGestureRecognizer.h; sourceTree = "<group>"; };
 		557198461F3444A700C2328A /* YW_UIGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_UIGestureRecognizer.m; sourceTree = "<group>"; };
 		5571984C1F37FBCF00C2328A /* YW_ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ContactListViewController.h; sourceTree = "<group>"; };
@@ -962,6 +973,8 @@
 				559573801F56A074009E928C /* YW_ActivityTestBaseViewController.m */,
 				55ED6D6D1F5D0A950022C48E /* YW_ActivityCreateCollectionViewController.h */,
 				55ED6D6E1F5D0A950022C48E /* YW_ActivityCreateCollectionViewController.m */,
+				556BB7971F68C12C0045986C /* YW_AddThingsViewController.h */,
+				556BB7981F68C12C0045986C /* YW_AddThingsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -971,6 +984,8 @@
 			children = (
 				55ED6D6A1F594E380022C48E /* YW_ThingsModel.h */,
 				55ED6D6B1F594E380022C48E /* YW_ThingsModel.m */,
+				556BB79F1F68CEAC0045986C /* YW_PairCellModel.h */,
+				556BB7A01F68CEAC0045986C /* YW_PairCellModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -984,6 +999,9 @@
 				5531F8D31F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.h */,
 				5531F8D41F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.m */,
 				5531F8D51F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.xib */,
+				556BB79A1F68CA420045986C /* YW_ThingPairTableViewCell.h */,
+				556BB79B1F68CA420045986C /* YW_ThingPairTableViewCell.m */,
+				556BB79C1F68CA420045986C /* YW_ThingPairTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1518,6 +1536,7 @@
 				5575C8CD1F29B27D003F12B8 /* WXOpenIMSDKResource.bundle in Resources */,
 				55C502821F2716AC0062DBE0 /* securityQuestion.plist in Resources */,
 				55EC6E171F3322FE00F5C7B2 /* fold.png in Resources */,
+				556BB79E1F68CA420045986C /* YW_ThingPairTableViewCell.xib in Resources */,
 				5575C91F1F29B480003F12B8 /* SPCallingCardBubbleChatContentView.xib in Resources */,
 				5531F8D71F4ABF3900BCC28A /* YW_ActivityThingsTableViewCell.xib in Resources */,
 				5575C92E1F29B480003F12B8 /* icon_delete@2x.png in Resources */,
@@ -1666,6 +1685,7 @@
 				5531F8AA1F44274200BCC28A /* YW_MainMenuItem.m in Sources */,
 				55C502391F26F56D0062DBE0 /* YW_RootTabBarController.m in Sources */,
 				5575C9221F29B480003F12B8 /* SPInputViewPluginCallingCard.m in Sources */,
+				556BB7A11F68CEAC0045986C /* YW_PairCellModel.m in Sources */,
 				55ED6D6F1F5D0A950022C48E /* YW_ActivityCreateCollectionViewController.m in Sources */,
 				5531F8A21F4426AE00BCC28A /* YW_MainMenuViewController.m in Sources */,
 				55C5024C1F26F9060062DBE0 /* YW_DiaryViewController.m in Sources */,
@@ -1680,6 +1700,7 @@
 				55EC6DFE1F32FF7400F5C7B2 /* SPContactListController.m in Sources */,
 				5595735F1F4FC35E009E928C /* YW_MenuSingleton.m in Sources */,
 				559573811F56A074009E928C /* YW_ActivityTestBaseViewController.m in Sources */,
+				556BB7991F68C12C0045986C /* YW_AddThingsViewController.m in Sources */,
 				5531F8A71F4426F600BCC28A /* YW_TableViewCell.m in Sources */,
 				55EC6E091F33028900F5C7B2 /* UIControl+BlockSupport.m in Sources */,
 				55C502681F27142D0062DBE0 /* YW_NavigationController.m in Sources */,
@@ -1696,6 +1717,7 @@
 				55EC6DE11F31B9ED00F5C7B2 /* YW_SignUpFirstViewController.m in Sources */,
 				557198C41F4199D200C2328A /* YW_SliderMenuTool.m in Sources */,
 				55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */,
+				556BB79D1F68CA420045986C /* YW_ThingPairTableViewCell.m in Sources */,
 				55C5024F1F26F93C0062DBE0 /* YW_ActivityViewController.m in Sources */,
 				55EC6DC71F31ACA300F5C7B2 /* UIImage+YWUIImage.m in Sources */,
 				5575C9211F29B480003F12B8 /* SPCallingCardBubbleViewModel.m in Sources */,

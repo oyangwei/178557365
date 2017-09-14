@@ -26,4 +26,6 @@
 
 #import "YW_MenuSingleton.h"  //菜单栏单例
 
+#import "YWCommonMethod.h"  //公共工具
+
 #endif /* PrefixHeader_pch */

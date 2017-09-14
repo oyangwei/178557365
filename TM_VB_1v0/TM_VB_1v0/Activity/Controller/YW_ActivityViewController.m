@@ -33,6 +33,7 @@
 #import "YW_ActivityTestStyleViewController_04.h"
 #import "YW_ActivityTestStyleViewController_05.h"
 #import "YW_ActivityCreateCollectionViewController.h"
+#import "YW_AddThingsViewController.h"
 
 #define BottomTabBarHeight 49
 
@@ -377,7 +378,7 @@ static CGFloat viewOriginY = 64;
 -(void)back
 {
     if (self.testNVC.childViewControllers.count >= 1) {
-        [self.testNVC popViewControllerAnimated:YES];
+        [self.testNVC popViewControllerAnimated:NO];
     }
 }
 
@@ -1024,8 +1025,12 @@ static CGFloat viewOriginY = 64;
         [self CommonEditClick];
     }
     
-    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Things"] && [itemTitle isEqualToString:@"CreateCollection"]) {
-        [self.activityRecentVC.navigationController pushViewController:[[YW_ActivityCreateCollectionViewController alloc] init] animated:YES];
+    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Things"] && [itemTitle isEqualToString:@"CreateCollection"]) {
+        [self.activityRecentVC.navigationController pushViewController:[[YW_ActivityCreateCollectionViewController alloc] init] animated:NO];
+    }
+    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Things"] && [itemTitle isEqualToString:@"AddThing"])
+    {
+        [self.activityRecentVC.navigationController pushViewController:[[YW_AddThingsViewController alloc] init] animated:NO];
     }
 }
 

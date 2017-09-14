@@ -104,7 +104,8 @@
         
         if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Things"]) {
             YW_MainMenuItem *CreateCollection = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"CreateCollection" destVcClass:[NSNull class]];
-            self.data = @[Select, CreateCollection];
+            YW_MainMenuItem *AddThing = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"AddThing" destVcClass:[NSNull class]];
+            self.data = @[Select, CreateCollection, AddThing];
         }else
         {
             self.data = @[Select];
