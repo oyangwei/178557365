@@ -12,7 +12,7 @@
 
 typedef void(^ClickItemBlock)(YW_MenuBarLabel *label);
 
-@interface YW_MenuSliderBar : DMPagingScrollView <UIScrollViewDelegate>
+@interface YW_MenuSliderBar : UIScrollView <UIScrollViewDelegate>
 
 /** 屏幕可显示的最大数量 */
 @property(assign, nonatomic) int maxShowNum;

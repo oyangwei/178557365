@@ -132,7 +132,6 @@
     
     if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Diary"]) {
         YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animateVC.rootViewController;
-        [diaryVC setCurrentSelectedViewController:item.destVcNum];
     }
     else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Activity"]) {
         YW_ActivityViewController *activityVC = (YW_ActivityViewController *)animateVC.rootViewController;

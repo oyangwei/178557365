@@ -8,7 +8,7 @@
 
 #import "YW_LoginViewController.h"
 #import "YW_NavigationController.h"
-#import "YW_DiaryViewController.h"
+#import "YW_HomeViewController.h"
 #import "SPUtil.h"
 #import "SPKitExample.h"
 
@@ -157,10 +157,9 @@
 
 -(void)_pushMainControllerAnimated:(BOOL)aAnimated
 {
-    YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
-    YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+    YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
     [UIView transitionWithView:self.view.window duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.view.window.rootViewController = nVC;
+        self.view.window.rootViewController = homeVC;
     } completion:nil];
 }
 

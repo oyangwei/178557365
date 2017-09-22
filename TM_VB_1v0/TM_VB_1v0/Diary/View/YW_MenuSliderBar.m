@@ -50,7 +50,7 @@
     }
     
     self.contentSize = CGSizeMake(titleArr.count * labelW, 0);
-    [self setPageWidth:labelW];
+//    [self setPageWidth:labelW];
 }
 
 - (void)updateMenuWithTitleArr:(NSMutableArray *)titleArr

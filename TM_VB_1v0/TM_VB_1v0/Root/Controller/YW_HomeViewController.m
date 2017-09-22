@@ -1,15 +1,16 @@
 //
-//  YW_DiaryViewController.m
+//  YW_HomeViewController.m
 //  TM_VB_1v0
 //
-//  Created by z°先森 on 2017/7/25.
+//  Created by Oyw on 2017/9/22.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_DiaryViewController.h"
+#import "YW_HomeViewController.h"
 #import "YW_IconButton.h"
 #import "YW_MenuSliderBar.h"
-#import "YW_HomeViewController.h"
+#import "YW_DiaryViewController.h"
+#import "YW_NavigationController.h"
 
 #define ButtonViewLeftMargin 30      // 存放按钮容器距离左边间距
 #define ButtonColumnMarginSpace 35         // 按钮列间距
@@ -18,44 +19,34 @@
 #define IconButtonLabelHeight 25     // 图标按钮文字高度
 #define BottomMenuViewHeight 49     // 底部菜单高度
 
-@interface YW_DiaryViewController ()
+@interface YW_HomeViewController ()
 
 @end
 
-@implementation YW_DiaryViewController
+@implementation YW_HomeViewController
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
-    
-    
+ 
     [self setUIViewBackgroud:self.view name:@"home_bg"];
-    
-    self.title = @"Diary";
-    
-    self.navigationController.navigationBar.translucent = NO;
-    
-    self.view.height -= 64;
     
     [self setupContentView];
     
     [self setupBottomMenuView];
-    
-    
 }
 
 -(void)setupContentView
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(ButtonViewLeftMargin, 20, self.view.width - 2 * ButtonViewLeftMargin, self.view.height - BottomMenuViewHeight - 104)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(ButtonViewLeftMargin, 64, self.view.width - 2 * ButtonViewLeftMargin, self.view.height - BottomMenuViewHeight - 104)];
     [self.view addSubview:view];
     
-    NSArray *iconTitles = [NSArray arrayWithObjects:@"Chat", @"Contact", nil];
+    NSArray *iconTitles = [NSArray arrayWithObjects:@"Diary", @"Activity", @"Me", @"News", nil];
     
     // 计算按钮的Y坐标 (从下往上排列)
-    //    CGFloat buttonW = (view.width - (ColumnNumber - 1) * ButtonColumnMarginSpace) / ColumnNumber;
-    //  CGFloat buttonH = buttonW + IconButtonLabelHeight;
-    //   CGFloat buttonX = 0;
-    //  CGFloat buttonY = view.height - buttonW;
+//    CGFloat buttonW = (view.width - (ColumnNumber - 1) * ButtonColumnMarginSpace) / ColumnNumber;
+  //  CGFloat buttonH = buttonW + IconButtonLabelHeight;
+ //   CGFloat buttonX = 0;
+ //  CGFloat buttonY = view.height - buttonW;
     
     // 计算按钮的Y坐标(从上往下排列)
     CGFloat buttonX = 0;
@@ -68,7 +59,7 @@
     for (int i = 0; i < rowNumber; i ++) {
         buttonY = buttonH * i + i * ButtonRowMarginSpace;  //计算按钮的Y坐标 (从上往下排列)
         
-        //   buttonY = view.height - (buttonH * (i + 1) + i * ButtonRowMarginSpace);  //计算按钮的Y坐标(从下往上排列)
+     //   buttonY = view.height - (buttonH * (i + 1) + i * ButtonRowMarginSpace);  //计算按钮的Y坐标(从下往上排列)
         
         CGFloat rowMaxCount = ColumnNumber;
         if (i == rowNumber - 1) {
@@ -79,6 +70,7 @@
             buttonX = buttonW * j + ButtonRowMarginSpace * j;
             
             YW_IconButton *button = [[YW_IconButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonW, buttonH)];
+            button.tag = 100 + i;
             button.alpha = 0.7;
             [button setImage:[UIImage imageNamed:@"testBg"] forState:UIControlStateNormal];
             [button setTitle:iconTitles[i * ColumnNumber + j] forState:UIControlStateNormal];
@@ -98,7 +90,7 @@
     UIButton *mainBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BottomMenuViewHeight, BottomMenuViewHeight)];
     [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     YW_MenuSliderBar *sliderMenu = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(BottomMenuViewHeight, 0, menuView.width - mainBtn.width, BottomMenuViewHeight)];
     sliderMenu.maxShowNum = 3;
     
@@ -110,15 +102,30 @@
     [self.view addSubview:menuView];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 -(void)buttonClick:(UIButton *)button
 {
-    NSLog(@"%s, line = %d", __func__, __LINE__);
+    switch (button.tag - 100) {
+        case 0:
+        {
+            YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
+            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+            
+                self.view.window.rootViewController = nVC;
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 -(void)mainClick:(UIButton *)button
 {
-    YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
-    self.view.window.rootViewController = homeVC;
+    NSLog(@"%s, line = %d", __func__, __LINE__);
 }
 
 -(void)shakeAnimation:(UIButton *)button
@@ -134,5 +141,6 @@
     [button.imageView startAnimating];
     
 }
+
 
 @end
