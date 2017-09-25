@@ -31,6 +31,8 @@
 
 #define ThemeColor @"#418ACE"
 
+#define MenuBarButtonBgColor @"8EAFD3"
+
 #define CustomBorderColor @"#D2D2D2"
 
 #define MenuBarTextNormalColor @"#FFFFFF"  //菜单栏常规字体颜色

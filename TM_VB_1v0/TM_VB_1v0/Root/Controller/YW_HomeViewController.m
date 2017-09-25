@@ -11,6 +11,9 @@
 #import "YW_MenuSliderBar.h"
 #import "YW_DiaryViewController.h"
 #import "YW_NavigationController.h"
+#import "YW_ActivityViewController.h"
+#import "YW_NewsViewController.h"
+#import "YW_MeViewController.h"
 
 #define ButtonViewLeftMargin 30      // 存放按钮容器距离左边间距
 #define ButtonColumnMarginSpace 35         // 按钮列间距
@@ -40,7 +43,7 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(ButtonViewLeftMargin, 64, self.view.width - 2 * ButtonViewLeftMargin, self.view.height - BottomMenuViewHeight - 104)];
     [self.view addSubview:view];
     
-    NSArray *iconTitles = [NSArray arrayWithObjects:@"Diary", @"Activity", @"Me", @"News", nil];
+    NSArray *iconTitles = [NSArray arrayWithObjects:@"Diary", @"Activity", @"News", @"Me", nil];
     
     // 计算按钮的Y坐标 (从下往上排列)
 //    CGFloat buttonW = (view.width - (ColumnNumber - 1) * ButtonColumnMarginSpace) / ColumnNumber;
@@ -70,7 +73,7 @@
             buttonX = buttonW * j + ButtonRowMarginSpace * j;
             
             YW_IconButton *button = [[YW_IconButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonW, buttonH)];
-            button.tag = 100 + i;
+            button.tag = 100 + i * ColumnNumber + j;
             button.alpha = 0.7;
             [button setImage:[UIImage imageNamed:@"testBg"] forState:UIControlStateNormal];
             [button setTitle:iconTitles[i * ColumnNumber + j] forState:UIControlStateNormal];
@@ -91,12 +94,17 @@
     [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
 
-    YW_MenuSliderBar *sliderMenu = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(BottomMenuViewHeight, 0, menuView.width - mainBtn.width, BottomMenuViewHeight)];
-    sliderMenu.maxShowNum = 3;
-    
-    [sliderMenu setUpMenuWithTitleArr:[NSMutableArray arrayWithObjects:@"Diary", @"Activity", @"Me", @"Discovery", @"More", nil]];
-    
-    [menuView addSubview:sliderMenu];
+    if (![YW_MenuSingleton shareMenuInstance].sliderBar) {
+        YW_MenuSliderBar *sliderMenu = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(BottomMenuViewHeight, 0, menuView.width - mainBtn.width, BottomMenuViewHeight)];
+        sliderMenu.maxShowNum = 3;
+        
+        [sliderMenu setUpMenuWithTitleArr:nil];    //初始化SliderBar
+        
+//        [sliderMenu setUpMenuWithTitleArr:[NSMutableArray arrayWithObjects:@"Diary", @"Activity", @"News", @"Me", nil]];    //初始化SliderBar
+        
+        [YW_MenuSingleton initWithSlider:sliderMenu];
+    }
+    [menuView addSubview:[YW_MenuSingleton shareMenuInstance].sliderBar];
     [menuView addSubview:mainBtn];
     
     [self.view addSubview:menuView];
@@ -115,7 +123,31 @@
             YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
             YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
             
-                self.view.window.rootViewController = nVC;
+            self.view.window.rootViewController = nVC;
+            break;
+        }
+        case 1:
+        {
+            YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
+            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
+            
+            self.view.window.rootViewController = nVC;
+            break;
+        }
+        case 2:
+        {
+            YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
+            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
+            
+            self.view.window.rootViewController = nVC;
+            break;
+        }
+        case 3:
+        {
+            YW_MeViewController *meVC = [[YW_MeViewController alloc] init];
+            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:meVC];
+            
+            self.view.window.rootViewController = nVC;
             break;
         }
         default:

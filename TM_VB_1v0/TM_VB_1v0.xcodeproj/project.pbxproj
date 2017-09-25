@@ -153,6 +153,7 @@
 		55C502BE1F2738E20062DBE0 /* YW_MenuSliderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502BD1F2738E20062DBE0 /* YW_MenuSliderBar.m */; };
 		55C502C11F273B100062DBE0 /* UIView+YW_ScreenFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C502C01F273B100062DBE0 /* UIView+YW_ScreenFrame.m */; };
 		55D2F27F1F74C28E00AD8C1A /* home_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D2F27E1F74C28E00AD8C1A /* home_bg.png */; };
+		55D2F2861F78928200AD8C1A /* YW_MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2F2851F78928200AD8C1A /* YW_MenuButton.m */; };
 		55EC6DC61F31ACA300F5C7B2 /* UIButton+YWUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DBF1F31ACA300F5C7B2 /* UIButton+YWUIButton.m */; };
 		55EC6DC71F31ACA300F5C7B2 /* UIImage+YWUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DC11F31ACA300F5C7B2 /* UIImage+YWUIImage.m */; };
 		55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DC31F31ACA300F5C7B2 /* UILabel+YWUILabel.m */; };
@@ -453,6 +454,8 @@
 		55C502BF1F273B100062DBE0 /* UIView+YW_ScreenFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YW_ScreenFrame.h"; sourceTree = "<group>"; };
 		55C502C01F273B100062DBE0 /* UIView+YW_ScreenFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YW_ScreenFrame.m"; sourceTree = "<group>"; };
 		55D2F27E1F74C28E00AD8C1A /* home_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_bg.png; sourceTree = "<group>"; };
+		55D2F2841F78928200AD8C1A /* YW_MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MenuButton.h; sourceTree = "<group>"; };
+		55D2F2851F78928200AD8C1A /* YW_MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MenuButton.m; sourceTree = "<group>"; };
 		55EC6DBE1F31ACA300F5C7B2 /* UIButton+YWUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+YWUIButton.h"; sourceTree = "<group>"; };
 		55EC6DBF1F31ACA300F5C7B2 /* UIButton+YWUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YWUIButton.m"; sourceTree = "<group>"; };
 		55EC6DC01F31ACA300F5C7B2 /* UIImage+YWUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YWUIImage.h"; sourceTree = "<group>"; };
@@ -1160,6 +1163,8 @@
 				55C5026C1F2716AC0062DBE0 /* YWCommonMethod.m */,
 				5595735D1F4FC35E009E928C /* YW_MenuSingleton.h */,
 				5595735E1F4FC35E009E928C /* YW_MenuSingleton.m */,
+				55D2F2841F78928200AD8C1A /* YW_MenuButton.h */,
+				55D2F2851F78928200AD8C1A /* YW_MenuButton.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1676,6 +1681,7 @@
 				5575C8BF1F2988D4003F12B8 /* YW_NaviBarListViewController.m in Sources */,
 				557198651F3AE2EC00C2328A /* YW_ActivityRecentTableViewCell.m in Sources */,
 				559573701F554B20009E928C /* YW_ActivityTestStyleViewController_01.m in Sources */,
+				55D2F2861F78928200AD8C1A /* YW_MenuButton.m in Sources */,
 				5531F8B31F46942800BCC28A /* YW_SuspendUIButton.m in Sources */,
 				55EC6DE61F31BB9C00F5C7B2 /* YWNetworkingMamager.m in Sources */,
 				5575C9201F29B480003F12B8 /* SPCallingCardBubbleChatView.m in Sources */,

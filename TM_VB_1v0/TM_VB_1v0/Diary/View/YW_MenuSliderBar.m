@@ -8,9 +8,10 @@
 
 #import "YW_MenuSliderBar.h"
 #import "UIView+YW_ScreenFrame.h"
+#import "YW_MenuButton.h"
 
 
-@interface YW_MenuSliderBar ()
+@interface YW_MenuSliderBar () <YWMenuButtonDelegate>
 
 @end
 
@@ -30,27 +31,26 @@
 
 -(void)setUpMenuWithTitleArr:(NSMutableArray *)titleArr
 {
+    self.buttons = [[NSMutableArray alloc] init];
     self.currentTab = titleArr[0];
-    CGFloat labelW = (self.width) / self.maxShowNum;
-    CGFloat labelH = self.height;
-    CGFloat labelY = 0;
+    CGFloat buttonW = (self.width) / self.maxShowNum;
+    CGFloat buttonH = self.height;
+    CGFloat buttonY = 0;
     
     for (int i = 0; i < titleArr.count; i ++) {
-        CGFloat labelX = i * labelW;
+        CGFloat buttonX = i * buttonW;
         
-        YW_MenuBarLabel *label = [[YW_MenuBarLabel alloc] initWithFrame:CGRectMake(labelX, labelY, labelW, labelH)];
-        label.text = titleArr[i];
+        YW_MenuButton *button = [[YW_MenuButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonW, buttonH)];
+        [button setTitle:titleArr[i] forState:UIControlStateNormal];
+        button.delegate = self;
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(tapMenuItem:) forControlEvents:UIControlEventTouchUpInside];
         
-        label.tag = 100 + i;
-    
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMenuItem:)];
-        [label addGestureRecognizer:tapGestureRecognizer];
-        
-        [self addSubview:label];
+        [self.buttons addObject:button];
+        [self addSubview:button];
     }
     
-    self.contentSize = CGSizeMake(titleArr.count * labelW, 0);
-//    [self setPageWidth:labelW];
+    self.contentSize = CGSizeMake(titleArr.count * buttonW, 0);
 }
 
 - (void)updateMenuWithTitleArr:(NSMutableArray *)titleArr
@@ -63,22 +63,51 @@
     
 }
 
--(void)tapMenuItem:(UITapGestureRecognizer *)tapGestureRecognizer
+-(void)insertMenuWithTitle:(NSString *)title
 {
-    YW_MenuBarLabel *label = (YW_MenuBarLabel *)tapGestureRecognizer.view;
-    label.alpha = 0.5;
-    label.textColor = [UIColor colorWithHexString:MenuBarTextSelectedColor];
+    CGFloat buttonW = (self.width) / self.maxShowNum;
+    CGFloat buttonH = self.height;
+    CGFloat buttonY = 0;
+    CGFloat buttonX = self.buttons.count * buttonW;
     
-    for (YW_MenuBarLabel *otherLabel in self.subviews) {
-        if (otherLabel != label) {
-            otherLabel.textColor = [UIColor colorWithHexString:MenuBarTextNormalColor];
-            otherLabel.alpha = 1.0;
+    YW_MenuButton *button = [[YW_MenuButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonW, buttonH)];
+    [button setTitle:title forState:UIControlStateNormal];
+    button.delegate = self;
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(tapMenuItem:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.buttons addObject:button];
+    [self addSubview:button];
+    
+    self.contentSize = CGSizeMake(self.buttons.count * buttonW, 0);
+    
+    [self tapMenuItem:button];
+}
+-(void)removeMenuWithTitle:(NSString *)title
+{
+    for (YW_MenuButton *btn in self.buttons) {
+        if ([btn.titleLabel.text isEqualToString:title]) {
+            [self deleteButtonRemoveSelf:btn];
+            [self.buttons removeObject:btn];
         }
     }
-    CGPoint titleOffset = self.contentOffset;
-    titleOffset.x = label.center.x - self.width * 0.5;
+    self.contentSize = CGSizeMake(self.buttons.count * (self.width) / self.maxShowNum, 0);
+    NSLog(@"--%@", NSStringFromCGSize(self.contentSize));
+}
+
+-(void)tapMenuItem:(YW_MenuButton *)button
+{
+    button.backgroundColor = [[UIColor colorWithHexString:MenuBarButtonBgColor] colorWithAlphaComponent:1.0];
+    for (YW_MenuButton *btn in self.buttons) {
+        if (btn != button) {
+            btn.backgroundColor = [UIColor clearColor];
+        }
+    }
     
-    CGFloat maxTitleOffsetX = self.contentSize.width - self.width;
+    CGPoint titleOffset = self.contentOffset;
+    titleOffset.x = button.center.x - self.width * 0.5;
+    
+    CGFloat maxTitleOffsetX = self.contentSize.width < self.width ? 0 : self.contentSize.width - self.width;
     if (titleOffset.x < 0) {
         titleOffset.x = 0;
     }
@@ -89,7 +118,45 @@
     [self setContentOffset:titleOffset animated:YES];
     
     if (self.clickItemBlock) {
-        self.clickItemBlock(label);
+        self.clickItemBlock(button);
+    }
+}
+
+-(void)deleteButtonRemoveSelf:(YW_MenuButton *)button
+{
+    [self.buttons removeObject:button];
+    
+    CGFloat buttonW = (self.width) / self.maxShowNum;
+    
+    [UIView animateWithDuration:0.5 animations:^{   //重新布局
+        for (int i = 0; i < self.buttons.count; i++) {
+            CGFloat buttonX = i * buttonW;
+            YW_MenuButton *currentBtn = _buttons[i];
+            currentBtn.x = buttonX;
+        }
+    }];
+    
+    self.contentSize = CGSizeMake(self.buttons.count * buttonW, 0);
+    
+    if (self.clickCloseBlock) {
+        self.clickCloseBlock(button);
+    }
+}
+
+- (void)intoButtonEditStatus
+{
+    // 进入编辑状态
+    for (YW_MenuButton *button in self.buttons) {
+        if (button.shaking) return;
+        button.shaking = YES;
+    }
+}
+
+-(void)exitButtonEditStatus
+{
+    //推出编辑状态
+    for (YW_MenuButton *button in self.buttons) {
+        button.shaking = NO;
     }
 }
 

@@ -8,20 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class YW_MenuSliderBar;
+
 @interface YW_MenuSingleton : NSObject <NSCopying, NSMutableCopying>
 
 /** Current View Title */
-@property(strong, nonatomic) NSString *viewTitle;
-
-/** Current Menu Title */
-@property(strong, nonatomic) NSString *menuTitle;
-
-/** Current SubMenu Title */
-@property(strong, nonatomic) NSString *subMenuTitle;
+@property(strong, nonatomic) YW_MenuSliderBar *sliderBar;
 
 /** 菜单项 */
 @property(strong, nonatomic) NSMutableArray *menuControllersTitlesArr;
 
 +(instancetype)shareMenuInstance;
+
++(instancetype)initWithSlider:(YW_MenuSliderBar *)sliderBar;
 
 @end

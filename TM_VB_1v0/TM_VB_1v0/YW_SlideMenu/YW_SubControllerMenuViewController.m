@@ -76,7 +76,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = [[YW_MenuSingleton shareMenuInstance] menuTitle];
+//    titleLabel.text = [[YW_MenuSingleton shareMenuInstance] menuTitle];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:20];
     [self.headerView addSubview:titleLabel];
@@ -90,27 +90,27 @@
 
 -(void)setupData
 {
-    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"View"])
-    {
-        
-        YW_MainMenuItem *Slide = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Slide" destVcClass:[NSNull class]];
-        YW_MainMenuItem *Fixed = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Fixed" destVcClass:[NSNull class]];
-        
-        self.data = @[Slide, Fixed];
-    }
-    else
-    {
-        YW_MainMenuItem *Select = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Select" destVcClass:[NSNull class]];
-        
-        if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Things"]) {
-            YW_MainMenuItem *CreateCollection = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"CreateCollection" destVcClass:[NSNull class]];
-            YW_MainMenuItem *AddThing = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"AddThing" destVcClass:[NSNull class]];
-            self.data = @[Select, CreateCollection, AddThing];
-        }else
-        {
-            self.data = @[Select];
-        }
-    }
+//    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"View"])
+//    {
+//        
+//        YW_MainMenuItem *Slide = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Slide" destVcClass:[NSNull class]];
+//        YW_MainMenuItem *Fixed = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Fixed" destVcClass:[NSNull class]];
+//        
+//        self.data = @[Slide, Fixed];
+//    }
+//    else
+//    {
+//        YW_MainMenuItem *Select = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Select" destVcClass:[NSNull class]];
+//        
+//        if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Things"]) {
+//            YW_MainMenuItem *CreateCollection = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"CreateCollection" destVcClass:[NSNull class]];
+//            YW_MainMenuItem *AddThing = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"AddThing" destVcClass:[NSNull class]];
+//            self.data = @[Select, CreateCollection, AddThing];
+//        }else
+//        {
+//            self.data = @[Select];
+//        }
+//    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -144,18 +144,18 @@
     YW_AnimateMemuViewController *animVC = (YW_AnimateMemuViewController *)self.parentViewController;
     [animVC closeMenu];
     
-    if ([[[YW_MenuSingleton shareMenuInstance] viewTitle] isEqualToString:@"Diary"]) {
-//        YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animVC.rootViewController;
-//        [diaryVC setCurrentSelectedViewController:item.destVcNum];
-    }
-    else if ([[[YW_MenuSingleton shareMenuInstance] viewTitle] isEqualToString:@"Activity"]) {
-        YW_ActivityViewController *activityVC = (YW_ActivityViewController *)animVC.rootViewController;
-        [activityVC selectFunctionOfItemTitle:cell.item.itmeTitle];
-    }
-    else if ([[[YW_MenuSingleton shareMenuInstance] viewTitle] isEqualToString:@"Me"]) {
-//        YW_MeViewController *meVC = (YW_MeViewController *)animVC.rootViewController;
-//        [meVC setCurrentSelectedViewController:item.destVcNum];
-    }
+//    if ([[[YW_MenuSingleton shareMenuInstance] viewTitle] isEqualToString:@"Diary"]) {
+////        YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animVC.rootViewController;
+////        [diaryVC setCurrentSelectedViewController:item.destVcNum];
+//    }
+//    else if ([[[YW_MenuSingleton shareMenuInstance] viewTitle] isEqualToString:@"Activity"]) {
+//        YW_ActivityViewController *activityVC = (YW_ActivityViewController *)animVC.rootViewController;
+//        [activityVC selectFunctionOfItemTitle:cell.item.itmeTitle];
+//    }
+//    else if ([[[YW_MenuSingleton shareMenuInstance] viewTitle] isEqualToString:@"Me"]) {
+////        YW_MeViewController *meVC = (YW_MeViewController *)animVC.rootViewController;
+////        [meVC setCurrentSelectedViewController:item.destVcNum];
+//    }
 }
 
 @end

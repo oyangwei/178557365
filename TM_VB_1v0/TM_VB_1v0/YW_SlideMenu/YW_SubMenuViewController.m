@@ -76,7 +76,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = [[YW_MenuSingleton shareMenuInstance] menuTitle];
+//    titleLabel.text = [[YW_MenuSingleton shareMenuInstance] menuTitle];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:20];
     [self.headerView addSubview:titleLabel];
@@ -130,17 +130,17 @@
     YW_AnimateMemuViewController *animateVC = (YW_AnimateMemuViewController *)self.parentViewController;
     [animateVC closeMenu];
     
-    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Diary"]) {
-        YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animateVC.rootViewController;
-    }
-    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Activity"]) {
-        YW_ActivityViewController *activityVC = (YW_ActivityViewController *)animateVC.rootViewController;
-        [activityVC setCurrentSelectedViewController:item.destVcNum];
-    }
-    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Me"]) {
-        YW_MeViewController *meVC = (YW_MeViewController *)animateVC.rootViewController;
-        [meVC setCurrentSelectedViewController:item.destVcNum];
-    }
+//    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Diary"]) {
+//        YW_DiaryViewController *diaryVC = (YW_DiaryViewController *)animateVC.rootViewController;
+//    }
+//    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Activity"]) {
+//        YW_ActivityViewController *activityVC = (YW_ActivityViewController *)animateVC.rootViewController;
+//        [activityVC setCurrentSelectedViewController:item.destVcNum];
+//    }
+//    else if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"Me"]) {
+//        YW_MeViewController *meVC = (YW_MeViewController *)animateVC.rootViewController;
+//        [meVC setCurrentSelectedViewController:item.destVcNum];
+//    }
 }
 
 @end

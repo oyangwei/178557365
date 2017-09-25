@@ -10,10 +10,4 @@
 
 @interface YW_ActivityViewController : UIViewController
 
-/** 设置当前被选中的标题 */
--(void)setCurrentSelectedViewController:(NSInteger)currentItemNum;
-
-/** 菜单栏功能选项 */
--(void)selectFunctionOfItemTitle:(NSString *)itemTitle;
-
 @end

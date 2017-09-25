@@ -38,4 +38,10 @@ static YW_MenuSingleton *_instance;
     return _instance;
 }
 
++(instancetype)initWithSlider:(YW_MenuSliderBar *)sliderBar
+{
+    [[self shareMenuInstance] setSliderBar:sliderBar];
+    return [self shareMenuInstance];
+}
+
 @end
