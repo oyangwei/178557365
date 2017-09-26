@@ -104,6 +104,10 @@
         }
     }
     
+    if (self.clickItemBlock) {
+        self.clickItemBlock(button);
+    }
+    
     CGPoint titleOffset = self.contentOffset;
     titleOffset.x = button.center.x - self.width * 0.5;
     
@@ -117,9 +121,7 @@
     
     [self setContentOffset:titleOffset animated:YES];
     
-    if (self.clickItemBlock) {
-        self.clickItemBlock(button);
-    }
+    
 }
 
 -(void)deleteButtonRemoveSelf:(YW_MenuButton *)button
@@ -157,6 +159,25 @@
     //推出编辑状态
     for (YW_MenuButton *button in self.buttons) {
         button.shaking = NO;
+    }
+}
+
+-(void)setCurrentTab:(NSString *)currentTab
+{
+    _currentTab = currentTab;
+    
+    if ([currentTab isEqualToString:@"home"]) {
+        for (YW_MenuButton *button in self.buttons) {
+            button.backgroundColor = [UIColor clearColor];
+        }
+    }else
+    {
+        for (YW_MenuButton *button in self.buttons) {
+            if ([button.titleLabel.text isEqualToString:currentTab])
+            {
+                [self tapMenuItem:button];
+            }
+        }
     }
 }
 

@@ -62,7 +62,7 @@ static NSString *const currentTitle = @"Me";
     self.mainView = view;
     [self.view addSubview:view];
     
-    NSArray *iconTitles = [NSArray arrayWithObjects:@"News_01", @"News_02", @"News_03", nil];
+    NSArray *iconTitles = [NSArray arrayWithObjects:@"Me_01", @"Me_02", @"Me_03", nil];
     
     // 计算按钮的Y坐标 (从下往上排列)
     //  CGFloat buttonW = (view.width - (ColumnNumber - 1) * ButtonColumnMarginSpace) / ColumnNumber;
@@ -84,7 +84,7 @@ static NSString *const currentTitle = @"Me";
         //   buttonY = view.height - (buttonH * (i + 1) + i * ButtonRowMarginSpace);  //计算按钮的Y坐标(从下往上排列)
         
         CGFloat rowMaxCount = ColumnNumber;
-        if (i == rowNumber) {
+        if (i == rowNumber - 1 && iconTitles.count % ColumnNumber != 0) {
             rowMaxCount = iconTitles.count % ColumnNumber;  //计算当前行存放的Button最大数量
         }
         
@@ -101,8 +101,6 @@ static NSString *const currentTitle = @"Me";
             [view addSubview:button];
         }
     }
-    
-    
 }
 
 -(void)setupBottomMenuView
@@ -115,6 +113,7 @@ static NSString *const currentTitle = @"Me";
     [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
     
     YW_MenuSliderBar *sliderBar = [YW_MenuSingleton shareMenuInstance].sliderBar;
+    sliderBar.currentTab = currentTitle;
     BOOL isExitBtn = false;
     for (YW_MenuButton *button in sliderBar.buttons) {
         if ([button.titleLabel.text isEqualToString:currentTitle]) {

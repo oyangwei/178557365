@@ -25,6 +25,7 @@
 #import "UIViewController+YWUIViewController.h"  //UIViewController类别
 
 #import "YW_MenuSingleton.h"  //菜单栏单例
+#import "YW_NaviSingleton.h"  //控制器单例
 
 #import "YWCommonMethod.h"  //公共工具
 

@@ -15,6 +15,9 @@
 #import "YW_ActivityViewController.h"
 #import "YW_DiaryViewController.h"
 #import "YW_NavigationController.h"
+#import "YW_New01ViewController.h"
+#import "YW_New02ViewController.h"
+#import "YW_New03ViewController.h"
 
 #define ButtonViewLeftMargin 30      // 存放按钮容器距离左边间距
 #define ButtonColumnMarginSpace 35         // 按钮列间距
@@ -40,7 +43,6 @@ static NSString *const currentTitle = @"News";
     
     [super viewDidLoad];
     
-    
     [self setUIViewBackgroud:self.view name:@"home_bg"];
     
     self.title = currentTitle;
@@ -53,7 +55,19 @@ static NSString *const currentTitle = @"News";
     
     [self setupBottomMenuView];
     
+    UIButton *btn = [[UIButton alloc] init];
+    btn.titleLabel.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"NewsVC"];
     
+    if (![btn.titleLabel.text isEqualToString:@"NewsVC"]) {
+        [self buttonClick:btn];
+    }
+
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSUserDefaults standardUserDefaults] setObject:@"NewsVC" forKey:@"NewsVC"];
 }
 
 -(void)setupContentView
@@ -84,7 +98,7 @@ static NSString *const currentTitle = @"News";
         //   buttonY = view.height - (buttonH * (i + 1) + i * ButtonRowMarginSpace);  //计算按钮的Y坐标(从下往上排列)
         
         CGFloat rowMaxCount = ColumnNumber;
-        if (i == rowNumber) {
+        if (i == rowNumber - 1 && iconTitles.count % ColumnNumber != 0) {
             rowMaxCount = iconTitles.count % ColumnNumber;  //计算当前行存放的Button最大数量
         }
         
@@ -114,6 +128,7 @@ static NSString *const currentTitle = @"News";
     [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
     
     YW_MenuSliderBar *sliderBar = [YW_MenuSingleton shareMenuInstance].sliderBar;
+    sliderBar.currentTab = currentTitle;
     BOOL isExitBtn = false;
     for (YW_MenuButton *button in sliderBar.buttons) {
         if ([button.titleLabel.text isEqualToString:currentTitle]) {
@@ -163,7 +178,19 @@ static NSString *const currentTitle = @"News";
 
 -(void)buttonClick:(UIButton *)button
 {
-    NSLog(@"%s, line = %d", __func__, __LINE__);
+    if ([button.titleLabel.text isEqualToString:@"News_01"]) {
+        YW_New01ViewController *news01VC = [[YW_New01ViewController alloc] init];
+        [[NSUserDefaults standardUserDefaults] setObject:@"News_01" forKey:@"NewsVC"];
+        [self.navigationController pushViewController:news01VC animated:YES];
+    }else if ([button.titleLabel.text isEqualToString:@"News_02"]) {
+        YW_New02ViewController *news02VC = [[YW_New02ViewController alloc] init];
+        [[NSUserDefaults standardUserDefaults] setObject:@"News_02" forKey:@"NewsVC"];
+        [self.navigationController pushViewController:news02VC animated:YES];
+    }else if ([button.titleLabel.text isEqualToString:@"News_03"]) {
+        YW_New03ViewController *news03VC = [[YW_New03ViewController alloc] init];
+        [[NSUserDefaults standardUserDefaults] setObject:@"News_03" forKey:@"NewsVC"];
+        [self.navigationController pushViewController:news03VC animated:YES];
+    }
 }
 
 -(void)mainClick:(UIButton *)button
@@ -184,6 +211,11 @@ static NSString *const currentTitle = @"News";
     [button.imageView.layer addAnimation:shake forKey:nil];
     [button.imageView startAnimating];
     
+}
+
+-(void)popViewController
+{
+    NSLog(@"%s, line = %d", __func__, __LINE__);
 }
 
 @end
