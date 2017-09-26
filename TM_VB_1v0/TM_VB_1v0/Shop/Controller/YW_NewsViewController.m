@@ -55,19 +55,8 @@ static NSString *const currentTitle = @"News";
     
     [self setupBottomMenuView];
     
-    UIButton *btn = [[UIButton alloc] init];
-    btn.titleLabel.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"NewsVC"];
+    [[YW_NaviSingleton shareInstance] setNewsNVC:(YW_NavigationController *)self.navigationController];
     
-    if (![btn.titleLabel.text isEqualToString:@"NewsVC"]) {
-        [self buttonClick:btn];
-    }
-
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [[NSUserDefaults standardUserDefaults] setObject:@"NewsVC" forKey:@"NewsVC"];
 }
 
 -(void)setupContentView
@@ -153,7 +142,6 @@ static NSString *const currentTitle = @"News";
         if ([button.titleLabel.text isEqualToString:@"Diary"]) {
             YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
             YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
-            
             weakSelf.view.window.rootViewController = nVC;
         }else if ([button.titleLabel.text isEqualToString:@"Activity"])
         {
@@ -180,15 +168,12 @@ static NSString *const currentTitle = @"News";
 {
     if ([button.titleLabel.text isEqualToString:@"News_01"]) {
         YW_New01ViewController *news01VC = [[YW_New01ViewController alloc] init];
-        [[NSUserDefaults standardUserDefaults] setObject:@"News_01" forKey:@"NewsVC"];
         [self.navigationController pushViewController:news01VC animated:YES];
     }else if ([button.titleLabel.text isEqualToString:@"News_02"]) {
         YW_New02ViewController *news02VC = [[YW_New02ViewController alloc] init];
-        [[NSUserDefaults standardUserDefaults] setObject:@"News_02" forKey:@"NewsVC"];
         [self.navigationController pushViewController:news02VC animated:YES];
     }else if ([button.titleLabel.text isEqualToString:@"News_03"]) {
         YW_New03ViewController *news03VC = [[YW_New03ViewController alloc] init];
-        [[NSUserDefaults standardUserDefaults] setObject:@"News_03" forKey:@"NewsVC"];
         [self.navigationController pushViewController:news03VC animated:YES];
     }
 }

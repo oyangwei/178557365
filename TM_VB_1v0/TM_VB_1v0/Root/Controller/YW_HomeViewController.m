@@ -132,8 +132,14 @@ static NSString *const currentTitle = @"home";
                 weakSelf.view.window.rootViewController = nVC;
             }else if ([button.titleLabel.text isEqualToString:@"News"])
             {
-                YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
-                YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
+                YW_NavigationController *nVC = [YW_NaviSingleton shareInstance].newsNVC;
+                if (!nVC) {   //第一次进入,创建新的newsVC
+                    YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
+                    nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
+                    [[YW_NaviSingleton shareInstance] setNewsNVC:nVC];
+                }
+                NSInteger index = nVC.childViewControllers.count - 1;
+                [nVC popToViewController:nVC.childViewControllers[index] animated:YES];
                 weakSelf.view.window.rootViewController = nVC;
             }else if ([button.titleLabel.text isEqualToString:@"Me"])
             {
@@ -175,8 +181,13 @@ static NSString *const currentTitle = @"home";
         }
         case 2:
         {
-            YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
+            YW_NavigationController *nVC = [YW_NaviSingleton shareInstance].newsNVC;
+            if (!nVC) {   //第一次进入,创建新的newsVC
+                YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
+                nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
+                [[YW_NaviSingleton shareInstance] setNewsNVC:nVC];
+            }
+            [nVC popToViewController:nVC.topViewController animated:YES];
             
             self.view.window.rootViewController = nVC;
             break;

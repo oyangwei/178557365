@@ -26,6 +26,8 @@
     [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.popDelegate = self.interactivePopGestureRecognizer.delegate;
     self.delegate = self;
+    
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

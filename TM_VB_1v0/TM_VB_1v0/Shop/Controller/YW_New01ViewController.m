@@ -35,22 +35,11 @@ static NSString *const currentTitle = @"News";
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor redColor];
+    
     [self setupBottomMenuView];
     
-//    NSString *titleVC = [[NSUserDefaults standardUserDefaults] valueForKey:@"News01VC"];
-//    
-//    if (![titleVC isEqualToString:@"News_01"]) {
-//        YW_New02ViewController *news02VC = [[YW_New02ViewController alloc] init];
-//        [self.navigationController pushViewController:news02VC animated:YES];
-//    }
+    [[YW_NaviSingleton shareInstance] setNewsNVC:(YW_NavigationController *)self.navigationController];
     
-    [self.navigationController popToViewController:self.navigationController.childViewControllers[3] animated:YES];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [[NSUserDefaults standardUserDefaults] setObject:@"News_01" forKey:@"News01VC"];
 }
 
 -(void)setupBottomMenuView
@@ -116,10 +105,10 @@ static NSString *const currentTitle = @"News";
     YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
     self.view.window.rootViewController = homeVC;
 }
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     YW_New02ViewController *news02VC = [[YW_New02ViewController alloc] init];
-    [[NSUserDefaults standardUserDefaults] setObject:@"News_02" forKey:@"News01VC"];
     [self.navigationController pushViewController:news02VC animated:YES];
 }
 

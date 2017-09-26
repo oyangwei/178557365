@@ -34,7 +34,10 @@ static NSString *const currentTitle = @"News";
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor grayColor];
+    
     [self setupBottomMenuView];
+    
+    [[YW_NaviSingleton shareInstance] setNewsNVC:(YW_NavigationController *)self.navigationController];
 }
 
 -(void)setupBottomMenuView
@@ -100,4 +103,5 @@ static NSString *const currentTitle = @"News";
     YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
     self.view.window.rootViewController = homeVC;
 }
+
 @end
