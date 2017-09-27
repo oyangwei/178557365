@@ -11,6 +11,7 @@
 #import "YW_HomeViewController.h"
 #import "SPUtil.h"
 #import "SPKitExample.h"
+#import "YW_MainViewController.h"
 
 #define TextFieldWidth ScreenWitdh * 3 / 4
 #define TextFieldHeight 50
@@ -157,7 +158,7 @@
 
 -(void)_pushMainControllerAnimated:(BOOL)aAnimated
 {
-    YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
+    YW_MainViewController *homeVC = [[YW_MainViewController alloc] init];
     [UIView transitionWithView:self.view.window duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.view.window.rootViewController = homeVC;
     } completion:nil];

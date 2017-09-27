@@ -53,10 +53,14 @@ static NSString *const currentTitle = @"News";
     
     [self setupContentView];
     
-    [self setupBottomMenuView];
-    
     [[YW_NaviSingleton shareInstance] setNewsNVC:(YW_NavigationController *)self.navigationController];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.rootVC insertMenuButton:currentTitle];
 }
 
 -(void)setupContentView
@@ -107,63 +111,6 @@ static NSString *const currentTitle = @"News";
     
 }
 
--(void)setupBottomMenuView
-{
-    UIView *menuView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - BottomMenuViewHeight, self.view.width, BottomMenuViewHeight)];
-    menuView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
-    
-    UIButton *mainBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BottomMenuViewHeight, BottomMenuViewHeight)];
-    [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
-    [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    YW_MenuSliderBar *sliderBar = [YW_MenuSingleton shareMenuInstance].sliderBar;
-    sliderBar.currentTab = currentTitle;
-    BOOL isExitBtn = false;
-    for (YW_MenuButton *button in sliderBar.buttons) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            isExitBtn = YES;
-            break;
-        }
-    }
-    
-    if (!isExitBtn) {
-        [sliderBar insertMenuWithTitle:currentTitle];
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    sliderBar.clickCloseBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
-            weakSelf.view.window.rootViewController = homeVC;
-        }
-    };
-    
-    sliderBar.clickItemBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:@"Diary"]) {
-            YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"Activity"])
-        {
-            YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"Me"])
-        {
-            YW_MeViewController *meVC = [[YW_MeViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:meVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }
-    };
-    
-    [[YW_MenuSingleton shareMenuInstance] setSliderBar:sliderBar];
-    
-    [menuView addSubview:[YW_MenuSingleton shareMenuInstance].sliderBar];
-    [menuView addSubview:mainBtn];
-    
-    [self.view addSubview:menuView];
-}
-
 -(void)buttonClick:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"News_01"]) {
@@ -183,24 +130,4 @@ static NSString *const currentTitle = @"News";
     YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
     self.view.window.rootViewController = homeVC;
 }
-
--(void)shakeAnimation:(UIButton *)button
-{
-    CAKeyframeAnimation *shake = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation"];
-    CGFloat angle = M_PI / 36;
-    NSArray *values = @[@(angle), @(-angle), @(angle)];
-    [shake setValues:values];
-    [shake setRepeatCount:100];
-    [shake setDuration:0.5];
-    
-    [button.imageView.layer addAnimation:shake forKey:nil];
-    [button.imageView startAnimating];
-    
-}
-
--(void)popViewController
-{
-    NSLog(@"%s, line = %d", __func__, __LINE__);
-}
-
 @end

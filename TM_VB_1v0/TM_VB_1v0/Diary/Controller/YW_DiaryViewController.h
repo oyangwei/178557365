@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YW_MainViewController.h"
 
 @interface YW_DiaryViewController : UIViewController
+
+/** 根视图 */
+@property(strong, nonatomic) YW_MainViewController *rootVC;
 
 @end

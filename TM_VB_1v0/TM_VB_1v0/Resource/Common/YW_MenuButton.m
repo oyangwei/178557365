@@ -161,7 +161,7 @@
     }
     
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.iconBtn.size = CGSizeMake(self.width * 0.15, self.width * 0.15);
+    self.iconBtn.size = CGSizeMake(self.width * 0.2, self.width * 0.2);
     self.iconBtn.x = 0;
     self.iconBtn.y = 0;
     

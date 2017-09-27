@@ -83,6 +83,7 @@
     
     [self tapMenuItem:button];
 }
+
 -(void)removeMenuWithTitle:(NSString *)title
 {
     for (YW_MenuButton *btn in self.buttons) {
@@ -121,7 +122,6 @@
     
     [self setContentOffset:titleOffset animated:YES];
     
-    
 }
 
 -(void)deleteButtonRemoveSelf:(YW_MenuButton *)button
@@ -139,6 +139,8 @@
     }];
     
     self.contentSize = CGSizeMake(self.buttons.count * buttonW, 0);
+    
+    [self exitButtonEditStatus];   //删除后推出编辑状态
     
     if (self.clickCloseBlock) {
         self.clickCloseBlock(button);

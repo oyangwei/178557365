@@ -59,19 +59,12 @@ static NSString *const currentTitle = @"Diary";
     
     [self setupContentView];
     
-    [self setupBottomMenuView];
-    
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    UIButton *btn = [[UIButton alloc] init];
-    btn.titleLabel.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"DiaryVC"];
-    
-    if (![btn.titleLabel.text isEqualToString:@"DiaryVC"]) {
-        [self buttonClick:btn];
-    }
+    [super viewDidAppear:animated];
+    [self.rootVC insertMenuButton:currentTitle];
 }
 
 -(void)setupContentView
@@ -122,63 +115,6 @@ static NSString *const currentTitle = @"Diary";
     
 }
 
--(void)setupBottomMenuView
-{
-    UIView *menuView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - BottomMenuViewHeight, self.view.width, BottomMenuViewHeight)];
-    menuView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
-    
-    UIButton *mainBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BottomMenuViewHeight, BottomMenuViewHeight)];
-    [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
-    [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    YW_MenuSliderBar *sliderBar = [YW_MenuSingleton shareMenuInstance].sliderBar;
-    sliderBar.currentTab = currentTitle;
-    BOOL isExitBtn = false;
-    for (YW_MenuButton *button in sliderBar.buttons) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            isExitBtn = YES;
-            break;
-        }
-    }
-    
-    if (!isExitBtn) {
-        [sliderBar insertMenuWithTitle:currentTitle];
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    sliderBar.clickCloseBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
-            weakSelf.view.window.rootViewController = homeVC;
-        }
-    };
-    
-    sliderBar.clickItemBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:@"Activity"]) {
-            YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"News"])
-        {
-            YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"Me"])
-        {
-            YW_MeViewController *meVC = [[YW_MeViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:meVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }
-    };
-    
-    [[YW_MenuSingleton shareMenuInstance] setSliderBar:sliderBar];
-    
-    [menuView addSubview:[YW_MenuSingleton shareMenuInstance].sliderBar];
-    [menuView addSubview:mainBtn];
-    
-    [self.view addSubview:menuView];
-}
-
 -(void)buttonClick:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"Chat"]) {
@@ -222,26 +158,8 @@ static NSString *const currentTitle = @"Diary";
             }
         };
         
-        [self.window addSubview:self.menuView];
-        
-        __weak typeof(self) weakSelf = self;
-        __block typeof(YWConversationListViewController) *conversationListControllerBlock = conversationListController;
-        
-        //载入之后添加底部菜单栏
         [conversationListController setViewDidLoadBlock:^{
-            self.window = [UIApplication sharedApplication].keyWindow;
-            [self setUIViewBackgroud:self.window name:@"home_bg"];
-            [self.window setFrame:CGRectMake(0, 0, ScreenWitdh, ScreenHeight - BottomMenuViewHeight)];
-            self.menuView = [self createBottomMenuWithTarget:conversationListControllerBlock];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:@"ChatVC" forKey:@"DiarVC"];
-        }];
-        
-        //消失之后移除菜单栏
-        [conversationListController setViewDidDisappearBlock:^(BOOL aAnimated) {
-            self.window = [UIApplication sharedApplication].keyWindow;
-            [self.window setFrame:CGRectMake(0, 0, ScreenWitdh, ScreenHeight)];
-            [weakSelf.menuView removeFromSuperview];
+            [[YW_NaviSingleton shareInstance] setDiaryNVC:(YW_NavigationController *)weakConversationListController.navigationController];
         }];
         
         [self.navigationController pushViewController:conversationListController animated:YES];
@@ -257,75 +175,6 @@ static NSString *const currentTitle = @"Diary";
 {
     YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
     self.view.window.rootViewController = homeVC;
-}
-
--(void)shakeAnimation:(UIButton *)button
-{
-    CAKeyframeAnimation *shake = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation"];
-    CGFloat angle = M_PI / 36;
-    NSArray *values = @[@(angle), @(-angle), @(angle)];
-    [shake setValues:values];
-    [shake setRepeatCount:100];
-    [shake setDuration:0.5];
-    
-    [button.imageView.layer addAnimation:shake forKey:nil];
-    [button.imageView startAnimating];
-    
-}
-
-- (UIView *)createBottomMenuWithTarget:(id)target
-{
-    UIView *menuView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - BottomMenuViewHeight, ScreenWitdh, BottomMenuViewHeight)];
-    menuView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
-    
-    UIButton *mainBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BottomMenuViewHeight, BottomMenuViewHeight)];
-    [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
-    [mainBtn addTarget:target action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    YW_MenuSliderBar *sliderBar = [YW_MenuSingleton shareMenuInstance].sliderBar;
-    BOOL isExitBtn = false;
-    for (YW_MenuButton *button in sliderBar.buttons) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            isExitBtn = YES;
-            break;
-        }
-    }
-    
-    if (!isExitBtn) {
-        [sliderBar insertMenuWithTitle:currentTitle];
-    }
-    
-    __block typeof(YWConversationListViewController) *weakSelf = target;
-    sliderBar.clickCloseBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
-            weakSelf.view.window.rootViewController = homeVC;
-        }
-    };
-    
-    sliderBar.clickItemBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:@"Activity"]) {
-            YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"News"])
-        {
-            YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"Me"])
-        {
-            YW_MeViewController *meVC = [[YW_MeViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:meVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }
-    };
-    
-    [[YW_MenuSingleton shareMenuInstance] setSliderBar:sliderBar];
-    
-    [menuView addSubview:[YW_MenuSingleton shareMenuInstance].sliderBar];
-    [menuView addSubview:mainBtn];
-    return menuView;
 }
 
 @end

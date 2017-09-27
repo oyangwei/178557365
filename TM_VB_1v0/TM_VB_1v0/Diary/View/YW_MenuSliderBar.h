@@ -27,7 +27,7 @@ typedef void(^ClickCloseBlock)(YW_MenuButton *button);
 /** 当前标签 */
 @property(strong, nonatomic) NSString *currentTab;
 
--(void)setUpMenuWithTitleArr:(NSMutableArray *)titleArr;
+- (void)setUpMenuWithTitleArr:(NSMutableArray *)titleArr;
 
 - (void)updateMenuWithTitleArr:(NSMutableArray *)titleArr;
 

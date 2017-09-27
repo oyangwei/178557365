@@ -36,7 +36,7 @@ static NSString *const currentTitle = @"News";
     
     self.view.backgroundColor = [UIColor redColor];
     
-    [self setupBottomMenuView];
+//    [self setupBottomMenuView];
     
     [[YW_NaviSingleton shareInstance] setNewsNVC:(YW_NavigationController *)self.navigationController];
     

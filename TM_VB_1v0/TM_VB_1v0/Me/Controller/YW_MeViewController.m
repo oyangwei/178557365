@@ -51,8 +51,7 @@ static NSString *const currentTitle = @"Me";
     
     [self setupContentView];
     
-    [self setupBottomMenuView];
-    
+    [self.rootVC insertMenuButton:currentTitle];
     
 }
 

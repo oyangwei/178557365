@@ -10,6 +10,15 @@
 #import "YW_NavigationController.h"
 #import "YW_RootViewController.h"
 #import "SPKitExample.h"
+#import "YW_MenuButton.h"
+#import "YW_MenuSliderBar.h"
+#import "YW_DiaryViewController.h"
+#import "YW_NavigationController.h"
+#import "YW_ActivityViewController.h"
+#import "YW_NewsViewController.h"
+#import "YW_MeViewController.h"
+
+#define BottomMenuViewHeight 49     // 底部菜单高度
 
 @interface AppDelegate ()
 
@@ -18,6 +27,16 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self setupContentView];
+    
+//    [self setupBottomMenuView];
+    
+    return YES;
+}
+
+-(void)setupContentView
+{
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
@@ -26,11 +45,39 @@
     
     YW_NavigationController *navigationVC = [[YW_NavigationController alloc] initWithRootViewController:rootVC];
     self.window.rootViewController = navigationVC;
-    [self.window makeKeyAndVisible];
     
-    return YES;
+    [self.window makeKeyAndVisible];
 }
 
+-(void)setupBottomMenuView
+{
+    UIView *menuView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight - BottomMenuViewHeight, ScreenWitdh, BottomMenuViewHeight)];
+    menuView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+    
+    UIButton *mainBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BottomMenuViewHeight, BottomMenuViewHeight)];
+    [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    
+    YW_MenuSliderBar *sliderMenu = [YW_MenuSingleton shareMenuInstance].sliderBar;
+    
+    if (![YW_MenuSingleton shareMenuInstance].sliderBar) {
+        sliderMenu = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(BottomMenuViewHeight, 0, menuView.width - mainBtn.width, BottomMenuViewHeight)];
+        sliderMenu.maxShowNum = 3;
+        
+        [sliderMenu setUpMenuWithTitleArr:nil];    //初始化SliderBar
+        
+        //        [sliderMenu setUpMenuWithTitleArr:[NSMutableArray arrayWithObjects:@"Diary", @"Activity", @"News", @"Me", nil]];    //初始化SliderBar
+        
+        [YW_MenuSingleton initWithSlider:sliderMenu];
+        
+    }
+    [[YW_MenuSingleton shareMenuInstance] setSliderBar:sliderMenu];
+    [menuView addSubview:[YW_MenuSingleton shareMenuInstance].sliderBar];
+    [menuView addSubview:mainBtn];
+    
+    self.sliderMenu = menuView;
+    
+    [self.window addSubview:menuView];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

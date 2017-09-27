@@ -113,6 +113,7 @@
 		5595737C1F5562D5009E928C /* YW_ActivityTestStyleViewController_05.m in Sources */ = {isa = PBXBuildFile; fileRef = 5595737B1F5562D5009E928C /* YW_ActivityTestStyleViewController_05.m */; };
 		559573811F56A074009E928C /* YW_ActivityTestBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559573801F56A074009E928C /* YW_ActivityTestBaseViewController.m */; };
 		559654591F2F118B00C7F073 /* MenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 559654581F2F118B00C7F073 /* MenuTab.plist */; };
+		55A01B201F7B8C13009ACAC8 /* YW_MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A01B1F1F7B8C13009ACAC8 /* YW_MainViewController.m */; };
 		55C501F01F26E6F40062DBE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501EF1F26E6F40062DBE0 /* main.m */; };
 		55C501F31F26E6F40062DBE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501F21F26E6F40062DBE0 /* AppDelegate.m */; };
 		55C501FE1F26E6F40062DBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C501FC1F26E6F40062DBE0 /* LaunchScreen.storyboard */; };
@@ -159,6 +160,8 @@
 		55D2F2971F79FCA900AD8C1A /* YW_New02ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2F2941F79FCA900AD8C1A /* YW_New02ViewController.m */; };
 		55D2F2981F79FCA900AD8C1A /* YW_New03ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2F2961F79FCA900AD8C1A /* YW_New03ViewController.m */; };
 		55D2F29B1F7A384700AD8C1A /* YW_NaviSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2F29A1F7A384700AD8C1A /* YW_NaviSingleton.m */; };
+		55D2F2AB1F7B5B9100AD8C1A /* YW_BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2F2AA1F7B5B9100AD8C1A /* YW_BaseViewController.m */; };
+		55D2F2B61F7B7FAC00AD8C1A /* YW_MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2F2B51F7B7FAC00AD8C1A /* YW_MoreViewController.m */; };
 		55EC6DC61F31ACA300F5C7B2 /* UIButton+YWUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DBF1F31ACA300F5C7B2 /* UIButton+YWUIButton.m */; };
 		55EC6DC71F31ACA300F5C7B2 /* UIImage+YWUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DC11F31ACA300F5C7B2 /* UIImage+YWUIImage.m */; };
 		55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC6DC31F31ACA300F5C7B2 /* UILabel+YWUILabel.m */; };
@@ -389,6 +392,8 @@
 		5595737F1F56A074009E928C /* YW_ActivityTestBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_ActivityTestBaseViewController.h; sourceTree = "<group>"; };
 		559573801F56A074009E928C /* YW_ActivityTestBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_ActivityTestBaseViewController.m; sourceTree = "<group>"; };
 		559654581F2F118B00C7F073 /* MenuTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTab.plist; sourceTree = "<group>"; };
+		55A01B1E1F7B8C13009ACAC8 /* YW_MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MainViewController.h; sourceTree = "<group>"; };
+		55A01B1F1F7B8C13009ACAC8 /* YW_MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MainViewController.m; sourceTree = "<group>"; };
 		55C501EB1F26E6F40062DBE0 /* TM_VB_1v0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TM_VB_1v0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C501EF1F26E6F40062DBE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55C501F11F26E6F40062DBE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -471,6 +476,10 @@
 		55D2F2961F79FCA900AD8C1A /* YW_New03ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_New03ViewController.m; sourceTree = "<group>"; };
 		55D2F2991F7A384700AD8C1A /* YW_NaviSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_NaviSingleton.h; sourceTree = "<group>"; };
 		55D2F29A1F7A384700AD8C1A /* YW_NaviSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_NaviSingleton.m; sourceTree = "<group>"; };
+		55D2F2A91F7B5B9100AD8C1A /* YW_BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_BaseViewController.h; sourceTree = "<group>"; };
+		55D2F2AA1F7B5B9100AD8C1A /* YW_BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_BaseViewController.m; sourceTree = "<group>"; };
+		55D2F2B41F7B7FAC00AD8C1A /* YW_MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MoreViewController.h; sourceTree = "<group>"; };
+		55D2F2B51F7B7FAC00AD8C1A /* YW_MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MoreViewController.m; sourceTree = "<group>"; };
 		55EC6DBE1F31ACA300F5C7B2 /* UIButton+YWUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+YWUIButton.h"; sourceTree = "<group>"; };
 		55EC6DBF1F31ACA300F5C7B2 /* UIButton+YWUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YWUIButton.m"; sourceTree = "<group>"; };
 		55EC6DC01F31ACA300F5C7B2 /* UIImage+YWUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YWUIImage.h"; sourceTree = "<group>"; };
@@ -1190,6 +1199,12 @@
 				55D2F2851F78928200AD8C1A /* YW_MenuButton.m */,
 				55D2F2991F7A384700AD8C1A /* YW_NaviSingleton.h */,
 				55D2F29A1F7A384700AD8C1A /* YW_NaviSingleton.m */,
+				55D2F2A91F7B5B9100AD8C1A /* YW_BaseViewController.h */,
+				55D2F2AA1F7B5B9100AD8C1A /* YW_BaseViewController.m */,
+				55D2F2B41F7B7FAC00AD8C1A /* YW_MoreViewController.h */,
+				55D2F2B51F7B7FAC00AD8C1A /* YW_MoreViewController.m */,
+				55A01B1E1F7B8C13009ACAC8 /* YW_MainViewController.h */,
+				55A01B1F1F7B8C13009ACAC8 /* YW_MainViewController.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1472,7 +1487,7 @@
 				TargetAttributes = {
 					55C501EA1F26E6F40062DBE0 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = D8M9Q9D8CF;
+						DevelopmentTeam = YEZ42AE4QP;
 						ProvisioningStyle = Automatic;
 					};
 					55C502031F26E6F40062DBE0 = {
@@ -1689,6 +1704,7 @@
 				55C502551F26F9600062DBE0 /* YW_MeViewController.m in Sources */,
 				5575C8BC1F297A70003F12B8 /* MJCSegmentInterface.m in Sources */,
 				55C502581F26F96C0062DBE0 /* YW_NewsViewController.m in Sources */,
+				55A01B201F7B8C13009ACAC8 /* YW_MainViewController.m in Sources */,
 				5531F8D01F483D8300BCC28A /* YW_SegmentInterface.m in Sources */,
 				5575C9271F29B480003F12B8 /* SPBubbleViewModelCustomize.m in Sources */,
 				55EC6DDB1F31B55300F5C7B2 /* YWAreaCodeView.m in Sources */,
@@ -1748,6 +1764,8 @@
 				556BB7991F68C12C0045986C /* YW_AddThingsViewController.m in Sources */,
 				5531F8A71F4426F600BCC28A /* YW_TableViewCell.m in Sources */,
 				55EC6E091F33028900F5C7B2 /* UIControl+BlockSupport.m in Sources */,
+				55D2F2B61F7B7FAC00AD8C1A /* YW_MoreViewController.m in Sources */,
+				55D2F2AB1F7B5B9100AD8C1A /* YW_BaseViewController.m in Sources */,
 				55C502681F27142D0062DBE0 /* YW_NavigationController.m in Sources */,
 				557198D91F41AF1500C2328A /* YW_BaseNavigationController.m in Sources */,
 				55EC6DCC1F31AD3C00F5C7B2 /* YW_RootViewController.m in Sources */,
@@ -1917,7 +1935,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = D8M9Q9D8CF;
+				DEVELOPMENT_TEAM = YEZ42AE4QP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TM_VB_1v0/Framework/WXFrameworks",
@@ -1926,7 +1944,7 @@
 				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/文稿 - pg的iMac/Git/TM_VB_1v0/TM_VB_1v0/PrefixHeader.pch";
 				INFOPLIST_FILE = TM_VB_1v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1938,7 +1956,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = D8M9Q9D8CF;
+				DEVELOPMENT_TEAM = YEZ42AE4QP;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TM_VB_1v0/Framework/WXFrameworks",
@@ -1947,7 +1965,7 @@
 				GCC_PREFIX_HEADER = "/Users/Oyw/Documents/文稿 - pg的iMac/Git/TM_VB_1v0/TM_VB_1v0/PrefixHeader.pch";
 				INFOPLIST_FILE = TM_VB_1v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "TM.TM-VB-1v0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};

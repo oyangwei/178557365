@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YW_BaseViewController.h"
 
 @interface YW_HomeViewController : UIViewController
 

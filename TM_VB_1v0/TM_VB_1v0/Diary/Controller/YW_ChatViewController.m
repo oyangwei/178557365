@@ -39,7 +39,7 @@ static NSString *const currentTitle = @"Chat";
     self.tableView.height -= 200;
     self.tableView.frame = frame;
     
-    [self setupBottomMenuView];
+//    [self setupBottomMenuView];
 }
 
 -(void)setupBottomMenuView

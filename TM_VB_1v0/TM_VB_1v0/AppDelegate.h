@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+/** sliderMenu */
+@property(strong, nonatomic) UIView *sliderMenu;
 
 @end
 

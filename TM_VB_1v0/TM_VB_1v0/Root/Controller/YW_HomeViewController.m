@@ -15,6 +15,7 @@
 #import "YW_NewsViewController.h"
 #import "YW_MeViewController.h"
 #import "YW_MenuButton.h"
+#import "YW_MainViewController.h"
 
 #define ButtonViewLeftMargin 30      // 存放按钮容器距离左边间距
 #define ButtonColumnMarginSpace 35         // 按钮列间距
@@ -27,6 +28,9 @@ static NSString *const currentTitle = @"home";
 
 @interface YW_HomeViewController ()
 
+/** 父控制器 */
+@property(strong, nonatomic) YW_MainViewController *mainVC;
+
 @end
 
 @implementation YW_HomeViewController
@@ -34,16 +38,15 @@ static NSString *const currentTitle = @"home";
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    [self setUIViewBackgroud:self.view name:@"home_bg"];
+    self.mainVC = (YW_MainViewController *)self.parentViewController;
     
     [self setupContentView];
     
-    [self setupBottomMenuView];
 }
 
 -(void)setupContentView
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(ButtonViewLeftMargin, 64, self.view.width - 2 * ButtonViewLeftMargin, self.view.height - BottomMenuViewHeight - 104)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(ButtonViewLeftMargin, 64, self.view.width - 2 * ButtonViewLeftMargin, self.view.height - 49 - 104)];
     [self.view addSubview:view];
     
     NSArray *iconTitles = [NSArray arrayWithObjects:@"Diary", @"Activity", @"News", @"Me", nil];
@@ -88,73 +91,6 @@ static NSString *const currentTitle = @"home";
     }
 }
 
--(void)setupBottomMenuView
-{
-    UIView *menuView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - BottomMenuViewHeight, self.view.width, BottomMenuViewHeight)];
-    menuView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
-    
-    UIButton *mainBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BottomMenuViewHeight, BottomMenuViewHeight)];
-    [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
-    [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
-
-    YW_MenuSliderBar *sliderMenu = [YW_MenuSingleton shareMenuInstance].sliderBar;
-    
-    if (![YW_MenuSingleton shareMenuInstance].sliderBar) {
-        sliderMenu = [[YW_MenuSliderBar alloc] initWithFrame:CGRectMake(BottomMenuViewHeight, 0, menuView.width - mainBtn.width, BottomMenuViewHeight)];
-        sliderMenu.maxShowNum = 3;
-        
-        [sliderMenu setUpMenuWithTitleArr:nil];    //初始化SliderBar
-        
-//        [sliderMenu setUpMenuWithTitleArr:[NSMutableArray arrayWithObjects:@"Diary", @"Activity", @"News", @"Me", nil]];    //初始化SliderBar
-        
-        [YW_MenuSingleton initWithSlider:sliderMenu];
-        
-    }
-    sliderMenu.currentTab = currentTitle;
-    __weak typeof(self) weakSelf = self;
-    sliderMenu.clickCloseBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
-            weakSelf.view.window.rootViewController = homeVC;
-        }
-    };
-    
-    sliderMenu.clickItemBlock = ^(YW_MenuButton *button) {
-            if ([button.titleLabel.text isEqualToString:@"Diary"]) {
-                YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
-                YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
-                
-                weakSelf.view.window.rootViewController = nVC;
-            }else if ([button.titleLabel.text isEqualToString:@"Activity"])
-            {
-                YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
-                YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
-                weakSelf.view.window.rootViewController = nVC;
-            }else if ([button.titleLabel.text isEqualToString:@"News"])
-            {
-                YW_NavigationController *nVC = [YW_NaviSingleton shareInstance].newsNVC;
-                if (!nVC) {   //第一次进入,创建新的newsVC
-                    YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
-                    nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
-                    [[YW_NaviSingleton shareInstance] setNewsNVC:nVC];
-                }
-                NSInteger index = nVC.childViewControllers.count - 1;
-                [nVC popToViewController:nVC.childViewControllers[index] animated:YES];
-                weakSelf.view.window.rootViewController = nVC;
-            }else if ([button.titleLabel.text isEqualToString:@"Me"])
-            {
-                YW_MeViewController *meVC = [[YW_MeViewController alloc] init];
-                YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:meVC];
-                weakSelf.view.window.rootViewController = nVC;
-            }
-        };
-    [[YW_MenuSingleton shareMenuInstance] setSliderBar:sliderMenu];
-    [menuView addSubview:[YW_MenuSingleton shareMenuInstance].sliderBar];
-    [menuView addSubview:mainBtn];
-    
-    [self.view addSubview:menuView];
-}
-
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
@@ -165,18 +101,26 @@ static NSString *const currentTitle = @"home";
     switch (button.tag - 100) {
         case 0:
         {
-            YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+            YW_NavigationController *nVC = [YW_NaviSingleton shareInstance].diaryNVC;
+            if (!nVC) {   //第一次进入,创建新的diaryVC
+                YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
+                diaryVC.rootVC = self.mainVC;
+                nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+                [[YW_NaviSingleton shareInstance] setDiaryNVC:nVC];
+            }
             
-            self.view.window.rootViewController = nVC;
+            [nVC popToViewController:nVC.topViewController animated:YES];
+            
+            [self.mainVC setupViewController:nVC];
             break;
         }
         case 1:
         {
             YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
+            activityVC.rootVC = self.mainVC;
             YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
             
-            self.view.window.rootViewController = nVC;
+            [self.mainVC setupViewController:nVC];
             break;
         }
         case 2:
@@ -184,30 +128,28 @@ static NSString *const currentTitle = @"home";
             YW_NavigationController *nVC = [YW_NaviSingleton shareInstance].newsNVC;
             if (!nVC) {   //第一次进入,创建新的newsVC
                 YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
+                newsVC.rootVC = self.mainVC;
                 nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
                 [[YW_NaviSingleton shareInstance] setNewsNVC:nVC];
             }
+            
             [nVC popToViewController:nVC.topViewController animated:YES];
             
-            self.view.window.rootViewController = nVC;
+            [self.mainVC setupViewController:nVC];
             break;
         }
         case 3:
         {
             YW_MeViewController *meVC = [[YW_MeViewController alloc] init];
+            meVC.rootVC = self.mainVC;
             YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:meVC];
             
-            self.view.window.rootViewController = nVC;
+            [self.mainVC setupViewController:nVC];
             break;
         }
         default:
             break;
     }
-}
-
--(void)mainClick:(UIButton *)button
-{
-    NSLog(@"%s, line = %d", __func__, __LINE__);
 }
 
 -(void)shakeAnimation:(UIButton *)button
@@ -223,6 +165,5 @@ static NSString *const currentTitle = @"home";
     [button.imageView startAnimating];
     
 }
-
 
 @end
