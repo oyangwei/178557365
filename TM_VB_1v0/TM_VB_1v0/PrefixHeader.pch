@@ -26,6 +26,7 @@
 
 #import "YW_MenuSingleton.h"  //菜单栏单例
 #import "YW_NaviSingleton.h"  //控制器单例
+#import "YW_DiaryVCSingleton.h" //记录Diary控制器单例
 
 #import "YWCommonMethod.h"  //公共工具
 

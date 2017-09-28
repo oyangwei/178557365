@@ -16,6 +16,7 @@
 #import "YW_MeViewController.h"
 #import "YW_MenuButton.h"
 #import "YW_MainViewController.h"
+#import "SPKitExample.h"
 
 #define ButtonViewLeftMargin 30      // 存放按钮容器距离左边间距
 #define ButtonColumnMarginSpace 35         // 按钮列间距
@@ -42,6 +43,12 @@ static NSString *const currentTitle = @"home";
     
     [self setupContentView];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.mainVC insertMenuButton:currentTitle];
 }
 
 -(void)setupContentView
@@ -101,17 +108,18 @@ static NSString *const currentTitle = @"home";
     switch (button.tag - 100) {
         case 0:
         {
-            YW_NavigationController *nVC = [YW_NaviSingleton shareInstance].diaryNVC;
-            if (!nVC) {   //第一次进入,创建新的diaryVC
+            YW_NavigationController *diaryNVC = [YW_NaviSingleton shareInstance].diaryNVC;
+            if (!diaryNVC) {   //第一次进入,创建新的diaryVC
                 YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
                 diaryVC.rootVC = self.mainVC;
-                nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
-                [[YW_NaviSingleton shareInstance] setDiaryNVC:nVC];
+                diaryNVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+                [[YW_NaviSingleton shareInstance] setDiaryNVC:diaryNVC];
+                [self.mainVC setupViewController:diaryNVC];
+            }else
+            {
+                [self.mainVC setupViewController:diaryNVC];
+                
             }
-            
-            [nVC popToViewController:nVC.topViewController animated:YES];
-            
-            [self.mainVC setupViewController:nVC];
             break;
         }
         case 1:

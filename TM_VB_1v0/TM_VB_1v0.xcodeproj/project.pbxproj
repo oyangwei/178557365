@@ -114,6 +114,7 @@
 		559573811F56A074009E928C /* YW_ActivityTestBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 559573801F56A074009E928C /* YW_ActivityTestBaseViewController.m */; };
 		559654591F2F118B00C7F073 /* MenuTab.plist in Resources */ = {isa = PBXBuildFile; fileRef = 559654581F2F118B00C7F073 /* MenuTab.plist */; };
 		55A01B201F7B8C13009ACAC8 /* YW_MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A01B1F1F7B8C13009ACAC8 /* YW_MainViewController.m */; };
+		55A01B271F7C90D1009ACAC8 /* YW_DiaryVCSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A01B261F7C90D1009ACAC8 /* YW_DiaryVCSingleton.m */; };
 		55C501F01F26E6F40062DBE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501EF1F26E6F40062DBE0 /* main.m */; };
 		55C501F31F26E6F40062DBE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C501F21F26E6F40062DBE0 /* AppDelegate.m */; };
 		55C501FE1F26E6F40062DBE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C501FC1F26E6F40062DBE0 /* LaunchScreen.storyboard */; };
@@ -394,6 +395,8 @@
 		559654581F2F118B00C7F073 /* MenuTab.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuTab.plist; sourceTree = "<group>"; };
 		55A01B1E1F7B8C13009ACAC8 /* YW_MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_MainViewController.h; sourceTree = "<group>"; };
 		55A01B1F1F7B8C13009ACAC8 /* YW_MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_MainViewController.m; sourceTree = "<group>"; };
+		55A01B251F7C90D1009ACAC8 /* YW_DiaryVCSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_DiaryVCSingleton.h; sourceTree = "<group>"; };
+		55A01B261F7C90D1009ACAC8 /* YW_DiaryVCSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_DiaryVCSingleton.m; sourceTree = "<group>"; };
 		55C501EB1F26E6F40062DBE0 /* TM_VB_1v0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TM_VB_1v0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C501EF1F26E6F40062DBE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55C501F11F26E6F40062DBE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1205,6 +1208,8 @@
 				55D2F2B51F7B7FAC00AD8C1A /* YW_MoreViewController.m */,
 				55A01B1E1F7B8C13009ACAC8 /* YW_MainViewController.h */,
 				55A01B1F1F7B8C13009ACAC8 /* YW_MainViewController.m */,
+				55A01B251F7C90D1009ACAC8 /* YW_DiaryVCSingleton.h */,
+				55A01B261F7C90D1009ACAC8 /* YW_DiaryVCSingleton.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1782,6 +1787,7 @@
 				557198C41F4199D200C2328A /* YW_SliderMenuTool.m in Sources */,
 				55EC6DC81F31ACA300F5C7B2 /* UILabel+YWUILabel.m in Sources */,
 				556BB79D1F68CA420045986C /* YW_ThingPairTableViewCell.m in Sources */,
+				55A01B271F7C90D1009ACAC8 /* YW_DiaryVCSingleton.m in Sources */,
 				55C5024F1F26F93C0062DBE0 /* YW_ActivityViewController.m in Sources */,
 				55EC6DC71F31ACA300F5C7B2 /* UIImage+YWUIImage.m in Sources */,
 				5575C9211F29B480003F12B8 /* SPCallingCardBubbleViewModel.m in Sources */,

@@ -47,7 +47,9 @@ static NSString *const currentTitle = @"Diary";
     
     [super viewDidLoad];
     
-    [[NSUserDefaults standardUserDefaults] setObject:@"DiarVC" forKey:@"DiarVC"];
+//    [[YW_DiaryVCSingleton shareInstance] setLastVCTitle:@"Diary"];
+    
+    [[YW_NaviSingleton shareInstance] setDiaryNVC:(YW_NavigationController *)self.navigationController];  //记录当前控制器
     
     [self setUIViewBackgroud:self.view name:@"home_bg"];
     
@@ -119,51 +121,62 @@ static NSString *const currentTitle = @"Diary";
 {
     if ([button.titleLabel.text isEqualToString:@"Chat"]) {
         
-        YWConversationListViewController *conversationListController = [[SPKitExample sharedInstance].ywIMKit makeConversationListViewController];
-        [[SPKitExample sharedInstance] exampleCustomizeConversationCellWithConversationListController:conversationListController];
-        
-        __weak __typeof(conversationListController) weakConversationListController = conversationListController;
-        conversationListController.didSelectItemBlock = ^(YWConversation *aConversation) {
-            if ([aConversation isKindOfClass:[YWCustomConversation class]]) {
-                YWCustomConversation *customConversation = (YWCustomConversation *)aConversation;
-                [customConversation markConversationAsRead];
-                
-                if ([customConversation.conversationId isEqualToString:SPTribeSystemConversationID]) {
-                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Tribe" bundle:nil];
-                    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"SPTribeSystemConversationViewController"];
-                    [weakConversationListController.navigationController pushViewController:controller animated:YES];
-                }
-                else if ([customConversation.conversationId isEqualToString:kSPCustomConversationIdForFAQ]) {
-                    YWWebViewController *controller = [YWWebViewController makeControllerWithUrlString:@"https://bbs.aliyun.com/searcher.php?step=2&method=AND&type=thread&verify=d26d3c6e63c0b37d&sch_area=1&fid=285&sch_time=all&keyword=汇总" andImkit:[SPKitExample sharedInstance].ywIMKit];
-                    [controller setHidesBottomBarWhenPushed:YES];
-                    [controller setTitle:@"云旺iOS精华问题"];
-                    [weakConversationListController.navigationController pushViewController:controller animated:YES];
+        YW_NavigationController *nVC = [YW_DiaryVCSingleton shareInstance].chatVC;
+        if (!nVC) {   //第一次进入,创建新的chatVC
+            YWConversationListViewController *conversationListController = [[SPKitExample sharedInstance].ywIMKit makeConversationListViewController];
+            [[SPKitExample sharedInstance] exampleCustomizeConversationCellWithConversationListController:conversationListController];
+            
+            __weak __typeof(conversationListController) weakConversationListController = conversationListController;
+            conversationListController.didSelectItemBlock = ^(YWConversation *aConversation) {
+                if ([aConversation isKindOfClass:[YWCustomConversation class]]) {
+                    YWCustomConversation *customConversation = (YWCustomConversation *)aConversation;
+                    [customConversation markConversationAsRead];
+                    
+                    if ([customConversation.conversationId isEqualToString:SPTribeSystemConversationID]) {
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Tribe" bundle:nil];
+                        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"SPTribeSystemConversationViewController"];
+                        [weakConversationListController.navigationController pushViewController:controller animated:YES];
+                    }
+                    else if ([customConversation.conversationId isEqualToString:kSPCustomConversationIdForFAQ]) {
+                        YWWebViewController *controller = [YWWebViewController makeControllerWithUrlString:@"https://bbs.aliyun.com/searcher.php?step=2&method=AND&type=thread&verify=d26d3c6e63c0b37d&sch_area=1&fid=285&sch_time=all&keyword=汇总" andImkit:[SPKitExample sharedInstance].ywIMKit];
+                        [controller setHidesBottomBarWhenPushed:YES];
+                        [controller setTitle:@"云旺iOS精华问题"];
+                        [weakConversationListController.navigationController pushViewController:controller animated:YES];
+                    }
+                    else {
+                        YWWebViewController *controller = [YWWebViewController makeControllerWithUrlString:@"https://im.taobao.com/" andImkit:[SPKitExample sharedInstance].ywIMKit];
+                        [controller setHidesBottomBarWhenPushed:YES];
+                        [controller setTitle:@"功能介绍"];
+                        [weakConversationListController.navigationController pushViewController:controller animated:YES];
+                    }
                 }
                 else {
-                    YWWebViewController *controller = [YWWebViewController makeControllerWithUrlString:@"https://im.taobao.com/" andImkit:[SPKitExample sharedInstance].ywIMKit];
-                    [controller setHidesBottomBarWhenPushed:YES];
-                    [controller setTitle:@"功能介绍"];
-                    [weakConversationListController.navigationController pushViewController:controller animated:YES];
+                    [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation
+                                                                                fromNavigationController:weakConversationListController.navigationController];
                 }
-            }
-            else {
-                [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation
-                                                                            fromNavigationController:weakConversationListController.navigationController];
-            }
-        };
-        
-        conversationListController.didDeleteItemBlock = ^ (YWConversation *aConversation) {
-            if ([aConversation.conversationId isEqualToString:SPTribeSystemConversationID]) {
-                [[[SPKitExample sharedInstance].ywIMKit.IMCore getConversationService] removeConversationByConversationId:[SPKitExample sharedInstance].tribeSystemConversation.conversationId error:NULL];
-            }
-        };
-        
-        [conversationListController setViewDidLoadBlock:^{
-            [[YW_NaviSingleton shareInstance] setDiaryNVC:(YW_NavigationController *)weakConversationListController.navigationController];
-        }];
-        
-        [self.navigationController pushViewController:conversationListController animated:YES];
-        
+            };
+            
+            conversationListController.didDeleteItemBlock = ^ (YWConversation *aConversation) {
+                if ([aConversation.conversationId isEqualToString:SPTribeSystemConversationID]) {
+                    [[[SPKitExample sharedInstance].ywIMKit.IMCore getConversationService] removeConversationByConversationId:[SPKitExample sharedInstance].tribeSystemConversation.conversationId error:NULL];
+                }
+            };
+            
+            [conversationListController setViewDidLoadBlock:^{
+                [[YW_DiaryVCSingleton shareInstance] setChatVC:(YW_NavigationController *)weakConversationListController.navigationController];   //进入到chat之后，记录一下
+            }];
+            
+            NSLog(@"--%ld %@", nVC.childViewControllers.count, self.rootVC);
+            YW_NavigationController *chatNVC = [[YW_NavigationController alloc] initWithRootViewController:conversationListController];
+            [[YW_NaviSingleton shareInstance] setDiaryNVC:chatNVC];   //进入Chat之后，记录一下
+            [[YW_DiaryVCSingleton shareInstance] setLastVCTitle:@"Chat"];
+            [self.rootVC setupViewController:chatNVC];
+        }else  //第二次进入，直接进入到上一次离开的界面
+        {
+            NSLog(@"--%ld %@", nVC.childViewControllers.count, self.rootVC);
+            [nVC popToViewController:nVC.topViewController animated:YES];
+            [self.rootVC setupViewController:nVC];
+        }
     }
     else if([button.titleLabel.text isEqualToString:@"Contact"])
     {

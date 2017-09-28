@@ -15,10 +15,14 @@
 #import "YW_ActivityViewController.h"
 #import "YW_NewsViewController.h"
 #import "YW_MeViewController.h"
+#import "SPKitExample.h"
 
 #define BottomMenuViewHeight 49     // 底部菜单高度
 
 @interface YW_MainViewController ()
+{
+    BOOL isDiaryVC;
+}
 
 /** 菜单栏 */
 @property(strong, nonatomic) YW_MenuSliderBar *sliderMenu;
@@ -84,16 +88,87 @@
     __weak typeof(self) weakSelf = self;
     sliderMenu.clickItemBlock = ^(YW_MenuButton *button) {
         if ([button.titleLabel.text isEqualToString:@"Diary"]) {
-            YW_NavigationController *nVC = [YW_NaviSingleton shareInstance].diaryNVC;
-            if (!nVC) {   //第一次进入,创建新的diaryVC
+            YW_NavigationController *diaryNVC = [YW_NaviSingleton shareInstance].diaryNVC;
+            if (!diaryNVC) {   //第一次进入,创建新的diaryVC
                 YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
-                nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
-                [[YW_NaviSingleton shareInstance] setDiaryNVC:nVC];
+                diaryNVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+                [[YW_NaviSingleton shareInstance] setDiaryNVC:diaryNVC];
+                [weakSelf setupViewController:diaryNVC];
+            }else
+            {
+                NSLog(@"--%@", self.childViewControllers[0]);
+                // 伪代码
+                // 1、判断当前界面是哪个界面
+                
+                if ([self.childViewControllers[0] isKindOfClass:[YW_HomeViewController class]]){
+//                判断 [YW_NaviSingleton shareInstance].diaryNVC 是哪个导航控制器
+//                直接跳到 [YW_NaviSingleton shareInstance].diaryNVC
+                    
+                    [weakSelf setupViewController:diaryNVC];
+                }else if ([self.childViewControllers[0] isKindOfClass:[YW_NavigationController class]])
+                {
+                    YW_NavigationController *nvc = self.childViewControllers[0];
+                    if ([nvc.childViewControllers[0] isKindOfClass:[YW_DiaryViewController class]]) {
+                        NSLog(@"--%@", nvc.childViewControllers[0]);
+                        //判断最后一次访问的是chat还是contact
+                        NSString *lastVCTitle = [YW_DiaryVCSingleton shareInstance].lastVCTitle;
+                        if ([lastVCTitle isEqualToString:@"Chat"]) {
+                            YW_NavigationController *chatNVC = [YW_DiaryVCSingleton shareInstance].chatVC;
+                            [[YW_NaviSingleton shareInstance] setDiaryNVC:chatNVC];
+                            [chatNVC popToViewController:chatNVC.topViewController animated:YES];
+                            [weakSelf setupViewController:chatNVC];
+                        }else if ([lastVCTitle isEqualToString:@"Contact"])
+                        {
+                            YW_NavigationController *contactNVC = [YW_DiaryVCSingleton shareInstance].chatVC;
+                            [[YW_NaviSingleton shareInstance] setDiaryNVC:contactNVC];
+                            [contactNVC popToViewController:contactNVC.topViewController animated:YES];
+                            [weakSelf setupViewController:contactNVC];
+                        }
+                    }else  //否则就处在Diary的子功能菜单中,回到YW_DiaryViewController界面
+                    {
+                        YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
+                        diaryVC.rootVC = weakSelf;
+                        diaryNVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+                        [[YW_NaviSingleton shareInstance] setDiaryNVC:diaryNVC];
+                        [weakSelf setupViewController:diaryNVC];
+                    }
+                }
+                
+                //判断当前所在Diary功能的哪个界面
+//                if ([diaryNVC.childViewControllers[0] isKindOfClass:[YW_DiaryViewController class]]) {
+//                    NSString *lastVCTitle = [YW_DiaryVCSingleton shareInstance].lastVCTitle;
+//                    
+//                    NSLog(@"%s, line = %d, %@, %@", __func__, __LINE__, lastVCTitle, diaryNVC);
+//                    if ([lastVCTitle isEqualToString:@"Chat"]) {
+//                        YW_NavigationController *chatNVC = [YW_DiaryVCSingleton shareInstance].chatVC;
+//                        [[YW_NaviSingleton shareInstance] setDiaryNVC:chatNVC];
+//                        [chatNVC popToViewController:chatNVC.topViewController animated:YES];
+//                        [weakSelf setupViewController:chatNVC];
+//                    }else if ([lastVCTitle isEqualToString:@"Contact"])
+//                    {
+//                        YW_NavigationController *contactNVC = [YW_DiaryVCSingleton shareInstance].chatVC;
+//                        [[YW_NaviSingleton shareInstance] setDiaryNVC:contactNVC];
+//                        [contactNVC popToViewController:contactNVC.topViewController animated:YES];
+//                        [weakSelf setupViewController:contactNVC];
+//                    }else
+//                    {
+//                        [weakSelf setupViewController:diaryNVC];
+//                    }
+//                }else if ([diaryNVC.childViewControllers[0] isKindOfClass:[YWConversationListViewController class]]) {
+//                    
+//                    if ([self.currentTitle isEqualToString:@"home"]) {    //判断当前界面是否处在 Home界面
+//                        self.currentTitle = @"lastDiaryVC";
+//                        [weakSelf setupViewController:diaryNVC];
+//                    }else
+//                    {
+//                        YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
+//                        diaryVC.rootVC = weakSelf;
+//                        diaryNVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
+//                        [[YW_NaviSingleton shareInstance] setDiaryNVC:diaryNVC];
+//                        [weakSelf setupViewController:diaryNVC];
+//                    }
+//                }
             }
-            
-            [nVC popToViewController:nVC.topViewController animated:YES];
-            [weakSelf setupViewController:nVC];
-            
         }else if ([button.titleLabel.text isEqualToString:@"Activity"])
         {
             YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
@@ -142,7 +217,7 @@
 {
     self.currentTitle = title;
     
-    if (!title) {
+    if (!title || [title isEqualToString:@"home"]) {
         return;
     }
     

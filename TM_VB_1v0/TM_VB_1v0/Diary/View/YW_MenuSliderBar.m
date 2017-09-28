@@ -81,7 +81,7 @@
     
     self.contentSize = CGSizeMake(self.buttons.count * buttonW, 0);
     
-    [self tapMenuItem:button];
+    [self setCurrentTab:title];
 }
 
 -(void)removeMenuWithTitle:(NSString *)title
@@ -177,7 +177,22 @@
         for (YW_MenuButton *button in self.buttons) {
             if ([button.titleLabel.text isEqualToString:currentTab])
             {
-                [self tapMenuItem:button];
+                button.backgroundColor = [[UIColor colorWithHexString:MenuBarButtonBgColor] colorWithAlphaComponent:1.0];
+                CGPoint titleOffset = self.contentOffset;
+                titleOffset.x = button.center.x - self.width * 0.5;
+                
+                CGFloat maxTitleOffsetX = self.contentSize.width < self.width ? 0 : self.contentSize.width - self.width;
+                if (titleOffset.x < 0) {
+                    titleOffset.x = 0;
+                }
+                if (titleOffset.x > maxTitleOffsetX) {
+                    titleOffset.x = maxTitleOffsetX;
+                }
+                
+                [self setContentOffset:titleOffset animated:YES];
+            }else
+            {
+                button.backgroundColor = [UIColor clearColor];
             }
         }
     }

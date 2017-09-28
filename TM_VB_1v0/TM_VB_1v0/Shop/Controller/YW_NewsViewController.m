@@ -108,7 +108,6 @@ static NSString *const currentTitle = @"News";
             [view addSubview:button];
         }
     }
-    
 }
 
 -(void)buttonClick:(UIButton *)button
