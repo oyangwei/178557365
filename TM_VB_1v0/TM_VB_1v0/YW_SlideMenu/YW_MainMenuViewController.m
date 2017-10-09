@@ -106,15 +106,9 @@
 
 -(void)setupData
 {
-    YW_MainMenuItem *user_name = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"UserName" destVcClass:[YW_MeViewController class]];
+    YW_MainMenuItem *logout = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"Logout" destVcClass:[NSNull class]];
     
-    YW_MainMenuItem *diary = [YW_MainMenuItem itemWithIcon:@"menu_wallet" title:@"Diary" destVcClass:[YW_DiaryViewController class]];
-    
-    YW_MainMenuItem *activity = [YW_MainMenuItem itemWithIcon:@"menu_promo" title:@"Activity" destVcClass:[YW_ActivityViewController class]];
-    
-    YW_MainMenuItem *news = [YW_MainMenuItem itemWithIcon:@"menu_sticker" title:@"News" destVcClass:[YW_NewsViewController class]];
-    
-    self.data = @[user_name, diary, activity, news];
+    self.data = @[logout];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -143,22 +137,22 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    YW_MainMenuItem *item = _data[indexPath.row];
-    if (item.destVcClass == nil) return;
-    
-    YW_AnimateMemuViewController *animateVC = (YW_AnimateMemuViewController *)self.parentViewController;
-    [animateVC closeMenu];
-    
-    UIViewController *vc = [[item.destVcClass alloc] init];
-    
-    YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:vc];
-
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        window.rootViewController = nVC;
-        [YW_SliderMenuTool hide];
-    });
+//    YW_MainMenuItem *item = _data[indexPath.row];
+//    if (item.destVcClass == nil) return;
+//    
+//    YW_AnimateMemuViewController *animateVC = (YW_AnimateMemuViewController *)self.parentViewController;
+//    [animateVC closeMenu];
+//    
+//    UIViewController *vc = [[item.destVcClass alloc] init];
+//    
+//    YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:vc];
+//
+//    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        window.rootViewController = nVC;
+//        [YW_SliderMenuTool hide];
+//    });
 }
 
 @end

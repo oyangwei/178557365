@@ -1,22 +1,22 @@
 //
-//  YW_DiaryVCSingleton.m
+//  YW_ActivityVCSingleton.m
 //  TM_VB_1v0
 //
-//  Created by Oyw on 2017/9/28.
+//  Created by Oyw on 2017/9/30.
 //  Copyright © 2017年 TeleconMobile. All rights reserved.
 //
 
-#import "YW_DiaryVCSingleton.h"
+#import "YW_ActivityVCSingleton.h"
 
-static YW_DiaryVCSingleton *_instance;
-@implementation YW_DiaryVCSingleton
+static YW_ActivityVCSingleton *_instance;
+
+@implementation YW_ActivityVCSingleton
 
 +(instancetype)allocWithZone:(struct _NSZone *)zone
 {
-    [super allocWithZone:zone];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (_instance == nil) {
+        if (!_instance) {
             _instance = [super allocWithZone:zone];
         }
     });

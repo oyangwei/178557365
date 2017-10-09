@@ -10,6 +10,9 @@
 
 @interface YW_MainViewController : UIViewController
 
+/** 菜单栏 */
+@property(strong, nonatomic) UIView *menuView;
+
 -(void)setupViewController:(UIViewController *)vc;
 
 -(void)insertMenuButton:(NSString *)title;

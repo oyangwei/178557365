@@ -48,7 +48,6 @@ static NSString *const currentTitle = @"home";
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.mainVC insertMenuButton:currentTitle];
 }
 
 -(void)setupContentView
@@ -57,6 +56,7 @@ static NSString *const currentTitle = @"home";
     [self.view addSubview:view];
     
     NSArray *iconTitles = [NSArray arrayWithObjects:@"Diary", @"Activity", @"News", @"Me", nil];
+//    NSArray *iconImages = [NSArray arrayWithObjects:@"diary", @"activity", @"news", @"me", nil];
     
     // 计算按钮的Y坐标 (从下往上排列)
 //    CGFloat buttonW = (view.width - (ColumnNumber - 1) * ButtonColumnMarginSpace) / ColumnNumber;
@@ -88,7 +88,7 @@ static NSString *const currentTitle = @"home";
             YW_IconButton *button = [[YW_IconButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonW, buttonH)];
             button.tag = 100 + i * ColumnNumber + j;
             button.alpha = 0.7;
-            [button setImage:[UIImage imageNamed:@"testBg"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:iconTitles[i * ColumnNumber + j]] forState:UIControlStateNormal];
             [button setTitle:iconTitles[i * ColumnNumber + j] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -105,9 +105,11 @@ static NSString *const currentTitle = @"home";
 
 -(void)buttonClick:(UIButton *)button
 {
+    self.mainVC.menuView.backgroundColor = [UIColor colorWithHexString:ThemeColor];
     switch (button.tag - 100) {
         case 0:
         {
+            [[YW_NaviSingleton shareInstance] setMainTitle:@"Diary"];
             YW_NavigationController *diaryNVC = [YW_NaviSingleton shareInstance].diaryNVC;
             if (!diaryNVC) {   //第一次进入,创建新的diaryVC
                 YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
@@ -117,18 +119,26 @@ static NSString *const currentTitle = @"home";
                 [self.mainVC setupViewController:diaryNVC];
             }else
             {
+                [self.mainVC insertMenuButton:@"Diary"];
                 [self.mainVC setupViewController:diaryNVC];
-                
             }
             break;
         }
         case 1:
         {
-            YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
-            activityVC.rootVC = self.mainVC;
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
-            
-            [self.mainVC setupViewController:nVC];
+            [[YW_NaviSingleton shareInstance] setMainTitle:@"Activity"];
+            YW_NavigationController *activityNVC = [YW_NaviSingleton shareInstance].activityNVC;
+            if (!activityNVC) {   //第一次进入,创建新的diaryVC
+                YW_ActivityViewController *activityVC = [[YW_ActivityViewController alloc] init];
+                activityVC.rootVC = self.mainVC;
+                activityNVC = [[YW_NavigationController alloc] initWithRootViewController:activityVC];
+                [[YW_NaviSingleton shareInstance] setActivityNVC:activityNVC];
+                [self.mainVC setupViewController:activityNVC];
+            }else
+            {
+                [self.mainVC insertMenuButton:@"Activity"];
+                [self.mainVC setupViewController:activityNVC];
+            }
             break;
         }
         case 2:

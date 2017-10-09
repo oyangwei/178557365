@@ -93,10 +93,10 @@
 //    if ([[[YW_MenuSingleton shareMenuInstance] menuTitle] isEqualToString:@"View"])
 //    {
 //        
-//        YW_MainMenuItem *Slide = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Slide" destVcClass:[NSNull class]];
-//        YW_MainMenuItem *Fixed = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Fixed" destVcClass:[NSNull class]];
+        YW_MainMenuItem *Slide = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Slide" destVcClass:[NSNull class]];
+        YW_MainMenuItem *Fixed = [YW_MainMenuItem itemWithIcon:@"menu_invite" title:@"Fixed" destVcClass:[NSNull class]];
 //        
-//        self.data = @[Slide, Fixed];
+        self.data = @[Slide, Fixed];
 //    }
 //    else
 //    {

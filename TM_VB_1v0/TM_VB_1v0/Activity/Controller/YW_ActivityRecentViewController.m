@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
     ShowThings = 1 << 3
 };
 
+static NSString *const currentTitle = @"Things";
+
 @interface YW_ActivityRecentViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     BOOL isHideFavorite;
@@ -124,6 +126,15 @@ typedef NS_ENUM(NSInteger, CurentShowThings){
 {
     [self requestCollectionsData];
     [self requestThingsData];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[YW_ActivityVCSingleton shareInstance] setLastVCTitle:currentTitle];
+    [[YW_ActivityVCSingleton shareInstance] setThingsVC:(YW_NavigationController *)self.navigationController];   //进入到Things之后，记录一下
+    [[YW_NaviSingleton shareInstance] setActivityNVC:(YW_NavigationController *)self.navigationController];
 }
 
 - (void)requestThingsData

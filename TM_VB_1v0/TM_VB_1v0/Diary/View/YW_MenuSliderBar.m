@@ -98,7 +98,7 @@
 
 -(void)tapMenuItem:(YW_MenuButton *)button
 {
-    button.backgroundColor = [[UIColor colorWithHexString:MenuBarButtonBgColor] colorWithAlphaComponent:1.0];
+    button.backgroundColor = [[UIColor colorWithHexString:MenuBarButtonSelectedBgColor] colorWithAlphaComponent:1.0];
     for (YW_MenuButton *btn in self.buttons) {
         if (btn != button) {
             btn.backgroundColor = [UIColor clearColor];
@@ -177,7 +177,7 @@
         for (YW_MenuButton *button in self.buttons) {
             if ([button.titleLabel.text isEqualToString:currentTab])
             {
-                button.backgroundColor = [[UIColor colorWithHexString:MenuBarButtonBgColor] colorWithAlphaComponent:1.0];
+                button.backgroundColor = [[UIColor colorWithHexString:MenuBarButtonSelectedBgColor] colorWithAlphaComponent:1.0];
                 CGPoint titleOffset = self.contentOffset;
                 titleOffset.x = button.center.x - self.width * 0.5;
                 
@@ -196,6 +196,27 @@
             }
         }
     }
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    YW_MenuButton *button = (YW_MenuButton *)[touches anyObject];
+    NSLog(@"--%@", button.titleLabel.text);
+}
+
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
+-(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
 }
 
 @end

@@ -22,12 +22,15 @@
 #import "YWHttpURLDefine.h"   //网络请求地址
 
 #import "UIButton+YWUIButton.h" //UIButton类别
+#import "UIBarButtonItem+YW_Extension.h"
 #import "UIViewController+YWUIViewController.h"  //UIViewController类别
 
 #import "YW_MenuSingleton.h"  //菜单栏单例
 #import "YW_NaviSingleton.h"  //控制器单例
 #import "YW_DiaryVCSingleton.h" //记录Diary控制器单例
+#import "YW_ActivityVCSingleton.h" //记录Activity控制器单例
 
 #import "YWCommonMethod.h"  //公共工具
+#import "YW_SliderMenuTool.h"  //右滑菜单
 
 #endif /* PrefixHeader_pch */

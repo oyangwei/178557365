@@ -16,7 +16,8 @@
 #import "YW_ActivityViewController.h"
 #import "YW_NavigationController.h"
 #import "SPKitExample.h"
-#import "YW_ChatViewController.h"
+#import "YW_ContactListViewController.h"
+#import "YW_SubControllerMenuViewController.h"
 
 #define ButtonViewLeftMargin 30      // 存放按钮容器距离左边间距
 #define ButtonColumnMarginSpace 35         // 按钮列间距
@@ -51,13 +52,17 @@ static NSString *const currentTitle = @"Diary";
     
     [[YW_NaviSingleton shareInstance] setDiaryNVC:(YW_NavigationController *)self.navigationController];  //记录当前控制器
     
-    [self setUIViewBackgroud:self.view name:@"home_bg"];
+    [self.view setBackgroundColor:[UIColor colorWithHexString:ViewBgColor]];
     
     self.title = currentTitle;
+    
+    [self.rootVC insertMenuButton:currentTitle];  //插入底部菜单标签
     
     self.navigationController.navigationBar.translucent = NO;
     
     self.view.height -= 64;
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"MainTagSubIcon" highImage:@"MainTagSubIcon" target:self action:@selector(showSubMenu)];
     
     [self setupContentView];
     
@@ -66,7 +71,6 @@ static NSString *const currentTitle = @"Diary";
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.rootVC insertMenuButton:currentTitle];
 }
 
 -(void)setupContentView
@@ -76,6 +80,7 @@ static NSString *const currentTitle = @"Diary";
     [self.view addSubview:view];
     
     NSArray *iconTitles = [NSArray arrayWithObjects:@"Chat", @"Contact", nil];
+    NSArray *iconImages = [NSArray arrayWithObjects:@"chat", @"contact", nil];
     
     // 计算按钮的Y坐标 (从下往上排列)
     //    CGFloat buttonW = (view.width - (ColumnNumber - 1) * ButtonColumnMarginSpace) / ColumnNumber;
@@ -106,15 +111,21 @@ static NSString *const currentTitle = @"Diary";
             
             YW_IconButton *button = [[YW_IconButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonW, buttonH)];
             button.alpha = 0.7;
-            [button setImage:[UIImage imageNamed:@"login_bg"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:iconImages[i * ColumnNumber + j]] forState:UIControlStateNormal];
             [button setTitle:iconTitles[i * ColumnNumber + j] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:ViewTitleColor] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
             [view addSubview:button];
         }
     }
+}
+
+-(void)showSubMenu
+{
+    [YW_SliderMenuTool showFunctionMenuWithRootViewController:self withToViewController:[YW_SubControllerMenuViewController class]];
     
+     NSLog(@"--%s, line = %d", __func__, __LINE__);
 }
 
 -(void)buttonClick:(UIButton *)button
@@ -128,6 +139,7 @@ static NSString *const currentTitle = @"Diary";
             
             __weak __typeof(conversationListController) weakConversationListController = conversationListController;
             conversationListController.didSelectItemBlock = ^(YWConversation *aConversation) {
+//                [[YW_NaviSingleton shareInstance] setDiaryNVC:(YW_NavigationController *)weakConversationListController.navigationController];   //进入Chat之后，记录一下]
                 if ([aConversation isKindOfClass:[YWCustomConversation class]]) {
                     YWCustomConversation *customConversation = (YWCustomConversation *)aConversation;
                     [customConversation markConversationAsRead];
@@ -162,25 +174,33 @@ static NSString *const currentTitle = @"Diary";
                 }
             };
             
-            [conversationListController setViewDidLoadBlock:^{
+            [conversationListController setViewDidAppearBlock:^(BOOL aAnimated) {
+                [[YW_DiaryVCSingleton shareInstance] setLastVCTitle:@"Chat"];
+                [[YW_NaviSingleton shareInstance] setDiaryNVC:(YW_NavigationController *)weakConversationListController.navigationController];   //进入Chat之后，记录一下]
                 [[YW_DiaryVCSingleton shareInstance] setChatVC:(YW_NavigationController *)weakConversationListController.navigationController];   //进入到chat之后，记录一下
+//                weakConversationListController.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"MainTagSubIcon" highImage:@"MainTagSubIcon" target:weakConversationListController action:@selector(showSubMenu)];
             }];
-            
-            NSLog(@"--%ld %@", nVC.childViewControllers.count, self.rootVC);
+        
             YW_NavigationController *chatNVC = [[YW_NavigationController alloc] initWithRootViewController:conversationListController];
-            [[YW_NaviSingleton shareInstance] setDiaryNVC:chatNVC];   //进入Chat之后，记录一下
-            [[YW_DiaryVCSingleton shareInstance] setLastVCTitle:@"Chat"];
             [self.rootVC setupViewController:chatNVC];
         }else  //第二次进入，直接进入到上一次离开的界面
         {
-            NSLog(@"--%ld %@", nVC.childViewControllers.count, self.rootVC);
             [nVC popToViewController:nVC.topViewController animated:YES];
             [self.rootVC setupViewController:nVC];
         }
     }
     else if([button.titleLabel.text isEqualToString:@"Contact"])
     {
-        
+        YW_NavigationController *contactNVC = [YW_DiaryVCSingleton shareInstance].contactVC;
+        if (!contactNVC) {  //第一次进入
+            YW_ContactListViewController *contactVC = [[YW_ContactListViewController alloc] init];
+            contactNVC = [[YW_NavigationController alloc] initWithRootViewController:contactVC];
+        }
+        else
+        {
+            [contactNVC popToViewController:contactNVC.topViewController animated:YES];
+        }
+        [self.rootVC setupViewController:contactNVC];
     }
 }
 

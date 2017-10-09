@@ -28,6 +28,9 @@
 #define ContactSelectBackgroudColor @"#AAAAAA"
 #define ContactLabelSelectTextColor @"#FFFFFF"
 
+
+static NSString *const currentTitle = @"Contact";
+
 typedef NS_ENUM(NSInteger, CurrentShowContactStyle){
     ShowNone = 1 << 0,
     ShowFavorite = 1 << 1,
@@ -87,11 +90,21 @@ static CGFloat defaultHeight;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    defaultHeight = ScreenHeight - 64 - TabBarHeight - SearchBarHeight - 4 * LabelHeight;
+    
+    defaultHeight = ScreenHeight - 64 - 4 * LabelHeight - 49;
     
     [self setUpView];
     
     [self reloadTribeData];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[YW_DiaryVCSingleton shareInstance] setLastVCTitle:currentTitle];
+    [[YW_DiaryVCSingleton shareInstance] setContactVC:(YW_NavigationController *)self.navigationController];   //进入到chat之后，记录一下
+    [[YW_NaviSingleton shareInstance] setDiaryNVC:(YW_NavigationController *)self.navigationController];
 }
 
 -(void)setUpView

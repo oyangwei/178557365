@@ -1,5 +1,5 @@
 //
-//  YW_DiaryViewController.m
+//  YW_ActivityViewController.m
 //  TM_VB_1v0
 //
 //  Created by z°先森 on 2017/7/25.
@@ -15,6 +15,8 @@
 #import "YW_NewsViewController.h"
 #import "YW_DiaryViewController.h"
 #import "YW_NavigationController.h"
+#import "YW_ActivityThingsViewController.h"
+#import "YW_ActivityRecentViewController.h"
 
 #define ButtonViewLeftMargin 30      // 存放按钮容器距离左边间距
 #define ButtonColumnMarginSpace 35         // 按钮列间距
@@ -40,8 +42,7 @@ static NSString *const currentTitle = @"Activity";
     
     [super viewDidLoad];
     
-    
-    [self setUIViewBackgroud:self.view name:@"home_bg"];
+    [self.view setBackgroundColor:[UIColor colorWithHexString:ViewBgColor]];
     
     self.title = currentTitle;
     
@@ -53,6 +54,11 @@ static NSString *const currentTitle = @"Activity";
     
     [self.rootVC insertMenuButton:currentTitle];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 -(void)setupContentView
@@ -94,7 +100,7 @@ static NSString *const currentTitle = @"Activity";
             button.alpha = 0.7;
             [button setImage:[UIImage imageNamed:@"login_bg"] forState:UIControlStateNormal];
             [button setTitle:iconTitles[i * ColumnNumber + j] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:ViewTitleColor] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
             [view addSubview:button];
@@ -102,67 +108,29 @@ static NSString *const currentTitle = @"Activity";
     }
 }
 
--(void)setupBottomMenuView
-{
-    UIView *menuView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.height - BottomMenuViewHeight, self.view.width, BottomMenuViewHeight)];
-    menuView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
-    
-    UIButton *mainBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BottomMenuViewHeight, BottomMenuViewHeight)];
-    [mainBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
-    [mainBtn addTarget:self action:@selector(mainClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    YW_MenuSliderBar *sliderBar = [YW_MenuSingleton shareMenuInstance].sliderBar;
-    sliderBar.currentTab = currentTitle;
-    BOOL isExitBtn = false;
-    for (YW_MenuButton *button in sliderBar.buttons) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            isExitBtn = YES;
-            break;
-        }
-    }
-    
-    if (!isExitBtn) {
-        [sliderBar insertMenuWithTitle:currentTitle];
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    sliderBar.clickCloseBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:currentTitle]) {
-            YW_HomeViewController *homeVC = [[YW_HomeViewController alloc] init];
-            weakSelf.view.window.rootViewController = homeVC;
-        }
-    };
-    
-    sliderBar.clickItemBlock = ^(YW_MenuButton *button) {
-        if ([button.titleLabel.text isEqualToString:@"Diary"]) {
-            YW_DiaryViewController *diaryVC = [[YW_DiaryViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:diaryVC];
-        
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"News"])
-        {
-            YW_NewsViewController *newsVC = [[YW_NewsViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:newsVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }else if ([button.titleLabel.text isEqualToString:@"Me"])
-        {
-            YW_MeViewController *meVC = [[YW_MeViewController alloc] init];
-            YW_NavigationController *nVC = [[YW_NavigationController alloc] initWithRootViewController:meVC];
-            weakSelf.view.window.rootViewController = nVC;
-        }
-    };
-    
-    [[YW_MenuSingleton shareMenuInstance] setSliderBar:sliderBar];
-    
-    [menuView addSubview:[YW_MenuSingleton shareMenuInstance].sliderBar];
-    [menuView addSubview:mainBtn];
-    
-    [self.view addSubview:menuView];
-}
-
 -(void)buttonClick:(UIButton *)button
 {
-    NSLog(@"%s, line = %d", __func__, __LINE__);
+    if ([button.titleLabel.text isEqualToString:@"Shares"]) {
+        
+        
+    }else if ([button.titleLabel.text isEqualToString:@"Things"])
+    {
+        YW_NavigationController *activityNVC = [YW_ActivityVCSingleton shareInstance].thingsVC;
+        if (!activityNVC) {  //第一次访问
+            YW_ActivityRecentViewController *thingsVC = [[YW_ActivityRecentViewController alloc] init];
+            activityNVC = [[YW_NavigationController alloc] initWithRootViewController:thingsVC];
+        }else
+        {
+            [activityNVC popToViewController:activityNVC.topViewController animated:YES];
+        }
+        [self.rootVC setupViewController:activityNVC];
+    }else if ([button.titleLabel.text isEqualToString:@"HotList"])
+    {
+        
+    }else if ([button.titleLabel.text isEqualToString:@"Active"])
+    {
+        
+    }
 }
 
 -(void)mainClick:(UIButton *)button

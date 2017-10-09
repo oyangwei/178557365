@@ -330,731 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
+            timestampString = "528361471.991681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528281691.295288"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Root/Controller/YW_HomeViewController.m"
-            timestampString = "528278559.818409"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Root/Controller/YW_HomeViewController.m"
-            timestampString = "528278559.818409"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Root/Controller/YW_HomeViewController.m"
-            timestampString = "528278559.818409"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Root/Controller/YW_HomeViewController.m"
-            timestampString = "528278559.818409"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Root/Controller/YW_HomeViewController.m"
-            timestampString = "528278559.818409"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Root/Controller/YW_HomeViewController.m"
-            timestampString = "528278559.818409"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528281691.295288"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528281691.295288"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.638335"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.640264"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.644711"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.646585"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.650982"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.652946"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.657261"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.659036"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.66414"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.666114"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[YW_MainViewController setupBottomMenuView]"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528278561.30394"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "89"
-                  endingLineNumber = "89"
-                  offsetFromSymbolStart = "1060">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528278561.305838"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
-                  offsetFromSymbolStart = "60">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/View/YW_MenuSliderBar.m"
-            timestampString = "528271652.420355"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-tapMenuItem:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/View/YW_MenuSliderBar.m"
-            timestampString = "528271653.007324"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-tapMenuItem:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-viewDidAppear:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.670595"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.67265"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528281691.295288"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-buttonClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/View/YW_MenuSliderBar.m"
-            timestampString = "528276725.97747"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "-deleteButtonRemoveSelf:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -1066,11 +346,91 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528279548.708344"
+            timestampString = "528450651.753794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-showSubMenu"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Diary/View/YW_MenuSliderBar.m"
+            timestampString = "528363083.178937"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "-touchesBegan:withEvent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528452580.824082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-setupBottomMenuView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
+            timestampString = "528449752.375208"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "-buttonClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
+            timestampString = "528449752.375208"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-buttonClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Activity/Controller/YW_ActivityViewController.m"
+            timestampString = "528449752.375208"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-buttonClick:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1082,491 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
+            timestampString = "528452580.824082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.6814"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.683565"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.687925"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.689869"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.694233"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.696094"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.700789"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.702728"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.707353"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.709746"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.714433"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.716415"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.720924"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.722927"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.727402"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.729421"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.733814"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.735721"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528282018.344802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-setupBottomMenuView"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.740284"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2240">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.80"
-                  moduleName = "TM_VB_1v0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-                  timestampString = "528281691.742288"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "2252">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528281811.533948"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "-setupBottomMenuView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1578,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528281811.533948"
+            timestampString = "528452580.824082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
@@ -1594,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528281307.510692"
+            timestampString = "528452580.824082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-setupBottomMenuView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1610,11 +490,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
-            timestampString = "528281811.533948"
+            timestampString = "528452580.824082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "-setupBottomMenuView"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.87"
+                  moduleName = "TM_VB_1v0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+                  timestampString = "528453117.131525"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "2788">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__44-[YW_MainViewController setupBottomMenuView]_block_invoke.87"
+                  moduleName = "TM_VB_1v0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+                  timestampString = "528453117.133698"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "2800">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528452580.824082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "-setupBottomMenuView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1622,63 +550,127 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528281691.295288"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528452580.824082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "-buttonClick:"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-setupBottomMenuView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-            timestampString = "528281654.724882"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528452580.824082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "-buttonClick:"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-setupBottomMenuView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528452580.824082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "-setupBottomMenuView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528452580.824082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-setupBottomMenuView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528453116.727014"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "-dragButtonClicked:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+            timestampString = "528453116.727014"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
+            landmarkName = "-dragButtonClicked:"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[YW_DiaryViewController buttonClick:]"
+                  symbolName = "-[YW_MainViewController dragButtonClicked:]"
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-                  timestampString = "528281654.732013"
+                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+                  timestampString = "528453117.161726"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "165"
-                  endingLineNumber = "165"
-                  offsetFromSymbolStart = "620">
+                  startingLineNumber = "304"
+                  endingLineNumber = "304"
+                  offsetFromSymbolStart = "84">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__38-[YW_DiaryViewController buttonClick:]_block_invoke_2"
+                  symbolName = "__43-[YW_MainViewController dragButtonClicked:]_block_invoke"
                   moduleName = "TM_VB_1v0"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Diary/Controller/YW_DiaryViewController.m"
-                  timestampString = "528281654.734278"
+                  urlString = "file:///Users/Oyw/Documents/%E6%96%87%E7%A8%BF%20-%20pg%E7%9A%84iMac/Git/TM_VB_1v0/TM_VB_1v0/Resource/Common/YW_MainViewController.m"
+                  timestampString = "528453117.163831"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "166"
-                  endingLineNumber = "166"
-                  offsetFromSymbolStart = "36">
+                  startingLineNumber = "305"
+                  endingLineNumber = "305"
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>

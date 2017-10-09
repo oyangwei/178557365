@@ -11,8 +11,17 @@
 
 @interface YW_NaviSingleton : NSObject <NSCopying, NSMutableCopying>
 
+/** 当前所处界面 */
+@property(strong, nonatomic) NSString *mainTitle;
+
+/** 当前所处界面 */
+@property(strong, nonatomic) NSString *currentTitle;
+
 /** DiaryNavigationViewController */
 @property(strong, nonatomic) YW_NavigationController *diaryNVC;
+
+/** ActivityNavigationViewController */
+@property(strong, nonatomic) YW_NavigationController *activityNVC;
 
 /** NewsNavigationViewController */
 @property(strong, nonatomic) YW_NavigationController *newsNVC;

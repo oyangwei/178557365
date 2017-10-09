@@ -29,7 +29,13 @@
 
 #pragma mark - 颜色
 
-#define ThemeColor @"#418ACE"
+#define ThemeColor @"#8EAFD3"
+
+#define ViewBgColor @"#DADFEB"
+
+#define ViewTitleColor @"#D3794F"
+
+#define MenuBarButtonSelectedBgColor @"#4C6FA6"
 
 #define MenuBarButtonBgColor @"8EAFD3"
 
