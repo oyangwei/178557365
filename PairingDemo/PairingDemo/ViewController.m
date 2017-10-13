@@ -17,6 +17,9 @@
 #define UUIDPrefix @"FD72D491-8174-4067-B64C-ACACF1"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
+{
+    int numService;
+}
     
 /** 刷新转动 */
 @property(strong, nonatomic) UIActivityIndicatorView *refresh;
@@ -29,6 +32,9 @@
 
 /** centerManager 中心管理者 */
 @property(strong, nonatomic) CBCentralManager *centerManager;
+    
+/** centerManager2 中心管理者 */
+@property(strong, nonatomic) CBCentralManager *centerManager2;
     
 /** peripheralManager 外设模式 */
 @property(strong, nonatomic) CBPeripheralManager *peripheralManager;
@@ -53,7 +59,13 @@
     
 /** writeCharacteristic 写入的特征 */
 @property(strong, nonatomic) CBCharacteristic *writeCharacteristic;
+    
+/** 计时器 */
+@property(strong, nonatomic) NSTimer *timer;
 
+/** 当前时间 */
+@property(assign, nonatomic) NSInteger currentSecond;
+    
 @end
 
 @implementation ViewController
@@ -185,7 +197,20 @@
     __weak typeof(self) weakSelf = self;
     cell.pairPeripheralBlock = ^{
         weakSelf.peripheral = weakSelf.peripheralArray[indexPath.row];
-        [weakSelf.centerManager connectPeripheral:weakSelf.peripheral options:nil];
+        
+        [weakSelf.centerManager stopScan]; //停止扫描
+        [weakSelf.refresh stopAnimating]; //停止刷新
+        
+        [weakSelf requestThingData:@{@"uuid":[weakSelf.peripheral.identifier.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""]}];
+        
+        [weakSelf.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).offset(60);
+        }];
+        
+        [SVProgressHUD showSuccessWithStatus:@"Connected Success!"];
+        
+        YW_ThingPairTableViewCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.peripheralArray indexOfObject:weakSelf.peripheral] inSection:0]];
+        [cell.pairBtn setTitle:@"Paired" forState:UIControlStateNormal];
     };
     return cell;
 }
@@ -215,153 +240,113 @@
         break;
     }
 }
-    
-/** 扫描外设时调用 */
--(void)centralManager:(CBCentralManager *)central
-didDiscoverPeripheral:(CBPeripheral *)peripheral
-    advertisementData:(NSDictionary<NSString *,id> *)advertisementData
-                 RSSI:(NSNumber *)RSSI
+
+- (void)createPeripheralManager
 {
+    self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue() options:nil];
+}
     
-//    if (![peripheral.identifier.UUIDString hasPrefix:@""]) {
-//        return;
-//    }
-    
-    if (![self.peripheralArray containsObject:peripheral]) {
-        NSLog(@"%s, line = %d , peripheral:%@, RSSI:%@, advertisementData:%@", __func__, __LINE__, peripheral, RSSI, advertisementData);
-        [self.peripheralArray addObject:peripheral];
-        [self reloadData];
+-(void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    //在开发中，NS_ENUM可以直接用 == 号判断，NS_OPTIONS类型的枚举要用&(包含)判断
+    if (peripheral.state == CBManagerStatePoweredOn) {
+        
+        CBMutableDescriptor *descriptor = [[CBMutableDescriptor alloc] initWithType:[CBUUID UUIDWithString:CBUUIDCharacteristicUserDescriptionString] value:@"TeleconMobile01"];
+        
+        // 创建特征（服务的特征）
+        CBMutableCharacteristic *cha = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"FFE1"]
+                                                                          properties:CBCharacteristicPropertyRead value:nil
+                                                                         permissions:CBAttributePermissionsReadable];
+        cha.descriptors = @[descriptor];
+        numService = 0;
+        [self.nServices removeAllObjects];
+        for (int i = 0; i < self.receiveUUIDs.count; i++) {
+            // 通常UUID都是由硬件工程师定义的
+            CBUUID *serviceUUID = [CBUUID UUIDWithString:[self formatterUUID:self.receiveUUIDs[1]]];
+            
+            // 设置添加到外设中的服务
+            CBMutableService *service = [[CBMutableService alloc] initWithType:serviceUUID primary:YES];
+            
+            service.characteristics = @[cha];
+            
+            [self.nServices addObject:service];
+            
+            [self.peripheralManager addService:service];
+        }
     }
-    
+    else
+    {
+        NSLog(@"not ON %ld", (long)peripheral.state);
+    }
 }
-    
-/** 连接外设后调用 */
-- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+
+// 添加服务
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error
 {
-    NSLog(@"%s, line = %d , peripheral:%@, UUID:%@", __func__, __LINE__, peripheral, peripheral.identifier);
+    NSLog(@"%s, line = %d service = %@", __func__, __LINE__, service);
     
-    [self.centerManager stopScan]; //停止扫描
-    [self.refresh stopAnimating]; //停止刷新
-    
-    [self requestThingData:@{@"uuid":[peripheral.identifier.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""]}];
-    
-    [self.peripheral setDelegate:self];
-    [self.peripheral discoverServices:nil];  //扫描服务
-    
-    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(60);
-    }];
-    
-    [SVProgressHUD showSuccessWithStatus:@"Connected Success!"];
-    
-    YW_ThingPairTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.peripheralArray indexOfObject:peripheral] inSection:0]];
-    [cell.pairBtn setTitle:@"Paired" forState:UIControlStateNormal];
-}
-    
-/** 连接外设失败 */
-- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
-{
-    YW_ThingPairTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.peripheralArray indexOfObject:peripheral] inSection:0]];
-    [cell.pairBtn setTitle:@"Pair" forState:UIControlStateNormal];
-}
-    
-/** 外设信号强度变化时 */
-- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
-{
-    /**
-     * 计算公式：
-     *    d = 10^((abs(RSSI) - A) / (10 * n))
-     * 其中：
-     *    d - 计算所得距离
-     *    RSSI - 接收信号强度（负值）
-     *    A - 发射端和接收端相隔1米时的信号强度
-     *    n - 环境衰减因子
-     */
-    NSLog(@"%s, line = %d, 可根据RSSI计算出蓝牙设备和手机的距离", __func__, __LINE__);
-}
-    
-/** 发现外设服务时调用 */
-- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
-{
     if (error) {
-        NSLog(@"%@", error);
+        NSLog(@"error : %@", error);
         return;
     }
     
-    for (CBService *service in peripheral.services) {
-        [self.nServices addObject:service];
-    }
+    numService ++;
     
-    for (CBService *service in peripheral.services) {
-        [peripheral discoverCharacteristics:nil forService:service];
+    if (self.nServices.count == numService) {
+        [peripheral startAdvertising:@{
+                                       CBAdvertisementDataLocalNameKey : @"ManufacturerData",
+                                       CBAdvertisementDataServiceUUIDsKey : [self.nServices valueForKey:@"UUID"]
+                                       }];
     }
-}
-    
-/** 根据服务搜索特征 */
--(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
-{
-    for (CBCharacteristic *c in service.characteristics) {
-        [self.nCharacterics addObject:c];
-    }
-}
-    
-/** 获取外设发来的数据，不论是read和notify,获取数据都是从这个方法中读取 */
--(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    NSLog(@"%s, line = %d, characteristic = %@", __func__, __LINE__, characteristic);
 }
 
--(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    NSLog(@"%s, line = %d, characteristic = %@", __func__, __LINE__, characteristic);
-}
-
--(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    NSLog(@"%s, line = %d, characteristic = %@", __func__, __LINE__, characteristic);
-}
-
--(void)writeDataToPeripheral
-{
-    if (_peripheral.state == CBPeripheralStateConnected) {
-        for (CBCharacteristic *c in self.nCharacterics) {
-            if ([c.UUID isEqual:[CBUUID UUIDWithString:@"FF01"]]) {
-                int i = 0;
-                while (i < 6) {  //发送6次
-                    [_peripheral writeValue:[self hexString:self.receiveUUIDs[1]] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
-                    i++;
-                }
-            }else if ([c.UUID isEqual:[CBUUID UUIDWithString:@"FF02"]]) {
-                int i = 0;
-                while (i < 6) {  //发送6次
-                    [_peripheral writeValue:[self hexString:self.receiveUUIDs[2]] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
-                    i++;
-                }
-            }else if ([c.UUID isEqual:[CBUUID UUIDWithString:@"FF03"]]) {
-                int i = 0;
-                while (i < 6) {  //发送6次
-                    [_peripheral writeValue:[self hexString:self.receiveUUIDs[3]] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
-                    i++;
-                }
-            }else if ([c.UUID isEqual:[CBUUID UUIDWithString:@"FF04"]]) {
-                int i = 0;
-                while (i < 6) {  //发送6次
-                    [_peripheral writeValue:[self hexString:self.receiveUUIDs[4]] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
-                    i++;
-                }
-            }
-        }
-    }
-}
-    
--(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+- (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
 {
     if (error) {
-        [self writeCharacteristic];   //  写入失败之后，重新尝试写入，直到成功
+        NSLog(@"error : %@", error);
     }
-    NSLog(@"%s, line = %d, characteristic = %@", __func__, __LINE__, characteristic);
+
+    NSLog(@"peripheral : %@", peripheral);
     
-    [peripheral readValueForCharacteristic:characteristic];
+    self.currentSecond = 0;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timepiece) userInfo:nil repeats:YES];
+    
+}
+    
+- (void)timepiece
+{
+    self.currentSecond ++;
+    
+    if (self.currentSecond == 60) {
+        [self.peripheralManager stopAdvertising];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.centerManager2 = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        });
+    }
+}
+    
+-(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    if (central == self.centerManager) {
+        //    if (![peripheral.identifier.UUIDString hasPrefix:@""]) {
+        //        return;
+        //    }
+        
+        if (![self.peripheralArray containsObject:peripheral]) {
+            NSLog(@"%s, line = %d , peripheral:%@, RSSI:%@, advertisementData:%@", __func__, __LINE__, peripheral, RSSI, advertisementData);
+            [self.peripheralArray addObject:peripheral];
+            [self reloadData];
+        }
+    }else if (central == self.centerManager2)
+    {
+        
+        if ([peripheral.identifier isEqual:_peripheral.identifier]) {
+            NSLog(@"%s, line = %d , peripheral:%@, RSSI:%@, advertisementData:%@", __func__, __LINE__, peripheral, RSSI, advertisementData);
+            
+            [self writePairThingData:@{@"uuid":advertisementData[@"UUID"]}];
+        }
+    }
+    
 }
     
 #pragma mark - 向服务器请求数据
@@ -370,13 +355,13 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", nil];
 
-    [manager POST:@"http://192.168.3.4/Module/Receiving_1.php" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:@"http://192.168.3.4/Module/Receiving_one.php" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSLog(@"%@", responseObject);
         NSString *data = ((NSDictionary *)responseObject)[@"result"];
         NSString *newStr = [parameters[@"uuid"] substringToIndex:20];
         
-        NSLog(@"%lu", (unsigned long)[data length]);
+        [self.receiveUUIDs removeAllObjects];
         
         for (int i = 0; i < [data length]; i++) {
             unichar ch = [data characterAtIndex:i];
@@ -394,20 +379,24 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
                 }
             }
         }
-        [self writeDataToPeripheral];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self createPeripheralManager];  //切换至外设模式
+        });
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%s, line = %d, error = %@", __func__, __LINE__, error);
     }];
 }
 
 #pragma mark - 向服务器写入配对成功的数据
--(void)writePairThingData:(NSDictionary *)condition withPeripheral:(CBPeripheral *)peripheral
+-(void)writePairThingData:(NSDictionary *)condition
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", nil];
     
     [manager POST:@"http://192.168.3.4/Module/Receiving_2.php" parameters:condition progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)                 {
-        
+        NSLog(@"%@", responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%s, line = %d, error = %@", __func__, __LINE__, error);
     }];
@@ -455,6 +444,20 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
     }
     NSData *data = [NSData dataWithBytes:byte length:20];
     return data;
+}
+    
+// 格式转换
+-(NSString *)formatterUUID:(NSString *)uuid
+{
+    // 665544332211112233445566
+    NSString *newUUID = [NSString string];
+    for (int i = 0; i < [uuid length]; i ++) {
+        newUUID = [newUUID stringByAppendingFormat:@"%c", [uuid characterAtIndex:i]];
+        if (i == 7 || i == 11 || i == 15 || i == 19) {
+            newUUID = [newUUID stringByAppendingFormat:@"-"];
+        }
+    }
+    return newUUID;
 }
 
 @end
