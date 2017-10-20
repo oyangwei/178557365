@@ -1,6 +1,8 @@
 platform:ios, '8.0'
 
-target 'TM_VB_1v0'
+target 'TestDemo_Tang'
 
 	pod 'Masonry'
     pod 'AFNetworking', '~> 3.0'
+    pod 'MJRefresh'
+

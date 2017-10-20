@@ -228,7 +228,7 @@
     thirdQuestionTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIButton *finishedBtn = [UIButton createButtonWithFrame:CGRectMake(0, 0, 0, 0) Title:@"完成\nFinished" Target:self Selector:@selector(next:)];
-    finishedBtn.backgroundColor = [UIColor colorWithHexString:@"FC4F52"];
+    finishedBtn.backgroundColor = [UIColor colorWithHexString:ThemeColor];
     finishedBtn.titleLabel.numberOfLines = 0;
     finishedBtn.tintColor = [UIColor whiteColor];
     [finishedBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -263,7 +263,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.mas_equalTo(TextFieldWidth);
         make.height.mas_equalTo(50);
-        make.top.equalTo(self.view.mas_top).offset(100);
+        make.top.equalTo(self.view.mas_top).offset(50);
     }];
     
     [firstAnswerTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -629,7 +629,12 @@
     
     CGFloat finishedBtnMaxY = CGRectGetMaxY(self.finishedBtn.frame);
     
-    moveHeight = finishedBtnMaxY - keyBoardFrame.origin.y + 90;
+    moveHeight = finishedBtnMaxY - keyBoardFrame.origin.y + 30;
+    
+    if (moveHeight < 0) {
+        moveHeight = 49;
+    }
+    
     [UIView animateWithDuration:animationDurationValue animations:^{
         CGRect viewFrame = self.view.frame;
         viewFrame.origin.y -= moveHeight;

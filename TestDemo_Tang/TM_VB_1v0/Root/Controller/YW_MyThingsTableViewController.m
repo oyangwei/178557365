@@ -12,6 +12,10 @@
 #import "YW_ThingsTableViewCell.h"
 #import "YCXMenu.h"
 #import "YW_PairViewController.h"
+#import "YW_ThingsSingleTon.h"
+#import "YW_ThingsModel.h"
+#import "YW_ThingControllViewController.h"
+#import "YW_PairConfirmView.h"
 
 @interface YW_MyThingsTableViewController ()
 
@@ -19,9 +23,26 @@
 
 @property (nonatomic , strong) NSMutableArray *leftItems;
 
+@property (nonatomic , strong) NSMutableArray *things;
+
+/** AlertUIWindow */
+@property(strong, nonatomic) UIWindow *alertWindow;
+
+/** YW_PairConfirmView */
+@property(strong, nonatomic) YW_PairConfirmView *confirmView;
+
+
 @end
 
 @implementation YW_MyThingsTableViewController
+
+-(NSMutableArray *)things
+{
+    if (!_things) {
+        _things = [YW_ThingsSingleTon shareInstance].thingsArray;
+    }
+    return _things;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,10 +58,15 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YW_ThingsTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"ThingsCell"];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 #pragma mark - Notification
 
@@ -74,15 +100,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.things.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YW_ThingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ThingsCell"];
+    YW_ThingsModel *model = self.things[indexPath.row];
+    cell.imgView.image = [UIImage imageNamed:model.iconName];
+    cell.nameLabel.text = model.productName;
     
-    cell.imgView.image = [UIImage imageNamed:@"avatar_login"];
-    cell.nameLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     return cell;
 }
 
@@ -90,6 +117,35 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 64.0;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    YW_ThingsModel *model = self.things[indexPath.row];
+    YW_ThingControllViewController *thingControlVC = [[YW_ThingControllViewController alloc] init];
+    thingControlVC.titleName = model.productName;
+    [self.navigationController pushViewController:thingControlVC animated:YES];
+}
+
+-(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewRowAction *renameAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Rename" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"Rename : %ld", indexPath.row);
+        [self alertPairConfirmView:(int)indexPath.row];
+    }];
+    
+    UITableViewRowAction *deletedAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"Delete : %ld", indexPath.row);
+        
+        [self.things removeObjectAtIndex:indexPath.row];
+        [[YW_ThingsSingleTon shareInstance] setThingsArray:self.things];
+        [self.tableView reloadData];
+    }];
+    deletedAction.backgroundColor = [UIColor colorWithHexString:ThemeColor];
+    
+    return @[deletedAction, renameAction];
 }
 
 -(void)showLeftMenu
@@ -122,7 +178,7 @@
     if ([YCXMenu isShow]){
         [YCXMenu dismissMenu];
     } else {
-        __weak typeof(self) weakSelf = self;
+//        __weak typeof(self) weakSelf = self;
         [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 0, 50, 0) menuItems:self.rightItems selected:^(NSInteger index, YCXMenuItem *item) {
             if (index == 0) {
                 YW_PairViewController *pairVC = [[YW_PairViewController alloc] init];
@@ -200,6 +256,54 @@
     if ([YCXMenu isShow]) {
         [YCXMenu dismissMenu];
     }
+}
+
+-(void)alertPairConfirmView:(int)row
+{
+    NSLog(@"%s, line = %d", __func__, __LINE__);
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.alertWindow = window;
+    window.backgroundColor = [UIColor clearColor];
+    window.windowLevel = UIWindowLevelAlert;
+    window.hidden = NO;
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:window.frame];
+    bgView.backgroundColor = [UIColor blackColor];
+    bgView.alpha = 0.3;
+    [window addSubview:bgView];
+    
+    __weak typeof(NSMutableArray *) thingsArr = [YW_ThingsSingleTon shareInstance].thingsArray;
+    __weak typeof(YW_ThingsModel *) model = self.things[row];
+    
+    YW_PairConfirmView *confirmView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([YW_PairConfirmView class]) owner:self options:nil] lastObject];
+    confirmView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height/ 2 - 80);
+    confirmView.modelNoLabel.text = model.productName;
+    [confirmView.renameTextFiled becomeFirstResponder];
+    self.confirmView = confirmView;
+    __weak typeof(self) weakSelf = self;
+    __block typeof(YW_PairConfirmView *) weakConfirmView = confirmView;
+    confirmView.confirmBlock = ^{
+        NSString *newModelNo;
+        if (![weakConfirmView.renameTextFiled.text isEqualToString:@""]) {
+            newModelNo = weakConfirmView.renameTextFiled.text;
+        }else
+        {
+            newModelNo = weakConfirmView.modelNoLabel.text;
+        }
+        
+        weakSelf.alertWindow.hidden = YES;
+        model.productName = newModelNo;
+        
+        [thingsArr replaceObjectAtIndex:row withObject:model];
+        [[YW_ThingsSingleTon shareInstance] setThingsArray:thingsArr];
+        weakSelf.things = thingsArr;
+        [weakConfirmView.renameTextFiled resignFirstResponder];
+        [weakSelf.tableView reloadData];
+    };
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [window addSubview:confirmView];
+    } ];
 }
 
 @end

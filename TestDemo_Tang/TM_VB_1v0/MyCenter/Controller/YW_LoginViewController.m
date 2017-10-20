@@ -9,6 +9,8 @@
 #import "YW_LoginViewController.h"
 #import "YW_NavigationController.h"
 #import "YW_MyThingsTableViewController.h"
+#import "YW_ThingsSingleTon.h"
+#import "YW_ThingsModel.h"
 
 #define TextFieldWidth ScreenWitdh * 3 / 4
 #define TextFieldHeight 50
@@ -43,7 +45,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UITextField *phoneTextField = [[UITextField alloc] init];
-    phoneTextField.text = @"visitor12";
+    phoneTextField.text = @"test";
     phoneTextField.placeholder = @"PhoneNumber";
     phoneTextField.layer.borderWidth = 1;
     phoneTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
@@ -61,7 +63,7 @@
     phoneLabel.textAlignment = NSTextAlignmentCenter;
     
     UITextField *passwordTextField = [[UITextField alloc] init];
-    passwordTextField.text = @"taobao1234";
+    passwordTextField.text = @"test";
     passwordTextField.placeholder = @"Password";
     passwordTextField.layer.borderWidth = 1;
     passwordTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
@@ -74,7 +76,7 @@
     passwordTextField.secureTextEntry = YES;
     
     UIButton *loginBtn = [UIButton createButtonWithFrame:CGRectMake(0, 0, 0, 0) Title:@"登录\nLog In" Target:self Selector:@selector(login:)];
-    loginBtn.backgroundColor = [UIColor colorWithHexString:@"FC4F52"];
+    loginBtn.backgroundColor = [UIColor colorWithHexString:ThemeColor];
     loginBtn.titleLabel.numberOfLines = 0;
     loginBtn.tintColor = [UIColor whiteColor];
     [loginBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -151,6 +153,15 @@
 //            NSLog(@"%@", aError);
 //        }
 //    }];
+    
+    NSMutableArray *thingsArr = [NSMutableArray array];
+    for (int i = 0; i < 1; i ++) {
+        YW_ThingsModel *thingModel = [YW_ThingsModel thingsModel:@{@"Icon":@"sofa", @"Name":@"Example01"}];
+        [thingsArr addObject:thingModel];
+    }
+    [[YW_ThingsSingleTon shareInstance] setThingsArray:thingsArr];
+    
+//    NSLog(@"%@", [YW_ThingsSingleTon shareInstance].thingsArray);
     
     YW_MyThingsTableViewController *myThingVC = [[YW_MyThingsTableViewController alloc] init];
     YW_BaseNavigationController *nVC = [[YW_BaseNavigationController alloc] initWithRootViewController:myThingVC];

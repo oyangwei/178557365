@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YW_ThingControllViewController">
+            <connections>
+                <outlet property="button01" destination="5ic-XX-x6E" id="144-O5-QlR"/>
+                <outlet property="button02" destination="gqb-iK-Zd0" id="Vm5-8h-bbr"/>
+                <outlet property="button03" destination="Gc1-ov-An8" id="BBk-Ta-5SR"/>
+                <outlet property="button04" destination="gfu-nw-zpE" id="Qb6-BL-2d4"/>
+                <outlet property="button05" destination="WOU-EV-AWV" id="D7R-Me-rwi"/>
+                <outlet property="button06" destination="BhF-fw-2bD" id="NZr-SH-6oz"/>
+                <outlet property="button07" destination="6YA-gq-VlE" id="4Tq-Rc-wkO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rc_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jfv-Xk-4Io">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                </imageView>
+                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ic-XX-x6E">
+                    <rect key="frame" x="67.5" y="91.5" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="RQX-mx-OOc"/>
+                        <constraint firstAttribute="height" constant="80" id="X8R-Hq-ESc"/>
+                    </constraints>
+                    <state key="normal" image="button_1.png"/>
+                </button>
+                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqb-iK-Zd0">
+                    <rect key="frame" x="227.5" y="91.5" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="Z4J-Jo-DXH"/>
+                        <constraint firstAttribute="width" constant="80" id="jTw-KC-oet"/>
+                    </constraints>
+                    <state key="normal" image="button_2.png"/>
+                </button>
+                <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfu-nw-zpE">
+                    <rect key="frame" x="227.5" y="201.5" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="enI-Wa-8Z9"/>
+                        <constraint firstAttribute="height" constant="80" id="nPg-8H-hpk"/>
+                    </constraints>
+                    <state key="normal" image="button_4.png"/>
+                </button>
+                <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gc1-ov-An8">
+                    <rect key="frame" x="67.5" y="201.5" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="Bqc-gl-Y2K"/>
+                        <constraint firstAttribute="height" constant="80" id="iNm-0a-3rz"/>
+                    </constraints>
+                    <state key="normal" image="button_3.png"/>
+                </button>
+                <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BhF-fw-2bD">
+                    <rect key="frame" x="227.5" y="311.5" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="Ogp-nu-lMv"/>
+                        <constraint firstAttribute="width" constant="80" id="U8t-x1-VjK"/>
+                    </constraints>
+                    <state key="normal" image="button_6.png"/>
+                </button>
+                <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOU-EV-AWV">
+                    <rect key="frame" x="67.5" y="311.5" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="8Rt-b8-SEp"/>
+                        <constraint firstAttribute="width" constant="80" id="Trp-Of-wA0"/>
+                    </constraints>
+                    <state key="normal" image="button_5.png"/>
+                </button>
+                <button opaque="NO" tag="107" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6YA-gq-VlE">
+                    <rect key="frame" x="147.5" y="421.5" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="hEQ-aa-t2K"/>
+                        <constraint firstAttribute="width" constant="80" id="uZD-5V-yXg"/>
+                    </constraints>
+                    <state key="normal" image="button_7.png"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="6YA-gq-VlE" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="277-ZD-PzR"/>
+                <constraint firstItem="gqb-iK-Zd0" firstAttribute="top" secondItem="5ic-XX-x6E" secondAttribute="top" id="4aW-K6-iMX"/>
+                <constraint firstItem="6YA-gq-VlE" firstAttribute="top" secondItem="BhF-fw-2bD" secondAttribute="bottom" constant="30" id="62S-JT-bZ6"/>
+                <constraint firstItem="BhF-fw-2bD" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="80" id="8VO-Ed-EsF"/>
+                <constraint firstItem="gfu-nw-zpE" firstAttribute="leading" secondItem="BhF-fw-2bD" secondAttribute="leading" id="AV4-Qv-jpJ"/>
+                <constraint firstItem="WOU-EV-AWV" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-80" id="CEi-gj-Q6P"/>
+                <constraint firstItem="5ic-XX-x6E" firstAttribute="trailing" secondItem="Gc1-ov-An8" secondAttribute="trailing" id="Dac-mD-jix"/>
+                <constraint firstItem="Jfv-Xk-4Io" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="KE9-Jj-voK"/>
+                <constraint firstItem="WOU-EV-AWV" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" constant="50" id="KUY-cl-Xkl"/>
+                <constraint firstItem="BhF-fw-2bD" firstAttribute="top" secondItem="WOU-EV-AWV" secondAttribute="top" id="Pl8-Oh-O25"/>
+                <constraint firstItem="Gc1-ov-An8" firstAttribute="top" secondItem="gfu-nw-zpE" secondAttribute="top" id="SOe-Er-tOU"/>
+                <constraint firstItem="Jfv-Xk-4Io" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="Wa4-WV-gZg"/>
+                <constraint firstItem="Jfv-Xk-4Io" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="YeI-dK-jQp"/>
+                <constraint firstItem="Jfv-Xk-4Io" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z46-7v-wXk"/>
+                <constraint firstItem="Gc1-ov-An8" firstAttribute="trailing" secondItem="WOU-EV-AWV" secondAttribute="trailing" id="auR-7R-enw"/>
+                <constraint firstItem="gqb-iK-Zd0" firstAttribute="leading" secondItem="gfu-nw-zpE" secondAttribute="leading" id="loa-a6-nhL"/>
+                <constraint firstItem="BhF-fw-2bD" firstAttribute="top" secondItem="gfu-nw-zpE" secondAttribute="bottom" constant="30" id="mL9-Nm-0iK"/>
+                <constraint firstItem="Gc1-ov-An8" firstAttribute="top" secondItem="5ic-XX-x6E" secondAttribute="bottom" constant="30" id="rDC-FY-ryp"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="-235.5" y="-42.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="button_1.png" width="70" height="70"/>
+        <image name="button_2.png" width="70" height="70"/>
+        <image name="button_3.png" width="70" height="70"/>
+        <image name="button_4.png" width="70" height="70"/>
+        <image name="button_5.png" width="70" height="70"/>
+        <image name="button_6.png" width="70" height="70"/>
+        <image name="button_7.png" width="70" height="70"/>
+        <image name="rc_background.png" width="360" height="570"/>
+    </resources>
+</document>

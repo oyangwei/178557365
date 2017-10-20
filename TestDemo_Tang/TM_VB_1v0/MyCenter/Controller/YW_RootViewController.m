@@ -10,6 +10,9 @@
 #import "YW_LoginViewController.h"
 #import "YW_SignUpFirstViewController.h"
 
+#define btnWidth 150
+#define btnHeight 60
+
 @interface YW_RootViewController ()
 
 @property (strong, nonatomic) UIButton *loginBtn;
@@ -38,17 +41,18 @@
     
     UIImageView *bgImage = [[UIImageView alloc] init];
     bgImage.userInteractionEnabled = YES;
-    [bgImage setImage:[UIImage imageNamed:@"home_bg"]];
+    [bgImage setImage:[UIImage imageNamed:@"login_bg"]];
     bgImage.contentMode = UIViewContentModeScaleAspectFill;
     
-    CGRect loginBtnRect = CGRectMake(ScreenWitdh/2 - 50, ScreenHeight/2 - 60, 100, 50);
+    CGRect loginBtnRect = CGRectMake(ScreenWitdh/2 - btnWidth, ScreenHeight/2 - btnHeight, btnWidth, btnHeight);
     UIButton *loginBtn = [UIButton createButtonWithFrame:loginBtnRect Title:@"Log In\n登陆" Target:self Selector:@selector(login:)];
     loginBtn.tintColor = [UIColor whiteColor];
+    loginBtn.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
     [loginBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [loginBtn setUIButtonBorderColor:[UIColor whiteColor].CGColor borderWidth:1.0 borderRadius:5.0];
     loginBtn.titleLabel.numberOfLines = 0;
     
-    CGRect signBtnRect = CGRectMake(ScreenWitdh/2 - 50, ScreenHeight/2 + 10, 100, 50);
+    CGRect signBtnRect = CGRectMake(ScreenWitdh/2 - btnHeight, ScreenHeight/2 + 10, btnWidth, btnHeight);
     UIButton *signBtn = [UIButton createButtonWithFrame:signBtnRect Title:@"Sign Up\n注册" Target:self Selector:@selector(signUp:)];
     signBtn.tintColor = [UIColor whiteColor];
     [signBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -70,8 +74,8 @@
     
     [signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(bgImage.mas_centerX);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(btnWidth);
+        make.height.mas_equalTo(btnHeight);
         make.bottom.equalTo(bgImage.mas_centerY).offset(-20);
     }];
     

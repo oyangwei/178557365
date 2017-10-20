@@ -211,7 +211,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.mas_equalTo(TextFieldWidth);
         make.height.mas_equalTo(TextFieldHeight);
-        make.top.equalTo(self.view.mas_top).offset(120);
+        make.top.equalTo(self.view.mas_top).offset(50);
     }];
     
     [areaCodeView mas_makeConstraints:^(MASConstraintMaker *make) {

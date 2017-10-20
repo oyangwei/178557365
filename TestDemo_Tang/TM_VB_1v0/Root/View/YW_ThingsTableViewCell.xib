@@ -20,14 +20,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yfr-on-T0s">
-                        <rect key="frame" x="10" y="7" width="50" height="50"/>
+                        <rect key="frame" x="15" y="16" width="32" height="32"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="FmE-s0-LP4"/>
-                            <constraint firstAttribute="height" constant="50" id="y3D-h1-2nL"/>
+                            <constraint firstAttribute="width" constant="32" id="FmE-s0-LP4"/>
+                            <constraint firstAttribute="height" constant="32" id="y3D-h1-2nL"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXY-z1-AXr">
-                        <rect key="frame" x="70" y="23" width="38" height="18"/>
+                        <rect key="frame" x="57" y="23" width="38" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.58039215686274503" green="0.71372549019607845" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -47,7 +48,7 @@
                     <constraint firstItem="QXY-z1-AXr" firstAttribute="leading" secondItem="yfr-on-T0s" secondAttribute="trailing" constant="10" id="n8Z-u8-vpF"/>
                     <constraint firstAttribute="bottom" secondItem="bKp-ZG-05X" secondAttribute="bottom" id="poH-G2-10I"/>
                     <constraint firstItem="yfr-on-T0s" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y69-ml-UGR"/>
-                    <constraint firstItem="yfr-on-T0s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="yXG-P7-aaR"/>
+                    <constraint firstItem="yfr-on-T0s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="yXG-P7-aaR"/>
                     <constraint firstAttribute="trailing" secondItem="bKp-ZG-05X" secondAttribute="trailing" constant="10" id="zut-NI-eda"/>
                 </constraints>
             </tableViewCellContentView>

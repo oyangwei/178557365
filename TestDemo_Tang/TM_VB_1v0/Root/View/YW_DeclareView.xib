@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YW_DeclareView">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="450"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tg-2W-BG2">
+                    <rect key="frame" x="8" y="63" width="264" height="307"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <mutableString key="text">       Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Manual" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7Y-pi-q38">
+                    <rect key="frame" x="90" y="20" width="101.5" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="8Ly-q7-6VA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stB-hh-kc1">
+                    <rect key="frame" x="95" y="390" width="90" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="3BY-UH-6wc"/>
+                        <constraint firstAttribute="width" constant="90" id="t9l-Bm-lpo"/>
+                    </constraints>
+                    <state key="normal" title="OK">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="confirmClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Jze-P9-fIp"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="stB-hh-kc1" firstAttribute="top" secondItem="8tg-2W-BG2" secondAttribute="bottom" constant="20" id="5Du-JK-sVs"/>
+                <constraint firstItem="M7Y-pi-q38" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="Cr2-t7-ZhU"/>
+                <constraint firstItem="M7Y-pi-q38" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Eiw-cC-3o0"/>
+                <constraint firstItem="8tg-2W-BG2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="NWb-h9-XtE"/>
+                <constraint firstItem="8tg-2W-BG2" firstAttribute="top" secondItem="M7Y-pi-q38" secondAttribute="bottom" constant="8" id="SOJ-LM-Xqf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8tg-2W-BG2" secondAttribute="trailing" constant="8" id="U9y-NL-NbT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="stB-hh-kc1" secondAttribute="bottom" constant="20" id="g6N-GC-xPe"/>
+                <constraint firstItem="stB-hh-kc1" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="pJm-Ky-cNZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="confirmBtn" destination="stB-hh-kc1" id="q48-5H-AMf"/>
+            </connections>
+            <point key="canvasLocation" x="-536" y="-110"/>
+        </view>
+    </objects>
+</document>
