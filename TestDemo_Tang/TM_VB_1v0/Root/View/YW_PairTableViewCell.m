@@ -45,7 +45,7 @@
     {
         self.pairIndicator.alpha = 0.0;
         self.pairLabel.alpha = 1.0;
-        self.pairLabel.text = @"Paired";
+        self.pairLabel.text = @"PairedPair(已配对)";
         [self.pairIndicator stopAnimating];
     }
 }

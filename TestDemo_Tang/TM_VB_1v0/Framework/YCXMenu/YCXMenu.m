@@ -464,6 +464,7 @@ typedef enum {
             }
 
             UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
+            titleLabel.numberOfLines = 0;
             titleLabel.text = menuItem.title;
             titleLabel.font = menuItem.titleFont ? menuItem.titleFont : titleFont;
             titleLabel.textAlignment = menuItem.alignment;

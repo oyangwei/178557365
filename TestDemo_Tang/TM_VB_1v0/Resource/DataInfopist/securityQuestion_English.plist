@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>What&apos;s your father&apos;s name?</string>
+	<string>What&apos;s your mother&apos;s name?</string>
+	<string>What&apos;s your wife&apos;s name?</string>
+	<string>What&apos;s your father&apos;s birthday?</string>
+	<string>What&apos;s your father&apos;s birthday?</string>
+	<string>What&apos;s your mother&apos;s birthday?</string>
+	<string>What&apos;s your school number or work number?</string>
+	<string>What is your hometown?</string>
+	<string>What&apos;s your pet&apos;s name?</string>
+</array>
+</plist>

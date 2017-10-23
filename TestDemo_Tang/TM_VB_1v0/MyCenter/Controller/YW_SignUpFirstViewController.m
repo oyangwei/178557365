@@ -18,10 +18,9 @@
 #define TextFieldCornerRadius 5
 #define LeftTime 20
 
-@interface YW_SignUpFirstViewController () <UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface YW_SignUpFirstViewController () <UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 {
     CGFloat moveHeight;
-    BOOL keyBoardShow;
 }
 
 @property(strong, nonatomic) UITextField *areaCodeTextField;
@@ -70,9 +69,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    keyBoardShow = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -84,8 +80,6 @@
     [self.codeTextField resignFirstResponder];
     [self.userNameTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark -- 初始化界面
@@ -113,6 +107,7 @@
     [areaCodeView addGestureRecognizer:tapGestureRecognizer];
     
     UITextField *phoneTextField = [[UITextField alloc] init];
+    phoneTextField.delegate = self;
     phoneTextField.placeholder = @"Mobile Phone";
     phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
     phoneTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0)];
@@ -123,6 +118,7 @@
     phoneTextField.layer.cornerRadius = TextFieldCornerRadius;
     
     UITextField *codeTextField = [[UITextField alloc] init];
+    codeTextField.delegate = self;
     codeTextField.placeholder = @"Code";
     codeTextField.keyboardType = UIKeyboardTypeNumberPad;
     codeTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 0)];
@@ -133,6 +129,7 @@
     codeTextField.layer.cornerRadius = TextFieldCornerRadius;
     
     UITextField *userNameTextField = [[UITextField alloc] init];
+    userNameTextField.delegate = self;
     userNameTextField.placeholder = @"Plese Create Account Name";
     userNameTextField.layer.borderWidth = 1;
     userNameTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
@@ -144,6 +141,7 @@
     userNameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     UITextField *passwordTextField = [[UITextField alloc] init];
+    passwordTextField.delegate = self;
     passwordTextField.placeholder = @"Please Input Password";
     passwordTextField.layer.borderWidth = 1;
     passwordTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
@@ -211,7 +209,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.mas_equalTo(TextFieldWidth);
         make.height.mas_equalTo(TextFieldHeight);
-        make.top.equalTo(self.view.mas_top).offset(50);
+        make.top.equalTo(self.view.mas_top).offset(20);
     }];
     
     [areaCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -355,24 +353,24 @@
 //判断手机号码格式是否正确
 -(void)next:(id)sender
 {
-//    if (!self.getCodeSeccess) {
-//        [self alertMsg:@"获取验证码失败" confimBlock:nil];
-//        return;
-//    }
-//    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: self.codeTextField.text, @"SMSCode", self.Sid, @"Sid", nil];
-
-//    [YWNetworkingMamager postWithURLString:CheckCodeURL parameters:parameters progress:nil success:^(NSDictionary *data) {
-//        NSLog(@"%@", data);
-//        if ([data[@"result"] isEqualToString:@"0"]) {
-//            [self alertMsg:@"验证成功" confimBlock:^{
-//                YWSignUpSecondViewController *susVC = [[YWSignUpSecondViewController alloc] init];
-//                [self.navigationController pushViewController:susVC animated:YES];
-//            }];
-//        }
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@", error);
-//        [self alertMsg:@"获取验证码失败" confimBlock:nil];
-//    }];
+    //    if (!self.getCodeSeccess) {
+    //        [self alertMsg:@"获取验证码失败" confimBlock:nil];
+    //        return;
+    //    }
+    //    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: self.codeTextField.text, @"SMSCode", self.Sid, @"Sid", nil];
+    
+    //    [YWNetworkingMamager postWithURLString:CheckCodeURL parameters:parameters progress:nil success:^(NSDictionary *data) {
+    //        NSLog(@"%@", data);
+    //        if ([data[@"result"] isEqualToString:@"0"]) {
+    //            [self alertMsg:@"验证成功" confimBlock:^{
+    //                YWSignUpSecondViewController *susVC = [[YWSignUpSecondViewController alloc] init];
+    //                [self.navigationController pushViewController:susVC animated:YES];
+    //            }];
+    //        }
+    //    } failure:^(NSError *error) {
+    //        NSLog(@"%@", error);
+    //        [self alertMsg:@"获取验证码失败" confimBlock:nil];
+    //    }];
     
     YW_SignUpSecondViewController *susVC = [[YW_SignUpSecondViewController alloc] init];
     [self.navigationController pushViewController:susVC animated:YES];
@@ -387,47 +385,54 @@
     self.areaCodePickerView.alpha = 0;
 }
 
-#pragma mark - 监听键盘弹出
--(void)keyBoardWillShow:(NSNotification *)notification
+-(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (keyBoardShow) {
-        return;
+    moveHeight = 0;
+    
+    if (textField == _codeTextField) {
+        moveHeight = 216 - (ScreenHeight - CGRectGetMaxY(_nextBtn.frame)) + 20 + TextFieldHeight;
+        if (moveHeight < 0) {
+            moveHeight = 0;
+        }
     }
     
-    keyBoardShow = YES;
-    
-    NSDictionary *userInfo = [notification userInfo];
-    
-    CGFloat animationDurationValue = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
-    CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    CGFloat nextBtnMaxY = CGRectGetMaxY(self.nextBtn.frame);
-    
-    moveHeight = nextBtnMaxY - keyBoardFrame.origin.y + 90;
-    [UIView animateWithDuration:animationDurationValue animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         CGRect viewFrame = self.view.frame;
         viewFrame.origin.y -= moveHeight;
+        viewFrame.size.height += moveHeight;
         self.view.frame = viewFrame;
     }];
 }
 
-#pragma mark - 监听键盘隐藏
--(void)keyBoardWillHide:(NSNotification *)notification
+-(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    keyBoardShow = NO;
-    
-    NSDictionary *userInfo = [notification userInfo];
-    
-    CGFloat animationDurationValue = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
-    if (moveHeight) {
-        [UIView animateWithDuration:animationDurationValue animations:^{
-            CGRect viewFrame = self.view.frame;
-            viewFrame.origin.y += moveHeight;
-            self.view.frame = viewFrame;
-        }];
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect viewFrame = self.view.frame;
+        viewFrame.origin.y += moveHeight;
+        viewFrame.size.height -= moveHeight;
+        self.view.frame = viewFrame;
+    }];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _phoneTextField) {
+        [textField resignFirstResponder];
+        [_userNameTextField becomeFirstResponder];
+    }else if (textField == _userNameTextField)
+    {
+        [textField resignFirstResponder];
+        [_passwordTextField becomeFirstResponder];
+    }else if (textField == _passwordTextField)
+    {
+        [textField resignFirstResponder];
+        [_codeTextField becomeFirstResponder];
+    }else if (textField == _codeTextField)
+    {
+        [textField resignFirstResponder];
     }
+    return true;
 }
 
 @end
+

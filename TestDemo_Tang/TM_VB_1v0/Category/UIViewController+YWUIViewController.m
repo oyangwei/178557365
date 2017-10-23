@@ -24,8 +24,15 @@
 }
 
 -(void)alertMsg:(NSString *)msg confimBlock:(ConfirmBlock)confirBlock{
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        if (confirBlock) {
+//            confirBlock();
+//        }
+//    }];
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Prompt" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (confirBlock) {
             confirBlock();
         }
@@ -35,7 +42,7 @@
 }
 
 -(void)alertMsg:(NSString *)msg confimBlock:(ConfirmBlock)confirBlock cancleBlock:(CancleBlock)cancleBlock{
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Prompt" message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (confirBlock) {
             confirBlock();
@@ -46,6 +53,17 @@
             cancleBlock();
         }
     }];
+    
+//    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        if (confirBlock) {
+//            confirBlock();
+//        }
+//    }];
+//    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"Cancle" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        if (cancleBlock) {
+//            cancleBlock();
+//        }
+//    }];
     [alertVC addAction:cancleAction];
     [alertVC addAction:confirmAction];
     [self presentViewController:alertVC animated:YES completion:nil];

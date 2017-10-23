@@ -9,6 +9,10 @@
 #import "YW_SignUpSecondViewController.h"
 #import "YWQuestionView.h"
 #import "YWQuestionViewCell.h"
+#import "YW_MyThingsTableViewController.h"
+#import "YW_BaseNavigationController.h"
+#import "YW_ThingsSingleTon.h"
+#import "YW_ThingsModel.h"
 
 #define TextFieldWidth ScreenWitdh * 3 / 4
 #define TextFieldHeight 50
@@ -19,10 +23,9 @@
 #define thirdQuestionTableViewCellID @"thirdQuestionCell"
 #define customQuestionTableViewCellID @"customQuestionCell"
 
-@interface YW_SignUpSecondViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface YW_SignUpSecondViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 {
     CGFloat moveHeight;
-    BOOL keyBoardShow;
 }
 
 @property(strong, nonatomic) UITextField *firstQuestionTextField;
@@ -56,9 +59,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    keyBoardShow = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -69,14 +69,13 @@
     [self.firstAnswerTextField resignFirstResponder];
     [self.secondAnswerTextField resignFirstResponder];
     [self.thirdAnswerTextField resignFirstResponder];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(NSMutableArray *)questionArray
 {
     if (_questionArray == nil) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"securityQuestion.plist" ofType:nil];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"securityQuestion_English.plist" ofType:nil];
         NSArray *tempArr = [NSArray arrayWithContentsOfFile:path];
         
         _questionArray = [NSMutableArray array];
@@ -113,12 +112,14 @@
     YWQuestionView *firstQuestionView = [[YWQuestionView alloc] initWithFrame:CGRectMake(0, 0, TextFieldWidth, TextFieldHeight)];
     firstQuestionView.tag = 101;
     firstQuestionView.userInteractionEnabled = YES;
+//    [firstQuestionView setQuestionLabelText:@"Question01"];
     [firstQuestionView setQuestionLabelText:@"安全问题01"];
     //    [firstQuestionView addGestureRecognizer:tapGestureRecognizer];
     [firstQuestionView.questionBtn addTarget:self action:@selector(selectQuestion:) forControlEvents:UIControlEventTouchUpInside];
     [firstQuestionTextField addSubview:firstQuestionView];
     
     UITextField *firstAnswerTextField = [[UITextField alloc] init];
+    firstAnswerTextField.delegate = self;
     firstAnswerTextField.layer.borderWidth = 1;
     firstAnswerTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
     firstAnswerTextField.layer.cornerRadius = TextFieldCornerRadius;
@@ -129,6 +130,7 @@
     firstAnswerTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     UILabel *firstAnswerLabel = [[UILabel alloc] init];
+//    firstAnswerLabel.text = @"Answer";
     firstAnswerLabel.text = @"答案";
     firstAnswerLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -146,12 +148,14 @@
     YWQuestionView *secondQuestionView = [[YWQuestionView alloc] initWithFrame:CGRectMake(0, 0, TextFieldWidth, TextFieldHeight)];
     secondQuestionView.tag = 102;
     secondQuestionView.userInteractionEnabled = YES;
+//    [secondQuestionView setQuestionLabelText:@"Question02"];
     [secondQuestionView setQuestionLabelText:@"安全问题02"];
     //    [secondQuestionView addGestureRecognizer:tapGestureRecognizer];
     [secondQuestionView.questionBtn addTarget:self action:@selector(selectQuestion:) forControlEvents:UIControlEventTouchUpInside];
     [secondQuestionTextField addSubview:secondQuestionView];
     
     UITextField *secondAnswerTextField = [[UITextField alloc] init];
+    secondAnswerTextField.delegate = self;
     secondAnswerTextField.layer.borderWidth = 1;
     secondAnswerTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
     secondAnswerTextField.layer.cornerRadius = TextFieldCornerRadius;
@@ -162,6 +166,7 @@
     secondAnswerTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     UILabel *secondAnswerLabel = [[UILabel alloc] init];
+//    secondAnswerLabel.text = @"Answer";
     secondAnswerLabel.text = @"答案";
     secondAnswerLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -179,12 +184,14 @@
     YWQuestionView *thirdQuestionView = [[YWQuestionView alloc] initWithFrame:CGRectMake(0, 0, TextFieldWidth, TextFieldHeight)];
     thirdQuestionView.tag = 103;
     thirdQuestionView.userInteractionEnabled = YES;
+//    [thirdQuestionView setQuestionLabelText:@"Question03"];
     [thirdQuestionView setQuestionLabelText:@"安全问题03"];
     //    [thirdQuestionView addGestureRecognizer:tapGestureRecognizer];
     [thirdQuestionView.questionBtn addTarget:self action:@selector(selectQuestion:) forControlEvents:UIControlEventTouchUpInside];
     [thirdQuestionTextField addSubview:thirdQuestionView];
     
     UITextField *thirdAnswerTextField = [[UITextField alloc] init];
+    thirdAnswerTextField.delegate = self;
     thirdAnswerTextField.layer.borderWidth = 1;
     thirdAnswerTextField.layer.borderColor = [UIColor colorWithHexString:@"D2D2D2"].CGColor;
     thirdAnswerTextField.layer.cornerRadius = TextFieldCornerRadius;
@@ -195,6 +202,7 @@
     thirdAnswerTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     UILabel *thirdAnswerLabel = [[UILabel alloc] init];
+//    thirdAnswerLabel.text = @"Answer";
     thirdAnswerLabel.text = @"答案";
     thirdAnswerLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -263,7 +271,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.mas_equalTo(TextFieldWidth);
         make.height.mas_equalTo(50);
-        make.top.equalTo(self.view.mas_top).offset(50);
+        make.top.equalTo(self.view.mas_top).offset(20);
     }];
     
     [firstAnswerTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -607,57 +615,71 @@
 
 -(void)next:(id)sender
 {
+    NSMutableArray *thingsArr = [NSMutableArray array];
+    for (int i = 0; i < 1; i ++) {
+        YW_ThingsModel *thingModel = [YW_ThingsModel thingsModel:@{@"Icon":@"sofa", @"Name":@"Example01"}];
+        [thingsArr addObject:thingModel];
+    }
+    [[YW_ThingsSingleTon shareInstance] setThingsArray:thingsArr];
+    
     [self alertMsg:@"注册成功" confimBlock:^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        YW_MyThingsTableViewController *myThingVC = [[YW_MyThingsTableViewController alloc] init];
+        YW_BaseNavigationController *nVC = [[YW_BaseNavigationController alloc] initWithRootViewController:myThingVC];
+        UIWindow *window = [UIApplication alloc].keyWindow;
+        [window setRootViewController:nVC];
     } cancleBlock:nil];
+    
+//    [self alertMsg:@"Register Successful" confimBlock:^{
+//        YW_MyThingsTableViewController *myThingVC = [[YW_MyThingsTableViewController alloc] init];
+//        YW_BaseNavigationController *nVC = [[YW_BaseNavigationController alloc] initWithRootViewController:myThingVC];
+//        UIWindow *window = [UIApplication alloc].keyWindow;
+//        [window setRootViewController:nVC];
+//    } cancleBlock:nil];
 }
 
-#pragma mark - 监听键盘弹出
--(void)keyBoardWillShow:(NSNotification *)notification
+-(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (keyBoardShow) {
-        return;
+    moveHeight = 0;
+    
+    if (textField == _thirdAnswerTextField) {
+        moveHeight = 216 - (ScreenHeight - CGRectGetMaxY(_finishedBtn.frame)) + 20 + TextFieldHeight;
+        if (moveHeight < 0) {
+            moveHeight = 0;
+        }
     }
     
-    keyBoardShow = YES;
-    
-    NSDictionary *userInfo = [notification userInfo];
-    
-    CGFloat animationDurationValue = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
-    CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    CGFloat finishedBtnMaxY = CGRectGetMaxY(self.finishedBtn.frame);
-    
-    moveHeight = finishedBtnMaxY - keyBoardFrame.origin.y + 30;
-    
-    if (moveHeight < 0) {
-        moveHeight = 49;
-    }
-    
-    [UIView animateWithDuration:animationDurationValue animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         CGRect viewFrame = self.view.frame;
         viewFrame.origin.y -= moveHeight;
+        viewFrame.size.height += moveHeight;
         self.view.frame = viewFrame;
     }];
 }
 
-#pragma mark - 监听键盘隐藏
--(void)keyBoardWillHide:(NSNotification *)notification
+-(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    keyBoardShow = NO;
-    
-    NSDictionary *userInfo = [notification userInfo];
-    
-    CGFloat animationDurationValue = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
-    if (moveHeight) {
-        [UIView animateWithDuration:animationDurationValue animations:^{
-            CGRect viewFrame = self.view.frame;
-            viewFrame.origin.y += moveHeight;
-            self.view.frame = viewFrame;
-        }];
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect viewFrame = self.view.frame;
+        viewFrame.origin.y += moveHeight;
+        viewFrame.size.height -= moveHeight;
+        self.view.frame = viewFrame;
+    }];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _firstAnswerTextField) {
+        [textField resignFirstResponder];
+        [_secondAnswerTextField becomeFirstResponder];
+    }else if (textField == _secondAnswerTextField)
+    {
+        [textField resignFirstResponder];
+        [_thirdAnswerTextField becomeFirstResponder];
+    }else if (textField == _thirdAnswerTextField)
+    {
+        [textField resignFirstResponder];
     }
+    return true;
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -668,3 +690,4 @@
 }
 
 @end
+

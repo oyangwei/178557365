@@ -28,6 +28,7 @@
 		5531F8D21F4A95A000BCC28A /* me.png in Resources */ = {isa = PBXBuildFile; fileRef = 5531F8D11F4A95A000BCC28A /* me.png */; };
 		5531F8DE1F4D4DD000BCC28A /* default_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5531F8DD1F4D4DD000BCC28A /* default_back.png */; };
 		5532EA471F3064C40014C297 /* historyRecord.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5532EA461F3064C40014C297 /* historyRecord.plist */; };
+		553365411F9DD54E00B4D6B4 /* securityQuestion_English.plist in Resources */ = {isa = PBXBuildFile; fileRef = 553365401F9DD26300B4D6B4 /* securityQuestion_English.plist */; };
 		553DE0E71F749FC9000D9589 /* YW_IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE0E61F749FC9000D9589 /* YW_IconButton.m */; };
 		554C59FA1F96059400B8C4CA /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 554C59BF1F95FF9800B8C4CA /* MJRefreshAutoFooter.m */; };
 		554C59FB1F96059400B8C4CA /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 554C59C11F95FF9800B8C4CA /* MJRefreshBackFooter.m */; };
@@ -249,6 +250,7 @@
 		5531F8D11F4A95A000BCC28A /* me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me.png; sourceTree = "<group>"; };
 		5531F8DD1F4D4DD000BCC28A /* default_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_back.png; sourceTree = "<group>"; };
 		5532EA461F3064C40014C297 /* historyRecord.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = historyRecord.plist; sourceTree = "<group>"; };
+		553365401F9DD26300B4D6B4 /* securityQuestion_English.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = securityQuestion_English.plist; sourceTree = "<group>"; };
 		553DE0E51F749FC9000D9589 /* YW_IconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YW_IconButton.h; sourceTree = "<group>"; };
 		553DE0E61F749FC9000D9589 /* YW_IconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YW_IconButton.m; sourceTree = "<group>"; };
 		554C59BE1F95FF9800B8C4CA /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 			children = (
 				55C5026E1F2716AC0062DBE0 /* areaCode.plist */,
 				55C5026F1F2716AC0062DBE0 /* securityQuestion.plist */,
+				553365401F9DD26300B4D6B4 /* securityQuestion_English.plist */,
 			);
 			path = DataInfopist;
 			sourceTree = "<group>";
@@ -1216,6 +1219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553365411F9DD54E00B4D6B4 /* securityQuestion_English.plist in Resources */,
 				554C5A251F9746DA00B8C4CA /* button_1.png in Resources */,
 				554C5A261F9746DA00B8C4CA /* button_2.png in Resources */,
 				554C5A271F9746DA00B8C4CA /* button_3.png in Resources */,

@@ -88,6 +88,7 @@
 
 -(void)setupNav
 {
+    self.title = @"My Sofa\n我的沙发";
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithHexString:ThemeColor]];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"list" highImage:@"list_click" target:self action:@selector(showLeftMenu)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"add" highImage:@"add_click" target:self action:@selector(showRightMenu)];
@@ -196,12 +197,12 @@
     if (!_rightItems) {
         
         // set title
-        YCXMenuItem *scanAdd = [YCXMenuItem menuTitle:@"Add By Scan" WithIcon:nil];
+        YCXMenuItem *scanAdd = [YCXMenuItem menuTitle:@"Add By Scan\n扫描添加" WithIcon:nil];
         scanAdd.foreColor = [UIColor whiteColor];
         scanAdd.titleFont = [UIFont boldSystemFontOfSize:17.0f];
         scanAdd.alignment = NSTextAlignmentCenter;
         
-        YCXMenuItem *inputAdd = [YCXMenuItem menuTitle:@"Add By Input" WithIcon:nil];
+        YCXMenuItem *inputAdd = [YCXMenuItem menuTitle:@"Add By Input\n输入添加" WithIcon:nil];
         inputAdd.foreColor = [UIColor whiteColor];
         inputAdd.titleFont = [UIFont boldSystemFontOfSize:17.0f];
         inputAdd.alignment = NSTextAlignmentCenter;
@@ -238,7 +239,7 @@
         
         //set item
         _leftItems = [@[
-                         [YCXMenuItem menuItem:@"Log Out"
+                         [YCXMenuItem menuItem:@"Log Out\n注销"
                                          image:nil
                                            tag:100
                                       userInfo:@{@"title":@"Menu"}],

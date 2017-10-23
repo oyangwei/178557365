@@ -59,7 +59,7 @@
                         <constraint firstAttribute="height" constant="40" id="xAE-ry-vc5"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="确定"/>
+                    <state key="normal" title="OK"/>
                     <connections>
                         <action selector="confirmClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="PtB-Rt-e8B"/>
                     </connections>

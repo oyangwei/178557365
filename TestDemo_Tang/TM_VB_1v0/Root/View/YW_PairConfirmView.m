@@ -24,6 +24,8 @@
     self.modelNoView.layer.borderWidth = 1;
     self.modelNoView.layer.borderColor = [UIColor colorWithHexString:ThemeColor].CGColor;
     
+    self.renameTextFiled.delegate = self;
+    [self.renameTextFiled becomeFirstResponder];
     self.renameTextFiled.layer.cornerRadius = 10;
     self.renameTextFiled.layer.borderWidth = 1;
     self.renameTextFiled.layer.borderColor = [UIColor colorWithHexString:ThemeColor].CGColor;
@@ -38,6 +40,7 @@
     self.confirmBtn.layer.cornerRadius = 10;
     self.confirmBtn.layer.borderWidth = 1;
     self.confirmBtn.layer.borderColor = [UIColor colorWithHexString:ThemeColor].CGColor;
+    
 }
 
 - (IBAction)confirmClick:(id)sender {
